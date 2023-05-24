@@ -72,24 +72,24 @@
 
     <section anchor="overview">
       <name>Overview of Time-Variant Networks</name>
-      <t>Existing Internet routing techniques maintain end-to-end connected paths across a network. Routing mechanisms exist to recover 
-         connectivity and resume normal traffic forwarding as the topology changes. Occasionally, optimisation of routes may also be 
+      <t>Existing Internet routing techniques maintain end-to-end connected paths across a network. Routing mechanisms exist to recover
+         connectivity and resume normal traffic forwarding as the topology changes. Occasionally, optimisation of routes may also be
          requested, especially post-topology changes due to disruptive events. However, there are a growing number of use cases where
-         changes to the routing topology are an expected part of network operations. In these scenarios, the pre-planned loss and 
+         changes to the routing topology are an expected part of network operations. In these scenarios, the pre-planned loss and
          restoration of an adjacency, or formation of an alternate adjacency, should be seen as a non-disruptive event.</t>
-         
+
       <t>Time-Variant Routing (TVR) refers to calculating a path or subpath through a network where the time of message transmission
-         (or receipt) is part of the overall route computation.  Therefore, a TVR computation might produce different results 
-         depending on the time that the calculation is performed without other detectable changes to the network topology or other 
-         cost functions associated with the route.</t>   
-         
+         (or receipt) is part of the overall route computation.  Therefore, a TVR computation might produce different results
+         depending on the time that the calculation is performed without other detectable changes to the network topology or other
+         cost functions associated with the route.</t>
+
        <section anchor="scheduling">
         <name>Resource Scheduling</name>
-        <t>Planned resource scheduling will be required for various scenarios; these include networks with mobile nodes, such as 
-           crewless aerial vehicles and orbiting satellite constellations. In these scenarios, links are lost and re-established 
-           as a function of the mobility of the platforms. Furthermore, link activity might be restricted to certain times of the 
-           day in networks without reliable access to power, such as networks harvesting energy from tidal, wind, and solar 
-           resources. Similarly, network traffic might be planned around energy costs or expected user data volumes in networks 
+        <t>Planned resource scheduling will be required for various scenarios; these include networks with mobile nodes, such as
+           crewless aerial vehicles and orbiting satellite constellations. In these scenarios, links are lost and re-established
+           as a function of the mobility of the platforms. Furthermore, link activity might be restricted to certain times of the
+           day in networks without reliable access to power, such as networks harvesting energy from tidal, wind, and solar
+           resources. Similarly, network traffic might be planned around energy costs or expected user data volumes in networks
            prioritising green computing and energy efficiency over data rate.</t>
        </section>
        <section anchor="topologies">
@@ -106,12 +106,12 @@
       </section>
       <section anchor="routing">
         <name>Routing</name>
-        <t>Existing routing techniques are not typically designed to handle potential connectivity, i.e., nodes and links 
+        <t>Existing routing techniques are not typically designed to handle potential connectivity, i.e., nodes and links
            scheduled to appear in the future. Therefore, the TVR Scenarios and use cases referenced and discussed in this
            document will be compromised of scheduled resources that are expected to appear in the future.</t>
         <t>However, even if some adjacency failures are predictable, others are not, including link failures and node outages.
-           Therefore, any new technique or routing protocol extension for TVR enviroments must be capable of handling planned and unexpected 
-           resource losses.</t>   
+           Therefore, any new technique or routing protocol extension for TVR enviroments must be capable of handling planned and unexpected
+           resource losses.</t>
          <section anchor="constraints">
          <name>Constraints</name>
          <t>TBD</t>
