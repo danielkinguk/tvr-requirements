@@ -88,6 +88,8 @@
         <dd>A single instant of time, consistent with the concepts of date-time in <xref target="RFC3339"/>.</dd>
         <dt>Timeline:</dt>
         <dd>A possibly bounded interval of time, consistent with the concept of a period in <xref target="RFC3339"/>.</dd>
+        <dt>Subsequent:</dt>
+        <dd>A time instant which is later in a timeline than some reference time instant.</dd>
       </dl>
     </section>
 
@@ -119,7 +121,7 @@
 This section covers different aspects of how temporality applies to any potential TVR information model.
 Each aspect is roughly independent and informs how a model can choose to include temporality in its parameter space.
         </t>
-        <section>
+        <section anchor="time-scope">
           <name>Scope of Time-Variability</name>
           <t>
 One aspect of any time-varying model is the scope of what may be time-variable.
@@ -133,7 +135,7 @@ Two extremes of this aspect are:
 It is expected that an application of time-variability to real world data models will keep some entities within the model time-invariant and allow scheduling of other, specific entities.
           </t>
           <t>
-Another aspect of any time-varying model is the granularity of state to which a schedule may be applied.
+Another aspect of any time-varying model is the granularity of state to which a schedule can be applied.
 Two extremes of this aspect are:
           </t>
           <ul>
@@ -153,9 +155,10 @@ In other cases the model may allow indefinitely-large schedules but the processi
           </t>
         </section>
         <section>
-          <name>Time Granularity</name>
+          <name>Time Precision</name>
           <t>
 Different time-variant models will require different granularities of planning time, either because of limitations or assumptions about wall-clock time or because of requirements within the modeled domain.
+It is up to specific models to define the precision of time values and the required accuracy and precison of wall-clocks which implement the schedules.
           </t>
         </section>
         <section>
@@ -179,11 +182,51 @@ A model which does not include the notion of periodicy within a schedule could b
           </t>
         </section>
         <section>
+          <name>Continuity in a Schedule</name>
+          <t>
+A schedule which includes a sequence of time intervals needs to ensure that the interpretation of those intervals in the schedule timeline does not leave any "gaps" at the interval boundaries.
+For that reason, it is important that the model uses half-open intervals of time so that time-adjacent intervals leave no gap.
+In keeping with the terminology of <xref target="RFC3339"/>, intervals are bounded by their "start" and "end" instants.
+It is <bcp14>RECOMMENDED</bcp14> that any time-varying model use schedules with intervals closed on their start time and open on their end time.
+This behavior lends to the interpretation, in the schedule timeline, that the scheduled state takes effect at an interval's start and continues until the subsequent state.
+          </t>
+        </section>
+        <section>
           <name>Time-Overlap and Priority</name>
           <t>
 In an ideal situation a model would be guaranteed by design to contain only contiguous and non-overlapping schedules for each time-variant scope.
 In a realized model this kind of invaraint might not be enforcable or might lead to overly complex schedule structures.
 One way a model can handle this is to establish a concept of schedule priority, where some intervals of the schedule timeline contain overlapping schedules for the same properties and only the highest-priority schedule applies.
+When priorities are allowed by a model, it enables the concept of an "overlay" where a long-duration state can be temporarilly (in schedule time) superseded by a short-duration state.
+          </t>
+        </section>
+        <section>
+          <name>Property Value Interpolation</name>
+          <t>
+When a schedule is applied to an entity in a way which is more <xref target="time-scope">granular</xref> than just indicating when that whole entity is valid or invalid, the model needs to consider how individual properties are to be treated between scheduled instants.
+Some of the possibile behaviors are:
+          </t>
+          <dl>
+            <dt>Zero-order hold:</dt>
+            <dd>
+From the instant a scheduled value applies to a property until the subsequent-in-schedule-time value supersedes it.
+This is simple from a logical standpoint, but discontinuties in the value over schedule time could cause issues with the model itself.
+For some models, though, the constant values between change instants are actually beneficial by allowing the entire timeline to be compressed into a sequence of discrete state-change instants.
+This is the behavior implied in models such as <xref target="AIXM"/>.
+            </dd>
+            <dt>Linear interpolation:</dt>
+            <dd>
+At the instants of time defined in the schedule the property takes the exact values, but between those instants the property is interpolated linearly over time.
+This results in a state that is continuous over time, which is beneficial for some kinds of model but also means that there is no simple discrete sequence of states.
+            </dd>
+            <dt>Higher-order or spline interpolation:</dt>
+            <dd>
+Higher order interpolations can result in properties that vary over schedule time in ways that are more or less beneficial to different types of models.
+            </dd>
+          </dl>
+          <t>
+Regardless of the types of interpolation used, a model can choose to apply interpolation globally or per-property.
+Since different properties represent different physical or logical metrics of a network it is expected that different types of interpolation will be needed for different represented quantities.
           </t>
         </section>
         <section>
@@ -208,14 +251,23 @@ A model which has an intrinsic notion of fine-grained superseding changes, possi
       </section>
       <section anchor="topologies">
         <name>Topologies</name>
-        <t>TBD</t>
+        <t>
+The primary entities of a topological network model, as realized in <xref target="RFC8345"/> and similar predecessors, are nodes and unidirectional links, with a secondary entity representing the "termination point" of a link at a node.
+Following the concepts described in <xref target="scheduling"/> the nodes and links are the entities to which a schedule can be applied.
+        </t>
          <section anchor="nodes">
          <name>Nodes</name>
-         <t>TBD</t>
+         <t>
+When a schedule is applied to a node the granularity <bcp14>SHALL</bcp14> at least be at the individual node.
+In cases where the properties of a node have time-variable values the model <bcp14>SHALL</bcp14> define an interpolation method, either globally or per-property.
+         </t>
          </section>
           <section anchor="links">
           <name>Links</name>
-          <t>TBD</t>
+          <t>
+When a schedule is applied to a link the granularity <bcp14>SHALL</bcp14> at least be at the individual link.
+In cases where the properties of a link have time-variable values the model <bcp14>SHALL</bcp14> define an interpolation method, either globally or per-property.
+          </t>
           </section>
       </section>
       <section anchor="routing">
@@ -265,6 +317,7 @@ A model which has an intrinsic notion of fine-grained superseding changes, possi
       </references>
       <references title="Informative References">
         <?rfc include="reference.RFC.3339.xml"?>
+        <?rfc include="reference.RFC.8345.xml"?>
         <?rfc include="reference.I-D.king-tvr-ntn-challanges.xml"?>
         <?rfc include="reference.I-D.contreras-tvr-alto-exposure.xml"?>
         <?rfc include="reference.I-D.hou-tvr-satellite-network-usecases.xml"?>
