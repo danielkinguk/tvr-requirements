@@ -252,23 +252,56 @@ A model which has an intrinsic notion of fine-grained superseding changes, possi
       <section anchor="topologies">
         <name>Topologies</name>
         <t>
-The primary entities of a topological network model, as realized in <xref target="RFC8345"/> and similar predecessors, are nodes and unidirectional links, with a secondary entity representing the "termination point" of a link at a node.
-Following the concepts described in <xref target="scheduling"/> the nodes and links are the entities to which a schedule can be applied.
+The primary entities of a topological network model, as realized in <xref target="RFC8345"/> and similar predecessors, are nodes and unidirectional links, with a secondary entity representing the "termination point" for each side of a link at a node.
+Following the concepts described in <xref target="scheduling"/> these are the entities to which an intrinsic schedule can be applied.
         </t>
-         <section anchor="nodes">
-         <name>Nodes</name>
-         <t>
+        <section anchor="nodes">
+          <name>Nodes</name>
+          <t>
 When a schedule is applied to a node the granularity <bcp14>SHALL</bcp14> at least be at the individual node.
 In cases where the properties of a node have time-variable values the model <bcp14>SHALL</bcp14> define an interpolation method, either globally or per-property.
-         </t>
-         </section>
-          <section anchor="links">
+          </t>
+          <t>
+A node is just a named entity in Layer 3 <xref target="RFC8346"/> and Layer 2 <xref target="RFC8944"/> topologies.
+Schedules on a node <bcp14>SHALL</bcp14> be used to indicate the validity of the entire node or changing properties of that entity.
+When a schedule indicates that a node is not valid for a schedule time instant, that validity <bcp14>SHALL</bcp14> apply to all of its termination points and links as well.
+This logic allows a schedule to represent, for example, the expected power-on state of a node at a specific layer.
+          </t>
+        </section>
+        <section anchor="termpoints">
+          <name>Termination Points</name>
+          <t>
+When a schedule is applied to a termination point the granularity <bcp14>SHALL</bcp14> at least be at the individual entity.
+In cases where the properties of a termination point have time-variable values the model <bcp14>SHALL</bcp14> define an interpolation method, either globally or per-property.
+          </t>
+          <t>
+A termination point is associated with an IP address in Layer 3 <xref target="RFC8346"/> and a MAC address in Layer 2 <xref target="RFC8944"/> topologies.
+Schedules on a termination point <bcp14>SHALL</bcp14> be used to indicate the validity of the layer-2/3 interface represented by the entity or changing properties of that entity.
+When a schedule indicates that a termination point is not valid for a schedule time instant, that validity <bcp14>SHALL</bcp14> apply to all of its links as well.
+This logic allows a schedule to represent, for example, the expected power-on or administrative-enabled state of an attached network interface card (NIC) or virtual private network (VPN) endpoint.
+          </t>
+        </section>
+        <section anchor="links">
           <name>Links</name>
           <t>
 When a schedule is applied to a link the granularity <bcp14>SHALL</bcp14> at least be at the individual link.
 In cases where the properties of a link have time-variable values the model <bcp14>SHALL</bcp14> define an interpolation method, either globally or per-property.
           </t>
-          </section>
+          <t>
+A link is associated with link metric properties in Layer 3 <xref target="RFC8346"/> and Layer 2 <xref target="RFC8944"/> topologies.
+Schedules on a link <bcp14>SHALL</bcp14> be used to indicate the validity of the entire link or changing properties of that entity.
+When a schedule indicates that a link is not valid for a schedule time instant, that validity <bcp14>SHALL NOT</bcp14> apply to its termination points and nodes.
+This logic allows a schedule to represent, for example, the expected connectivity state, data throughput/rate, and latency/delay of a link.
+          </t>
+        </section>
+        <section>
+          <name>Network Layering</name>
+          <t>
+When a schedule indicates that an entity is not valid for a schedule time instant, that validity <bcp14>SHALL NOT</bcp14> apply to any of its associated overlay or underlay network entities.
+The effects of scheduled administrative disabling or enabling of an entity at one layer do not imply a change in administrative enabled state at any other layer.
+Likewise, the assigning of an address property at one layer does not imply the presence or absence of an address assignment at that same time instant for any other layer.
+          </t>
+        </section>
       </section>
       <section anchor="routing">
         <name>Routing</name>
@@ -318,6 +351,8 @@ In cases where the properties of a link have time-variable values the model <bcp
       <references title="Informative References">
         <?rfc include="reference.RFC.3339.xml"?>
         <?rfc include="reference.RFC.8345.xml"?>
+        <?rfc include="reference.RFC.8346.xml"?>
+        <?rfc include="reference.RFC.8944.xml"?>
         <?rfc include="reference.I-D.king-tvr-ntn-challanges.xml"?>
         <?rfc include="reference.I-D.contreras-tvr-alto-exposure.xml"?>
         <?rfc include="reference.I-D.hou-tvr-satellite-network-usecases.xml"?>
