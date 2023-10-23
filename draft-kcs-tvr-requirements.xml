@@ -273,15 +273,15 @@ In cases where the properties of a link have time-variable values the model <bcp
       <section anchor="routing">
         <name>Routing</name>
         <t>Traditional network routing techniques typically use link bandwidth and delay for path calculation, and do not consider time-based factors. TVR should be
-	   capable of improving network performance and reliability in environments where node livelyness and link availability is a time-based consideration, with various factors, 
-           including power availability, interface line of sight or expected demand. 
+	   capable of improving network performance and reliability in environments where node livelyness and link availability is a time-based consideration, with various factors,
+           including power availability, interface line of sight or expected demand. </t>
         <t>However, even if some adjacency failures are predictable, others are not, including link failures and node outages.
            Therefore, any new technique or routing protocol extension for TVR enviroments must be capable of handling planned and unexpected
            resource losses.</t>
 	<t>Time-Variant Routing (TVR) introduces a scenario of calculating a path, or sub-path within a network, taking into account the timing
 	   of message transmission or receipt as an integral part of the overall route computation.</t>
-	<t>Furthermore, Synchronization of network time across TVR-capable nodes is critical in TVR networks.</t> 
-	<t>Three scenarios are currently considered when computating TVR-enabled paths.
+	<t>Furthermore, Synchronization of network time across TVR-capable nodes is critical in TVR networks.</t>
+	<t>Three scenarios are currently considered when computating TVR-enabled paths.</t>
          <section anchor="Centralized">
          <name>Centralized</name>
          <t>The network nodes will receive the time variable information and traffic forwarding rules directly from a logically centralized source, such as a network controller. The time variable data may then be
@@ -289,19 +289,19 @@ In cases where the properties of a link have time-variable values the model <bcp
          </section>
          <section anchor="Distributed">
          <name>Distributed</name>
-         <t>All network nodes will participate in a routing scheme where time variable information is propagated through the network via capability and variability advertisements. This could be achieved using 
-            extensions to existing routing schemes and techniques so that link, adjacency, cost, and schedule may be considered when making forwarding decisions for per-hop packets or calculating traffic 
+         <t>All network nodes will participate in a routing scheme where time variable information is propagated through the network via capability and variability advertisements. This could be achieved using
+            extensions to existing routing schemes and techniques so that link, adjacency, cost, and schedule may be considered when making forwarding decisions for per-hop packets or calculating traffic
             engineered end-to-end paths. It should be noted that schedule distribution and node computation latency may exist in some network environments.</t>
          </section>
          <section anchor="Hybrid">
          <name>Hybrid</name>
-         <t>In this scenario, mixed-node TVR capability exists. Some nodes will require a schedule provided by a centralized source, and others will be capable of advertising and learning scheduled information 
+         <t>In this scenario, mixed-node TVR capability exists. Some nodes will require a schedule provided by a centralized source, and others will be capable of advertising and learning scheduled information
 	    via a distributed mechanism.</t>
 	 <t>This scenario presents time and schedule synchronization and source verification challenges and will require further study.</t>
-         </section>     
+         </section>
          <section anchor="constraints">
          <name>Constraints</name>
-         <t>TBD</t>
+         <t><cref>TBD</cref></t>
          </section>
       </section>
     </section>
