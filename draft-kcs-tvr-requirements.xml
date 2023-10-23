@@ -90,6 +90,14 @@
         <dd>A possibly bounded interval of time, consistent with the concept of a period in <xref target="RFC3339"/>.</dd>
         <dt>Subsequent:</dt>
         <dd>A time instant which is later in a timeline than some reference time instant.</dd>
+        <dt>Orchestrator:</dt>
+        <dd>The subsystem of a managing device which centralizes control of a network and applies policy to manage a network.</dd>
+        <dt>Manager:</dt>
+        <dd>The subsystem in a managing device which operates a management protocol to control an Agent.</dd>
+        <dt>Agent:</dt>
+        <dd>The subsystem in a managed device which operates a management protocol to be controlled by a Manager.</dd>
+        <dt>(Routing) Application:</dt>
+        <dd>The subsystem of a managed device which performs the functions of a routing protocol and/or algorithm.</dd>
       </dl>
       <figure anchor="fig-mgmt-ents">
         <name>Management Entities</name>
