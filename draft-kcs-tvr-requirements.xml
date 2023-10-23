@@ -30,7 +30,7 @@
         <email>brian.sipos+ietf@gmail.com</email>
       </address>
     </author>
-    <date year="2023" month="May" day="24"/>
+    <date/>
     <area>Routing</area>
     <keyword>Time-variant</keyword>
     <keyword>Routing</keyword>
@@ -91,8 +91,27 @@
         <dt>Subsequent:</dt>
         <dd>A time instant which is later in a timeline than some reference time instant.</dd>
       </dl>
+      <figure anchor="fig-mgmt-ents">
+        <name>Management Entities</name>
+        <artwork type="ascii" align="center">
++--------------------+       +-------------------+
+|   Managing Device  |       |   Managed Device  |
+|                    |       |                   |
+|  +--------------+  |       |  +-------------+  |
+|  | Orchestrator |  |       |  | Application |  |
+|  +--------------+  |       |  +-------------+  |
+|         |          |       |         |         |
+|  +--------------+  |       |  +-------------+  |
+|  |    Manager   |&lt;-----+-----&gt;|    Agent    |  |
+|  +--------------+  |   :   |  +-------------+  |
++--------------------+   :   +-------------------+
+                         :
+                  +-------------+
+                  |  Data Model |
+                  +-------------+
+</artwork>
+      </figure>
     </section>
-
     <section anchor="overview">
       <name>Overview of Time-Variant Networks</name>
       <t>Existing Internet routing techniques maintain end-to-end connected paths across a network. Routing mechanisms exist to recover
@@ -114,6 +133,46 @@
            day in networks without reliable access to power, such as networks harvesting energy from tidal, wind, and solar
            resources. Similarly, network traffic might be planned around energy costs or expected user data volumes in networks
            prioritising green computing and energy efficiency over data rate.</t>
+        <section>
+          <name>Schedule Visibility</name>
+          <t>
+Because scheduled time-variance is not a part of exsting routing algorithms and managed data models, not all routing applications will be made to handle schedules as part of the routing parameters intrinsically.
+Two extremes of schedules being associated to routing data are:
+          </t>
+          <dl>
+            <dt>Intrinsic Schedule:</dt>
+            <dd>
+In this situation the schedule is an intrinsic part of the managed data model which is visible to the routing application and used as part of the routing algorithms.
+When the schedule is intrinsic, there is not necessarily the notion of a schedule being "executed" in wall-clock time because the time-varying parameters are ingested as part of the routing algorithms natural functioning.
+            </dd>
+            <dt>Extrinsic Schedule:</dt>
+            <dd>
+In this situation the schedule is not part of the managed data proper but maintained within the Orchestrator; the routing application only sees the effects of changes in routing parameters as the schedule is executed (in wall-clock time) by the Agent.
+            </dd>
+          </dl>
+          <t>
+There is also the possibility of an intermediate situation where the schedule is still part of the managed data model but is visible only to, and executed in wall-clock time by, the management Agent.
+This allows a more distributed use of scheduled data than centralizing its processing in an Orchestrator.
+          </t>
+        </section>
+        <section>
+          <name>Schedule Locality</name>
+          <t>
+Similar to how different entities can have, or not have, visbility into a time-varying schedule there is also the aspect of where the schedule data is handled within the network topology.
+Two extremes for locality of schedule handling are:
+          </t>
+          <dl>
+            <dt>Centralized:</dt>
+            <dd>
+In this situation, all schedule handling is centralized within a network Orchestrator and changes are sent to routing applications in wall-clock time via a management interface.
+This corresponds with the Extrinsic schedule visibility because the managed routers do not see the schedule to indicate why parameter changes are taking place.
+            </dd>
+            <dt>Distributed:</dt>
+            <dd>
+This situation corresponds with the Intrinsic or intermediate schedule visibility, where a schedule (with a potentially limited time horizon from what is known at the orchestrator) is part of the managed data which is distributed to managed devices to be handled either by the Agent or by the routing Application itself.
+            </dd>
+          </dl>
+        </section>
       </section>
       <section>
         <name>General Temporality</name>
@@ -362,9 +421,9 @@ Likewise, the assigning of an address property at one layer does not imply the p
       <name>References</name>
       <references>
         <name>Normative References</name>
-        <?rfc include="reference.RFC.2119.xml"?>	
+        <?rfc include="reference.RFC.2119.xml"?>
         <?rfc include="reference.RFC.8174.xml"?>
-	     <?rfc include="reference.I-D.ietf-tvr-use-cases.xml"?>
+        <?rfc include="reference.I-D.ietf-tvr-use-cases.xml"?>
       </references>
       <references title="Informative References">
         <?rfc include="reference.RFC.3339.xml"?>
