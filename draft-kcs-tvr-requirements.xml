@@ -338,23 +338,22 @@ Likewise, the assigning of an address property at one layer does not imply the p
 
       <section title="Support the Identification and Advertisement of Node Attribute Changes">
         <t>In Time-Variant Routing, scheduling of the system are as expected.
-        In practical situations, however, the attributes of nodes can be
+        In practical situations, however, the attributes of entities can be
         converted back and forth between Time-Variant and Non-Time-Variant
-        nodes. For example, a mobile phone can be considered a
-        Non-Time-Variant node in the network when charging. After unplugging
-        the power cord, it can be considered a Time-Variant-Node because it
-        starts to be powered by batteries.</t>
+        nodes.</t>
 
-        <t>o MUST support the identification and advertisement of node
+        <t>A managed device MUST support the identification and advertisement of non-scheduled
         attribute changes.</t>
 
         <t>Besides, If there are abnormal changes in the system, it is
         necessary to advertise them through the existing routing protocols in
         time to achieve the stability of Time-Variant Routing and avoid
         redundant advertisements. For example, a node in the system is
-        suddenly damaged due to external factors. Therefore,</t>
+        suddenly damaged due to external factors. 
+	Changes in a node's state outside of a schedule are communicated to other nodes in a network through existing routing protocol mechanims, where they exist.
+	</t>
 
-        <t>o Should provide a advertisement methodology for responding to
+        <t>A manager SHOULD provide a advertisement methodology for responding to
         abnormal changes in the system.</t>
       </section>
 
