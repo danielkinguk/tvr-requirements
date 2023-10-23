@@ -333,6 +333,74 @@ Likewise, the assigning of an address property at one layer does not imply the p
       <t>TBD</t>
     </section>
 
+     <section anchor="requirements-summary">
+      <name>Requirements Summary</name>
+
+      <section title="Support the Identification and Advertisement of Node Attribute Changes">
+        <t>In Time-Variant Routing, scheduling of the system are as expected.
+        In practical situations, however, the attributes of nodes can be
+        converted back and forth between Time-Variant and Non-Time-Variant
+        nodes. For example, a mobile phone can be considered a
+        Non-Time-Variant node in the network when charging. After unplugging
+        the power cord, it can be considered a Time-Variant-Node because it
+        starts to be powered by batteries.</t>
+
+        <t>o MUST support the identification and advertisement of node
+        attribute changes.</t>
+
+        <t>Besides, If there are abnormal changes in the system, it is
+        necessary to advertise them through the existing routing protocols in
+        time to achieve the stability of Time-Variant Routing and avoid
+        redundant advertisements. For example, a node in the system is
+        suddenly damaged due to external factors. Therefore,</t>
+
+        <t>o Should provide a advertisement methodology for responding to
+        abnormal changes in the system.</t>
+      </section>
+
+      <section title="Support Agent Node Advertisement">
+        <t>Agent nodes can help to improve the efficiency of the network.
+        There are some nodes in the network that do not have routing
+        functions. When their attributes change, they are unable to notify
+        other nodes in the network. Agent nodes can help nodes without routing
+        functions to advertise information, thus improving the efficiency of
+        the network. Therefore,</t>
+
+        <t>o MUST support agent nodes to help non-routing nodes implement
+        information advertisement.</t>
+      </section>
+
+      <section title="Support Identification and Classification of Node Attributes">
+        <t>The node attributes of the network may change as described in 3.1.
+        If the system cannot timely identify and classify in a processing
+        manner after the node attributes change, it will lead to suboptimal
+        routing decisions. Therefore,</t>
+
+        <t>o MUST provide a discovery and resolving methodology for the
+        identification and classification of node attributes.</t>
+      </section>
+
+      <section title="Support System Schedule and Time Interval Changes">
+        <t>The system's schedule may change, requiring of to be reconfigured
+        instead it being set once and not being able to be modified.
+        Additionally, time-variant intervals in the system may also vary.
+        Therefore,</t>
+
+        <t>o MUST support system schedule changes.</t>
+
+        <t>o MUST support time interval changes.</t>
+      </section>
+
+      <section title="Support Appropriate Time Accuracy">
+        <t>The accuracy of the time cannot be too large or too small;
+        otherwise, convergence may not be possible. Therefore,</t>
+
+        <t>o MUST support appropriate time accuracy.</t>
+      </section>   
+    </section>
+
+
+	  
     <section anchor="iana-considerations">
       <name>IANA Considerations</name>
       <t>This document has no IANA actions.</t>
