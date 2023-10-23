@@ -320,24 +320,25 @@ Likewise, the assigning of an address property at one layer does not imply the p
 
      <section anchor="tvr-use-case-requirements">
       <name>Time-Variant Use Case Requirements</name>
-      <t>Several TVR use cases have been identifed and discussed in <xref target="I-D.ietf-tvr-use-cases"/>. This section provides 
+      <t>Several TVR use cases have been identifed and discussed in <xref target="I-D.ietf-tvr-use-cases"/>. This section provides
 	further detail on specific requirements to meet use case needs.</t>
+      <section>
          <name>Operating Efficiency Use Case</name>
          <t>Several operational efficiency requirements exist; these include:</t>
 
         <ol spacing="normal" type="1">
-            <li>Distribution of Predicted Topology-change. The predicted topology-change information may include the valid time, 
+            <li>Distribution of Predicted Topology-change. The predicted topology-change information may include the valid time,
 		invalid time, link costs at different times, and change periods. </li>
 
             <li>Topology Changes. The predicted topology-change information may change due to forecasted or unforecasted changes. The managing entity should be capable of providing a partial or full topology update as often as needed.</li>
 
             <li>The Minimum Route Recalculation Interval and Threshold. Although some cases may assume that the cost persists for a sufficient
-		amount of time, considering that each route contains multiple links, the change frequency of the path may be much higher than 
-		the cost. In this case, the minimum recalculation interval or cost change threshold is needed to determine when a route 
+		amount of time, considering that each route contains multiple links, the change frequency of the path may be much higher than
+		the cost. In this case, the minimum recalculation interval or cost change threshold is needed to determine when a route
 		recalculation is required. Of course, scheduled topology connection changes must be considered when path calculation is required.</li>
           </ol>
-		 
-         </section>
+		
+     </section>
     </section>
 
      <section anchor="operational-considerations">
