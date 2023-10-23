@@ -395,9 +395,9 @@ Likewise, the assigning of an address property at one layer does not imply the p
         otherwise, convergence may not be possible. Therefore,</t>
 
         <t>o MUST support appropriate time accuracy.</t>
-      </section>   
+      </section>
     </section>
-	  
+	
     <section anchor="iana-considerations">
       <name>IANA Considerations</name>
       <t>This document has no IANA actions.</t>
