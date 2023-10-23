@@ -11,7 +11,7 @@
   <!-- xml2rfc v2v3 conversion 3.17.0 -->
   <front>
     <title abbrev="tvr-requirements">TVR (Time-Variant Routing) Requirements</title>
-    <seriesInfo name="Internet-Draft" value="draft-kcs-tvr-requirements-latest"/>
+    <seriesInfo name="Internet-Draft" value="draft-kcs-tvr-requirements-01"/>
     <author fullname="D. King">
       <organization>Lancaster University</organization>
       <address>
@@ -47,7 +47,7 @@
       </t>
       <t>
         Discussion of this document takes place on the
-        Time Variant Routing Working Group mailing list (<eref target="mailto:tvr@ietf.org"/>),
+        Time-Variant Routing Working Group mailing list (<eref target="mailto:tvr@ietf.org"/>),
         which is archived at <eref target="https://mailarchive.ietf.org/arch/browse/tvr/"/>.
         Subscribe at <eref target="https://www.ietf.org/mailman/listinfo/tvr/"/>.
       </t>
@@ -123,7 +123,7 @@
     <section anchor="overview">
       <name>Overview of Time-Variant Networks</name>
       <t>Existing Internet routing techniques maintain end-to-end connected paths across a network. Routing mechanisms exist to recover
-         connectivity and resume normal traffic forwarding as the topology changes. Occasionally, optimisation of routes may also be
+         connectivity and resume normal traffic forwarding as the topology changes. Occasionally, optimization of routes may also be
          requested, especially post-topology changes due to disruptive events. However, there are a growing number of use cases where
          changes to the routing topology are an expected part of network operations. In these scenarios, the pre-planned loss and
          restoration of an adjacency, or formation of an alternate adjacency, should be seen as a non-disruptive event.</t>
@@ -135,12 +135,12 @@
 
       <section anchor="scheduling">
         <name>Resource Scheduling</name>
-        <t>Planned resource scheduling will be required for various scenarios; these include networks with mobile nodes, such as
+        <t>Planned resource scheduling will be required for various scenarios; these include networks with mobile entities, such as
            crewless aerial vehicles and orbiting satellite constellations <xref target="I-D.ietf-tvr-use-cases"/>. In these scenarios, links are lost and re-established
            as a function of the mobility of the platforms. Furthermore, link activity might be restricted to certain times of the
            day in networks without reliable access to power, such as networks harvesting energy from tidal, wind, and solar
            resources. Similarly, network traffic might be planned around energy costs or expected user data volumes in networks
-           prioritising green computing and energy efficiency over data rate.</t>
+           prioritizing green computing and energy efficiency over data rate.</t>
         <section>
           <name>Schedule Visibility</name>
           <t>
@@ -150,12 +150,12 @@ Two extremes of schedules being associated to routing data are:
           <dl>
             <dt>Intrinsic Schedule:</dt>
             <dd>
-In this situation the schedule is an intrinsic part of the managed data model which is visible to the routing application and used as part of the routing algorithms.
+In this situation, the schedule is an intrinsic part of the managed data model which is visible to the routing application and used as part of the routing algorithms.
 When the schedule is intrinsic, there is not necessarily the notion of a schedule being "executed" in wall-clock time because the time-varying parameters are ingested as part of the routing algorithms natural functioning.
             </dd>
             <dt>Extrinsic Schedule:</dt>
             <dd>
-In this situation the schedule is not part of the managed data proper but maintained within the Orchestrator; the routing application only sees the effects of changes in routing parameters as the schedule is executed (in wall-clock time) by the Agent.
+In this situation, the schedule is not part of the managed data proper but maintained within the Orchestrator; the routing application only sees the effects of changes in routing parameters as the schedule is executed (in wall-clock time) by the Agent.
             </dd>
           </dl>
           <t>
@@ -166,7 +166,7 @@ This allows a more distributed use of scheduled data than centralizing its proce
         <section>
           <name>Schedule Locality</name>
           <t>
-Similar to how different entities can have, or not have, visbility into a time-varying schedule there is also the aspect of where the schedule data is handled within the network topology.
+Similar to how different entities can have, or not have, visibility into a time-varying schedule there is also the aspect of where the schedule data is handled within the network topology.
 Two extremes for locality of schedule handling are:
           </t>
           <dl>
@@ -177,7 +177,7 @@ This corresponds with the Extrinsic schedule visibility because the managed rout
             </dd>
             <dt>Distributed:</dt>
             <dd>
-This situation corresponds with the Intrinsic or intermediate schedule visibility, where a schedule (with a potentially limited time horizon from what is known at the orchestrator) is part of the managed data which is distributed to managed devices to be handled either by the Agent or by the routing Application itself.
+This situation corresponds with the Intrinsic or intermediate schedule visibility, where a schedule (with a potentially limited time horizon from what is known at the Orchestrator) is part of the managed data which is distributed to managed devices to be handled either by the Agent or by the routing Application itself.
             </dd>
           </dl>
         </section>
@@ -373,29 +373,29 @@ Likewise, the assigning of an address property at one layer does not imply the p
       <section anchor="routing">
         <name>Routing</name>
         <t>Traditional network routing techniques typically use link bandwidth and delay for path calculation, and do not consider time-based factors. TVR should be
-	   capable of improving network performance and reliability in environments where node livelyness and link availability is a time-based consideration, with various factors,
+	   capable of improving network performance and reliability in environments where entity livelyness and link availability is a time-based consideration, with various factors,
            including power availability, interface line of sight or expected demand. </t>
-        <t>However, even if some adjacency failures are predictable, others are not, including link failures and node outages.
+        <t>However, even if some adjacency failures are predictable, others are not, including link failures and entity outages.
            Therefore, any new technique or routing protocol extension for TVR enviroments must be capable of handling planned and unexpected
            resource losses.</t>
 	<t>Time-Variant Routing (TVR) introduces a scenario of calculating a path, or sub-path within a network, taking into account the timing
 	   of message transmission or receipt as an integral part of the overall route computation.</t>
-	<t>Furthermore, Synchronization of network time across TVR-capable nodes is critical in TVR networks.</t>
+	<t>Furthermore, Synchronization of network time across TVR-capable entities is critical in TVR networks.</t>
 	<t>Three scenarios are currently considered when computating TVR-enabled paths.</t>
          <section anchor="Centralized">
          <name>Centralized</name>
-         <t>The network nodes will receive the time variable information and traffic forwarding rules directly from a logically centralized source, such as a network controller. The time variable data may then be
-	    processed locally by the node entered into the scheduled routing table and specific forwarding rules applied.</t>
+         <t>The network entities will receive the time variable information and traffic forwarding rules directly from a logically centralized source, such as a Orchestrator. The time variable data may then be
+	    processed locally by the entuty entered into the scheduled routing table and specific forwarding rules applied.</t>
          </section>
          <section anchor="Distributed">
          <name>Distributed</name>
-         <t>All network nodes will participate in a routing scheme where time variable information is propagated through the network via capability and variability advertisements. This could be achieved using
+         <t>All network entities will participate in a routing scheme where time variable information is propagated through the network via capability and variability advertisements. This could be achieved using
             extensions to existing routing schemes and techniques so that link, adjacency, cost, and schedule may be considered when making forwarding decisions for per-hop packets or calculating traffic
             engineered end-to-end paths. It should be noted that schedule distribution and node computation latency may exist in some network environments.</t>
          </section>
          <section anchor="Hybrid">
          <name>Hybrid</name>
-         <t>In this scenario, mixed-node TVR capability exists. Some nodes will require a schedule provided by a centralized source, and others will be capable of advertising and learning scheduled information
+         <t>In this scenario, mixed-entity TVR capability exists. Some entities will require a schedule provided by a centralized source, and others will be capable of advertising and learning scheduled information
 	    via a distributed mechanism.</t>
 	 <t>This scenario presents time and schedule synchronization and source verification challenges and will require further study.</t>
          </section>
@@ -439,50 +439,59 @@ Likewise, the assigning of an address property at one layer does not imply the p
       <t>TBD</t>
     </section>
 
+     <section anchor="solution-considerations">
+      <name>Solution Considerations</name>
+      <t>This document does not mandate specific techniques for the requirements identified. However, it does propose that existing IETF
+       mechanisms should be reused wherever possible to meet the TVR requirements.</t>
+      <t>The use of the YANG data modeling language is RECOMMENDED.</t>
+      <t>The use of the NETCONF protocol is RECOMMENDED.</t>     
+      <t>Further discussion on the applicability and advantages of these technologies for TVR will be provided in future versions of this document.</t> 
+    </section>
+
      <section anchor="requirements-summary">
       <name>Requirements Summary</name>
 
-      <section title="Support the Identification and Advertisement of Node Property Changes">
+      <section title="Support the Identification and Advertisement of Entity Property Changes">
         <t>In Time-Variant Routing, scheduling of the system are as expected.
         In practical situations, however, the properties of entities can be
         converted back and forth between Time-Variant and Non-Time-Variant
-        nodes.</t>
+        Entities.</t>
 
-        <t>A managed device MUST support the identification and advertisement of non-scheduled
+        <t>A entity MUST support the identification and advertisement of non-scheduled
         property changes.</t>
 
         <t>Besides, If there are abnormal changes in the system, it is
         necessary to advertise them through the existing routing protocols in
         time to achieve the stability of Time-Variant Routing and avoid
-        redundant advertisements. For example, a node in the system is
-        suddenly damaged due to external factors.
-	Changes in a node's state outside of a schedule are communicated to other nodes in a network through existing routing protocol mechanims, where they exist.
-	</t>
+        redundant advertisements. For example, a entity in the system is
+        suddenly damaged due to external factors.</t>
+	      
+	<t>Changes in entity state outside of a schedule are communicated to other entities in a network through existing routing protocol mechanims, where they exist.	</t>
 
         <t>A manager SHOULD provide a advertisement methodology for responding to
         abnormal changes in the system.</t>
       </section>
 
-      <section title="Support Agent Node Advertisement">
-        <t>Agent nodes can help to improve the efficiency of the network.
-        There are some nodes in the network that do not have routing
+      <section title="Support Agent Entity Advertisement">
+        <t>Agent entities can help to improve the efficiency of the network.
+        There are some entities in the network that do not have routing
         functions. When their properties change, they are unable to notify
-        other nodes in the network. Agent nodes can help nodes without routing
+        other entities in the network. Agent entities can help entities without routing
         functions to advertise information, thus improving the efficiency of
         the network. Therefore,</t>
 
-        <t>o MUST support agent nodes to help non-routing nodes implement
+        <t>o MUST support agent entities to help non-routing entities implement
         information advertisement.</t>
       </section>
 
-      <section title="Support Identification and Classification of Node Properties">
-        <t>The node properties of the network may change as described in 3.1.
+      <section title="Support Identification and Classification of Entity Properties">
+        <t>The entity properties of the network may change as described in 3.1.
         If the system cannot timely identify and classify in a processing
-        manner after the node properties change, it will lead to suboptimal
+        manner after the entity properties change, it will lead to suboptimal
         routing decisions. Therefore,</t>
 
         <t>o MUST provide a discovery and resolving methodology for the
-        identification and classification of node properties.</t>
+        identification and classification of entity properties.</t>
       </section>
 
       <section title="Support System Schedule and Time Interval Changes">
@@ -558,9 +567,6 @@ Likewise, the assigning of an address property at one layer does not imply the p
         <?rfc include="reference.RFC.8345.xml"?>
         <?rfc include="reference.RFC.8346.xml"?>
         <?rfc include="reference.RFC.8944.xml"?>
-        <?rfc include="reference.I-D.king-tvr-ntn-challanges.xml"?>
-        <?rfc include="reference.I-D.contreras-tvr-alto-exposure.xml"?>
-        <?rfc include="reference.I-D.hou-tvr-satellite-network-usecases.xml"?>
         <reference anchor="AIXM" target="https://aixm.aero/sites/aixm.aero/files/imce/AIXM51/aixm_temporality_1.0.pdf">
           <front>
             <title>AIXM 5 Temporality Model</title>
