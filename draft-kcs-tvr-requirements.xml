@@ -109,7 +109,7 @@
       <section anchor="scheduling">
         <name>Resource Scheduling</name>
         <t>Planned resource scheduling will be required for various scenarios; these include networks with mobile nodes, such as
-           crewless aerial vehicles and orbiting satellite constellations. In these scenarios, links are lost and re-established
+           crewless aerial vehicles and orbiting satellite constellations <xref target="I-D.ietf-tvr-use-cases"/>. In these scenarios, links are lost and re-established
            as a function of the mobility of the platforms. Furthermore, link activity might be restricted to certain times of the
            day in networks without reliable access to power, such as networks harvesting energy from tidal, wind, and solar
            resources. Similarly, network traffic might be planned around energy costs or expected user data volumes in networks
@@ -320,7 +320,31 @@ Likewise, the assigning of an address property at one layer does not imply the p
 
      <section anchor="tvr-use-case-requirements">
       <name>Time-Variant Use Case Requirements</name>
-      <t>TBD</t>
+      <t>Several TVR use cases have been identifed and discussed in <xref target="I-D.ietf-tvr-use-cases"/>. This section provides 
+	further detail on specific requirements to meet use case needs.</t>
+         <section anchor="constraints">
+         <name>Operating Efficiency Use Case</name>
+         <t>Several operational efficiency requirements exist; these include:</t>
+
+        <ol spacing="normal" type="1">
+            <li>Distribution of Predicted Topology-change. The predicted topology-change information may include the valid time, 
+		invalid time, link costs at different times, and change periods. </li>
+
+            <li>Topology Changes. The predicted topology-change information may change frequently. For example, the tidal network use cases
+		may have different change regularities in different seasons. The cost of the cellular network may also change as the 
+	        electricity price changes. Therefore, the predicted topology-change information that has been distributed is required to 
+		support adding, modifying, and deleting operations. There are two ways to realize this function: a) fully updated means the
+		predicted topology-change information is fully replaced each time the generator distributes it. b) Maintain a key for each 
+		predicted topology-change information: in this way, a generator of each indicated topology-change information generates a 
+		key for the prediction information and uniquely identifies the information to be added, deleted, or modified by the key.</li>
+
+            <li>The Minimum Route Recalculation Interval and Threshold. Although some cases may assume that the cost persists for a sufficient
+		amount of time, considering that each route contains multiple links, the change frequency of the path may be much higher than 
+		the cost. In this case, the minimum recalculation interval or cost change threshold is needed to determine when a route 
+		recalculation is required. Of course, scheduled topology connection changes must be considered when path calculation is required.</li>
+          </ol>
+		 
+         </section>
     </section>
 
      <section anchor="operational-considerations">
