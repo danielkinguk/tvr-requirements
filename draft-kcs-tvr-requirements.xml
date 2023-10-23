@@ -349,7 +349,7 @@ Likewise, the assigning of an address property at one layer does not imply the p
         necessary to advertise them through the existing routing protocols in
         time to achieve the stability of Time-Variant Routing and avoid
         redundant advertisements. For example, a node in the system is
-        suddenly damaged due to external factors. 
+        suddenly damaged due to external factors.
 	Changes in a node's state outside of a schedule are communicated to other nodes in a network through existing routing protocol mechanims, where they exist.
 	</t>
 
