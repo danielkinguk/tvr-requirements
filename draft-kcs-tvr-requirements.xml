@@ -322,7 +322,6 @@ Likewise, the assigning of an address property at one layer does not imply the p
       <name>Time-Variant Use Case Requirements</name>
       <t>Several TVR use cases have been identifed and discussed in <xref target="I-D.ietf-tvr-use-cases"/>. This section provides 
 	further detail on specific requirements to meet use case needs.</t>
-         <section anchor="constraints">
          <name>Operating Efficiency Use Case</name>
          <t>Several operational efficiency requirements exist; these include:</t>
 
