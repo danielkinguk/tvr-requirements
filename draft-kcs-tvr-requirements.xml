@@ -398,8 +398,6 @@ Likewise, the assigning of an address property at one layer does not imply the p
         <t>o MUST support appropriate time accuracy.</t>
       </section>   
     </section>
-
-
 	  
     <section anchor="iana-considerations">
       <name>IANA Considerations</name>
