@@ -329,13 +329,7 @@ Likewise, the assigning of an address property at one layer does not imply the p
             <li>Distribution of Predicted Topology-change. The predicted topology-change information may include the valid time, 
 		invalid time, link costs at different times, and change periods. </li>
 
-            <li>Topology Changes. The predicted topology-change information may change frequently. For example, the tidal network use cases
-		may have different change regularities in different seasons. The cost of the cellular network may also change as the 
-	        electricity price changes. Therefore, the predicted topology-change information that has been distributed is required to 
-		support adding, modifying, and deleting operations. There are two ways to realize this function: a) fully updated means the
-		predicted topology-change information is fully replaced each time the generator distributes it. b) Maintain a key for each 
-		predicted topology-change information: in this way, a generator of each indicated topology-change information generates a 
-		key for the prediction information and uniquely identifies the information to be added, deleted, or modified by the key.</li>
+            <li>Topology Changes. The predicted topology-change information may change due to forecasted or unforecasted changes. The managing entity should be capable of providing a partial or full topology update as often as needed.</li>
 
             <li>The Minimum Route Recalculation Interval and Threshold. Although some cases may assume that the cost persists for a sufficient
 		amount of time, considering that each route contains multiple links, the change frequency of the path may be much higher than 
