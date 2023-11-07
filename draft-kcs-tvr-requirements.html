@@ -1,0 +1,2012 @@
+<!DOCTYPE html>
+<html lang="en" class="Internet-Draft">
+<head>
+<meta charset="utf-8">
+<meta content="Common,Latin" name="scripts">
+<meta content="initial-scale=1.0" name="viewport">
+<title>TVR (Time-Variant Routing) Requirements</title>
+<meta content="D. King" name="author">
+<meta content="L. M. Contreras" name="author">
+<meta content="B. Sipos" name="author">
+<meta content="
+       Time-Variant Routing (TVR) refers to the calculation of a path or subpath through a network where the time of message transmission (or receipt) is part of the overall route computation. This means that, all things being equal, a TVR computation might produce different results depending on the time that the computation is performed without other detectable changes to the network topology or other cost functions associated with the route. 
+       This document introduces requirements where TVR computations could improve message exchange in a network. 
+    " name="description">
+<meta content="xml2rfc 3.18.2" name="generator">
+<meta content="Time-variant" name="keyword">
+<meta content="Routing" name="keyword">
+<meta content="Mobility" name="keyword">
+<meta content="Requirements" name="keyword">
+<meta content="draft-kcs-tvr-requirements-latest" name="ietf.draft">
+<!-- Generator version information:
+  xml2rfc 3.18.2
+    Python 3.11.6
+    ConfigArgParse 1.5.3
+    google-i18n-address 3.1.0
+    intervaltree 3.1.0
+    Jinja2 3.1.2
+    lxml 4.9.3
+    platformdirs 3.11.0
+    pycountry 22.3.5
+    PyYAML 6.0
+    requests 2.31.0
+    setuptools 67.7.2
+    six 1.16.0
+    wcwidth 0.2.8
+-->
+<link href="draft-kcs-tvr-requirements.xml" rel="alternate" type="application/rfc+xml">
+<link href="#copyright" rel="license">
+<style type="text/css">@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-vietnamese.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-cyrillic.woff2') format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-vietnamese.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-cyrillic.woff2') format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-vietnamese.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: local('Lora SemiBold'), local('Lora-SemiBold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-semibold-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Cabin Condensed';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: local('Cabin Condensed SemiBold'), local('CabinCondensed-SemiBold'), url('https://martinthomson.github.io/rfc-css/fonts/cabincondensed-semibold-vietnamese.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Cabin Condensed';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: local('Cabin Condensed SemiBold'), local('CabinCondensed-SemiBold'), url('https://martinthomson.github.io/rfc-css/fonts/cabincondensed-semibold-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Cabin Condensed';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: local('Cabin Condensed SemiBold'), local('CabinCondensed-SemiBold'), url('https://martinthomson.github.io/rfc-css/fonts/cabincondensed-semibold-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Oxygen Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Oxygen Mono'), local('OxygenMono-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/oxygenmono-regular-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Oxygen Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Oxygen Mono'), local('OxygenMono-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/oxygenmono-regular-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+  color-scheme: light dark;
+  --background-color: #fff;
+  --text-color: #222;
+  --title-color: #191919;
+  --link-color: #2a6496;
+  --highlight-color: #f9f9f9;
+  --line-color: #eee;
+  --pilcrow-weak: #ddd;
+  --pilcrow-strong: #bbb;
+  --small-font-size: 14.5px;
+  --font-mono: 'Oxygen Mono', monospace;
+  scrollbar-color: #bbb #eee;
+}
+body {
+  max-width: 600px;
+  margin: 75px auto;
+  padding: 0 5px;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  font: 16px/22px "Lora", serif;
+  scroll-behavior: smooth;
+}
+
+.ears {
+  display: none;
+}
+
+/* headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Cabin Condensed", sans-serif;
+  font-weight: 600;
+  margin: 0.8em 0 0.3em;
+  font-size-adjust: 0.5;
+  color: var(--title-color);
+}
+h1#title {
+  font-size: 32px;
+  line-height: 40px;
+  clear: both;
+}
+h1#title, h1#rfcnum {
+  margin: 1.5em 0 0.2em;
+}
+h1#rfcnum + h1#title {
+  margin: 0.2em 0;
+}
+
+h1, h2, h3 {
+  font-size: 22px;
+  line-height: 27px;
+}
+h4, h5, h6 {
+  font-size: 20px;
+  line-height: 24px;
+}
+
+/* general structure */
+.author {
+  padding-bottom: 0.3em;
+}
+#abstract+p {
+  font-size: 18px;
+  line-height: 24px;
+}
+#abstract+p code, #abstract+p samp, #abstract+p tt {
+  font-size: 16px;
+  line-height: 0;
+}
+
+p {
+  padding: 0;
+  margin: 0.5em 0;
+  text-align: left;
+}
+div {
+  margin: 0;
+}
+.alignRight.art-text {
+  background-color: var(--highlight-color);
+  border: 1px solid var(--line-color);
+  border-radius: 3px;
+  padding: 0.5em 1em 0;
+  margin-bottom: 0.5em;
+}
+.alignRight.art-text pre {
+  padding: 0;
+  width: auto;
+}
+.alignRight {
+  margin: 1em 0;
+}
+.alignRight > *:first-child {
+  border: none;
+  margin: 0;
+  float: right;
+  clear: both;
+}
+.alignRight > *:nth-child(2) {
+  clear: both;
+  display: block;
+  border: none;
+}
+svg {
+  display: block;
+}
+/* font-family isn't space-separated, but =~ will have to do */
+svg[font-family~="monospace" i], svg [font-family~="monospace" i] {
+  font-family: var(--font-mono);
+}
+.alignCenter.art-text {
+  background-color: var(--highlight-color);
+  border: 1px solid var(--line-color);
+  border-radius: 3px;
+  padding: 0.5em 1em 0;
+  margin-bottom: 0.5em;
+}
+.alignCenter.art-text pre {
+  padding: 0;
+  width: auto;
+}
+.alignCenter {
+  margin: 1em 0;
+}
+.alignCenter > *:first-child {
+  border: none;
+  /* this isn't optimal, but it's an existence proof.  PrinceXML doesn't
+     support flexbox yet.
+  */
+  display: table;
+  margin: 0 auto;
+}
+
+/* lists */
+ol, ul {
+  padding: 0;
+  margin: 0 0 0.5em 2em;
+}
+:is(ol, ul) :is(ol, ul) {
+  margin-left: 1em;
+}
+li {
+  margin: 0 0 0.25em 0;
+}
+.ulCompact li {
+  margin: 0;
+}
+ul.empty, .ulEmpty {
+  list-style-type: none;
+}
+ul.empty li, .ulEmpty li {
+  margin-top: 0.5em;
+}
+:is(ul, ol).compact, .ulCompact, .olCompact {
+  line-height: 1;
+  margin: 0 0 0 2em;
+}
+
+/* definition lists */
+dl {
+  clear: left;
+  --indent: 3ch;
+  /* --indent: attr(indent ch); not supported in any browser, but we can dream */
+}
+dl.olPercent {
+  --indent: 5ch;
+}
+dl > dt {
+  float: left;
+  margin-right: 2ch;
+  min-width: 8ch;
+}
+dl.dlNewline > dt {
+  float: none;
+}
+dl > dd {
+  margin-bottom: .8em;
+  margin-left: var(--indent) !important; /* stupid element overrides */
+  min-height: 2ex;
+}
+dl.olPercent > dt {
+  min-width: calc(var(--indent) - 2ch);
+}
+:is(dl.compact, .dlCompact) > dd {
+  margin-bottom: 0;
+}
+:is(dl.compact, .dlCompact) > dd > :is(:first-child, .break:first-child + *) {
+  margin-top: 0;
+}
+:is(dl.compact, .dlCompact) > dd > :is(:last-child) {
+  margin-bottom: 0;
+}
+dl > dd > dl {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+}
+:is(dd, span).break {
+  display: none;
+}
+
+/* links */
+a, a[href].selfRef:hover {
+  text-decoration: none;
+}
+a[href] {
+  color: var(--link-color);
+}
+a[href].selfRef, .iref + a[href].internal {
+  color: var(--text-color);
+}
+a[href]:hover {
+  text-decoration: underline;
+}
+a[href].selfRef:hover {
+  background-color: var(--highlight-color);
+}
+a.xref:is(.cite, .auto), :is(#status-of-memo, #copyright) a {
+  white-space: nowrap;
+}
+
+/* Figures */
+tt, code, pre {
+  background-color: var(--highlight-color);
+  font: 14px/22px var(--font-mono);
+}
+tt, code {
+  /* changing the font for inline elements leads to different ascender
+     and descender heights; as we want to retain baseline alignment,
+     remove leading to avoid altering the final height of lines
+     note: this fails if these blocks take an entire line,
+     a different solution would be great */
+  line-height: 0;
+}
+:is(h1, h2, h3, h4, h5, h6) :is(tt, code) {
+  font-size: 84%;
+}
+pre {
+  border: 1px solid var(--line-color);
+  font-size: 13.5px;
+  line-height: 16px;
+  letter-spacing: -0.2px;
+  margin: 5px;
+  padding: 5px;
+}
+img {
+  max-width: 100%;
+}
+figure {
+  margin: 0.5em 0;
+  padding: 0;
+}
+figure blockquote {
+  margin: 0.8em 0.4em 0.4em;
+}
+figcaption, caption {
+  font-style: italic;
+  margin: 0.5em 1.5em;
+  text-align: left;
+}
+@media screen {
+  /* Auto-collapse boilerplate. */
+  :is(#status-of-memo, #copyright) p {
+    margin: -2px 0;
+    max-height: 0;
+    transition: max-height 2s ease, margin 0.5s ease 0.5s;
+    overflow: hidden;
+  }
+  :is(#status-of-memo, #copyright):hover p,
+  :is(#status-of-memo, #copyright) h2:target ~ p {
+    margin: 0.5em 0;
+    max-height: 500px;
+    overflow: auto;
+  }
+  pre, svg {
+    display: inline-block;
+    overflow-x: auto;
+  }
+  pre {
+    max-width: 100%;
+    width: calc(100% - 22px - 1em);
+  }
+  svg {
+    max-width: calc(100% - 22px - 1em);
+  }
+  figure pre {
+    display: block;
+    width: calc(100% - 25px);
+  }
+  :is(pre, svg) + .pilcrow {
+    display: inline-block;
+    vertical-align: text-bottom;
+    padding-bottom: 8px;
+  }
+}
+
+/* aside, blockquote */
+aside, blockquote {
+  margin-left: 0;
+  padding: 0 2em;
+  font-style: italic;
+}
+blockquote {
+  margin: 1em 0;
+}
+cite {
+  display: block;
+  text-align: right;
+  font-style: italic;
+}
+
+/* tables */
+table {
+  max-width: 100%;
+  margin: 0 0 1em;
+  border-collapse: collapse;
+}
+table.right {
+  margin-left: auto;
+}
+table.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+table.left {
+  margin-right: auto;
+}
+thead, tbody {
+  border: 1px solid var(--line-color);
+}
+th, td {
+  text-align: left;
+  vertical-align: top;
+  padding: 5px 10px;
+}
+th {
+  background-color: var(--line-color);
+}
+:is(tr:nth-child(2n), thead+tbody > tr:nth-child(2n+1)) > td {
+  background-color: var(--background-color);
+}
+:is(tr:nth-child(2n+1), thead+tbody > tr:nth-child(2n)) > td {
+  background-color: var(--highlight-color);
+}
+table caption {
+  margin: 0;
+  padding: 3px 0 3px 1em;
+}
+table p {
+  margin: 0;
+}
+
+/* pilcrow */
+a.pilcrow {
+  margin-left: 3px;
+  opacity: 0.2;
+  user-select: none;
+}
+a.pilcrow[href] { color: var(--pilcrow-weak); }
+a.pilcrow[href]:hover { text-decoration: none; }
+@media not print {
+  :hover > a.pilcrow {
+    opacity: 1;
+  }
+  a.pilcrow[href]:hover {
+    color: var(--pilcrow-strong);
+    background-color: transparent;
+  }
+}
+@media print {
+  a.pilcrow {
+    display: none;
+  }
+}
+
+/* misc */
+hr {
+  border: 0;
+  border-top: 1px solid var(--line-color);
+}
+.bcp14 {
+  font-variant: small-caps;
+  font-weight: 600;
+  font-size: var(--small-font-size);
+}
+.role {
+  font-variant: all-small-caps;
+}
+sub, sup {
+  line-height: 1;
+  font-size: 80%;
+}
+
+/* info block */
+#identifiers {
+  margin: 0;
+  font-size: var(--small-font-size);
+  line-height: 18px;
+  --identifier-width: 15ch;
+}
+#identifiers dt {
+  width: var(--identifier-width);
+  min-width: var(--identifier-width);
+  clear: left;
+  float: left;
+  text-align: right;
+}
+#identifiers dd {
+  margin: 0;
+  margin-left: calc(1em + var(--identifier-width)) !important;
+  min-width: 5em;
+}
+#identifiers .authors .author {
+  display: inline-block;
+  margin-right: 1.5em;
+}
+#identifiers .authors .org {
+  font-style: italic;
+}
+
+/* The prepared/rendered info at the very bottom of the page */
+.docInfo {
+  color: #999;
+  font-size: 0.9em;
+  font-style: italic;
+  margin-top: 2em;
+}
+.docInfo .prepared {
+  float: left;
+}
+.docInfo .prepared {
+  float: right;
+}
+
+/* table of contents */
+#toc {
+  padding: 0.75em 0 2em 0;
+  margin-bottom: 1em;
+}
+#toc nav ul {
+  margin: 0 0.5em 0 0;
+  padding: 0;
+  list-style: none;
+}
+#toc nav li {
+  line-height: 1.3em;
+  margin: 0.75em 0;
+  padding-left: 1.2em;
+  text-indent: -1.2em;
+}
+#toc a.xref {
+  white-space: normal;
+}
+/* references */
+.references dt {
+  text-align: right;
+  font-weight: bold;
+  min-width: 10ch;
+  margin-right: 1.5ch;
+}
+.references dt:target::before {
+  content: "⇒";
+  width: 15px;
+  margin: 0 10px 0 -25px;
+}
+.references dd {
+  margin-left: 12ch !important;
+  overflow: auto;
+}
+
+.refInstance {
+  margin-bottom: 1.25em;
+}
+
+.references .ascii {
+  margin-bottom: 0.25em;
+}
+
+/* index */
+#rfc\.index\.index + ul {
+  margin-left: 0;
+}
+
+/* authors */
+address.vcard {
+  font-style: normal;
+  margin: 1em 0;
+}
+address.vcard .nameRole {
+  font-weight: 700;
+  margin-left: 0;
+}
+address.vcard .label {
+  margin: 0.5em 0;
+}
+address.vcard .type {
+  display: none;
+}
+.alternative-contact {
+  margin: 1.5em 0 1em;
+}
+hr.addr {
+  border-top: 1px dashed;
+  margin: 0;
+  color: #ddd;
+  max-width: calc(100% - 16px);
+}
+@media (min-width: 500px) {
+  #authors-addresses > section {
+    column-count: 2;
+    column-gap: 20px;
+  }
+  #authors-addresses > section > h2 {
+    column-span: all;
+  }
+  /* hack for break-inside: avoid-column */
+  #authors-addresses address {
+    display: inline-block;
+    break-inside: avoid-column;
+  }
+}
+
+.rfcEditorRemove p:first-of-type {
+  font-style: italic;
+}
+.cref {
+  background-color: rgba(249, 232, 105, 0.3);
+  padding: 2px 4px;
+}
+.crefSource {
+  font-style: italic;
+}
+/* alternative layout for smaller screens */
+@media screen and (max-width: 929px) {
+  #toc {
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    right: 0;
+    padding: 0;
+    margin: 0;
+    border-bottom: 1px solid #ccc;
+    opacity: 0.6;
+  }
+  #toc.active {
+      opacity: 1;
+  }
+  #toc h2 {
+    margin: 0;
+    padding: 2px 0 2px 6px;
+    padding-right: 1em;
+    font-size: 18px;
+    line-height: 24px;
+    min-width: 190px;
+    text-align: right;
+    background-color: #444;
+    color: white;
+    cursor: pointer;
+  }
+  #toc h2::before { /* css hamburger */
+    float: right;
+    position: relative;
+    width: 1em;
+    height: 1px;
+    left: -164px;
+    margin: 8px 0 0 0;
+    background: white none repeat scroll 0 0;
+    box-shadow: 0 4px 0 0 white, 0 8px 0 0 white;
+    content: "";
+  }
+  #toc nav {
+    display: none;
+    background-color: var(--background-color);
+    padding: 0.5em 1em 1em;
+    overflow: auto;
+    overscroll-behavior: contain;
+    height: calc(100vh - 48px);
+    border-left: 1px solid #ddd;
+  }
+  #toc.active nav {
+    display: block;
+  }
+  /* Make the collapsed ToC header render white on gray also when it's a link */
+  #toc h2 a,
+  #toc h2 a:link,
+  #toc h2 a:focus,
+  #toc h2 a:hover,
+  #toc a.toplink,
+  #toc a.toplink:hover {
+    color: white;
+    background-color: #444;
+    text-decoration: none;
+  }
+  #toc a.toplink {
+    margin-top: 2px;
+  }
+}
+
+/* alternative layout for wide screens */
+@media screen and (min-width: 930px) {
+  body {
+    padding-right: 360px;
+    padding-right: calc(min(180px + 20%, 500px));
+  }
+  #toc {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    right: calc(50vw - 480px);
+    width: 312px;
+    margin: 0;
+    padding: 0;
+    z-index: 1;
+  }
+  #toc h2 {
+    margin: 0;
+    padding: 0.25em 1em 1em 0;
+  }
+  #toc nav {
+    display: block;
+    height: calc(90vh - 84px);
+    bottom: 0;
+    padding: 0.5em 0 2em;
+    overflow: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+  }
+  #toc nav > ul  {
+    margin-bottom: 2em;
+  }
+  #toc ul {
+    margin: 0 0 0 4px;
+    font-size: var(--small-font-size);
+  }
+  #toc ul :is(p, li) {
+    margin: 2px 0;
+    line-height: 22px;
+  }
+  img { /* future proofing */
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* pagination */
+@media print {
+  body {
+    width: 100%;
+  }
+  p {
+    orphans: 3;
+    widows: 3;
+  }
+  #n-copyright-notice {
+    border-bottom: none;
+  }
+  #toc, #n-introduction {
+    page-break-before: always;
+  }
+  #toc {
+    border-top: none;
+    padding-top: 0;
+  }
+  figure, pre {
+    page-break-inside: avoid;
+  }
+  figure {
+    overflow: scroll;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+  }
+  h2+*, h3+*, h4+*, h5+*, h6+* {
+    page-break-before: avoid;
+  }
+  pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-size: 10pt;
+  }
+  table {
+    border: 1px solid #ddd;
+  }
+  td {
+    border-top: 1px solid #ddd;
+  }
+}
+
+@page :first {
+  padding-top: 0;
+  @top-left {
+    content: normal;
+    border: none;
+  }
+  @top-center {
+    content: normal;
+    border: none;
+  }
+  @top-right {
+    content: normal;
+    border: none;
+  }
+}
+
+@page {
+  size: A4;
+  margin-bottom: 45mm;
+  padding-top: 20px;
+}
+
+/* Changes introduced to fix issues found during implementation */
+
+/* Separate body from document info even without intervening H1 */
+section {
+  clear: both;
+}
+
+/* Top align author divs, to avoid names without organization dropping level with org names */
+.author {
+  vertical-align: top;
+}
+
+/* Style section numbers with more space between number and title */
+.section-number {
+  padding-right: 0.5em;
+}
+
+/* Add styling for a link in the ToC that points to the top of the document */
+a.toplink {
+  float: right;
+  margin: 8px 0.5em 0;
+}
+
+/* Provide styling for table cell text alignment */
+table .text-left {
+  text-align: left;
+}
+table .text-center {
+  text-align: center;
+}
+table .text-right {
+  text-align: right;
+}
+
+/* Make the alternative author contact information look less like just another
+   author, and group it closer with the primary author contact information */
+.alternative-contact {
+  margin: 0.5em 0 0.25em 0;
+}
+address .non-ascii {
+  margin: 0 0 0 2em;
+}
+
+/* With it being possible to set tables with alignment
+  left, center, and right, { width: 100%; } does not make sense */
+table {
+  width: auto;
+}
+
+/* Avoid reference text that sits in a block with very wide left margin,
+   because of a long floating dt label.*/
+.references dd {
+  overflow: visible;
+}
+
+/* Control caption placement */
+caption {
+  caption-side: bottom;
+}
+
+/* Limit the width of the author address vcard, so names in right-to-left
+   script don't end up on the other side of the page. */
+
+address.vcard {
+  max-width: 20em;
+  margin-right: auto;
+}
+
+/* For address alignment dependent on LTR or RTL scripts */
+address div.left {
+  text-align: left;
+}
+address div.right {
+  text-align: right;
+}
+
+/* Give the table caption label the same styling as the figcaption */
+
+@media print {
+  .toplink {
+    display: none;
+  }
+
+  /* avoid overwriting the top border line with the ToC header */
+  #toc {
+    padding-top: 1px;
+  }
+
+  /* Avoid page breaks inside dl and author address entries */
+  dd {
+    page-break-before: avoid;
+  }
+  .vcard {
+    page-break-inside: avoid;
+  }
+
+}
+
+/* Dark mode. */
+@media (prefers-color-scheme: dark) {
+:root {
+  --background-color: #121212;
+  --text-color: #f0f0f0;
+  --title-color: #fff;
+  --link-color: #4da4f0;
+  --highlight-color: #282828;
+  --line-color: #444;
+  --pilcrow-weak: #444;
+  --pilcrow-strong: #666;
+  scrollbar-color: #777 #333;
+}
+}
+
+/* SVG Trick: a prefix match works because only black and white are allowed */
+svg :is([stroke="black"], [stroke^="#000"]) {
+  stroke: var(--text-color);
+}
+svg :is([stroke="white"], [stroke^="#fff"]) {
+  stroke: var(--background-color);
+}
+svg :is([fill="black"], [fill^="#000"], :not([fill])) {
+  fill: var(--text-color);
+}
+svg :is([fill="white"], [fill^="#fff"]) {
+  fill: var(--background-color);
+}
+</style>
+
+</head>
+<body class="xml2rfc">
+<table class="ears">
+<thead><tr>
+<td class="left">Internet-Draft</td>
+<td class="center">tvr-requirements</td>
+<td class="right">October 2023</td>
+</tr></thead>
+<tfoot><tr>
+<td class="left">King, et al.</td>
+<td class="center">Expires 25 April 2024</td>
+<td class="right">[Page]</td>
+</tr></tfoot>
+</table>
+<div id="external-metadata" class="document-information"></div>
+<div id="internal-metadata" class="document-information">
+<dl id="identifiers">
+<dt class="label-workgroup">Workgroup:</dt>
+<dd class="workgroup">Network Working Group</dd>
+<dt class="label-internet-draft">Internet-Draft:</dt>
+<dd class="internet-draft">draft-kcs-tvr-requirements-latest</dd>
+<dt class="label-published">Published:</dt>
+<dd class="published">
+<time datetime="2023-10-23" class="published">23 October 2023</time>
+    </dd>
+<dt class="label-intended-status">Intended Status:</dt>
+<dd class="intended-status">Informational</dd>
+<dt class="label-expires">Expires:</dt>
+<dd class="expires"><time datetime="2024-04-25">25 April 2024</time></dd>
+<dt class="label-authors">Authors:</dt>
+<dd class="authors">
+<div class="author">
+      <div class="author-name">D. King</div>
+<div class="org">Lancaster University</div>
+</div>
+<div class="author">
+      <div class="author-name">L. M. Contreras</div>
+<div class="org">Telefonica</div>
+</div>
+<div class="author">
+      <div class="author-name">B. Sipos</div>
+<div class="org">JHU/APL</div>
+</div>
+</dd>
+</dl>
+</div>
+<h1 id="title">TVR (Time-Variant Routing) Requirements</h1>
+<section id="section-abstract">
+      <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
+<p id="section-abstract-1">Time-Variant Routing (TVR) refers to the calculation of a path or subpath through a network where the time of message transmission (or receipt) is part of the overall route computation. This means that, all things being equal, a TVR computation might produce different results depending on the time that the computation is performed without other detectable changes to the network topology or other cost functions associated with the route.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-2">This document introduces requirements where TVR computations could improve message exchange in a network.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
+</section>
+<section class="note rfcEditorRemove" id="section-note.1">
+      <h2 id="name-about-this-document">
+<a href="#name-about-this-document" class="section-name selfRef">About This Document</a>
+      </h2>
+<p id="section-note.1-1">This note is to be removed before publishing as an RFC.<a href="#section-note.1-1" class="pilcrow">¶</a></p>
+<p id="section-note.1-2">
+        Status information for this document may be found at <span><a href="https://datatracker.ietf.org/doc/draft-ietf-tvr-requirements/">https://datatracker.ietf.org/doc/draft-ietf-tvr-requirements/</a></span>.<a href="#section-note.1-2" class="pilcrow">¶</a></p>
+<p id="section-note.1-3">
+        Discussion of this document takes place on the
+        Time Variant Routing Working Group mailing list (<span><a href="mailto:tvr@ietf.org">mailto:tvr@ietf.org</a></span>),
+        which is archived at <span><a href="https://mailarchive.ietf.org/arch/browse/tvr/">https://mailarchive.ietf.org/arch/browse/tvr/</a></span>.
+        Subscribe at <span><a href="https://www.ietf.org/mailman/listinfo/tvr/">https://www.ietf.org/mailman/listinfo/tvr/</a></span>.<a href="#section-note.1-3" class="pilcrow">¶</a></p>
+<p id="section-note.1-4">Source for this draft and an issue tracker can be found at
+        <span><a href="https://github.com/danielkinguk/tvr-requirements">https://github.com/danielkinguk/tvr-requirements</a></span>.<a href="#section-note.1-4" class="pilcrow">¶</a></p>
+</section>
+<div id="status-of-memo">
+<section id="section-boilerplate.1">
+        <h2 id="name-status-of-this-memo">
+<a href="#name-status-of-this-memo" class="section-name selfRef">Status of This Memo</a>
+        </h2>
+<p id="section-boilerplate.1-1">
+        This Internet-Draft is submitted in full conformance with the
+        provisions of BCP 78 and BCP 79.<a href="#section-boilerplate.1-1" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-2">
+        Internet-Drafts are working documents of the Internet Engineering Task
+        Force (IETF). Note that other groups may also distribute working
+        documents as Internet-Drafts. The list of current Internet-Drafts is
+        at <span><a href="https://datatracker.ietf.org/drafts/current/">https://datatracker.ietf.org/drafts/current/</a></span>.<a href="#section-boilerplate.1-2" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-3">
+        Internet-Drafts are draft documents valid for a maximum of six months
+        and may be updated, replaced, or obsoleted by other documents at any
+        time. It is inappropriate to use Internet-Drafts as reference
+        material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-4">
+        This Internet-Draft will expire on 25 April 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="copyright">
+<section id="section-boilerplate.2">
+        <h2 id="name-copyright-notice">
+<a href="#name-copyright-notice" class="section-name selfRef">Copyright Notice</a>
+        </h2>
+<p id="section-boilerplate.2-1">
+            Copyright (c) 2023 IETF Trust and the persons identified as the
+            document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.2-2">
+            This document is subject to BCP 78 and the IETF Trust's Legal
+            Provisions Relating to IETF Documents
+            (<span><a href="https://trustee.ietf.org/license-info">https://trustee.ietf.org/license-info</a></span>) in effect on the date of
+            publication of this document. Please review these documents
+            carefully, as they describe your rights and restrictions with
+            respect to this document. Code Components extracted from this
+            document must include Revised BSD License text as described in
+            Section 4.e of the Trust Legal Provisions and are provided without
+            warranty as described in the Revised BSD License.<a href="#section-boilerplate.2-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="toc">
+<section id="section-toc.1">
+        <a href="#" onclick="scroll(0,0)" class="toplink">▲</a><h2 id="name-table-of-contents">
+<a href="#name-table-of-contents" class="section-name selfRef">Table of Contents</a>
+        </h2>
+<nav class="toc"><ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1">
+            <p id="section-toc.1-1.1.1" class="keepWithNext"><a href="#section-1" class="auto internal xref">1</a>.  <a href="#name-introduction" class="internal xref">Introduction</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2">
+            <p id="section-toc.1-1.2.1" class="keepWithNext"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-conventions-and-definitions" class="internal xref">Conventions and Definitions</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
+            <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-overview-of-time-variant-ne" class="internal xref">Overview of Time-Variant Networks</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1">
+                <p id="section-toc.1-1.3.2.1.1"><a href="#section-3.1" class="auto internal xref">3.1</a>.  <a href="#name-resource-scheduling" class="internal xref">Resource Scheduling</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1.2.1">
+                    <p id="section-toc.1-1.3.2.1.2.1.1" class="keepWithNext"><a href="#section-3.1.1" class="auto internal xref">3.1.1</a>.  <a href="#name-schedule-visibility" class="internal xref">Schedule Visibility</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1.2.2">
+                    <p id="section-toc.1-1.3.2.1.2.2.1"><a href="#section-3.1.2" class="auto internal xref">3.1.2</a>.  <a href="#name-schedule-locality" class="internal xref">Schedule Locality</a></p>
+</li>
+                </ul>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2">
+                <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="auto internal xref">3.2</a>.  <a href="#name-general-temporality" class="internal xref">General Temporality</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2.2.1">
+                    <p id="section-toc.1-1.3.2.2.2.1.1"><a href="#section-3.2.1" class="auto internal xref">3.2.1</a>.  <a href="#name-scope-of-time-variability" class="internal xref">Scope of Time-Variability</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2.2.2">
+                    <p id="section-toc.1-1.3.2.2.2.2.1"><a href="#section-3.2.2" class="auto internal xref">3.2.2</a>.  <a href="#name-time-horizon" class="internal xref">Time Horizon</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2.2.3">
+                    <p id="section-toc.1-1.3.2.2.2.3.1"><a href="#section-3.2.3" class="auto internal xref">3.2.3</a>.  <a href="#name-time-precision" class="internal xref">Time Precision</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2.2.4">
+                    <p id="section-toc.1-1.3.2.2.2.4.1"><a href="#section-3.2.4" class="auto internal xref">3.2.4</a>.  <a href="#name-validity-in-a-schedule" class="internal xref">Validity in a Schedule</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2.2.5">
+                    <p id="section-toc.1-1.3.2.2.2.5.1"><a href="#section-3.2.5" class="auto internal xref">3.2.5</a>.  <a href="#name-periodicity-in-a-schedule" class="internal xref">Periodicity in a Schedule</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2.2.6">
+                    <p id="section-toc.1-1.3.2.2.2.6.1"><a href="#section-3.2.6" class="auto internal xref">3.2.6</a>.  <a href="#name-continuity-in-a-schedule" class="internal xref">Continuity in a Schedule</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2.2.7">
+                    <p id="section-toc.1-1.3.2.2.2.7.1"><a href="#section-3.2.7" class="auto internal xref">3.2.7</a>.  <a href="#name-time-overlap-and-priority" class="internal xref">Time-Overlap and Priority</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2.2.8">
+                    <p id="section-toc.1-1.3.2.2.2.8.1"><a href="#section-3.2.8" class="auto internal xref">3.2.8</a>.  <a href="#name-property-value-interpolatio" class="internal xref">Property Value Interpolation</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2.2.9">
+                    <p id="section-toc.1-1.3.2.2.2.9.1"><a href="#section-3.2.9" class="auto internal xref">3.2.9</a>.  <a href="#name-changes-to-model-state" class="internal xref">Changes to Model State</a></p>
+</li>
+                </ul>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3">
+                <p id="section-toc.1-1.3.2.3.1"><a href="#section-3.3" class="auto internal xref">3.3</a>.  <a href="#name-topologies" class="internal xref">Topologies</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3.2.1">
+                    <p id="section-toc.1-1.3.2.3.2.1.1"><a href="#section-3.3.1" class="auto internal xref">3.3.1</a>.  <a href="#name-nodes" class="internal xref">Nodes</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3.2.2">
+                    <p id="section-toc.1-1.3.2.3.2.2.1"><a href="#section-3.3.2" class="auto internal xref">3.3.2</a>.  <a href="#name-termination-points" class="internal xref">Termination Points</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3.2.3">
+                    <p id="section-toc.1-1.3.2.3.2.3.1"><a href="#section-3.3.3" class="auto internal xref">3.3.3</a>.  <a href="#name-links" class="internal xref">Links</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3.2.4">
+                    <p id="section-toc.1-1.3.2.3.2.4.1"><a href="#section-3.3.4" class="auto internal xref">3.3.4</a>.  <a href="#name-network-layering" class="internal xref">Network Layering</a></p>
+</li>
+                </ul>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.4">
+                <p id="section-toc.1-1.3.2.4.1"><a href="#section-3.4" class="auto internal xref">3.4</a>.  <a href="#name-routing" class="internal xref">Routing</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.4.2.1">
+                    <p id="section-toc.1-1.3.2.4.2.1.1"><a href="#section-3.4.1" class="auto internal xref">3.4.1</a>.  <a href="#name-centralized" class="internal xref">Centralized</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.4.2.2">
+                    <p id="section-toc.1-1.3.2.4.2.2.1"><a href="#section-3.4.2" class="auto internal xref">3.4.2</a>.  <a href="#name-distributed" class="internal xref">Distributed</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.4.2.3">
+                    <p id="section-toc.1-1.3.2.4.2.3.1"><a href="#section-3.4.3" class="auto internal xref">3.4.3</a>.  <a href="#name-hybrid" class="internal xref">Hybrid</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.4.2.4">
+                    <p id="section-toc.1-1.3.2.4.2.4.1"><a href="#section-3.4.4" class="auto internal xref">3.4.4</a>.  <a href="#name-constraints" class="internal xref">Constraints</a></p>
+</li>
+                </ul>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
+            <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-time-variant-use-case-requi" class="internal xref">Time-Variant Use Case Requirements</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1">
+                <p id="section-toc.1-1.4.2.1.1"><a href="#section-4.1" class="auto internal xref">4.1</a>.  <a href="#name-operating-efficiency-use-ca" class="internal xref">Operating Efficiency Use Case</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
+            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-operational-considerations" class="internal xref">Operational Considerations</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
+            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
+            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-requirements-summary" class="internal xref">Requirements Summary</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.1">
+                <p id="section-toc.1-1.7.2.1.1"><a href="#section-7.1" class="auto internal xref">7.1</a>.  <a href="#name-support-the-identification-" class="internal xref">Support the Identification and Advertisement of Node Property Changes</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.2">
+                <p id="section-toc.1-1.7.2.2.1"><a href="#section-7.2" class="auto internal xref">7.2</a>.  <a href="#name-support-agent-node-advertis" class="internal xref">Support Agent Node Advertisement</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.3">
+                <p id="section-toc.1-1.7.2.3.1"><a href="#section-7.3" class="auto internal xref">7.3</a>.  <a href="#name-support-identification-and-" class="internal xref">Support Identification and Classification of Node Properties</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.4">
+                <p id="section-toc.1-1.7.2.4.1"><a href="#section-7.4" class="auto internal xref">7.4</a>.  <a href="#name-support-system-schedule-and" class="internal xref">Support System Schedule and Time Interval Changes</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.5">
+                <p id="section-toc.1-1.7.2.5.1"><a href="#section-7.5" class="auto internal xref">7.5</a>.  <a href="#name-support-appropriate-time-ac" class="internal xref">Support Appropriate Time Accuracy</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
+            <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
+            <p id="section-toc.1-1.9.1"><a href="#section-9" class="auto internal xref"></a><a href="#name-contributors" class="internal xref">Contributors</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
+            <p id="section-toc.1-1.10.1"><a href="#section-10" class="auto internal xref"></a><a href="#name-references" class="internal xref">References</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.1">
+                <p id="section-toc.1-1.10.2.1.1"><a href="#section-10.1" class="auto internal xref"></a><a href="#name-normative-references" class="internal xref">Normative References</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.2">
+                <p id="section-toc.1-1.10.2.2.1"><a href="#section-10.2" class="auto internal xref"></a><a href="#name-informative-references" class="internal xref">Informative References</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
+            <p id="section-toc.1-1.11.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
+</li>
+        </ul>
+</nav>
+</section>
+</div>
+<div id="introduction">
+<section id="section-1">
+      <h2 id="name-introduction">
+<a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
+      </h2>
+<p id="section-1-1"></p>
+</section>
+</div>
+<div id="conventions-and-definitions">
+<section id="section-2">
+      <h2 id="name-conventions-and-definitions">
+<a href="#section-2" class="section-number selfRef">2. </a><a href="#name-conventions-and-definitions" class="section-name selfRef">Conventions and Definitions</a>
+      </h2>
+<p id="section-2-1">The key words "<span class="bcp14">MUST</span>", "<span class="bcp14">MUST NOT</span>", "<span class="bcp14">REQUIRED</span>", "<span class="bcp14">SHALL</span>", "<span class="bcp14">SHALL NOT</span>", "<span class="bcp14">SHOULD</span>", "<span class="bcp14">SHOULD NOT</span>", "<span class="bcp14">RECOMMENDED</span>", "<span class="bcp14">NOT RECOMMENDED</span>",
+         "<span class="bcp14">MAY</span>", and "<span class="bcp14">OPTIONAL</span>" in this document are to be interpreted as
+         described in BCP 14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span> <span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span> when, and only when, they
+         appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶</a></p>
+<p id="section-2-2">Specific terms used within this document are as follows:<a href="#section-2-2" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-2-3">
+        <dt id="section-2-3.1">Model:</dt>
+        <dd style="margin-left: 1.5em" id="section-2-3.2">The universe being modeled, which defines a parameter space.<a href="#section-2-3.2" class="pilcrow">¶</a>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-2-3.3">Entity:</dt>
+        <dd style="margin-left: 1.5em" id="section-2-3.4">A single separable item within the model. Each entity has a stable identity which is time-invariant.<a href="#section-2-3.4" class="pilcrow">¶</a>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-2-3.5">Property:</dt>
+        <dd style="margin-left: 1.5em" id="section-2-3.6">A single attribute of an entity which is used to parameterize that entity. The notion of a property is not time-variant, the property always exists within an entity but its value may be time-variant.<a href="#section-2-3.6" class="pilcrow">¶</a>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-2-3.7">Property Value:</dt>
+        <dd style="margin-left: 1.5em" id="section-2-3.8">The specific value of a property, both as a planned state within the schedule timeline and as a realized state in wall-clock time.<a href="#section-2-3.8" class="pilcrow">¶</a>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-2-3.9">Schedule:</dt>
+        <dd style="margin-left: 1.5em" id="section-2-3.10">The method of parameterizing time-variance intrinsic to a time-variant model. The parameters of a schedule are within the state space of the model.<a href="#section-2-3.10" class="pilcrow">¶</a>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-2-3.11">Schedule Time:</dt>
+        <dd style="margin-left: 1.5em" id="section-2-3.12">An idealized timeline within a time-variant model over which entities and property values may change without a difference of state in the model itself. The notion of schedule time is intrinsic to the model.<a href="#section-2-3.12" class="pilcrow">¶</a>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-2-3.13">Wall-Clock Time:</dt>
+        <dd style="margin-left: 1.5em" id="section-2-3.14">The true timeline, measured in some time scale by some local ticker. The notion of wall-clock time is extrinsic to the model; even non-time-variant models allow for changes over wall-clock time, just as different model states rather than a change <em>within</em> the model itself.<a href="#section-2-3.14" class="pilcrow">¶</a>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-2-3.15">Time Instant:</dt>
+        <dd style="margin-left: 1.5em" id="section-2-3.16">A single instant of time, consistent with the concepts of date-time in <span>[<a href="#RFC3339" class="cite xref">RFC3339</a>]</span>.<a href="#section-2-3.16" class="pilcrow">¶</a>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-2-3.17">Timeline:</dt>
+        <dd style="margin-left: 1.5em" id="section-2-3.18">A possibly bounded interval of time, consistent with the concept of a period in <span>[<a href="#RFC3339" class="cite xref">RFC3339</a>]</span>.<a href="#section-2-3.18" class="pilcrow">¶</a>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-2-3.19">Subsequent:</dt>
+        <dd style="margin-left: 1.5em" id="section-2-3.20">A time instant which is later in a timeline than some reference time instant.<a href="#section-2-3.20" class="pilcrow">¶</a>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-2-3.21">Orchestrator:</dt>
+        <dd style="margin-left: 1.5em" id="section-2-3.22">The subsystem of a managing device which centralizes control of a network and applies policy to manage a network.<a href="#section-2-3.22" class="pilcrow">¶</a>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-2-3.23">Manager:</dt>
+        <dd style="margin-left: 1.5em" id="section-2-3.24">The subsystem in a managing device which operates a management protocol to control an Agent.<a href="#section-2-3.24" class="pilcrow">¶</a>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-2-3.25">Agent:</dt>
+        <dd style="margin-left: 1.5em" id="section-2-3.26">The subsystem in a managed device which operates a management protocol to be controlled by a Manager.<a href="#section-2-3.26" class="pilcrow">¶</a>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-2-3.27">(Routing) Application:</dt>
+        <dd style="margin-left: 1.5em" id="section-2-3.28">The subsystem of a managed device which performs the functions of a routing protocol and/or algorithm.<a href="#section-2-3.28" class="pilcrow">¶</a>
+</dd>
+      <dd class="break"></dd>
+</dl>
+<span id="name-management-entities"></span><div id="fig-mgmt-ents">
+<figure id="figure-1">
+        <div class="alignCenter art-ascii art-text artwork" id="section-2-4.1">
+<pre>
++--------------------+       +-------------------+
+|   Managing Device  |       |   Managed Device  |
+|                    |       |                   |
+|  +--------------+  |       |  +-------------+  |
+|  | Orchestrator |  |       |  | Application |  |
+|  +--------------+  |       |  +-------------+  |
+|         |          |       |         |         |
+|  +--------------+  |       |  +-------------+  |
+|  |    Manager   |&lt;-----+-----&gt;|    Agent    |  |
+|  +--------------+  |   :   |  +-------------+  |
++--------------------+   :   +-------------------+
+                         :
+                  +-------------+
+                  |  Data Model |
+                  +-------------+
+</pre>
+</div>
+<figcaption><a href="#figure-1" class="selfRef">Figure 1</a>:
+<a href="#name-management-entities" class="selfRef">Management Entities</a>
+        </figcaption></figure>
+</div>
+</section>
+</div>
+<div id="overview">
+<section id="section-3">
+      <h2 id="name-overview-of-time-variant-ne">
+<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-overview-of-time-variant-ne" class="section-name selfRef">Overview of Time-Variant Networks</a>
+      </h2>
+<p id="section-3-1">Existing Internet routing techniques maintain end-to-end connected paths across a network. Routing mechanisms exist to recover
+         connectivity and resume normal traffic forwarding as the topology changes. Occasionally, optimisation of routes may also be
+         requested, especially post-topology changes due to disruptive events. However, there are a growing number of use cases where
+         changes to the routing topology are an expected part of network operations. In these scenarios, the pre-planned loss and
+         restoration of an adjacency, or formation of an alternate adjacency, should be seen as a non-disruptive event.<a href="#section-3-1" class="pilcrow">¶</a></p>
+<p id="section-3-2">Time-Variant Routing (TVR) refers to calculating a path or subpath through a network where the time of message transmission
+         (or receipt) is part of the overall route computation.  Therefore, a TVR computation might produce different results
+         depending on the time that the calculation is performed without other detectable changes to the network topology or other
+         cost functions associated with the route.<a href="#section-3-2" class="pilcrow">¶</a></p>
+<div id="scheduling">
+<section id="section-3.1">
+        <h3 id="name-resource-scheduling">
+<a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-resource-scheduling" class="section-name selfRef">Resource Scheduling</a>
+        </h3>
+<p id="section-3.1-1">Planned resource scheduling will be required for various scenarios; these include networks with mobile nodes, such as
+           crewless aerial vehicles and orbiting satellite constellations <span>[<a href="#I-D.ietf-tvr-use-cases" class="cite xref">I-D.ietf-tvr-use-cases</a>]</span>. In these scenarios, links are lost and re-established
+           as a function of the mobility of the platforms. Furthermore, link activity might be restricted to certain times of the
+           day in networks without reliable access to power, such as networks harvesting energy from tidal, wind, and solar
+           resources. Similarly, network traffic might be planned around energy costs or expected user data volumes in networks
+           prioritising green computing and energy efficiency over data rate.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
+<section id="section-3.1.1">
+          <h4 id="name-schedule-visibility">
+<a href="#section-3.1.1" class="section-number selfRef">3.1.1. </a><a href="#name-schedule-visibility" class="section-name selfRef">Schedule Visibility</a>
+          </h4>
+<p id="section-3.1.1-1">
+Because scheduled time-variance is not a part of exsting routing algorithms and managed data models, not all routing applications will be made to handle schedules as part of the routing parameters intrinsically.
+Two extremes of schedules being associated to routing data are:<a href="#section-3.1.1-1" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-3.1.1-2">
+            <dt id="section-3.1.1-2.1">Intrinsic Schedule:</dt>
+            <dd style="margin-left: 1.5em" id="section-3.1.1-2.2">
+In this situation the schedule is an intrinsic part of the managed data model which is visible to the routing application and used as part of the routing algorithms.
+When the schedule is intrinsic, there is not necessarily the notion of a schedule being "executed" in wall-clock time because the time-varying parameters are ingested as part of the routing algorithms natural functioning.<a href="#section-3.1.1-2.2" class="pilcrow">¶</a>
+</dd>
+            <dd class="break"></dd>
+<dt id="section-3.1.1-2.3">Extrinsic Schedule:</dt>
+            <dd style="margin-left: 1.5em" id="section-3.1.1-2.4">
+In this situation the schedule is not part of the managed data proper but maintained within the Orchestrator; the routing application only sees the effects of changes in routing parameters as the schedule is executed (in wall-clock time) by the Agent.<a href="#section-3.1.1-2.4" class="pilcrow">¶</a>
+</dd>
+          <dd class="break"></dd>
+</dl>
+<p id="section-3.1.1-3">
+There is also the possibility of an intermediate situation where the schedule is still part of the managed data model but is visible only to, and executed in wall-clock time by, the management Agent.
+This allows a more distributed use of scheduled data than centralizing its processing in an Orchestrator.<a href="#section-3.1.1-3" class="pilcrow">¶</a></p>
+</section>
+<section id="section-3.1.2">
+          <h4 id="name-schedule-locality">
+<a href="#section-3.1.2" class="section-number selfRef">3.1.2. </a><a href="#name-schedule-locality" class="section-name selfRef">Schedule Locality</a>
+          </h4>
+<p id="section-3.1.2-1">
+Similar to how different entities can have, or not have, visbility into a time-varying schedule there is also the aspect of where the schedule data is handled within the network topology.
+Two extremes for locality of schedule handling are:<a href="#section-3.1.2-1" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-3.1.2-2">
+            <dt id="section-3.1.2-2.1">Centralized:</dt>
+            <dd style="margin-left: 1.5em" id="section-3.1.2-2.2">
+In this situation, all schedule handling is centralized within a network Orchestrator and changes are sent to routing applications in wall-clock time via a management interface.
+This corresponds with the Extrinsic schedule visibility because the managed routers do not see the schedule to indicate why parameter changes are taking place.<a href="#section-3.1.2-2.2" class="pilcrow">¶</a>
+</dd>
+            <dd class="break"></dd>
+<dt id="section-3.1.2-2.3">Distributed:</dt>
+            <dd style="margin-left: 1.5em" id="section-3.1.2-2.4">
+This situation corresponds with the Intrinsic or intermediate schedule visibility, where a schedule (with a potentially limited time horizon from what is known at the orchestrator) is part of the managed data which is distributed to managed devices to be handled either by the Agent or by the routing Application itself.<a href="#section-3.1.2-2.4" class="pilcrow">¶</a>
+</dd>
+          <dd class="break"></dd>
+</dl>
+</section>
+</section>
+</div>
+<section id="section-3.2">
+        <h3 id="name-general-temporality">
+<a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-general-temporality" class="section-name selfRef">General Temporality</a>
+        </h3>
+<p id="section-3.2-1">
+This section covers different aspects of how temporality applies to any potential TVR information model.
+Each aspect is roughly independent and informs how a model can choose to include temporality in its parameter space.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
+<div id="time-scope">
+<section id="section-3.2.1">
+          <h4 id="name-scope-of-time-variability">
+<a href="#section-3.2.1" class="section-number selfRef">3.2.1. </a><a href="#name-scope-of-time-variability" class="section-name selfRef">Scope of Time-Variability</a>
+          </h4>
+<p id="section-3.2.1-1">
+One aspect of any time-varying model is the scope of what may be time-variable.
+Two extremes of this aspect are:<a href="#section-3.2.1-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-3.2.1-2.1">A model which is completely time-invariant, which while there is still a notion of time it has no affect on any of the model entities.<a href="#section-3.2.1-2.1" class="pilcrow">¶</a>
+</li>
+            <li class="normal" id="section-3.2.1-2.2">A model in which every entity has some kind of schedule applied.<a href="#section-3.2.1-2.2" class="pilcrow">¶</a>
+</li>
+          </ul>
+<p id="section-3.2.1-3">
+It is expected that an application of time-variability to real world data models will keep some entities within the model time-invariant and allow scheduling of other, specific entities.<a href="#section-3.2.1-3" class="pilcrow">¶</a></p>
+<p id="section-3.2.1-4">
+Another aspect of any time-varying model is the granularity of state to which a schedule can be applied.
+Two extremes of this aspect are:<a href="#section-3.2.1-4" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-3.2.1-5.1">A model where one single schedule applies to the entire universe (<em>i.e.</em> indicating when the time-variant entities are valid or invalid).<a href="#section-3.2.1-5.1" class="pilcrow">¶</a>
+</li>
+            <li class="normal" id="section-3.2.1-5.2">A model where every property of every entity can be scheduled independently. This is the temporality model of <span>[<a href="#AIXM" class="cite xref">AIXM</a>]</span>.<a href="#section-3.2.1-5.2" class="pilcrow">¶</a>
+</li>
+          </ul>
+<p id="section-3.2.1-6">
+It is expected that an application of time-variability to data models will fit within these extremes, possibly applying a schedule to each entity indicating when that entity is valid or invalid, or applying a schedule to groups of properties within the entity (while leaving other properties time-invariant).<a href="#section-3.2.1-6" class="pilcrow">¶</a></p>
+</section>
+</div>
+<section id="section-3.2.2">
+          <h4 id="name-time-horizon">
+<a href="#section-3.2.2" class="section-number selfRef">3.2.2. </a><a href="#name-time-horizon" class="section-name selfRef">Time Horizon</a>
+          </h4>
+<p id="section-3.2.2-1">
+In an idealized model the schedules will apply indefinitely far in the past and the future, but in a realizable model with both processing and storage limitations there will need to be a time horizon within which the model applies and outside of which the model has no meaning.
+In some cases this horizon will be intrinsic to the model itself, with an explicit model parameter indicating the horizon.
+In other cases the model may allow indefinitely-large schedules but the processing of the planning timeline is bounded to limit resource needs.<a href="#section-3.2.2-1" class="pilcrow">¶</a></p>
+</section>
+<section id="section-3.2.3">
+          <h4 id="name-time-precision">
+<a href="#section-3.2.3" class="section-number selfRef">3.2.3. </a><a href="#name-time-precision" class="section-name selfRef">Time Precision</a>
+          </h4>
+<p id="section-3.2.3-1">
+Different time-variant models will require different granularities of planning time, either because of limitations or assumptions about wall-clock time or because of requirements within the modeled domain.
+It is up to specific models to define the precision of time values and the required accuracy and precison of wall-clocks which implement the schedules.<a href="#section-3.2.3-1" class="pilcrow">¶</a></p>
+</section>
+<section id="section-3.2.4">
+          <h4 id="name-validity-in-a-schedule">
+<a href="#section-3.2.4" class="section-number selfRef">3.2.4. </a><a href="#name-validity-in-a-schedule" class="section-name selfRef">Validity in a Schedule</a>
+          </h4>
+<p id="section-3.2.4-1">
+Within a single schedule over the planning timeline there will likely be a need to have multiple discrete intervals of validity over absolute schedule time.
+The time instants at which a schedule is invalid indicate an undefined property value, so it is important for a model to be able to accomodate multiple schedules as necessary to ensure that some properties can have values at all times.<a href="#section-3.2.4-1" class="pilcrow">¶</a></p>
+<p id="section-3.2.4-2">
+A model which restricts itself to a single interval of validity could run into difficulties over a long enough time horizon and would need to resort to having multiple model entities represent the same modeled "thing" which can lead to confusion and inefficiency.<a href="#section-3.2.4-2" class="pilcrow">¶</a></p>
+</section>
+<section id="section-3.2.5">
+          <h4 id="name-periodicity-in-a-schedule">
+<a href="#section-3.2.5" class="section-number selfRef">3.2.5. </a><a href="#name-periodicity-in-a-schedule" class="section-name selfRef">Periodicity in a Schedule</a>
+          </h4>
+<p id="section-3.2.5-1">
+Separate from the concept of intervals of validity in absolute schedule time, there can be a need to model repetitive states in a concise way.
+One way to model a periodic change of state is to combine a set of absolute time intervals with a periodic parameterization (duration valid and duration invalid); this is the mdoel of <span>[<a href="#AIXM" class="cite xref">AIXM</a>]</span>.<a href="#section-3.2.5-1" class="pilcrow">¶</a></p>
+<p id="section-3.2.5-2">
+A model which does not include the notion of periodicy within a schedule could be used in situations where discrete intervals of validity are needed to handle periodic state changes which is neither storage nor processing efficient.<a href="#section-3.2.5-2" class="pilcrow">¶</a></p>
+</section>
+<section id="section-3.2.6">
+          <h4 id="name-continuity-in-a-schedule">
+<a href="#section-3.2.6" class="section-number selfRef">3.2.6. </a><a href="#name-continuity-in-a-schedule" class="section-name selfRef">Continuity in a Schedule</a>
+          </h4>
+<p id="section-3.2.6-1">
+A schedule which includes a sequence of time intervals needs to ensure that the interpretation of those intervals in the schedule timeline does not leave any "gaps" at the interval boundaries.
+For that reason, it is important that the model uses half-open intervals of time so that time-adjacent intervals leave no gap.
+In keeping with the terminology of <span>[<a href="#RFC3339" class="cite xref">RFC3339</a>]</span>, intervals are bounded by their "start" and "end" instants.
+It is <span class="bcp14">RECOMMENDED</span> that any time-varying model use schedules with intervals closed on their start time and open on their end time.
+This behavior lends to the interpretation, in the schedule timeline, that the scheduled state takes effect at an interval's start and continues until the subsequent state.<a href="#section-3.2.6-1" class="pilcrow">¶</a></p>
+</section>
+<section id="section-3.2.7">
+          <h4 id="name-time-overlap-and-priority">
+<a href="#section-3.2.7" class="section-number selfRef">3.2.7. </a><a href="#name-time-overlap-and-priority" class="section-name selfRef">Time-Overlap and Priority</a>
+          </h4>
+<p id="section-3.2.7-1">
+In an ideal situation a model would be guaranteed by design to contain only contiguous and non-overlapping schedules for each time-variant scope.
+In a realized model this kind of invaraint might not be enforcable or might lead to overly complex schedule structures.
+One way a model can handle this is to establish a concept of schedule priority, where some intervals of the schedule timeline contain overlapping schedules for the same properties and only the highest-priority schedule applies.
+When priorities are allowed by a model, it enables the concept of an "overlay" where a long-duration state can be temporarilly (in schedule time) superseded by a short-duration state.<a href="#section-3.2.7-1" class="pilcrow">¶</a></p>
+</section>
+<section id="section-3.2.8">
+          <h4 id="name-property-value-interpolatio">
+<a href="#section-3.2.8" class="section-number selfRef">3.2.8. </a><a href="#name-property-value-interpolatio" class="section-name selfRef">Property Value Interpolation</a>
+          </h4>
+<p id="section-3.2.8-1">
+When a schedule is applied to an entity in a way which is more <span><a href="#time-scope" class="internal xref">granular</a> (<a href="#time-scope" class="auto internal xref">Section 3.2.1</a>)</span> than just indicating when that whole entity is valid or invalid, the model needs to consider how individual properties are to be treated between scheduled instants.
+Some of the possibile behaviors are:<a href="#section-3.2.8-1" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-3.2.8-2">
+            <dt id="section-3.2.8-2.1">Zero-order hold:</dt>
+            <dd style="margin-left: 1.5em" id="section-3.2.8-2.2">
+From the instant a scheduled value applies to a property until the subsequent-in-schedule-time value supersedes it.
+This is simple from a logical standpoint, but discontinuties in the value over schedule time could cause issues with the model itself.
+For some models, though, the constant values between change instants are actually beneficial by allowing the entire timeline to be compressed into a sequence of discrete state-change instants.
+This is the behavior implied in models such as <span>[<a href="#AIXM" class="cite xref">AIXM</a>]</span>.<a href="#section-3.2.8-2.2" class="pilcrow">¶</a>
+</dd>
+            <dd class="break"></dd>
+<dt id="section-3.2.8-2.3">Linear interpolation:</dt>
+            <dd style="margin-left: 1.5em" id="section-3.2.8-2.4">
+At the instants of time defined in the schedule the property takes the exact values, but between those instants the property is interpolated linearly over time.
+This results in a state that is continuous over time, which is beneficial for some kinds of model but also means that there is no simple discrete sequence of states.<a href="#section-3.2.8-2.4" class="pilcrow">¶</a>
+</dd>
+            <dd class="break"></dd>
+<dt id="section-3.2.8-2.5">Higher-order or spline interpolation:</dt>
+            <dd style="margin-left: 1.5em" id="section-3.2.8-2.6">
+Higher order interpolations can result in properties that vary over schedule time in ways that are more or less beneficial to different types of models.<a href="#section-3.2.8-2.6" class="pilcrow">¶</a>
+</dd>
+          <dd class="break"></dd>
+</dl>
+<p id="section-3.2.8-3">
+Regardless of the types of interpolation used, a model can choose to apply interpolation globally or per-property.
+Since different properties represent different physical or logical metrics of a network it is expected that different types of interpolation will be needed for different represented quantities.<a href="#section-3.2.8-3" class="pilcrow">¶</a></p>
+</section>
+<section id="section-3.2.9">
+          <h4 id="name-changes-to-model-state">
+<a href="#section-3.2.9" class="section-number selfRef">3.2.9. </a><a href="#name-changes-to-model-state" class="section-name selfRef">Changes to Model State</a>
+          </h4>
+<p id="section-3.2.9-1">
+Separate from how a time-variant model can contain a schedule timeline within the model state, a model design will need to consider how changes to the model state itself (over wall-clock time) are handled.
+This aspect is actually not specific to a time-variant model but is important to consider in this context.<a href="#section-3.2.9-1" class="pilcrow">¶</a></p>
+<p id="section-3.2.9-2">
+Two extremes of this aspect are:<a href="#section-3.2.9-2" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-3.2.9-3.1">
+A model which can only be changed wholesale, superseded by an entire new model state.
+This is easy to keep consistent but has inefficiences of storage and transport if the model state is to be shared or exchanged between real entities.<a href="#section-3.2.9-3.1" class="pilcrow">¶</a>
+</li>
+            <li class="normal" id="section-3.2.9-3.2">
+A model which has an intrinsic notion of fine-grained superseding changes, possibly scoped to individual entities, individual schedules, or more complex groupings.<a href="#section-3.2.9-3.2" class="pilcrow">¶</a>
+</li>
+          </ul>
+</section>
+</section>
+<div id="topologies">
+<section id="section-3.3">
+        <h3 id="name-topologies">
+<a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-topologies" class="section-name selfRef">Topologies</a>
+        </h3>
+<p id="section-3.3-1">
+The primary entities of a topological network model, as realized in <span>[<a href="#RFC8345" class="cite xref">RFC8345</a>]</span> and similar predecessors, are nodes and unidirectional links, with a secondary entity representing the "termination point" for each side of a link at a node.
+Following the concepts described in <a href="#scheduling" class="auto internal xref">Section 3.1</a> these are the entities to which an intrinsic schedule can be applied.<a href="#section-3.3-1" class="pilcrow">¶</a></p>
+<div id="nodes">
+<section id="section-3.3.1">
+          <h4 id="name-nodes">
+<a href="#section-3.3.1" class="section-number selfRef">3.3.1. </a><a href="#name-nodes" class="section-name selfRef">Nodes</a>
+          </h4>
+<p id="section-3.3.1-1">
+When a schedule is applied to a node the granularity <span class="bcp14">SHALL</span> at least be at the individual node.
+In cases where the properties of a node have time-variable values the model <span class="bcp14">SHALL</span> define an interpolation method, either globally or per-property.<a href="#section-3.3.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.3.1-2">
+A node is just a named entity in Layer 3 <span>[<a href="#RFC8346" class="cite xref">RFC8346</a>]</span> and Layer 2 <span>[<a href="#RFC8944" class="cite xref">RFC8944</a>]</span> topologies.
+Schedules on a node <span class="bcp14">SHALL</span> be used to indicate the validity of the entire node or changing properties of that entity.
+When a schedule indicates that a node is not valid for a schedule time instant, that validity <span class="bcp14">SHALL</span> apply to all of its termination points and links as well.
+This logic allows a schedule to represent, for example, the expected power-on state of a node at a specific layer.<a href="#section-3.3.1-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="termpoints">
+<section id="section-3.3.2">
+          <h4 id="name-termination-points">
+<a href="#section-3.3.2" class="section-number selfRef">3.3.2. </a><a href="#name-termination-points" class="section-name selfRef">Termination Points</a>
+          </h4>
+<p id="section-3.3.2-1">
+When a schedule is applied to a termination point the granularity <span class="bcp14">SHALL</span> at least be at the individual entity.
+In cases where the properties of a termination point have time-variable values the model <span class="bcp14">SHALL</span> define an interpolation method, either globally or per-property.<a href="#section-3.3.2-1" class="pilcrow">¶</a></p>
+<p id="section-3.3.2-2">
+A termination point is associated with an IP address in Layer 3 <span>[<a href="#RFC8346" class="cite xref">RFC8346</a>]</span> and a MAC address in Layer 2 <span>[<a href="#RFC8944" class="cite xref">RFC8944</a>]</span> topologies.
+Schedules on a termination point <span class="bcp14">SHALL</span> be used to indicate the validity of the layer-2/3 interface represented by the entity or changing properties of that entity.
+When a schedule indicates that a termination point is not valid for a schedule time instant, that validity <span class="bcp14">SHALL</span> apply to all of its links as well.
+This logic allows a schedule to represent, for example, the expected power-on or administrative-enabled state of an attached network interface card (NIC) or virtual private network (VPN) endpoint.<a href="#section-3.3.2-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="links">
+<section id="section-3.3.3">
+          <h4 id="name-links">
+<a href="#section-3.3.3" class="section-number selfRef">3.3.3. </a><a href="#name-links" class="section-name selfRef">Links</a>
+          </h4>
+<p id="section-3.3.3-1">
+When a schedule is applied to a link the granularity <span class="bcp14">SHALL</span> at least be at the individual link.
+In cases where the properties of a link have time-variable values the model <span class="bcp14">SHALL</span> define an interpolation method, either globally or per-property.<a href="#section-3.3.3-1" class="pilcrow">¶</a></p>
+<p id="section-3.3.3-2">
+A link is associated with link metric properties in Layer 3 <span>[<a href="#RFC8346" class="cite xref">RFC8346</a>]</span> and Layer 2 <span>[<a href="#RFC8944" class="cite xref">RFC8944</a>]</span> topologies.
+Schedules on a link <span class="bcp14">SHALL</span> be used to indicate the validity of the entire link or changing properties of that entity.
+When a schedule indicates that a link is not valid for a schedule time instant, that validity <span class="bcp14">SHALL NOT</span> apply to its termination points and nodes.
+This logic allows a schedule to represent, for example, the expected connectivity state, data throughput/rate, and latency/delay of a link.<a href="#section-3.3.3-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<section id="section-3.3.4">
+          <h4 id="name-network-layering">
+<a href="#section-3.3.4" class="section-number selfRef">3.3.4. </a><a href="#name-network-layering" class="section-name selfRef">Network Layering</a>
+          </h4>
+<p id="section-3.3.4-1">
+When a schedule indicates that an entity is not valid for a schedule time instant, that validity <span class="bcp14">SHALL NOT</span> apply to any of its associated overlay or underlay network entities.
+The effects of scheduled administrative disabling or enabling of an entity at one layer do not imply a change in administrative enabled state at any other layer.
+Likewise, the assigning of an address property at one layer does not imply the presence or absence of an address assignment at that same time instant for any other layer.<a href="#section-3.3.4-1" class="pilcrow">¶</a></p>
+</section>
+</section>
+</div>
+<div id="routing">
+<section id="section-3.4">
+        <h3 id="name-routing">
+<a href="#section-3.4" class="section-number selfRef">3.4. </a><a href="#name-routing" class="section-name selfRef">Routing</a>
+        </h3>
+<p id="section-3.4-1">Traditional network routing techniques typically use link bandwidth and delay for path calculation, and do not consider time-based factors. TVR should be
+    capable of improving network performance and reliability in environments where node livelyness and link availability is a time-based consideration, with various factors,
+           including power availability, interface line of sight or expected demand.<a href="#section-3.4-1" class="pilcrow">¶</a></p>
+<p id="section-3.4-2">However, even if some adjacency failures are predictable, others are not, including link failures and node outages.
+           Therefore, any new technique or routing protocol extension for TVR enviroments must be capable of handling planned and unexpected
+           resource losses.<a href="#section-3.4-2" class="pilcrow">¶</a></p>
+<p id="section-3.4-3">Time-Variant Routing (TVR) introduces a scenario of calculating a path, or sub-path within a network, taking into account the timing
+    of message transmission or receipt as an integral part of the overall route computation.<a href="#section-3.4-3" class="pilcrow">¶</a></p>
+<p id="section-3.4-4">Furthermore, Synchronization of network time across TVR-capable nodes is critical in TVR networks.<a href="#section-3.4-4" class="pilcrow">¶</a></p>
+<p id="section-3.4-5">Three scenarios are currently considered when computating TVR-enabled paths.<a href="#section-3.4-5" class="pilcrow">¶</a></p>
+<div id="Centralized">
+<section id="section-3.4.1">
+          <h4 id="name-centralized">
+<a href="#section-3.4.1" class="section-number selfRef">3.4.1. </a><a href="#name-centralized" class="section-name selfRef">Centralized</a>
+          </h4>
+<p id="section-3.4.1-1">The network nodes will receive the time variable information and traffic forwarding rules directly from a logically centralized source, such as a network controller. The time variable data may then be
+     processed locally by the node entered into the scheduled routing table and specific forwarding rules applied.<a href="#section-3.4.1-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="Distributed">
+<section id="section-3.4.2">
+          <h4 id="name-distributed">
+<a href="#section-3.4.2" class="section-number selfRef">3.4.2. </a><a href="#name-distributed" class="section-name selfRef">Distributed</a>
+          </h4>
+<p id="section-3.4.2-1">All network nodes will participate in a routing scheme where time variable information is propagated through the network via capability and variability advertisements. This could be achieved using
+            extensions to existing routing schemes and techniques so that link, adjacency, cost, and schedule may be considered when making forwarding decisions for per-hop packets or calculating traffic
+            engineered end-to-end paths. It should be noted that schedule distribution and node computation latency may exist in some network environments.<a href="#section-3.4.2-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="Hybrid">
+<section id="section-3.4.3">
+          <h4 id="name-hybrid">
+<a href="#section-3.4.3" class="section-number selfRef">3.4.3. </a><a href="#name-hybrid" class="section-name selfRef">Hybrid</a>
+          </h4>
+<p id="section-3.4.3-1">In this scenario, mixed-node TVR capability exists. Some nodes will require a schedule provided by a centralized source, and others will be capable of advertising and learning scheduled information
+     via a distributed mechanism.<a href="#section-3.4.3-1" class="pilcrow">¶</a></p>
+<p id="section-3.4.3-2">This scenario presents time and schedule synchronization and source verification challenges and will require further study.<a href="#section-3.4.3-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="constraints">
+<section id="section-3.4.4">
+          <h4 id="name-constraints">
+<a href="#section-3.4.4" class="section-number selfRef">3.4.4. </a><a href="#name-constraints" class="section-name selfRef">Constraints</a>
+          </h4>
+<p id="section-3.4.4-1"><span class="cref">TBD</span><a href="#section-3.4.4-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="tvr-use-case-requirements">
+<section id="section-4">
+      <h2 id="name-time-variant-use-case-requi">
+<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-time-variant-use-case-requi" class="section-name selfRef">Time-Variant Use Case Requirements</a>
+      </h2>
+<p id="section-4-1">Several TVR use cases have been identifed and discussed in <span>[<a href="#I-D.ietf-tvr-use-cases" class="cite xref">I-D.ietf-tvr-use-cases</a>]</span>. This section provides
+ further detail on specific requirements to meet use case needs.<a href="#section-4-1" class="pilcrow">¶</a></p>
+<section id="section-4.1">
+        <h3 id="name-operating-efficiency-use-ca">
+<a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-operating-efficiency-use-ca" class="section-name selfRef">Operating Efficiency Use Case</a>
+        </h3>
+<p id="section-4.1-1">Several operational efficiency requirements exist; these include:<a href="#section-4.1-1" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-4.1-2">
+            <li id="section-4.1-2.1">Distribution of Predicted Topology-change. The predicted topology-change information may include the valid time,
+ invalid time, link costs at different times, and change periods.<a href="#section-4.1-2.1" class="pilcrow">¶</a>
+</li>
+          <li id="section-4.1-2.2">Topology Changes. The predicted topology-change information may change due to forecasted or unforecasted changes. The managing entity should be capable of providing a partial or full topology update as often as needed.<a href="#section-4.1-2.2" class="pilcrow">¶</a>
+</li>
+          <li id="section-4.1-2.3">The Minimum Route Recalculation Interval and Threshold. Although some cases may assume that the cost persists for a sufficient
+ amount of time, considering that each route contains multiple links, the change frequency of the path may be much higher than
+ the cost. In this case, the minimum recalculation interval or cost change threshold is needed to determine when a route
+ recalculation is required. Of course, scheduled topology connection changes must be considered when path calculation is required.<a href="#section-4.1-2.3" class="pilcrow">¶</a>
+</li>
+        </ol>
+</section>
+</section>
+</div>
+<div id="operational-considerations">
+<section id="section-5">
+      <h2 id="name-operational-considerations">
+<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-operational-considerations" class="section-name selfRef">Operational Considerations</a>
+      </h2>
+<p id="section-5-1">TBD<a href="#section-5-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="security-considerations">
+<section id="section-6">
+      <h2 id="name-security-considerations">
+<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
+      </h2>
+<p id="section-6-1">TBD<a href="#section-6-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="requirements-summary">
+<section id="section-7">
+      <h2 id="name-requirements-summary">
+<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-requirements-summary" class="section-name selfRef">Requirements Summary</a>
+      </h2>
+<section id="section-7.1">
+        <h3 id="name-support-the-identification-">
+<a href="#section-7.1" class="section-number selfRef">7.1. </a><a href="#name-support-the-identification-" class="section-name selfRef">Support the Identification and Advertisement of Node Property Changes</a>
+        </h3>
+<p id="section-7.1-1">In Time-Variant Routing, scheduling of the system are as expected.
+        In practical situations, however, the properties of entities can be
+        converted back and forth between Time-Variant and Non-Time-Variant
+        nodes.<a href="#section-7.1-1" class="pilcrow">¶</a></p>
+<p id="section-7.1-2">A managed device MUST support the identification and advertisement of non-scheduled
+        property changes.<a href="#section-7.1-2" class="pilcrow">¶</a></p>
+<p id="section-7.1-3">Besides, If there are abnormal changes in the system, it is
+        necessary to advertise them through the existing routing protocols in
+        time to achieve the stability of Time-Variant Routing and avoid
+        redundant advertisements. For example, a node in the system is
+        suddenly damaged due to external factors.
+ Changes in a node's state outside of a schedule are communicated to other nodes in a network through existing routing protocol mechanims, where they exist.<a href="#section-7.1-3" class="pilcrow">¶</a></p>
+<p id="section-7.1-4">A manager SHOULD provide a advertisement methodology for responding to
+        abnormal changes in the system.<a href="#section-7.1-4" class="pilcrow">¶</a></p>
+</section>
+<section id="section-7.2">
+        <h3 id="name-support-agent-node-advertis">
+<a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-support-agent-node-advertis" class="section-name selfRef">Support Agent Node Advertisement</a>
+        </h3>
+<p id="section-7.2-1">Agent nodes can help to improve the efficiency of the network.
+        There are some nodes in the network that do not have routing
+        functions. When their properties change, they are unable to notify
+        other nodes in the network. Agent nodes can help nodes without routing
+        functions to advertise information, thus improving the efficiency of
+        the network. Therefore,<a href="#section-7.2-1" class="pilcrow">¶</a></p>
+<p id="section-7.2-2">o MUST support agent nodes to help non-routing nodes implement
+        information advertisement.<a href="#section-7.2-2" class="pilcrow">¶</a></p>
+</section>
+<section id="section-7.3">
+        <h3 id="name-support-identification-and-">
+<a href="#section-7.3" class="section-number selfRef">7.3. </a><a href="#name-support-identification-and-" class="section-name selfRef">Support Identification and Classification of Node Properties</a>
+        </h3>
+<p id="section-7.3-1">The node properties of the network may change as described in 3.1.
+        If the system cannot timely identify and classify in a processing
+        manner after the node properties change, it will lead to suboptimal
+        routing decisions. Therefore,<a href="#section-7.3-1" class="pilcrow">¶</a></p>
+<p id="section-7.3-2">o MUST provide a discovery and resolving methodology for the
+        identification and classification of node properties.<a href="#section-7.3-2" class="pilcrow">¶</a></p>
+</section>
+<section id="section-7.4">
+        <h3 id="name-support-system-schedule-and">
+<a href="#section-7.4" class="section-number selfRef">7.4. </a><a href="#name-support-system-schedule-and" class="section-name selfRef">Support System Schedule and Time Interval Changes</a>
+        </h3>
+<p id="section-7.4-1">The system's schedule may change, requiring of to be reconfigured
+        instead it being set once and not being able to be modified.
+        Additionally, time-variant intervals in the system may also vary.
+        Therefore,<a href="#section-7.4-1" class="pilcrow">¶</a></p>
+<p id="section-7.4-2">o MUST support system schedule changes.<a href="#section-7.4-2" class="pilcrow">¶</a></p>
+<p id="section-7.4-3">o MUST support time interval changes.<a href="#section-7.4-3" class="pilcrow">¶</a></p>
+</section>
+<section id="section-7.5">
+        <h3 id="name-support-appropriate-time-ac">
+<a href="#section-7.5" class="section-number selfRef">7.5. </a><a href="#name-support-appropriate-time-ac" class="section-name selfRef">Support Appropriate Time Accuracy</a>
+        </h3>
+<p id="section-7.5-1">The accuracy of the time cannot be too large or too small;
+        otherwise, convergence may not be possible. Therefore,<a href="#section-7.5-1" class="pilcrow">¶</a></p>
+<p id="section-7.5-2">o MUST support appropriate time accuracy.<a href="#section-7.5-2" class="pilcrow">¶</a></p>
+</section>
+</section>
+</div>
+<div id="iana-considerations">
+<section id="section-8">
+      <h2 id="name-iana-considerations">
+<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
+      </h2>
+<p id="section-8-1">This document has no IANA actions.<a href="#section-8-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="contributors">
+<section id="section-9">
+      <h2 id="name-contributors">
+<a href="#name-contributors" class="section-name selfRef">Contributors</a>
+      </h2>
+<p id="section-9-1">The following authors contributed significantly to this document:<a href="#section-9-1" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-9-2">
+<pre>
+
+   Jing Wang
+   China Mobile
+   China
+   Email: wangjingjc@chinamobile.com
+
+   Peng Liu
+   China Mobile
+   China
+   Email: liupengyjy@chinamobile.com
+
+   Li Zhang
+   Huawei
+   China
+   Email: zhangli344@huawei.com
+
+   Zheng (Sandy) Zhang
+   ZTE Corporation
+   China
+   Email: zhang.zheng@zte.com.cn
+
+   Yuehua Wei
+   ZTE Corporation
+   China
+   Email: wei.yuehua@zte.com.cn
+
+</pre><a href="#section-9-2" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
+<section id="section-10">
+      <h2 id="name-references">
+<a href="#name-references" class="section-name selfRef">References</a>
+      </h2>
+<section id="section-10.1">
+        <h3 id="name-normative-references">
+<a href="#name-normative-references" class="section-name selfRef">Normative References</a>
+        </h3>
+<dl class="references">
+<dt id="I-D.ietf-tvr-use-cases">[I-D.ietf-tvr-use-cases]</dt>
+        <dd>
+<span class="refAuthor">Birrane, E. J.</span>, <span class="refAuthor">Kuhn, N.</span>, and <span class="refAuthor">Y. Qu</span>, <span class="refTitle">"TVR (Time-Variant Routing) Use Cases"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-tvr-use-cases-03</span>, <time datetime="2023-10-19" class="refDate">19 October 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-tvr-use-cases-03">https://datatracker.ietf.org/doc/html/draft-ietf-tvr-use-cases-03</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC2119">[RFC2119]</dt>
+        <dd>
+<span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2119">https://www.rfc-editor.org/info/rfc2119</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8174">[RFC8174]</dt>
+      <dd>
+<span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8174">https://www.rfc-editor.org/info/rfc8174</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+</dl>
+</section>
+<section id="section-10.2">
+        <h3 id="name-informative-references">
+<a href="#name-informative-references" class="section-name selfRef">Informative References</a>
+        </h3>
+<dl class="references">
+<dt id="AIXM">[AIXM]</dt>
+        <dd>
+<span class="refAuthor">EUROCONTROL and Federal Aviation Administration</span>, <span class="refTitle">"AIXM 5 Temporality Model"</span>, <time datetime="2010-09-15" class="refDate">15 September 2010</time>, <span>&lt;<a href="https://aixm.aero/sites/aixm.aero/files/imce/AIXM51/aixm_temporality_1.0.pdf">https://aixm.aero/sites/aixm.aero/files/imce/AIXM51/aixm_temporality_1.0.pdf</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.contreras-tvr-alto-exposure">[I-D.contreras-tvr-alto-exposure]</dt>
+        <dd>
+<span class="refAuthor">Contreras, L. M.</span>, <span class="refTitle">"Using ALTO for exposing Time-Variant Routing information"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-contreras-tvr-alto-exposure-02</span>, <time datetime="2023-10-14" class="refDate">14 October 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-contreras-tvr-alto-exposure-02">https://datatracker.ietf.org/doc/html/draft-contreras-tvr-alto-exposure-02</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.hou-tvr-satellite-network-usecases">[I-D.hou-tvr-satellite-network-usecases]</dt>
+        <dd>
+<span class="refAuthor">Dongxu, H.</span>, <span class="refAuthor">Min, X.</span>, <span class="refAuthor">Zhou, F.</span>, and <span class="refAuthor">D. Yuan</span>, <span class="refTitle">"Satellite Network Routing Use Cases"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-hou-tvr-satellite-network-usecases-02</span>, <time datetime="2023-09-14" class="refDate">14 September 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-hou-tvr-satellite-network-usecases-02">https://datatracker.ietf.org/doc/html/draft-hou-tvr-satellite-network-usecases-02</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.king-tvr-ntn-challanges">[I-D.king-tvr-ntn-challanges]</dt>
+        <dd>
+<span class="refAuthor">King, D.</span> and <span class="refAuthor">K. Shortt</span>, <span class="refTitle">"Time Variant Challenges for Non-Terrestrial Networks"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-king-tvr-ntn-challanges-00</span>, <time datetime="2023-01-17" class="refDate">17 January 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-king-tvr-ntn-challanges-00">https://datatracker.ietf.org/doc/html/draft-king-tvr-ntn-challanges-00</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC3339">[RFC3339]</dt>
+        <dd>
+<span class="refAuthor">Klyne, G.</span> and <span class="refAuthor">C. Newman</span>, <span class="refTitle">"Date and Time on the Internet: Timestamps"</span>, <span class="seriesInfo">RFC 3339</span>, <span class="seriesInfo">DOI 10.17487/RFC3339</span>, <time datetime="2002-07" class="refDate">July 2002</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc3339">https://www.rfc-editor.org/info/rfc3339</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8345">[RFC8345]</dt>
+        <dd>
+<span class="refAuthor">Clemm, A.</span>, <span class="refAuthor">Medved, J.</span>, <span class="refAuthor">Varga, R.</span>, <span class="refAuthor">Bahadur, N.</span>, <span class="refAuthor">Ananthakrishnan, H.</span>, and <span class="refAuthor">X. Liu</span>, <span class="refTitle">"A YANG Data Model for Network Topologies"</span>, <span class="seriesInfo">RFC 8345</span>, <span class="seriesInfo">DOI 10.17487/RFC8345</span>, <time datetime="2018-03" class="refDate">March 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8345">https://www.rfc-editor.org/info/rfc8345</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8346">[RFC8346]</dt>
+        <dd>
+<span class="refAuthor">Clemm, A.</span>, <span class="refAuthor">Medved, J.</span>, <span class="refAuthor">Varga, R.</span>, <span class="refAuthor">Liu, X.</span>, <span class="refAuthor">Ananthakrishnan, H.</span>, and <span class="refAuthor">N. Bahadur</span>, <span class="refTitle">"A YANG Data Model for Layer 3 Topologies"</span>, <span class="seriesInfo">RFC 8346</span>, <span class="seriesInfo">DOI 10.17487/RFC8346</span>, <time datetime="2018-03" class="refDate">March 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8346">https://www.rfc-editor.org/info/rfc8346</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8944">[RFC8944]</dt>
+      <dd>
+<span class="refAuthor">Dong, J.</span>, <span class="refAuthor">Wei, X.</span>, <span class="refAuthor">Wu, Q.</span>, <span class="refAuthor">Boucadair, M.</span>, and <span class="refAuthor">A. Liu</span>, <span class="refTitle">"A YANG Data Model for Layer 2 Network Topologies"</span>, <span class="seriesInfo">RFC 8944</span>, <span class="seriesInfo">DOI 10.17487/RFC8944</span>, <time datetime="2020-11" class="refDate">November 2020</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8944">https://www.rfc-editor.org/info/rfc8944</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+</dl>
+</section>
+</section>
+<div id="authors-addresses">
+<section id="appendix-A">
+      <h2 id="name-authors-addresses">
+<a href="#name-authors-addresses" class="section-name selfRef">Authors' Addresses</a>
+      </h2>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">D. King</span></div>
+<div dir="auto" class="left"><span class="org">Lancaster University</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:d.king@lancaster.ac.uk" class="email">d.king@lancaster.ac.uk</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">L. M. Contreras</span></div>
+<div dir="auto" class="left"><span class="org">Telefonica</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:luismiguel.contrerasmurillo@telefonica.com" class="email">luismiguel.contrerasmurillo@telefonica.com</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">B. Sipos</span></div>
+<div dir="auto" class="left"><span class="org">JHU/APL</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:brian.sipos+ietf@gmail.com" class="email">brian.sipos+ietf@gmail.com</a>
+</div>
+</address>
+</section>
+</div>
+<script>const toc = document.getElementById("toc");
+toc.querySelector("h2").addEventListener("click", e => {
+  toc.classList.toggle("active");
+});
+toc.querySelector("nav").addEventListener("click", e => {
+  toc.classList.remove("active");
+});
+</script>
+</body>
+</html>

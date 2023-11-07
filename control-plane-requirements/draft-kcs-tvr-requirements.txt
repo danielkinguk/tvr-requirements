@@ -1,0 +1,533 @@
+
+
+
+
+Network Working Group                                            D. King
+Internet-Draft                                      Lancaster University
+Intended status: Informational                           L. M. Contreras
+Expires: 25 November 2023                                     Telefonica
+                                                                B. Sipos
+                                                                 JHU/APL
+                                                             24 May 2023
+
+
+                TVR (Time-Variant Routing) Requirements
+                   draft-kcs-tvr-requirements-latest
+
+Abstract
+
+   Time-Variant Routing (TVR) refers to the calculation of a path or
+   subpath through a network where the time of message transmission (or
+   receipt) is part of the overall route computation.  This means that,
+   all things being equal, a TVR computation might produce different
+   results depending on the time that the computation is performed
+   without other detectable changes to the network topology or other
+   cost functions associated with the route.
+
+   This document introduces requirements where TVR computations could
+   improve message exchange in a network.
+
+About This Document
+
+   This note is to be removed before publishing as an RFC.
+
+   Status information for this document may be found at
+   https://datatracker.ietf.org/doc/draft-ietf-tvr-requirements/.
+
+   Discussion of this document takes place on the Time Variant Routing
+   Working Group mailing list (mailto:tvr@ietf.org), which is archived
+   at https://mailarchive.ietf.org/arch/browse/tvr/.  Subscribe at
+   https://www.ietf.org/mailman/listinfo/tvr/.
+
+   Source for this draft and an issue tracker can be found at
+   https://github.com/danielkinguk/tvr-requirements.
+
+Status of This Memo
+
+   This Internet-Draft is submitted in full conformance with the
+   provisions of BCP 78 and BCP 79.
+
+   Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF).  Note that other groups may also distribute
+   working documents as Internet-Drafts.  The list of current Internet-
+   Drafts is at https://datatracker.ietf.org/drafts/current/.
+
+   Internet-Drafts are draft documents valid for a maximum of six months
+   and may be updated, replaced, or obsoleted by other documents at any
+   time.  It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
+
+   This Internet-Draft will expire on 25 November 2023.
+
+Copyright Notice
+
+   Copyright (c) 2023 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents (https://trustee.ietf.org/
+   license-info) in effect on the date of publication of this document.
+   Please review these documents carefully, as they describe your rights
+   and restrictions with respect to this document.  Code Components
+   extracted from this document must include Revised BSD License text as
+   described in Section 4.e of the Trust Legal Provisions and are
+   provided without warranty as described in the Revised BSD License.
+
+Table of Contents
+
+   1.  Introduction
+   2.  Conventions and Definitions
+   3.  Overview of Time-Variant Networks
+     3.1.  Resource Scheduling
+     3.2.  General Temporality
+       3.2.1.  Scope of Time-Variability
+       3.2.2.  Time Horizon
+       3.2.3.  Time Precision
+       3.2.4.  Validity in a Schedule
+       3.2.5.  Periodicity in a Schedule
+       3.2.6.  Continuity in a Schedule
+       3.2.7.  Time-Overlap and Priority
+       3.2.8.  Property Value Interpolation
+       3.2.9.  Changes to Model State
+     3.3.  Topologies
+       3.3.1.  Nodes
+       3.3.2.  Links
+     3.4.  Routing
+       3.4.1.  Centralized
+       3.4.2.  Distributed
+       3.4.3.  Hybrid
+       3.4.4.  Constraints
+   4.  Time-Variant Use Case Requirements
+   5.  Operational Considerations
+   6.  Security Considerations
+   7.  IANA Considerations
+   8.  References
+     8.1.  Normative References
+     8.2.  Informative References
+   Authors' Addresses
+
+1.  Introduction
+
+
+2.  Conventions and Definitions
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+   "OPTIONAL" in this document are to be interpreted as described in
+   BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
+   capitals, as shown here.
+
+   Specific terms used within this document are as follows:
+
+   Model:  The universe being modeled, which defines a parameter space.
+
+   Entity:  A single separable item within the model.  Each entity has a
+      stable identity which is time-invariant.
+
+   Property:  A single attribute of an entity which is used to
+      parameterize that entity.  The notion of a property is not time-
+      variant, the property always exists within an entity but its value
+      may be time-variant.
+
+   Property Value:  The specific value of a property, both as a planned
+      state within the schedule timeline and as a realized state in
+      wall-clock time.
+
+   Schedule:  The method of parameterizing time-variance intrinsic to a
+      time-variant model.  The parameters of a schedule are within the
+      state space of the model.
+
+   Schedule Time:  An idealized timeline within a time-variant model
+      over which entities and property values may change without a
+      difference of state in the model itself.  The notion of schedule
+      time is intrinsic to the model.
+
+   Wall-Clock Time:  The true timeline, measured in some time scale by
+      some local ticker.  The notion of wall-clock time is extrinsic to
+      the model; even non-time-variant models allow for changes over
+      wall-clock time, just as different model states rather than a
+      change _within_ the model itself.
+
+   Time Instant:  A single instant of time, consistent with the concepts
+      of date-time in [RFC3339].
+
+   Timeline:  A possibly bounded interval of time, consistent with the
+      concept of a period in [RFC3339].
+
+   Subsequent:  A time instant which is later in a timeline than some
+      reference time instant.
+
+3.  Overview of Time-Variant Networks
+
+   Existing Internet routing techniques maintain end-to-end connected
+   paths across a network.  Routing mechanisms exist to recover
+   connectivity and resume normal traffic forwarding as the topology
+   changes.  Occasionally, optimisation of routes may also be requested,
+   especially post-topology changes due to disruptive events.  However,
+   there are a growing number of use cases where changes to the routing
+   topology are an expected part of network operations.  In these
+   scenarios, the pre-planned loss and restoration of an adjacency, or
+   formation of an alternate adjacency, should be seen as a non-
+   disruptive event.
+
+   Time-Variant Routing (TVR) refers to calculating a path or subpath
+   through a network where the time of message transmission (or receipt)
+   is part of the overall route computation.  Therefore, a TVR
+   computation might produce different results depending on the time
+   that the calculation is performed without other detectable changes to
+   the network topology or other cost functions associated with the
+   route.
+
+3.1.  Resource Scheduling
+
+   Planned resource scheduling will be required for various scenarios;
+   these include networks with mobile nodes, such as crewless aerial
+   vehicles and orbiting satellite constellations.  In these scenarios,
+   links are lost and re-established as a function of the mobility of
+   the platforms.  Furthermore, link activity might be restricted to
+   certain times of the day in networks without reliable access to
+   power, such as networks harvesting energy from tidal, wind, and solar
+   resources.  Similarly, network traffic might be planned around energy
+   costs or expected user data volumes in networks prioritising green
+   computing and energy efficiency over data rate.
+
+3.2.  General Temporality
+
+   This section covers different aspects of how temporality applies to
+   any potential TVR information model.  Each aspect is roughly
+   independent and informs how a model can choose to include temporality
+   in its parameter space.
+
+3.2.1.  Scope of Time-Variability
+
+   One aspect of any time-varying model is the scope of what may be
+   time-variable.  Two extremes of this aspect are:
+
+   *  A model which is completely time-invariant, which while there is
+      still a notion of time it has no affect on any of the model
+      entities.
+
+   *  A model in which every entity has some kind of schedule applied.
+
+   It is expected that an application of time-variability to real world
+   data models will keep some entities within the model time-invariant
+   and allow scheduling of other, specific entities.
+
+   Another aspect of any time-varying model is the granularity of state
+   to which a schedule can be applied.  Two extremes of this aspect are:
+
+   *  A model where one single schedule applies to the entire universe
+      (_i.e._ indicating when the time-variant entities are valid or
+      invalid).
+
+   *  A model where every property of every entity can be scheduled
+      independently.  This is the temporality model of [AIXM].
+
+   It is expected that an application of time-variability to data models
+   will fit within these extremes, possibly applying a schedule to each
+   entity indicating when that entity is valid or invalid, or applying a
+   schedule to groups of properties within the entity (while leaving
+   other properties time-invariant).
+
+3.2.2.  Time Horizon
+
+   In an idealized model the schedules will apply indefinitely far in
+   the past and the future, but in a realizable model with both
+   processing and storage limitations there will need to be a time
+   horizon within which the model applies and outside of which the model
+   has no meaning.  In some cases this horizon will be intrinsic to the
+   model itself, with an explicit model parameter indicating the
+   horizon.  In other cases the model may allow indefinitely-large
+   schedules but the processing of the planning timeline is bounded to
+   limit resource needs.
+
+3.2.3.  Time Precision
+
+   Different time-variant models will require different granularities of
+   planning time, either because of limitations or assumptions about
+   wall-clock time or because of requirements within the modeled domain.
+   It is up to specific models to define the precision of time values
+   and the required accuracy and precison of wall-clocks which implement
+   the schedules.
+
+3.2.4.  Validity in a Schedule
+
+   Within a single schedule over the planning timeline there will likely
+   be a need to have multiple discrete intervals of validity over
+   absolute schedule time.  The time instants at which a schedule is
+   invalid indicate an undefined property value, so it is important for
+   a model to be able to accomodate multiple schedules as necessary to
+   ensure that some properties can have values at all times.
+
+   A model which restricts itself to a single interval of validity could
+   run into difficulties over a long enough time horizon and would need
+   to resort to having multiple model entities represent the same
+   modeled "thing" which can lead to confusion and inefficiency.
+
+3.2.5.  Periodicity in a Schedule
+
+   Separate from the concept of intervals of validity in absolute
+   schedule time, there can be a need to model repetitive states in a
+   concise way.  One way to model a periodic change of state is to
+   combine a set of absolute time intervals with a periodic
+   parameterization (duration valid and duration invalid); this is the
+   mdoel of [AIXM].
+
+   A model which does not include the notion of periodicy within a
+   schedule could be used in situations where discrete intervals of
+   validity are needed to handle periodic state changes which is neither
+   storage nor processing efficient.
+
+3.2.6.  Continuity in a Schedule
+
+   A schedule which includes a sequence of time intervals needs to
+   ensure that the interpretation of those intervals in the schedule
+   timeline does not leave any "gaps" at the interval boundaries.  For
+   that reason, it is important that the model uses half-open intervals
+   of time so that time-adjacent intervals leave no gap.  In keeping
+   with the terminology of [RFC3339], intervals are bounded by their
+   "start" and "end" instants.  It is RECOMMENDED that any time-varying
+   model use schedules with intervals closed on their start time and
+   open on their end time.  This behavior lends to the interpretation,
+   in the schedule timeline, that the scheduled state takes effect at an
+   interval's start and continues until the subsequent state.
+
+3.2.7.  Time-Overlap and Priority
+
+   In an ideal situation a model would be guaranteed by design to
+   contain only contiguous and non-overlapping schedules for each time-
+   variant scope.  In a realized model this kind of invaraint might not
+   be enforcable or might lead to overly complex schedule structures.
+   One way a model can handle this is to establish a concept of schedule
+   priority, where some intervals of the schedule timeline contain
+   overlapping schedules for the same properties and only the highest-
+   priority schedule applies.  When priorities are allowed by a model,
+   it enables the concept of an "overlay" where a long-duration state
+   can be temporarilly (in schedule time) superseded by a short-duration
+   state.
+
+3.2.8.  Property Value Interpolation
+
+   When a schedule is applied to an entity in a way which is more
+   granular (Section 3.2.1) than just indicating when that whole entity
+   is valid or invalid, the model needs to consider how individual
+   properties are to be treated between scheduled instants.  Some of the
+   possibile behaviors are:
+
+   Zero-order hold:  From the instant a scheduled value applies to a
+      property until the subsequent-in-schedule-time value supersedes
+      it.  This is simple from a logical standpoint, but discontinuties
+      in the value over schedule time could cause issues with the model
+      itself.  For some models, though, the constant values between
+      change instants are actually beneficial by allowing the entire
+      timeline to be compressed into a sequence of discrete state-change
+      instants.  This is the behavior implied in models such as [AIXM].
+
+   Linear interpolation:  At the instants of time defined in the
+      schedule the property takes the exact values, but between those
+      instants the property is interpolated linearly over time.  This
+      results in a state that is continuous over time, which is
+      beneficial for some kinds of model but also means that there is no
+      simple discrete sequence of states.
+
+   Higher-order or spline interpolation:  Higher order interpolations
+      can result in properties that vary over schedule time in ways that
+      are more or less beneficial to different types of models.
+
+   Regardless of the types of interpolation used, a model can choose to
+   apply interpolation globally or per-property.  Since different
+   properties represent different physical or logical metrics of a
+   network it is expected that different types of interpolation will be
+   needed for different represented quantities.
+
+3.2.9.  Changes to Model State
+
+   Separate from how a time-variant model can contain a schedule
+   timeline within the model state, a model design will need to consider
+   how changes to the model state itself (over wall-clock time) are
+   handled.  This aspect is actually not specific to a time-variant
+   model but is important to consider in this context.
+
+   Two extremes of this aspect are:
+
+   *  A model which can only be changed wholesale, superseded by an
+      entire new model state.  This is easy to keep consistent but has
+      inefficiences of storage and transport if the model state is to be
+      shared or exchanged between real entities.
+
+   *  A model which has an intrinsic notion of fine-grained superseding
+      changes, possibly scoped to individual entities, individual
+      schedules, or more complex groupings.
+
+3.3.  Topologies
+
+   The primary entities of a topological network model, as realized in
+   [RFC8345] and similar predecessors, are nodes and unidirectional
+   links, with a secondary entity representing the "termination point"
+   of a link at a node.  Following the concepts described in Section 3.1
+   the nodes and links are the entities to which a schedule can be
+   applied.
+
+3.3.1.  Nodes
+
+   When a schedule is applied to a node the granularity SHALL at least
+   be at the individual node.  In cases where the properties of a node
+   have time-variable values the model SHALL define an interpolation
+   method, either globally or per-property.
+
+3.3.2.  Links
+
+   When a schedule is applied to a link the granularity SHALL at least
+   be at the individual link.  In cases where the properties of a link
+   have time-variable values the model SHALL define an interpolation
+   method, either globally or per-property.
+
+3.4.  Routing
+
+   Traditional network routing techniques typically use link bandwidth
+   and delay for path calculation, and do not consider time-based
+   factors.  TVR should be capable of improving network performance and
+   reliability in environments where node livelyness and link
+   availability is a time-based consideration, with various factors,
+   including power availability, interface line of sight or expected
+   demand.
+
+   However, even if some adjacency failures are predictable, others are
+   not, including link failures and node outages.  Therefore, any new
+   technique or routing protocol extension for TVR enviroments must be
+   capable of handling planned and unexpected resource losses.
+
+   Time-Variant Routing (TVR) introduces a scenario of calculating a
+   path, or sub-path within a network, taking into account the timing of
+   message transmission or receipt as an integral part of the overall
+   route computation.
+
+   Furthermore, Synchronization of network time across TVR-capable nodes
+   is critical in TVR networks.
+
+   Three scenarios are currently considered when computating TVR-enabled
+   paths.
+
+3.4.1.  Centralized
+
+   The network nodes will receive the time variable information and
+   traffic forwarding rules directly from a logically centralized
+   source, such as a network controller.  The time variable data may
+   then be processed locally by the node entered into the scheduled
+   routing table and specific forwarding rules applied.
+
+3.4.2.  Distributed
+
+   All network nodes will participate in a routing scheme where time
+   variable information is propagated through the network via capability
+   and variability advertisements.  This could be achieved using
+   extensions to existing routing schemes and techniques so that link,
+   adjacency, cost, and schedule may be considered when making
+   forwarding decisions for per-hop packets or calculating traffic
+   engineered end-to-end paths.  It should be noted that schedule
+   distribution and node computation latency may exist in some network
+   environments.
+
+3.4.3.  Hybrid
+
+   In this scenario, mixed-node TVR capability exists.  Some nodes will
+   require a schedule provided by a centralized source, and others will
+   be capable of advertising and learning scheduled information via a
+   distributed mechanism.
+
+   This scenario presents time and schedule synchronization and source
+   verification challenges and will require further study.
+
+3.4.4.  Constraints
+
+
+   // TBD
+
+4.  Time-Variant Use Case Requirements
+
+   TBD
+
+5.  Operational Considerations
+
+   TBD
+
+6.  Security Considerations
+
+   TBD
+
+7.  IANA Considerations
+
+   This document has no IANA actions.
+
+8.  References
+
+8.1.  Normative References
+
+   [I-D.ietf-tvr-use-cases]
+              Birrane, E. J., Kuhn, N., and Y. Qu, "TVR (Time-Variant
+              Routing) Use Cases", Work in Progress, Internet-Draft,
+              draft-ietf-tvr-use-cases-03, 19 October 2023,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-tvr-use-
+              cases-03>.
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119,
+              DOI 10.17487/RFC2119, March 1997,
+              <https://www.rfc-editor.org/info/rfc2119>.
+
+   [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
+              2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
+              May 2017, <https://www.rfc-editor.org/info/rfc8174>.
+
+8.2.  Informative References
+
+   [AIXM]     EUROCONTROL and Federal Aviation Administration, "AIXM 5
+              Temporality Model", 15 September 2010,
+              <https://aixm.aero/sites/aixm.aero/files/imce/AIXM51/
+              aixm_temporality_1.0.pdf>.
+
+   [I-D.contreras-tvr-alto-exposure]
+              Contreras, L. M., "Using ALTO for exposing Time-Variant
+              Routing information", Work in Progress, Internet-Draft,
+              draft-contreras-tvr-alto-exposure-02, 14 October 2023,
+              <https://datatracker.ietf.org/doc/html/draft-contreras-
+              tvr-alto-exposure-02>.
+
+   [I-D.hou-tvr-satellite-network-usecases]
+              Dongxu, H., Min, X., Zhou, F., and D. Yuan, "Satellite
+              Network Routing Use Cases", Work in Progress, Internet-
+              Draft, draft-hou-tvr-satellite-network-usecases-02, 14
+              September 2023, <https://datatracker.ietf.org/doc/html/
+              draft-hou-tvr-satellite-network-usecases-02>.
+
+   [I-D.king-tvr-ntn-challanges]
+              King, D. and K. Shortt, "Time Variant Challenges for Non-
+              Terrestrial Networks", Work in Progress, Internet-Draft,
+              draft-king-tvr-ntn-challanges-00, 17 January 2023,
+              <https://datatracker.ietf.org/doc/html/draft-king-tvr-ntn-
+              challanges-00>.
+
+   [RFC3339]  Klyne, G. and C. Newman, "Date and Time on the Internet:
+              Timestamps", RFC 3339, DOI 10.17487/RFC3339, July 2002,
+              <https://www.rfc-editor.org/info/rfc3339>.
+
+   [RFC8345]  Clemm, A., Medved, J., Varga, R., Bahadur, N.,
+              Ananthakrishnan, H., and X. Liu, "A YANG Data Model for
+              Network Topologies", RFC 8345, DOI 10.17487/RFC8345, March
+              2018, <https://www.rfc-editor.org/info/rfc8345>.
+
+Authors' Addresses
+
+   D. King
+   Lancaster University
+   Email: d.king@lancaster.ac.uk
+
+
+   L. M. Contreras
+   Telefonica
+   Email: luismiguel.contrerasmurillo@telefonica.com
+
+
+   B. Sipos
+   JHU/APL
+   Email: brian.sipos+ietf@gmail.com

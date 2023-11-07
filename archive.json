@@ -1,0 +1,907 @@
+{
+  "magic": "E!vIA5L86J2I",
+  "timestamp": "2023-11-07T00:36:49.277814+00:00",
+  "repo": "danielkinguk/tvr-requirements",
+  "labels": [
+    {
+      "name": "bug",
+      "description": "Something isn't working",
+      "color": "d73a4a"
+    },
+    {
+      "name": "documentation",
+      "description": "Improvements or additions to documentation",
+      "color": "0075ca"
+    },
+    {
+      "name": "duplicate",
+      "description": "This issue or pull request already exists",
+      "color": "cfd3d7"
+    },
+    {
+      "name": "enhancement",
+      "description": "New feature or request",
+      "color": "a2eeef"
+    },
+    {
+      "name": "good first issue",
+      "description": "Good for newcomers",
+      "color": "7057ff"
+    },
+    {
+      "name": "help wanted",
+      "description": "Extra attention is needed",
+      "color": "008672"
+    },
+    {
+      "name": "invalid",
+      "description": "This doesn't seem right",
+      "color": "e4e669"
+    },
+    {
+      "name": "question",
+      "description": "Further information is requested",
+      "color": "d876e3"
+    },
+    {
+      "name": "wontfix",
+      "description": "This will not be worked on",
+      "color": "ffffff"
+    }
+  ],
+  "issues": [
+    {
+      "number": 3,
+      "id": "I_kwDOJmJVRM5sBmng",
+      "title": "Slides for IETF 117",
+      "url": "https://github.com/danielkinguk/tvr-requirements/issues/3",
+      "state": "CLOSED",
+      "author": "danielkinguk",
+      "authorAssociation": "OWNER",
+      "assignees": [
+        "BrianSipos",
+        "danielkinguk",
+        "luismcontreras"
+      ],
+      "labels": [],
+      "body": "Draft slides for IETF 117. \r\n[draft_kcs_tvr_requirements_ietf117_v1.pptx](https://github.com/danielkinguk/tvr-requirements/files/12098318/draft_kcs_tvr_requirements_ietf117_v1.pptx)\r\n",
+      "createdAt": "2023-07-19T17:07:29Z",
+      "updatedAt": "2023-08-10T20:52:33Z",
+      "closedAt": "2023-08-10T20:52:33Z",
+      "comments": [
+        {
+          "author": "BrianSipos",
+          "authorAssociation": "COLLABORATOR",
+          "body": "The slides look good, I will touch up a little bit and can attach a new draft before Friday.",
+          "createdAt": "2023-07-20T17:14:05Z",
+          "updatedAt": "2023-07-20T17:14:05Z"
+        },
+        {
+          "author": "BrianSipos",
+          "authorAssociation": "COLLABORATOR",
+          "body": "My updates flatten out some of the third-level list items and add discussion about examples, but leave the structure in place otherwise.\r\n[draft_kcs_tvr_requirements_ietf117_v2.pptx](https://github.com/danielkinguk/tvr-requirements/files/12113881/draft_kcs_tvr_requirements_ietf117_v2.pptx)\r\n",
+          "createdAt": "2023-07-20T20:43:14Z",
+          "updatedAt": "2023-07-20T20:43:14Z"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "id": "I_kwDOJmJVRM5y9Jhy",
+      "title": "Add discussion in Topologies section about BCP from netmod",
+      "url": "https://github.com/danielkinguk/tvr-requirements/issues/4",
+      "state": "CLOSED",
+      "author": "BrianSipos",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "BrianSipos"
+      ],
+      "labels": [],
+      "body": "Add the \"interface\" as a top-level modeled entity and how schedules on nodes, interfaces, and links interact to model complex situations.",
+      "createdAt": "2023-10-05T16:07:56Z",
+      "updatedAt": "2023-10-21T16:32:16Z",
+      "closedAt": "2023-10-21T16:32:16Z",
+      "comments": []
+    },
+    {
+      "number": 5,
+      "id": "I_kwDOJmJVRM5y9Rp8",
+      "title": "Discuss intrinsic and extrinsic schedule modeling options",
+      "url": "https://github.com/danielkinguk/tvr-requirements/issues/5",
+      "state": "CLOSED",
+      "author": "BrianSipos",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "BrianSipos"
+      ],
+      "labels": [],
+      "body": "Within the [Resource Scheduling](https://www.ietf.org/archive/id/draft-kcs-tvr-requirements-00.html#name-resource-scheduling) section, there should be a discussion of how a schedule is applied to a data model: either intrinsic to the model parameters or as extrinsic changes to the model.",
+      "createdAt": "2023-10-05T16:26:54Z",
+      "updatedAt": "2023-10-23T16:48:34Z",
+      "closedAt": "2023-10-23T16:48:34Z",
+      "comments": [
+        {
+          "author": "BrianSipos",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@danielkinguk these changes can be used on their own or combined with any of your edits",
+          "createdAt": "2023-10-20T16:27:13Z",
+          "updatedAt": "2023-10-20T16:27:13Z"
+        },
+        {
+          "author": "danielkinguk",
+          "authorAssociation": "OWNER",
+          "body": "Cool, thanks Brian. I will continue to work on the new version over the weekend.\r\n ",
+          "createdAt": "2023-10-20T17:19:12Z",
+          "updatedAt": "2023-10-20T17:19:12Z"
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "id": "I_kwDOJmJVRM50PR5y",
+      "title": "Additional Requirements - Node Attributes & Advertisements ",
+      "url": "https://github.com/danielkinguk/tvr-requirements/issues/6",
+      "state": "CLOSED",
+      "author": "danielkinguk",
+      "authorAssociation": "OWNER",
+      "assignees": [
+        "danielkinguk"
+      ],
+      "labels": [],
+      "body": "Received comments from Jing Wang (China Mobile). \r\n\r\nhttps://mailarchive.ietf.org/arch/msg/tvr/lmu7VrAciF5zvBemJRc30mfVU7s/\r\n\r\n>>\r\n\u2022 Section3.1(Support the Identification and Advertisement of Node Attribute Changes) ,section3.2(Support Agent Node Advertisement) describe some requirements for advertising , May consider to supplementating as a new section in Chapter 3 of the draft-ietf-tvr-requirements;\r\n\u2022 Section3.3(Support Identification and Classification of Node Attributes) may consider to be regarded as a premise of the advertisement as a new section along with section 3.1&3.2, and could also be added to the content of 3.3.1(node) of the draft-ietf-tvr-requirements;\r\n\u2022 Section3.4(Support System Schedule and Time Interval Changes) may consider to be added to 3.2.9(Changes to Model State) of the draft-ietf-tvr-requirements\uff1b\r\n\u2022 Section3.5(Support Appropriate Time Accuracy) may consider to be be added to 3.2.3(Time Precision) of the draft-ietf-tvr-requirements.\r\n<<",
+      "createdAt": "2023-10-18T16:25:22Z",
+      "updatedAt": "2023-10-23T20:02:29Z",
+      "closedAt": "2023-10-23T20:02:29Z",
+      "comments": []
+    },
+    {
+      "number": 7,
+      "id": "I_kwDOJmJVRM50PToj",
+      "title": "Look to blend Routing Considerations into I-D",
+      "url": "https://github.com/danielkinguk/tvr-requirements/issues/7",
+      "state": "CLOSED",
+      "author": "danielkinguk",
+      "authorAssociation": "OWNER",
+      "assignees": [
+        "danielkinguk"
+      ],
+      "labels": [],
+      "body": "https://datatracker.ietf.org/doc/html/draft-zhang-tvr-routing-considerations-00\r\n\r\nScenarios:\r\n\r\n- Each node gets the models directly\r\n- VN advertises the variability by typical advertisement\r\n- Helper advertises the variability by typical advertisement\r\n",
+      "createdAt": "2023-10-18T16:27:48Z",
+      "updatedAt": "2023-10-23T20:02:21Z",
+      "closedAt": "2023-10-23T20:02:21Z",
+      "comments": [
+        {
+          "author": "danielkinguk",
+          "authorAssociation": "OWNER",
+          "body": "Done. Will polish a little more before closing. ",
+          "createdAt": "2023-10-23T09:25:40Z",
+          "updatedAt": "2023-10-23T09:25:40Z"
+        }
+      ]
+    },
+    {
+      "number": 8,
+      "id": "I_kwDOJmJVRM50PUh_",
+      "title": "Review latest TVR Use Case I-D and check for updates for Requirements I-D",
+      "url": "https://github.com/danielkinguk/tvr-requirements/issues/8",
+      "state": "CLOSED",
+      "author": "danielkinguk",
+      "authorAssociation": "OWNER",
+      "assignees": [
+        "danielkinguk"
+      ],
+      "labels": [],
+      "body": "https://datatracker.ietf.org/doc/html/draft-ietf-tvr-use-cases-02\r\n\r\n",
+      "createdAt": "2023-10-18T16:29:13Z",
+      "updatedAt": "2023-10-30T18:00:17Z",
+      "closedAt": "2023-10-30T18:00:17Z",
+      "comments": [
+        {
+          "author": "luismcontreras",
+          "authorAssociation": "COLLABORATOR",
+          "body": "New version -03 is available. Section 6 describes problems to solve. I will check if there is something new in terms of requirements, targeting 20:00 CET for this.",
+          "createdAt": "2023-10-23T15:23:00Z",
+          "updatedAt": "2023-10-23T15:23:00Z"
+        },
+        {
+          "author": "danielkinguk",
+          "authorAssociation": "OWNER",
+          "body": "Going to leave this open. We can discuss new requirements in the WG slides/discussion, or even prepare a new version of the I-D and submit when the Submission Tool opens again at the start of IETF week. \r\n ",
+          "createdAt": "2023-10-23T20:02:12Z",
+          "updatedAt": "2023-10-23T20:02:12Z"
+        }
+      ]
+    },
+    {
+      "number": 11,
+      "id": "I_kwDOJmJVRM50oW0t",
+      "title": "Add draft-zhang-tvr-routing-considerations-00 authors as Contributors",
+      "url": "https://github.com/danielkinguk/tvr-requirements/issues/11",
+      "state": "CLOSED",
+      "author": "danielkinguk",
+      "authorAssociation": "OWNER",
+      "assignees": [
+        "danielkinguk"
+      ],
+      "labels": [],
+      "body": "Blended text and ideas from draft-zhang-tvr-routing-considerations-00 into Requirements I-D. Suggest we add those authors as Contributors to Requirements I-D. ",
+      "createdAt": "2023-10-23T09:26:51Z",
+      "updatedAt": "2023-10-23T19:44:22Z",
+      "closedAt": "2023-10-23T19:44:22Z",
+      "comments": []
+    },
+    {
+      "number": 12,
+      "id": "I_kwDOJmJVRM50obTn",
+      "title": "Including \"Operating Efficiency\" text from Li Zhang",
+      "url": "https://github.com/danielkinguk/tvr-requirements/issues/12",
+      "state": "CLOSED",
+      "author": "danielkinguk",
+      "authorAssociation": "OWNER",
+      "assignees": [
+        "danielkinguk"
+      ],
+      "labels": [],
+      "body": ">>\r\n4.1 Requirements of Operating Efficiency Use Cases\r\n\r\n1). Distribution of predicted topology-change information.\r\nIn the Operating Efficiency case, the predicted topology-change information may include the valid time, invalid time, link costs at different time, and change periods (optional).\r\n\r\nWhen distributing these predicted change information, it is required to consider the combination of different type of information, such as the combination of periodic information and non-periodic information.\r\n\r\n2). Function of adding, deleting, and modifying.\r\n\r\nIn the Operating Efficiency case, the predicted topology-change information may change frequently. For example, the tidal network may have different change regularities in different seasons. The cost of the cellular network may also change as the electricity price changes. Therefore, the predicted topology-change information that has been distributed is required to support adding, modifying, and deleting operations. There are two ways to realize this function:\r\n\r\n  a) Fully updated: it means the predicted topology-change information is fully replaced each time the generator distributes it.\r\n  b) Maintain a key for each predicted topology-change information: in this way, a generator of each predicted topology-change information generates a key for the prediction information, and uniquely identifies the information to be added, deleted, or modified by the key.\r\n\r\n3). The minimum route recalculation interval and threshold.\r\n\r\nAlthough the Operating Efficiency case assumes that the cost persists for a sufficient amount of time, considering that each route contains multiple links, the change frequency of the route may be much higher than the cost. In this case, the minimum recalculation interval or cost change threshold is needed to determine when a route recalculation is needed. Of course, topology connection changes must be considered in route calculation in advance.\r\n<<\r\n",
+      "createdAt": "2023-10-23T09:36:31Z",
+      "updatedAt": "2023-10-23T19:43:58Z",
+      "closedAt": "2023-10-23T19:43:58Z",
+      "comments": []
+    },
+    {
+      "number": 15,
+      "id": "I_kwDOJmJVRM50opTV",
+      "title": "Specific section listing requirements and conformance language ",
+      "url": "https://github.com/danielkinguk/tvr-requirements/issues/15",
+      "state": "CLOSED",
+      "author": "danielkinguk",
+      "authorAssociation": "OWNER",
+      "assignees": [
+        "danielkinguk"
+      ],
+      "labels": [],
+      "body": "We received an email from Jing Wang and Peng Liu (China Mobile) expanding some of our existing requirements and also using 2119 conformance language.  Reading though their latest Requirements I-D: \r\n\r\nhttps://datatracker.ietf.org/doc/draft-wang-tvr-requirements-consideration/\r\n\r\nI suggest we blend various elements and conformance language into our document. ",
+      "createdAt": "2023-10-23T10:08:03Z",
+      "updatedAt": "2023-10-23T20:00:35Z",
+      "closedAt": "2023-10-23T20:00:35Z",
+      "comments": []
+    },
+    {
+      "number": 18,
+      "id": "I_kwDOJmJVRM50s8aP",
+      "title": "English review of the stable version and submit I-D",
+      "url": "https://github.com/danielkinguk/tvr-requirements/issues/18",
+      "state": "CLOSED",
+      "author": "danielkinguk",
+      "authorAssociation": "OWNER",
+      "assignees": [
+        "danielkinguk"
+      ],
+      "labels": [],
+      "body": "Also check terminology consistency. ",
+      "createdAt": "2023-10-23T20:06:39Z",
+      "updatedAt": "2023-10-30T18:00:25Z",
+      "closedAt": "2023-10-30T18:00:25Z",
+      "comments": []
+    },
+    {
+      "number": 21,
+      "id": "I_kwDOJmJVRM51W5ZP",
+      "title": "Create slides for IETF 118",
+      "url": "https://github.com/danielkinguk/tvr-requirements/issues/21",
+      "state": "OPEN",
+      "author": "danielkinguk",
+      "authorAssociation": "OWNER",
+      "assignees": [
+        "danielkinguk"
+      ],
+      "labels": [],
+      "body": "WIll create deck ASAP. ",
+      "createdAt": "2023-10-30T18:00:51Z",
+      "updatedAt": "2023-10-30T18:00:52Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 22,
+      "id": "I_kwDOJmJVRM51W5rf",
+      "title": "Address comments from Tony Li",
+      "url": "https://github.com/danielkinguk/tvr-requirements/issues/22",
+      "state": "OPEN",
+      "author": "danielkinguk",
+      "authorAssociation": "OWNER",
+      "assignees": [
+        "danielkinguk"
+      ],
+      "labels": [],
+      "body": "Received via TVR list: \r\n\r\n[WG chair hat: OFF]\r\nHi Authors,\r\nThank you for your work on the requirements document. I have a few comments.\r\n\r\nSubstantive comments:\r\n\r\n1) Given that this is an informational document and that you\u2019ve invoked RFC 2119/8174, I\u2019m a bit confused by your use of normative verbs. I think that you\u2019re trying to express requirements for the solutions. We normally use the normative verbs to express requirements on the solutions, in documents that are on the standards track.\r\n\r\nI would suggest that you consider dropping the normative verbs and explicitly list requirements on a solution.\r\n\r\n2) Section 3.4.2. Even if path computation is distributed, that does NOT imply that scheduling must be (or should be) distributed by the routing protocol. It could instead be distributed through a management plane mechanism, such as NETCONF or gnmi.\r\n\r\n3) Section 4.1. Will other per-use-case requirements be forthcoming? If not, perhaps this could be generalized.  Requirement 3 seems unclear. Perhaps more text that would explain the context a bit more might be helpful.\r\n\r\n4) Section 8.1. You write: \"In Time-Variant Routing, scheduling of the system are as expected.\u201d  Could you please expound a bit?  That sentence seems very vague.\r\n\r\n5) Section 8.2. Please consider using the term \u2018proxy\u2019.\r\n\r\n6) Section 8.3.  You write: \"If the system cannot timely identify and classify in a processing\r\nmanner after the entity properties change, \u2026\u201d. Please clarify, I\u2019m not able to parse this. You\u2019ve described a requirement here that is \"discovery and resolving methodology for the identification and classification of entity properties\u201d. I don\u2019t understand this. Aren\u2019t the properties part of the schedule?\r\n\r\n7) Section 8.4. You write: \u201c\u2026 requiring of to be reconfigured \u2026\u201d.  I can\u2019t parse this, please reword.  Aren\u2019t time interval changes a subset of schedule changes?\r\n\r\n8) Section 8.5.  Accuracy is not an absolute value. In the real world, everything is necessarily inaccurate at some level. Normally this is described as a tolerance. What are you really asking for?\r\n\r\n Editorial comments:\r\n\r\n1) Section 3.4. You use the word \u2018livelyness\u2019.  I think you want \u2018liveness\u2019. s/computating/computing/\r\n\r\n2) Section 3.4.1. s/a Orchestrator/an Orchestrator/. s/entuty/entity. Note that the usual term for this case is a Path Computation Element (PCE).\r\n\r\n3) Section 6. By convention, the security considerations section is at the end of the document, typically right in front of IANA considerations.\r\n\r\n4) Section 8.1. s/A entity/An entity/. s/If/if/ s/a advertisement/an advertisement/\r\n\r\nRegards,\r\nTony",
+      "createdAt": "2023-10-30T18:01:36Z",
+      "updatedAt": "2023-10-30T18:02:16Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "danielkinguk",
+          "authorAssociation": "OWNER",
+          "body": "I will respond to Tony via the list, I'll also queue up the changes/updates for a new version of the Requirements ID. ",
+          "createdAt": "2023-10-30T18:02:16Z",
+          "updatedAt": "2023-10-30T18:02:16Z"
+        }
+      ]
+    },
+    {
+      "number": 23,
+      "id": "I_kwDOJmJVRM518PVa",
+      "title": "IETF 118 Slides for TVR WG",
+      "url": "https://github.com/danielkinguk/tvr-requirements/issues/23",
+      "state": "OPEN",
+      "author": "danielkinguk",
+      "authorAssociation": "OWNER",
+      "assignees": [
+        "BrianSipos",
+        "danielkinguk",
+        "luismcontreras"
+      ],
+      "labels": [],
+      "body": "Please review and comment. I plan to submit Wednesday, 8 November - 17:00 (local Czech time). \r\n[Uploading slides-118-draft-ietf-tvr-requirements-01.pptx\u2026]()\r\n\r\n",
+      "createdAt": "2023-11-06T09:50:18Z",
+      "updatedAt": "2023-11-06T09:58:24Z",
+      "closedAt": null,
+      "comments": []
+    }
+  ],
+  "pulls": [
+    {
+      "number": 1,
+      "id": "PR_kwDOJmJVRM5R8kJY",
+      "title": "Use upstream I-D tools",
+      "url": "https://github.com/danielkinguk/tvr-requirements/pull/1",
+      "state": "MERGED",
+      "author": "BrianSipos",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2023-06-01T21:48:47Z",
+      "updatedAt": "2023-06-27T14:33:26Z",
+      "baseRepository": "danielkinguk/tvr-requirements",
+      "baseRefName": "main",
+      "baseRefOid": "4f3a9284589343c307e2130d01213eb9158b0b14",
+      "headRepository": "danielkinguk/tvr-requirements",
+      "headRefName": "use-id-tools",
+      "headRefOid": "55856a5c61115d991894566d165ffa8521898b29",
+      "closedAt": "2023-06-27T14:33:16Z",
+      "mergedAt": "2023-06-27T14:33:16Z",
+      "mergedBy": "danielkinguk",
+      "mergeCommit": {
+        "oid": "ac905825ce800d24863d17b1c685237b7672272f"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 2,
+      "id": "PR_kwDOJmJVRM5UDVFZ",
+      "title": "Initial temporality discussion",
+      "url": "https://github.com/danielkinguk/tvr-requirements/pull/2",
+      "state": "MERGED",
+      "author": "BrianSipos",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2023-06-27T15:42:42Z",
+      "updatedAt": "2023-07-08T19:06:44Z",
+      "baseRepository": "danielkinguk/tvr-requirements",
+      "baseRefName": "main",
+      "baseRefOid": "ac905825ce800d24863d17b1c685237b7672272f",
+      "headRepository": "danielkinguk/tvr-requirements",
+      "headRefName": "temporality-discussion",
+      "headRefOid": "09dbd2fe38325ec3d9cc0677b0f3b80005cd4859",
+      "closedAt": "2023-07-08T16:45:52Z",
+      "mergedAt": "2023-07-08T16:45:52Z",
+      "mergedBy": "danielkinguk",
+      "mergeCommit": {
+        "oid": "72965b43807fc3e7b7ffc3671705ee98098be2b8"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJmJVRM5ZfhRE",
+          "commit": {
+            "abbreviatedOid": "18dc48f"
+          },
+          "author": "danielkinguk",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2023-06-27T16:48:26Z",
+          "updatedAt": "2023-06-27T16:48:26Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOJmJVRM5apKP5",
+          "commit": {
+            "abbreviatedOid": "09dbd2f"
+          },
+          "author": "danielkinguk",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "Commit.",
+          "createdAt": "2023-07-08T17:00:10Z",
+          "updatedAt": "2023-07-08T17:00:10Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOJmJVRM5apRBT",
+          "commit": {
+            "abbreviatedOid": "09dbd2f"
+          },
+          "author": "danielkinguk",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "Commit.",
+          "createdAt": "2023-07-08T18:59:15Z",
+          "updatedAt": "2023-07-08T19:06:44Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOJmJVRM5apRch",
+          "commit": {
+            "abbreviatedOid": "09dbd2f"
+          },
+          "author": "danielkinguk",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "Changes look good.",
+          "createdAt": "2023-07-08T19:06:31Z",
+          "updatedAt": "2023-07-08T19:06:31Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 9,
+      "id": "PR_kwDOJmJVRM5daHyG",
+      "title": "Added discussion of termination points and schedule effects for #4",
+      "url": "https://github.com/danielkinguk/tvr-requirements/pull/9",
+      "state": "MERGED",
+      "author": "BrianSipos",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2023-10-20T17:47:08Z",
+      "updatedAt": "2023-10-23T19:55:31Z",
+      "baseRepository": "danielkinguk/tvr-requirements",
+      "baseRefName": "main",
+      "baseRefOid": "5e520686b106498b1ed71a73a00e03759365c068",
+      "headRepository": "danielkinguk/tvr-requirements",
+      "headRefName": "4-topologies-from-netmod",
+      "headRefOid": "06ac364d4bf390f90d29f844c12146143272f665",
+      "closedAt": "2023-10-21T16:32:15Z",
+      "mergedAt": "2023-10-21T16:32:15Z",
+      "mergedBy": "danielkinguk",
+      "mergeCommit": {
+        "oid": "add6bf6dc39ac0b972de66a931f0f664d33f64bf"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJmJVRM5kzwFB",
+          "commit": {
+            "abbreviatedOid": "06ac364"
+          },
+          "author": "danielkinguk",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "Looks good. ",
+          "createdAt": "2023-10-21T16:32:09Z",
+          "updatedAt": "2023-10-21T16:32:09Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 10,
+      "id": "PR_kwDOJmJVRM5dgedv",
+      "title": "Routing update draft-kcs-tvr-requirements.xml",
+      "url": "https://github.com/danielkinguk/tvr-requirements/pull/10",
+      "state": "MERGED",
+      "author": "danielkinguk",
+      "authorAssociation": "OWNER",
+      "assignees": [
+        "danielkinguk"
+      ],
+      "labels": [],
+      "body": "",
+      "createdAt": "2023-10-23T09:25:07Z",
+      "updatedAt": "2023-10-23T19:42:52Z",
+      "baseRepository": "danielkinguk/tvr-requirements",
+      "baseRefName": "main",
+      "baseRefOid": "add6bf6dc39ac0b972de66a931f0f664d33f64bf",
+      "headRepository": "danielkinguk/tvr-requirements",
+      "headRefName": "control-plane-requirements",
+      "headRefOid": "883ac7079f92ac4d896e232e8de3a78a0e42efdb",
+      "closedAt": "2023-10-23T19:42:41Z",
+      "mergedAt": "2023-10-23T19:42:41Z",
+      "mergedBy": "BrianSipos",
+      "mergeCommit": {
+        "oid": "9c4ef1f6e9eedb8b5f2951da92eb1ecefa17a038"
+      },
+      "comments": [
+        {
+          "author": "danielkinguk",
+          "authorAssociation": "OWNER",
+          "body": "Cool, I will synch \"orchestrator\" and \"controller\" usage on the stable version we create after we merge anything that's currently outstanding. I plan one final end-to-end review for English/consistency before submission.  ",
+          "createdAt": "2023-10-23T14:41:28Z",
+          "updatedAt": "2023-10-23T14:41:28Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJmJVRM5k5TTO",
+          "commit": {
+            "abbreviatedOid": "1931065"
+          },
+          "author": "BrianSipos",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "It might be good to keep some terms consistent between the Figure I added in branch for #5. I said \"Orchestrator\" but here it uses \"Controller\"; I don't have strong feelings for which one is better.",
+          "createdAt": "2023-10-23T14:35:20Z",
+          "updatedAt": "2023-10-23T14:35:20Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOJmJVRM5k5rsH",
+          "commit": {
+            "abbreviatedOid": "883ac70"
+          },
+          "author": "luismcontreras",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-10-23T15:14:15Z",
+          "updatedAt": "2023-10-23T15:15:20Z",
+          "comments": [
+            {
+              "originalPosition": 15,
+              "body": "Question here. Does actually TVR take into account the timing of the message transmission (or receipt)? In any case, if the answer is yes, we mention that TVR introduce such scenario. What is the use case supporting it? Maybe better to refer here to the use case document for clarification on which use case this statement is based",
+              "createdAt": "2023-10-23T15:14:15Z",
+              "updatedAt": "2023-10-23T15:15:20Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJmJVRM5k51ZH",
+          "commit": {
+            "abbreviatedOid": "1931065"
+          },
+          "author": "BrianSipos",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-10-23T15:29:59Z",
+          "updatedAt": "2023-10-23T15:29:59Z",
+          "comments": [
+            {
+              "originalPosition": 15,
+              "body": "It's a good point, and related to the scope of what \"TVR\" really means. Just attaching a schedule to entities in a data model allows expressing time-varying topology and existing routing algorithms can use that data as-is but _will not_ include any time-of-transmission delay in their routing calculations. Other, TVR-aware routing algorithms _can_ take advantage of the schedule and expected delays in their route computing.\r\n\r\nI tried to address this in the [Schedule Visibility](https://danielkinguk.github.io/tvr-requirements/5-intrinsic-extrinsic-schedule/draft-kcs-tvr-requirements.html#name-schedule-visibility) section in the `5-intrinsic-extrinsic-schedule` branch.",
+              "createdAt": "2023-10-23T15:29:59Z",
+              "updatedAt": "2023-10-23T15:30:00Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJmJVRM5k6J-K",
+          "commit": {
+            "abbreviatedOid": "1931065"
+          },
+          "author": "danielkinguk",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-10-23T16:10:38Z",
+          "updatedAt": "2023-10-23T16:10:38Z",
+          "comments": [
+            {
+              "originalPosition": 15,
+              "body": "How about adding a \"Under Discussion\" (need to find a better name) appendix at the end of the document for unanswered questions/requirements. Basically a catchall for anything that needs further discussion. ",
+              "createdAt": "2023-10-23T16:10:38Z",
+              "updatedAt": "2023-10-23T16:10:38Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 13,
+      "id": "PR_kwDOJmJVRM5dgrTL",
+      "title": "Operational requirements",
+      "url": "https://github.com/danielkinguk/tvr-requirements/pull/13",
+      "state": "MERGED",
+      "author": "danielkinguk",
+      "authorAssociation": "OWNER",
+      "assignees": [
+        "danielkinguk"
+      ],
+      "labels": [],
+      "body": "",
+      "createdAt": "2023-10-23T09:57:45Z",
+      "updatedAt": "2023-10-23T19:44:03Z",
+      "baseRepository": "danielkinguk/tvr-requirements",
+      "baseRefName": "main",
+      "baseRefOid": "5af249716b601cd750d4cf8b53182b146de76228",
+      "headRepository": "danielkinguk/tvr-requirements",
+      "headRefName": "operational-efficiency-proposal",
+      "headRefOid": "9c64264bfc9a782a18abf97fcd8d3dd64b2768b0",
+      "closedAt": "2023-10-23T19:43:57Z",
+      "mergedAt": "2023-10-23T19:43:57Z",
+      "mergedBy": "BrianSipos",
+      "mergeCommit": {
+        "oid": "296fd7d35ea845409145fd392ea58e9b1ca938d8"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJmJVRM5k44Mt",
+          "commit": {
+            "abbreviatedOid": "31f027d"
+          },
+          "author": "BrianSipos",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "",
+          "createdAt": "2023-10-23T13:53:19Z",
+          "updatedAt": "2023-10-23T13:57:31Z",
+          "comments": [
+            {
+              "originalPosition": 16,
+              "body": "This duplicate anchor is causing CI build problems",
+              "createdAt": "2023-10-23T13:53:19Z",
+              "updatedAt": "2023-10-23T13:57:31Z"
+            },
+            {
+              "originalPosition": 24,
+              "body": "The end of this paragraph can be somewhat misleading if the basis for the TVR discussion is that the managing entity uses NETCONF (or equivalent) to control devices. NETCONF provides many options for complex incremental updating of data models; replacing large parts or small parts at will.",
+              "createdAt": "2023-10-23T13:57:19Z",
+              "updatedAt": "2023-10-23T13:57:31Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJmJVRM5k5GAP",
+          "commit": {
+            "abbreviatedOid": "31f027d"
+          },
+          "author": "danielkinguk",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-10-23T14:14:20Z",
+          "updatedAt": "2023-10-23T14:14:20Z",
+          "comments": [
+            {
+              "originalPosition": 24,
+              "body": "Good point. How about...\r\n\r\n\"Topology Changes. The predicted topology-change information may change due to forecasted or unforecasted changes. The managing entity should be capable of providing a partial or full topology update as often as needed.\"\r\n\r\nWe can add some specific text about using IETF technology, such as YANG for data modeling and NETCONF/RESTCONF messaging. \r\n",
+              "createdAt": "2023-10-23T14:14:20Z",
+              "updatedAt": "2023-10-23T14:14:20Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 14,
+      "id": "PR_kwDOJmJVRM5dgs5H",
+      "title": "Contributor section",
+      "url": "https://github.com/danielkinguk/tvr-requirements/pull/14",
+      "state": "MERGED",
+      "author": "danielkinguk",
+      "authorAssociation": "OWNER",
+      "assignees": [
+        "danielkinguk"
+      ],
+      "labels": [],
+      "body": "Seeing as included text/ideas from other I-Ds (tidal UC I-D and routing considerations I-D), I propose adding them as Contributors to the Requirements I-D. \r\n\r\n\r\n\r\n",
+      "createdAt": "2023-10-23T10:01:12Z",
+      "updatedAt": "2023-10-23T19:44:25Z",
+      "baseRepository": "danielkinguk/tvr-requirements",
+      "baseRefName": "main",
+      "baseRefOid": "add6bf6dc39ac0b972de66a931f0f664d33f64bf",
+      "headRepository": "danielkinguk/tvr-requirements",
+      "headRefName": "contributor-section",
+      "headRefOid": "f2d57349f0d92c43e3a7daafb92800fec49fc514",
+      "closedAt": "2023-10-23T19:44:21Z",
+      "mergedAt": "2023-10-23T19:44:21Z",
+      "mergedBy": "BrianSipos",
+      "mergeCommit": {
+        "oid": "2955dfd3122ba56c10ce44d204b74c825ae4fc26"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJmJVRM5k70DE",
+          "commit": {
+            "abbreviatedOid": "f2d5734"
+          },
+          "author": "BrianSipos",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2023-10-23T19:41:17Z",
+          "updatedAt": "2023-10-23T19:41:17Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 16,
+      "id": "PR_kwDOJmJVRM5dg0J8",
+      "title": "Merging draft wang tvr requirements consideration",
+      "url": "https://github.com/danielkinguk/tvr-requirements/pull/16",
+      "state": "MERGED",
+      "author": "danielkinguk",
+      "authorAssociation": "OWNER",
+      "assignees": [
+        "danielkinguk"
+      ],
+      "labels": [],
+      "body": "",
+      "createdAt": "2023-10-23T10:19:55Z",
+      "updatedAt": "2023-10-23T19:49:55Z",
+      "baseRepository": "danielkinguk/tvr-requirements",
+      "baseRefName": "main",
+      "baseRefOid": "add6bf6dc39ac0b972de66a931f0f664d33f64bf",
+      "headRepository": "danielkinguk/tvr-requirements",
+      "headRefName": "merging-draft-wang-tvr-requirements-consideration",
+      "headRefOid": "079592d30fd393901c651a777bf9cc32161cca3e",
+      "closedAt": "2023-10-23T19:49:50Z",
+      "mergedAt": "2023-10-23T19:49:50Z",
+      "mergedBy": "BrianSipos",
+      "mergeCommit": {
+        "oid": "9fa04c37cdd82723c8a0e3bde2c2581c95c6b5fa"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJmJVRM5k6Stg",
+          "commit": {
+            "abbreviatedOid": "c29af51"
+          },
+          "author": "BrianSipos",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "",
+          "createdAt": "2023-10-23T16:29:42Z",
+          "updatedAt": "2023-10-23T16:30:36Z",
+          "comments": [
+            {
+              "originalPosition": 14,
+              "body": "This was something discussed at the last IETF around terminology; a node (or other entity) isn't considered as \"not time variant\" because it doesn't have any scheduled changes. The network as a whole is time-variant and each entity can have an arbitrarily complex schedule for its properties, including a trivial \"no changes\" non-schedule.",
+              "createdAt": "2023-10-23T16:29:42Z",
+              "updatedAt": "2023-10-23T16:30:36Z"
+            },
+            {
+              "originalPosition": 9,
+              "body": "To be consistent with Section 2 these should use the term \"property\" and \"property value\" to describe what is changing.",
+              "createdAt": "2023-10-23T16:30:33Z",
+              "updatedAt": "2023-10-23T16:30:36Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJmJVRM5k7veC",
+          "commit": {
+            "abbreviatedOid": "c29af51"
+          },
+          "author": "danielkinguk",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "Approved. ",
+          "createdAt": "2023-10-23T19:27:37Z",
+          "updatedAt": "2023-10-23T19:27:37Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 17,
+      "id": "PR_kwDOJmJVRM5djWQK",
+      "title": "Adding schedule visibility/locality discussion",
+      "url": "https://github.com/danielkinguk/tvr-requirements/pull/17",
+      "state": "MERGED",
+      "author": "BrianSipos",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes #5 ",
+      "createdAt": "2023-10-23T16:41:47Z",
+      "updatedAt": "2023-10-23T19:55:35Z",
+      "baseRepository": "danielkinguk/tvr-requirements",
+      "baseRefName": "main",
+      "baseRefOid": "add6bf6dc39ac0b972de66a931f0f664d33f64bf",
+      "headRepository": "danielkinguk/tvr-requirements",
+      "headRefName": "5-intrinsic-extrinsic-schedule",
+      "headRefOid": "136ddbf5f567ce945f08257f2d034bad6736c6bd",
+      "closedAt": "2023-10-23T16:48:33Z",
+      "mergedAt": "2023-10-23T16:48:33Z",
+      "mergedBy": "danielkinguk",
+      "mergeCommit": {
+        "oid": "5af249716b601cd750d4cf8b53182b146de76228"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJmJVRM5k6b7J",
+          "commit": {
+            "abbreviatedOid": "136ddbf"
+          },
+          "author": "danielkinguk",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2023-10-23T16:48:23Z",
+          "updatedAt": "2023-10-23T16:48:23Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 19,
+      "id": "PR_kwDOJmJVRM5dk4hO",
+      "title": "Prepare for submission",
+      "url": "https://github.com/danielkinguk/tvr-requirements/pull/19",
+      "state": "CLOSED",
+      "author": "danielkinguk",
+      "authorAssociation": "OWNER",
+      "assignees": [
+        "danielkinguk"
+      ],
+      "labels": [],
+      "body": "",
+      "createdAt": "2023-10-23T21:08:59Z",
+      "updatedAt": "2023-10-23T21:10:26Z",
+      "baseRepository": "danielkinguk/tvr-requirements",
+      "baseRefName": "main",
+      "baseRefOid": "6f80421ef5ad5729e93c547666eb0697b90df1a3",
+      "headRepository": "danielkinguk/tvr-requirements",
+      "headRefName": "prepare-for-submission",
+      "headRefOid": "1294169bfb561592334282729251f13450751cf7",
+      "closedAt": "2023-10-23T21:10:26Z",
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 20,
+      "id": "PR_kwDOJmJVRM5dk7RD",
+      "title": "Prepare for submission",
+      "url": "https://github.com/danielkinguk/tvr-requirements/pull/20",
+      "state": "OPEN",
+      "author": "danielkinguk",
+      "authorAssociation": "OWNER",
+      "assignees": [
+        "danielkinguk"
+      ],
+      "labels": [],
+      "body": "",
+      "createdAt": "2023-10-23T21:18:44Z",
+      "updatedAt": "2023-10-23T21:18:44Z",
+      "baseRepository": "danielkinguk/tvr-requirements",
+      "baseRefName": "main",
+      "baseRefOid": "6f80421ef5ad5729e93c547666eb0697b90df1a3",
+      "headRepository": "danielkinguk/tvr-requirements",
+      "headRefName": "prepare-for-submission",
+      "headRefOid": "3a97efa0bf25444c6e2b55f6c3391db5c4ddc690",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    }
+  ]
+}
