@@ -5,10 +5,10 @@
 Network Working Group                                            D. King
 Internet-Draft                                      Lancaster University
 Intended status: Informational                           L. M. Contreras
-Expires: 25 April 2024                                        Telefonica
+Expires: 18 August 2024                                       Telefonica
                                                                 B. Sipos
                                                                  JHU/APL
-                                                         23 October 2023
+                                                        15 February 2024
 
 
                 TVR (Time-Variant Routing) Requirements
@@ -57,11 +57,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 25 April 2024.
+   This Internet-Draft will expire on 18 August 2024.
 
 Copyright Notice
 
-   Copyright (c) 2023 IETF Trust and the persons identified as the
+   Copyright (c) 2024 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -79,6 +79,9 @@ Table of Contents
    2.  Conventions and Definitions
    3.  Overview of Time-Variant Networks
      3.1.  Resource Scheduling
+       3.1.1.  Schedule Visibility
+       3.1.2.  Generation Locality
+       3.1.3.  Execution Locality
      3.2.  General Temporality
        3.2.1.  Scope of Time-Variability
        3.2.2.  Time Horizon
@@ -95,8 +98,12 @@ Table of Contents
        3.3.3.  Links
        3.3.4.  Network Layering
      3.4.  Routing
-       3.4.1.  Constraints
+       3.4.1.  Centralized
+       3.4.2.  Distributed
+       3.4.3.  Hybrid
+       3.4.4.  Constraints
    4.  Time-Variant Use Case Requirements
+     4.1.  Operating Efficiency Use Case
    5.  Operational Considerations
    6.  Security Considerations
    7.  Requirements Summary
@@ -108,9 +115,10 @@ Table of Contents
      7.4.  Support System Schedule and Time Interval Changes
      7.5.  Support Appropriate Time Accuracy
    8.  IANA Considerations
-   9.  References
-     9.1.  Normative References
-     9.2.  Informative References
+   Contributors
+   References
+     Normative References
+     Informative References
    Authors' Addresses
 
 1.  Introduction
@@ -164,6 +172,36 @@ Table of Contents
    Subsequent:  A time instant which is later in a timeline than some
       reference time instant.
 
+   Orchestrator:  The subsystem of a managing device which centralizes
+      control of a network and applies policy to manage a network.
+
+   Manager:  The subsystem in a managing device which operates a
+      management protocol to control an Agent.
+
+   Agent:  The subsystem in a managed device which operates a management
+      protocol to be controlled by a Manager.
+
+   (Routing) Application:  The subsystem of a managed device which
+      performs the functions of a routing protocol and/or algorithm.
+
+            +--------------------+       +-------------------+
+            |   Managing Device  |       |   Managed Device  |
+            |                    |       |                   |
+            |  +--------------+  |       |  +-------------+  |
+            |  | Orchestrator |  |       |  | Application |  |
+            |  +--------------+  |       |  +-------------+  |
+            |         |          |       |         |         |
+            |  +--------------+  |       |  +-------------+  |
+            |  |    Manager   |<-----+----->|    Agent    |  |
+            |  +--------------+  |   :   |  +-------------+  |
+            +--------------------+   :   +-------------------+
+                                     :
+                              +-------------+
+                              |  Data Model |
+                              +-------------+
+
+                       Figure 1: Management Entities
+
 3.  Overview of Time-Variant Networks
 
    Existing Internet routing techniques maintain end-to-end connected
@@ -189,14 +227,132 @@ Table of Contents
 
    Planned resource scheduling will be required for various scenarios;
    these include networks with mobile nodes, such as crewless aerial
-   vehicles and orbiting satellite constellations.  In these scenarios,
-   links are lost and re-established as a function of the mobility of
-   the platforms.  Furthermore, link activity might be restricted to
-   certain times of the day in networks without reliable access to
-   power, such as networks harvesting energy from tidal, wind, and solar
-   resources.  Similarly, network traffic might be planned around energy
-   costs or expected user data volumes in networks prioritising green
-   computing and energy efficiency over data rate.
+   vehicles and orbiting satellite constellations
+   [I-D.ietf-tvr-use-cases].  In these scenarios, links are lost and re-
+   established as a function of the mobility of the platforms.
+   Furthermore, link activity might be restricted to certain times of
+   the day in networks without reliable access to power, such as
+   networks harvesting energy from tidal, wind, and solar resources.
+   Similarly, network traffic might be planned around energy costs or
+   expected user data volumes in networks prioritising green computing
+   and energy efficiency over data rate.
+
+3.1.1.  Schedule Visibility
+
+   Because scheduled time-variance is not a part of exsting routing
+   algorithms and managed data models, not all routing applications will
+   be made to handle schedules as part of the routing parameters
+   intrinsically.
+
+   Two extremes of schedules being associated to routing data are:
+
+   Intrinsic Schedule:  In this situation the schedule is an intrinsic
+      part of the managed data model which is visible to the routing
+      application and used as part of the routing algorithms.  When the
+      schedule is intrinsic, there is not necessarily the notion of a
+      schedule being "executed" in wall-clock time because the time-
+      varying parameters are ingested as part of the routing algorithms
+      natural functioning.
+
+   Extrinsic Schedule:  In this situation the schedule is not part of
+      the managed data proper but maintained within the Orchestrator;
+      the routing application only sees the effects of changes in
+      routing parameters as the schedule is executed (in wall-clock
+      time) by the Agent.
+
+   There is also the possibility of an intermediate situation where the
+   schedule is still part of the managed data model but is visible only
+   to, and executed in wall-clock time by, the management Agent.  This
+   allows a more distributed use of scheduled data than centralizing its
+   processing in an Orchestrator.
+
+3.1.2.  Generation Locality
+
+   The generation of a scheduled data model depends on collecting source
+   data (which likely has some temporal information in it to begin
+   with), choosing a time horizon to schedule within, and then
+   processing the source data into an overall schedule.
+
+   Two extremes for locality of schedule generation are:
+
+   Centralized Generation:  In this situation, all schedule generation
+      is centralized within a network Orchestrator and changes are sent
+      to routing applications in wall-clock time via a management
+      interface.  Even though the generation of the schedule is
+      centralized, both the schedule visibility (within the data model)
+      and the locality of how the schedule is executed are
+      unconstrained.
+
+      For example, a schedule could be generated in a central
+      orchestrator synchronized to all managed devices which then
+      execute the schedule in a distributed manner.
+
+   Distributed Generation:  This situation corresponds with the
+      Intrinsic or intermediate schedule visibility, where a schedule
+      (with a potentially limited time horizon from what is known at the
+      orchestrator) is part of the managed data which is distributed to
+      managed devices to be handled either by the Agent or by the
+      routing Application itself.
+
+3.1.3.  Execution Locality
+
+   Depending on the visibility of schedules within a data model (see
+   Section 3.1.1) there are different options for where the schedule may
+   be executed to ultimately affect a time-varying configuration on a
+   managed device.
+
+   Two extremes for locality of schedule execution are:
+
+   Centralized Execution:  In this situation, all schedule execution is
+      centralized within a network Orchestrator and changes are sent to
+      routing applications in wall-clock time via a management
+      interface.  This situation can apply to any type of schedule
+      visibility, but only to centralized generation because the full
+      scheduled data model needs to be available to the entity
+      performing the execution.
+
+   Distributed Execution:  In this situation, schedules are executed on
+      each managed device independently but based on synchronized
+      clocks.  This situation corresponds with the Intrinsic or
+      intermediate schedule visibility, where a schedule (with a
+      potentially limited time horizon from what is known at the
+      Orchestrator) is part of the managed data which is distributed to
+      managed devices to be handled either by the Agent or by the
+      routing Application itself.
+
+      When schedules are distributed to the managed devices, it
+      necessarily increases the amount of data that the managing device
+      needs to synchronize across the network.  The ratio of increased
+      size can be mitigated by only distributing a limited time horizon
+      to each device within a sliding window that moves forward in non-
+      real-time.
+
+   When schedules are both generated and executed centrally, there is a
+   consistency risk between different managed devices because if one
+   device fails to be reconfigured in wall-clock time its configuration
+   will no longer align with the other devices which are supposed to all
+   operate on the same schedule.  To recover from this kind of
+   situation, either reattempts to configure the misaligned device can
+   be made to bring it back into alignment with the other devices or the
+   other devices' configurations must be rolled-back into consistency
+   which will then cause all the devices to be off-schedule.
+
+   When schedules are executed on each device, there is a risk that
+   clocks on different devices become desynchronized beyond the time
+   precision required of the schedule.  Because real-time clocks are
+   necessary for more than just schedule execution, and because accurate
+   and precise time sources exist outside of network time (_e.g._, GPS
+   time) this risk can be made to have a low probability.
+
+   With distributed execution there is also a risk that a manager loses
+   connectivity with the managed device and the device eventually runs
+   out of time horizon in the schedule which is known to it.  This risk
+   can be mitigated by trading between the size and the horizon end-time
+   of schedules distributed to managed devices.  This trade can be
+   different for different devices, where some well-connected devices
+   operate closer to just-in-time with short horizons while other
+   devices can be given a longer horizon to allow it to execute in the
+   absense of near-continuous manager connectivity.
 
 3.2.  General Temporality
 
@@ -254,7 +410,7 @@ Table of Contents
    planning time, either because of limitations or assumptions about
    wall-clock time or because of requirements within the modeled domain.
    It is up to specific models to define the precision of time values
-   and the required accuracy and precison of wall-clocks which implement
+   and the required accuracy and precison of wall-clocks which execute
    the schedules.
 
 3.2.4.  Validity in a Schedule
@@ -439,24 +595,93 @@ Table of Contents
 
 3.4.  Routing
 
-   Existing routing techniques are not typically designed to handle
-   potential connectivity, i.e., nodes and links scheduled to appear in
-   the future.  Therefore, the TVR Scenarios and use cases referenced
-   and discussed in this document will be compromised of scheduled
-   resources that are expected to appear in the future.
+   Traditional network routing techniques typically use link bandwidth
+   and delay for path calculation, and do not consider time-based
+   factors.  TVR should be capable of improving network performance and
+   reliability in environments where node livelyness and link
+   availability is a time-based consideration, with various factors,
+   including power availability, interface line of sight or expected
+   demand.
 
    However, even if some adjacency failures are predictable, others are
    not, including link failures and node outages.  Therefore, any new
    technique or routing protocol extension for TVR enviroments must be
    capable of handling planned and unexpected resource losses.
 
-3.4.1.  Constraints
+   Time-Variant Routing (TVR) introduces a scenario of calculating a
+   path, or sub-path within a network, taking into account the timing of
+   message transmission or receipt as an integral part of the overall
+   route computation.
 
-   TBD
+   Furthermore, Synchronization of network time across TVR-capable nodes
+   is critical in TVR networks.
+
+   Three scenarios are currently considered when computating TVR-enabled
+   paths.
+
+3.4.1.  Centralized
+
+   The network nodes will receive the time variable information and
+   traffic forwarding rules directly from a logically centralized
+   source, such as a network controller.  The time variable data may
+   then be processed locally by the node entered into the scheduled
+   routing table and specific forwarding rules applied.
+
+3.4.2.  Distributed
+
+   All network nodes will participate in a routing scheme where time
+   variable information is propagated through the network via capability
+   and variability advertisements.  This could be achieved using
+   extensions to existing routing schemes and techniques so that link,
+   adjacency, cost, and schedule may be considered when making
+   forwarding decisions for per-hop packets or calculating traffic
+   engineered end-to-end paths.  It should be noted that schedule
+   distribution and node computation latency may exist in some network
+   environments.
+
+3.4.3.  Hybrid
+
+   In this scenario, mixed-node TVR capability exists.  Some nodes will
+   require a schedule provided by a centralized source, and others will
+   be capable of advertising and learning scheduled information via a
+   distributed mechanism.
+
+   This scenario presents time and schedule synchronization and source
+   verification challenges and will require further study.
+
+3.4.4.  Constraints
+
+
+   // TBD
 
 4.  Time-Variant Use Case Requirements
 
-   TBD
+   Several TVR use cases have been identifed and discussed in
+   [I-D.ietf-tvr-use-cases].  This section provides further detail on
+   specific requirements to meet use case needs.
+
+4.1.  Operating Efficiency Use Case
+
+   Several operational efficiency requirements exist; these include:
+
+   1.  Distribution of Predicted Topology-change.  The predicted
+       topology-change information may include the valid time, invalid
+       time, link costs at different times, and change periods.
+
+   2.  Topology Changes.  The predicted topology-change information may
+       change due to forecasted or unforecasted changes.  The managing
+       entity should be capable of providing a partial or full topology
+       update as often as needed.
+
+   3.  The Minimum Route Recalculation Interval and Threshold.  Although
+       some cases may assume that the cost persists for a sufficient
+       amount of time, considering that each route contains multiple
+       links, the change frequency of the path may be much higher than
+       the cost.  In this case, the minimum recalculation interval or
+       cost change threshold is needed to determine when a route
+       recalculation is required.  Of course, scheduled topology
+       connection changes must be considered when path calculation is
+       required.
 
 5.  Operational Considerations
 
@@ -534,16 +759,47 @@ Table of Contents
 
    This document has no IANA actions.
 
-9.  References
+Contributors
 
-9.1.  Normative References
+   The following authors contributed significantly to this document:
+
+
+      Jing Wang
+      China Mobile
+      China
+      Email: wangjingjc@chinamobile.com
+
+      Peng Liu
+      China Mobile
+      China
+      Email: liupengyjy@chinamobile.com
+
+      Li Zhang
+      Huawei
+      China
+      Email: zhangli344@huawei.com
+
+      Zheng (Sandy) Zhang
+      ZTE Corporation
+      China
+      Email: zhang.zheng@zte.com.cn
+
+      Yuehua Wei
+      ZTE Corporation
+      China
+      Email: wei.yuehua@zte.com.cn
+
+
+References
+
+Normative References
 
    [I-D.ietf-tvr-use-cases]
-              Birrane, E. J., Kuhn, N., and Y. Qu, "TVR (Time-Variant
-              Routing) Use Cases", Work in Progress, Internet-Draft,
-              draft-ietf-tvr-use-cases-03, 19 October 2023,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-tvr-use-
-              cases-03>.
+              Birrane, E. J., Kuhn, N., Qu, Y., Taylor, R., and L.
+              Zhang, "TVR (Time-Variant Routing) Use Cases", Work in
+              Progress, Internet-Draft, draft-ietf-tvr-use-cases-04, 19
+              November 2023, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-tvr-use-cases-04>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -554,7 +810,7 @@ Table of Contents
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/info/rfc8174>.
 
-9.2.  Informative References
+Informative References
 
    [AIXM]     EUROCONTROL and Federal Aviation Administration, "AIXM 5
               Temporality Model", 15 September 2010,
