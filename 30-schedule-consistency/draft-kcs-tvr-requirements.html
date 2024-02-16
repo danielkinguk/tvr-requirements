@@ -1056,7 +1056,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">King, et al.</td>
-<td class="center">Expires 18 August 2024</td>
+<td class="center">Expires 19 August 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1069,12 +1069,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-kcs-tvr-requirements-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-02-15" class="published">15 February 2024</time>
+<time datetime="2024-02-16" class="published">16 February 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-08-18">18 August 2024</time></dd>
+<dd class="expires"><time datetime="2024-08-19">19 August 2024</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1132,7 +1132,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 18 August 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 19 August 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1262,6 +1262,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
             <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-operational-considerations" class="internal xref">Operational Considerations</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.1">
+                <p id="section-toc.1-1.5.2.1.1"><a href="#section-5.1" class="auto internal xref">5.1</a>.  <a href="#name-risks-of-different-schedule" class="internal xref">Risks of Different Schedule Choices</a></p>
+</li>
+            </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
             <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
@@ -1432,12 +1437,13 @@ svg :is([fill="white"], [fill^="#fff"]) {
         <h3 id="name-resource-scheduling">
 <a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-resource-scheduling" class="section-name selfRef">Resource Scheduling</a>
         </h3>
-<p id="section-3.1-1">Planned resource scheduling will be required for various scenarios; these include networks with mobile nodes, such as
-           crewless aerial vehicles and orbiting satellite constellations <span>[<a href="#I-D.ietf-tvr-use-cases" class="cite xref">I-D.ietf-tvr-use-cases</a>]</span>. In these scenarios, links are lost and re-established
-           as a function of the mobility of the platforms. Furthermore, link activity might be restricted to certain times of the
-           day in networks without reliable access to power, such as networks harvesting energy from tidal, wind, and solar
-           resources. Similarly, network traffic might be planned around energy costs or expected user data volumes in networks
-           prioritising green computing and energy efficiency over data rate.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.1-1">
+Planned resource scheduling will be required for various scenarios; these include networks with mobile nodes, such as crewless aerial vehicles and orbiting satellite constellations <span>[<a href="#I-D.ietf-tvr-use-cases" class="cite xref">I-D.ietf-tvr-use-cases</a>]</span>.
+In these scenarios, links are lost and re-established as a function of the mobility of the platforms.
+Furthermore, link activity might be restricted to certain times of the day in networks without reliable access to power, such as networks harvesting energy from tidal, wind, and solar resources.
+Similarly, network traffic might be planned around energy costs or expected user data volumes in networks prioritising green computing and energy efficiency over data rate.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.1-2">
+This section discusses design choices available for resource scheduling, while later discussion in <a href="#operational-considerations" class="auto internal xref">Section 5</a> covers implications of combining these choices in various ways within a system.<a href="#section-3.1-2" class="pilcrow">¶</a></p>
 <div id="schedule-visibility">
 <section id="section-3.1.1">
           <h4 id="name-schedule-visibility">
@@ -1520,15 +1526,6 @@ The ratio of increased size can be mitigated by only distributing a limited time
 </dd>
           <dd class="break"></dd>
 </dl>
-<p id="section-3.1.3-4">
-When schedules are both generated and executed centrally, there is a consistency risk between different managed devices because if one device fails to be reconfigured in wall-clock time its configuration will no longer align with the other devices which are supposed to all operate on the same schedule.
-To recover from this kind of situation, either reattempts to configure the misaligned device can be made to bring it back into alignment with the other devices or the other devices' configurations must be rolled-back into consistency which will then cause all the devices to be off-schedule.<a href="#section-3.1.3-4" class="pilcrow">¶</a></p>
-<p id="section-3.1.3-5">
-When schedules are executed on each device, there is a risk that clocks on different devices become desynchronized beyond the time precision required of the schedule.
-Because real-time clocks are necessary for more than just schedule execution, and because accurate and precise time sources exist outside of network time (<em>e.g.</em>, GPS time) this risk can be made to have a low probability.<a href="#section-3.1.3-5" class="pilcrow">¶</a></p>
-<p id="section-3.1.3-6">
-With distributed execution there is also a risk that a manager loses connectivity with the managed device and the device eventually runs out of time horizon in the schedule which is known to it.
-This risk can be mitigated by trading between the size and the horizon end-time of schedules distributed to managed devices. This trade can be different for different devices, where some well-connected devices operate closer to just-in-time with short horizons while other devices can be given a longer horizon to allow it to execute in the absense of near-continuous manager connectivity.<a href="#section-3.1.3-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1659,6 +1656,7 @@ Higher order interpolations can result in properties that vary over schedule tim
 Regardless of the types of interpolation used, a model can choose to apply interpolation globally or per-property.
 Since different properties represent different physical or logical metrics of a network it is expected that different types of interpolation will be needed for different represented quantities.<a href="#section-3.2.8-3" class="pilcrow">¶</a></p>
 </section>
+<div id="sec-time-model-state-change">
 <section id="section-3.2.9">
           <h4 id="name-changes-to-model-state">
 <a href="#section-3.2.9" class="section-number selfRef">3.2.9. </a><a href="#name-changes-to-model-state" class="section-name selfRef">Changes to Model State</a>
@@ -1678,6 +1676,7 @@ A model which has an intrinsic notion of fine-grained superseding changes, possi
 </li>
           </ul>
 </section>
+</div>
 </section>
 <div id="topologies">
 <section id="section-3.3">
@@ -1832,6 +1831,30 @@ Likewise, the assigning of an address property at one layer does not imply the p
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-operational-considerations" class="section-name selfRef">Operational Considerations</a>
       </h2>
 <p id="section-5-1">TBD<a href="#section-5-1" class="pilcrow">¶</a></p>
+<section id="section-5.1">
+        <h3 id="name-risks-of-different-schedule">
+<a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-risks-of-different-schedule" class="section-name selfRef">Risks of Different Schedule Choices</a>
+        </h3>
+<p id="section-5.1-1">
+This section discusses risks and mitigations of those risks based on different choices or combinations of choices from <a href="#scheduling" class="auto internal xref">Section 3.1</a>.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
+<p id="section-5.1-2">
+When schedules are both generated and executed centrally, there is a consistency risk between different managed devices because if one device fails to be reconfigured in wall-clock time its configuration will no longer align with the other devices which are supposed to all operate on the same schedule.
+To recover from this kind of situation, either reattempts to configure the misaligned device can be made to bring it back into alignment with the other devices or the other devices' configurations must be rolled-back into consistency which will then cause all the devices to be off-schedule.<a href="#section-5.1-2" class="pilcrow">¶</a></p>
+<p id="section-5.1-3">
+When schedules are generated on each managed device, there is a risk that the source data used to generate each schedule is either out-of-date or inconsistent for some other reason.
+There is not much that can be done to mitigate this risk directly but an Orchestrator having visibility into a roll-up summary of the managed device could allow the Orchestrator to work around a de-synchronized device.<a href="#section-5.1-3" class="pilcrow">¶</a></p>
+<p id="section-5.1-4">
+When schedules are executed on each managed device, there is a risk that clocks on different devices become desynchronized beyond the time precision required of the schedule.
+Because real-time clocks are necessary for more than just schedule execution, and because accurate and precise time sources exist outside of network time (<em>e.g.</em>, GPS time) this risk can be made to have a low probability.<a href="#section-5.1-4" class="pilcrow">¶</a></p>
+<p id="section-5.1-5">
+When centralized generation is combined with distributed execution there is a risk that a manager loses connectivity with the managed device and the device eventually runs out of time horizon in the schedule.
+This risk can be mitigated by trading between the size and the horizon end-time of schedules distributed to managed devices. This trade can be different for different devices, where some well-connected devices operate closer to just-in-time with short horizons while other devices can be given a longer horizon to allow it to execute in the absense of near-continuous manager connectivity.<a href="#section-5.1-5" class="pilcrow">¶</a></p>
+<p id="section-5.1-6">
+Centralized generation and distributed execution also adds a risk that even though the managed device has a long enough time horizon the schedule state becomes out-of-date from the latest state generated on the Orchestrator.
+This illustrates the difference between having sufficient horizon with a schedule timeline but the actual model state becomes stale in wall-clock time.
+One way to mitigate this risk is for a design to allow fine-grained changes of state (as described in <a href="#sec-time-model-state-change" class="auto internal xref">Section 3.2.9</a>) to be communicated to a managed device over a shorter wall-clock time than communicating the full state each time an update is needed.
+This mitigation would help when communication is rate limited or usually available, but not when there are long periods of unavailability.<a href="#section-5.1-6" class="pilcrow">¶</a></p>
+</section>
 </section>
 </div>
 <div id="security-considerations">
