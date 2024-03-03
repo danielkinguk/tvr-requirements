@@ -5,10 +5,10 @@
 Network Working Group                                            D. King
 Internet-Draft                                      Lancaster University
 Intended status: Informational                           L. M. Contreras
-Expires: 25 April 2024                                        Telefonica
+Expires: 4 September 2024                                     Telefonica
                                                                 B. Sipos
                                                                  JHU/APL
-                                                         23 October 2023
+                                                            3 March 2024
 
 
                 TVR (Time-Variant Routing) Requirements
@@ -57,11 +57,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 25 April 2024.
+   This Internet-Draft will expire on 4 September 2024.
 
 Copyright Notice
 
-   Copyright (c) 2023 IETF Trust and the persons identified as the
+   Copyright (c) 2024 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -80,7 +80,8 @@ Table of Contents
    3.  Overview of Time-Variant Networks
      3.1.  Resource Scheduling
        3.1.1.  Schedule Visibility
-       3.1.2.  Schedule Locality
+       3.1.2.  Generation Locality
+       3.1.3.  Execution Locality
      3.2.  General Temporality
        3.2.1.  Scope of Time-Variability
        3.2.2.  Time Horizon
@@ -104,6 +105,7 @@ Table of Contents
    4.  Time-Variant Use Case Requirements
      4.1.  Operating Efficiency Use Case
    5.  Operational Considerations
+     5.1.  Risks of Different Schedule Choices
    6.  Security Considerations
    7.  Requirements Summary
      7.1.  Support the Identification and Advertisement of Node
@@ -236,13 +238,18 @@ Table of Contents
    expected user data volumes in networks prioritising green computing
    and energy efficiency over data rate.
 
+   This section discusses design choices available for resource
+   scheduling, while later discussion in Section 5 covers implications
+   of combining these choices in various ways within a system.
+
 3.1.1.  Schedule Visibility
 
    Because scheduled time-variance is not a part of exsting routing
    algorithms and managed data models, not all routing applications will
    be made to handle schedules as part of the routing parameters
-   intrinsically.  Two extremes of schedules being associated to routing
-   data are:
+   intrinsically.
+
+   Two extremes of schedules being associated to routing data are:
 
    Intrinsic Schedule:  In this situation the schedule is an intrinsic
       part of the managed data model which is visible to the routing
@@ -264,26 +271,66 @@ Table of Contents
    allows a more distributed use of scheduled data than centralizing its
    processing in an Orchestrator.
 
-3.1.2.  Schedule Locality
+3.1.2.  Generation Locality
 
-   Similar to how different entities can have, or not have, visbility
-   into a time-varying schedule there is also the aspect of where the
-   schedule data is handled within the network topology.  Two extremes
-   for locality of schedule handling are:
+   The generation of a scheduled data model depends on collecting source
+   data (which likely has some temporal information in it to begin
+   with), choosing a time horizon to schedule within, and then
+   processing the source data into an overall schedule.
 
-   Centralized:  In this situation, all schedule handling is centralized
-      within a network Orchestrator and changes are sent to routing
-      applications in wall-clock time via a management interface.  This
-      corresponds with the Extrinsic schedule visibility because the
-      managed routers do not see the schedule to indicate why parameter
-      changes are taking place.
+   Two extremes for locality of schedule generation are:
 
-   Distributed:  This situation corresponds with the Intrinsic or
-      intermediate schedule visibility, where a schedule (with a
-      potentially limited time horizon from what is known at the
+   Centralized Generation:  In this situation, all schedule generation
+      is centralized within a network Orchestrator and changes are sent
+      to routing applications in wall-clock time via a management
+      interface.  Even though the generation of the schedule is
+      centralized, both the schedule visibility (within the data model)
+      and the locality of how the schedule is executed are
+      unconstrained.
+
+      For example, a schedule could be generated in a central
+      orchestrator synchronized to all managed devices which then
+      execute the schedule in a distributed manner.
+
+   Distributed Generation:  This situation corresponds with the
+      Intrinsic or intermediate schedule visibility, where a schedule
+      (with a potentially limited time horizon from what is known at the
       orchestrator) is part of the managed data which is distributed to
       managed devices to be handled either by the Agent or by the
       routing Application itself.
+
+3.1.3.  Execution Locality
+
+   Depending on the visibility of schedules within a data model (see
+   Section 3.1.1) there are different options for where the schedule may
+   be executed to ultimately affect a time-varying configuration on a
+   managed device.
+
+   Two extremes for locality of schedule execution are:
+
+   Centralized Execution:  In this situation, all schedule execution is
+      centralized within a network Orchestrator and changes are sent to
+      routing applications in wall-clock time via a management
+      interface.  This situation can apply to any type of schedule
+      visibility, but only to centralized generation because the full
+      scheduled data model needs to be available to the entity
+      performing the execution.
+
+   Distributed Execution:  In this situation, schedules are executed on
+      each managed device independently but based on synchronized
+      clocks.  This situation corresponds with the Intrinsic or
+      intermediate schedule visibility, where a schedule (with a
+      potentially limited time horizon from what is known at the
+      Orchestrator) is part of the managed data which is distributed to
+      managed devices to be handled either by the Agent or by the
+      routing Application itself.
+
+      When schedules are distributed to the managed devices, it
+      necessarily increases the amount of data that the managing device
+      needs to synchronize across the network.  The ratio of increased
+      size can be mitigated by only distributing a limited time horizon
+      to each device within a sliding window that moves forward in non-
+      real-time.
 
 3.2.  General Temporality
 
@@ -341,7 +388,7 @@ Table of Contents
    planning time, either because of limitations or assumptions about
    wall-clock time or because of requirements within the modeled domain.
    It is up to specific models to define the precision of time values
-   and the required accuracy and precison of wall-clocks which implement
+   and the required accuracy and precison of wall-clocks which execute
    the schedules.
 
 3.2.4.  Validity in a Schedule
@@ -618,6 +665,58 @@ Table of Contents
 
    TBD
 
+5.1.  Risks of Different Schedule Choices
+
+   This section discusses risks and mitigations of those risks based on
+   different choices or combinations of choices from Section 3.1.
+
+   When schedules are both generated and executed centrally, there is a
+   consistency risk between different managed devices because if one
+   device fails to be reconfigured in wall-clock time its configuration
+   will no longer align with the other devices which are supposed to all
+   operate on the same schedule.  To recover from this kind of
+   situation, either reattempts to configure the misaligned device can
+   be made to bring it back into alignment with the other devices or the
+   other devices' configurations must be rolled-back into consistency
+   which will then cause all the devices to be off-schedule.
+
+   When schedules are generated on each managed device, there is a risk
+   that the source data used to generate each schedule is either out-of-
+   date or inconsistent for some other reason.  There is not much that
+   can be done to mitigate this risk directly but an Orchestrator having
+   visibility into a roll-up summary of the managed device could allow
+   the Orchestrator to work around a de-synchronized device.
+
+   When schedules are executed on each managed device, there is a risk
+   that clocks on different devices become desynchronized beyond the
+   time precision required of the schedule.  Because real-time clocks
+   are necessary for more than just schedule execution, and because
+   accurate and precise time sources exist outside of network time
+   (_e.g._, GPS time) this risk can be made to have a low probability.
+
+   When centralized generation is combined with distributed execution
+   there is a risk that a manager loses connectivity with the managed
+   device and the device eventually runs out of time horizon in the
+   schedule.  This risk can be mitigated by trading between the size and
+   the horizon end-time of schedules distributed to managed devices.
+   This trade can be different for different devices, where some well-
+   connected devices operate closer to just-in-time with short horizons
+   while other devices can be given a longer horizon to allow it to
+   execute in the absense of near-continuous manager connectivity.
+
+   Centralized generation and distributed execution also adds a risk
+   that even though the managed device has a long enough time horizon
+   the schedule state becomes out-of-date from the latest state
+   generated on the Orchestrator.  This illustrates the difference
+   between having sufficient horizon with a schedule timeline but the
+   actual model state becomes stale in wall-clock time.  One way to
+   mitigate this risk is for a design to allow fine-grained changes of
+   state (as described in Section 3.2.9) to be communicated to a managed
+   device over a shorter wall-clock time than communicating the full
+   state each time an update is needed.  This mitigation would help when
+   communication is rate limited or usually available, but not when
+   there are long periods of unavailability.
+
 6.  Security Considerations
 
    TBD
@@ -726,11 +825,11 @@ References
 Normative References
 
    [I-D.ietf-tvr-use-cases]
-              Birrane, E. J., Kuhn, N., and Y. Qu, "TVR (Time-Variant
-              Routing) Use Cases", Work in Progress, Internet-Draft,
-              draft-ietf-tvr-use-cases-03, 19 October 2023,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-tvr-use-
-              cases-03>.
+              Birrane, E. J., Kuhn, N., Qu, Y., Taylor, R., and L.
+              Zhang, "TVR (Time-Variant Routing) Use Cases", Work in
+              Progress, Internet-Draft, draft-ietf-tvr-use-cases-09, 29
+              February 2024, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-tvr-use-cases-09>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -751,9 +850,9 @@ Informative References
    [I-D.contreras-tvr-alto-exposure]
               Contreras, L. M., "Using ALTO for exposing Time-Variant
               Routing information", Work in Progress, Internet-Draft,
-              draft-contreras-tvr-alto-exposure-02, 14 October 2023,
+              draft-contreras-tvr-alto-exposure-03, 27 February 2024,
               <https://datatracker.ietf.org/doc/html/draft-contreras-
-              tvr-alto-exposure-02>.
+              tvr-alto-exposure-03>.
 
    [I-D.hou-tvr-satellite-network-usecases]
               Dongxu, H., Min, X., Zhou, F., and D. Yuan, "Satellite

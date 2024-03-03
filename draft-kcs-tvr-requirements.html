@@ -12,27 +12,27 @@
        Time-Variant Routing (TVR) refers to the calculation of a path or subpath through a network where the time of message transmission (or receipt) is part of the overall route computation. This means that, all things being equal, a TVR computation might produce different results depending on the time that the computation is performed without other detectable changes to the network topology or other cost functions associated with the route. 
        This document introduces requirements where TVR computations could improve message exchange in a network. 
     " name="description">
-<meta content="xml2rfc 3.18.2" name="generator">
+<meta content="xml2rfc 3.20.0" name="generator">
 <meta content="Time-variant" name="keyword">
 <meta content="Routing" name="keyword">
 <meta content="Mobility" name="keyword">
 <meta content="Requirements" name="keyword">
 <meta content="draft-kcs-tvr-requirements-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.18.2
-    Python 3.11.6
-    ConfigArgParse 1.5.3
+  xml2rfc 3.20.0
+    Python 3.11.8
+    ConfigArgParse 1.7
     google-i18n-address 3.1.0
     intervaltree 3.1.0
     Jinja2 3.1.2
     lxml 4.9.3
-    platformdirs 3.11.0
+    platformdirs 4.2.0
     pycountry 22.3.5
-    PyYAML 6.0
+    PyYAML 6.0.1
     requests 2.31.0
-    setuptools 67.7.2
+    setuptools 68.2.2
     six 1.16.0
-    wcwidth 0.2.8
+    wcwidth 0.2.13
 -->
 <link href="draft-kcs-tvr-requirements.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -1052,11 +1052,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">tvr-requirements</td>
-<td class="right">October 2023</td>
+<td class="right">March 2024</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">King, et al.</td>
-<td class="center">Expires 25 April 2024</td>
+<td class="center">Expires 4 September 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1069,12 +1069,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-kcs-tvr-requirements-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2023-10-23" class="published">23 October 2023</time>
+<time datetime="2024-03-03" class="published">3 March 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-04-25">25 April 2024</time></dd>
+<dd class="expires"><time datetime="2024-09-04">4 September 2024</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1132,7 +1132,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 25 April 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 4 September 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1141,7 +1141,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="#name-copyright-notice" class="section-name selfRef">Copyright Notice</a>
         </h2>
 <p id="section-boilerplate.2-1">
-            Copyright (c) 2023 IETF Trust and the persons identified as the
+            Copyright (c) 2024 IETF Trust and the persons identified as the
             document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.2-2">
             This document is subject to BCP 78 and the IETF Trust's Legal
@@ -1177,7 +1177,10 @@ svg :is([fill="white"], [fill^="#fff"]) {
                     <p id="section-toc.1-1.3.2.1.2.1.1" class="keepWithNext"><a href="#section-3.1.1" class="auto internal xref">3.1.1</a>.  <a href="#name-schedule-visibility" class="internal xref">Schedule Visibility</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1.2.2">
-                    <p id="section-toc.1-1.3.2.1.2.2.1"><a href="#section-3.1.2" class="auto internal xref">3.1.2</a>.  <a href="#name-schedule-locality" class="internal xref">Schedule Locality</a></p>
+                    <p id="section-toc.1-1.3.2.1.2.2.1"><a href="#section-3.1.2" class="auto internal xref">3.1.2</a>.  <a href="#name-generation-locality" class="internal xref">Generation Locality</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1.2.3">
+                    <p id="section-toc.1-1.3.2.1.2.3.1"><a href="#section-3.1.3" class="auto internal xref">3.1.3</a>.  <a href="#name-execution-locality" class="internal xref">Execution Locality</a></p>
 </li>
                 </ul>
 </li>
@@ -1259,6 +1262,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
             <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-operational-considerations" class="internal xref">Operational Considerations</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.1">
+                <p id="section-toc.1-1.5.2.1.1"><a href="#section-5.1" class="auto internal xref">5.1</a>.  <a href="#name-risks-of-different-schedule" class="internal xref">Risks of Different Schedule Choices</a></p>
+</li>
+            </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
             <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
@@ -1429,57 +1437,97 @@ svg :is([fill="white"], [fill^="#fff"]) {
         <h3 id="name-resource-scheduling">
 <a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-resource-scheduling" class="section-name selfRef">Resource Scheduling</a>
         </h3>
-<p id="section-3.1-1">Planned resource scheduling will be required for various scenarios; these include networks with mobile nodes, such as
-           crewless aerial vehicles and orbiting satellite constellations <span>[<a href="#I-D.ietf-tvr-use-cases" class="cite xref">I-D.ietf-tvr-use-cases</a>]</span>. In these scenarios, links are lost and re-established
-           as a function of the mobility of the platforms. Furthermore, link activity might be restricted to certain times of the
-           day in networks without reliable access to power, such as networks harvesting energy from tidal, wind, and solar
-           resources. Similarly, network traffic might be planned around energy costs or expected user data volumes in networks
-           prioritising green computing and energy efficiency over data rate.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.1-1">
+Planned resource scheduling will be required for various scenarios; these include networks with mobile nodes, such as crewless aerial vehicles and orbiting satellite constellations <span>[<a href="#I-D.ietf-tvr-use-cases" class="cite xref">I-D.ietf-tvr-use-cases</a>]</span>.
+In these scenarios, links are lost and re-established as a function of the mobility of the platforms.
+Furthermore, link activity might be restricted to certain times of the day in networks without reliable access to power, such as networks harvesting energy from tidal, wind, and solar resources.
+Similarly, network traffic might be planned around energy costs or expected user data volumes in networks prioritising green computing and energy efficiency over data rate.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.1-2">
+This section discusses design choices available for resource scheduling, while later discussion in <a href="#operational-considerations" class="auto internal xref">Section 5</a> covers implications of combining these choices in various ways within a system.<a href="#section-3.1-2" class="pilcrow">¶</a></p>
+<div id="schedule-visibility">
 <section id="section-3.1.1">
           <h4 id="name-schedule-visibility">
 <a href="#section-3.1.1" class="section-number selfRef">3.1.1. </a><a href="#name-schedule-visibility" class="section-name selfRef">Schedule Visibility</a>
           </h4>
 <p id="section-3.1.1-1">
-Because scheduled time-variance is not a part of exsting routing algorithms and managed data models, not all routing applications will be made to handle schedules as part of the routing parameters intrinsically.
-Two extremes of schedules being associated to routing data are:<a href="#section-3.1.1-1" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlParallel" id="section-3.1.1-2">
-            <dt id="section-3.1.1-2.1">Intrinsic Schedule:</dt>
-            <dd style="margin-left: 1.5em" id="section-3.1.1-2.2">
+Because scheduled time-variance is not a part of exsting routing algorithms and managed data models, not all routing applications will be made to handle schedules as part of the routing parameters intrinsically.<a href="#section-3.1.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.1.1-2">
+Two extremes of schedules being associated to routing data are:<a href="#section-3.1.1-2" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-3.1.1-3">
+            <dt id="section-3.1.1-3.1">Intrinsic Schedule:</dt>
+            <dd style="margin-left: 1.5em" id="section-3.1.1-3.2">
 In this situation the schedule is an intrinsic part of the managed data model which is visible to the routing application and used as part of the routing algorithms.
-When the schedule is intrinsic, there is not necessarily the notion of a schedule being "executed" in wall-clock time because the time-varying parameters are ingested as part of the routing algorithms natural functioning.<a href="#section-3.1.1-2.2" class="pilcrow">¶</a>
+When the schedule is intrinsic, there is not necessarily the notion of a schedule being "executed" in wall-clock time because the time-varying parameters are ingested as part of the routing algorithms natural functioning.<a href="#section-3.1.1-3.2" class="pilcrow">¶</a>
 </dd>
             <dd class="break"></dd>
-<dt id="section-3.1.1-2.3">Extrinsic Schedule:</dt>
-            <dd style="margin-left: 1.5em" id="section-3.1.1-2.4">
-In this situation the schedule is not part of the managed data proper but maintained within the Orchestrator; the routing application only sees the effects of changes in routing parameters as the schedule is executed (in wall-clock time) by the Agent.<a href="#section-3.1.1-2.4" class="pilcrow">¶</a>
+<dt id="section-3.1.1-3.3">Extrinsic Schedule:</dt>
+            <dd style="margin-left: 1.5em" id="section-3.1.1-3.4">
+In this situation the schedule is not part of the managed data proper but maintained within the Orchestrator; the routing application only sees the effects of changes in routing parameters as the schedule is executed (in wall-clock time) by the Agent.<a href="#section-3.1.1-3.4" class="pilcrow">¶</a>
 </dd>
           <dd class="break"></dd>
 </dl>
-<p id="section-3.1.1-3">
+<p id="section-3.1.1-4">
 There is also the possibility of an intermediate situation where the schedule is still part of the managed data model but is visible only to, and executed in wall-clock time by, the management Agent.
-This allows a more distributed use of scheduled data than centralizing its processing in an Orchestrator.<a href="#section-3.1.1-3" class="pilcrow">¶</a></p>
+This allows a more distributed use of scheduled data than centralizing its processing in an Orchestrator.<a href="#section-3.1.1-4" class="pilcrow">¶</a></p>
 </section>
+</div>
+<div id="schedule-gen-locality">
 <section id="section-3.1.2">
-          <h4 id="name-schedule-locality">
-<a href="#section-3.1.2" class="section-number selfRef">3.1.2. </a><a href="#name-schedule-locality" class="section-name selfRef">Schedule Locality</a>
+          <h4 id="name-generation-locality">
+<a href="#section-3.1.2" class="section-number selfRef">3.1.2. </a><a href="#name-generation-locality" class="section-name selfRef">Generation Locality</a>
           </h4>
 <p id="section-3.1.2-1">
-Similar to how different entities can have, or not have, visbility into a time-varying schedule there is also the aspect of where the schedule data is handled within the network topology.
-Two extremes for locality of schedule handling are:<a href="#section-3.1.2-1" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlParallel" id="section-3.1.2-2">
-            <dt id="section-3.1.2-2.1">Centralized:</dt>
-            <dd style="margin-left: 1.5em" id="section-3.1.2-2.2">
-In this situation, all schedule handling is centralized within a network Orchestrator and changes are sent to routing applications in wall-clock time via a management interface.
-This corresponds with the Extrinsic schedule visibility because the managed routers do not see the schedule to indicate why parameter changes are taking place.<a href="#section-3.1.2-2.2" class="pilcrow">¶</a>
+The generation of a scheduled data model depends on collecting source data (which likely has some temporal information in it to begin with), choosing a time horizon to schedule within, and then processing the source data into an overall schedule.<a href="#section-3.1.2-1" class="pilcrow">¶</a></p>
+<p id="section-3.1.2-2">
+Two extremes for locality of schedule generation are:<a href="#section-3.1.2-2" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-3.1.2-3">
+            <dt id="section-3.1.2-3.1">Centralized Generation:</dt>
+            <dd style="margin-left: 1.5em" id="section-3.1.2-3.2">
+              <p id="section-3.1.2-3.2.1">
+In this situation, all schedule generation is centralized within a network Orchestrator and changes are sent to routing applications in wall-clock time via a management interface.
+Even though the generation of the schedule is centralized, both the schedule visibility (within the data model) and the locality of how the schedule is executed are unconstrained.<a href="#section-3.1.2-3.2.1" class="pilcrow">¶</a></p>
+<p id="section-3.1.2-3.2.2">
+For example, a schedule could be generated in a central orchestrator synchronized to all managed devices which then execute the schedule in a distributed manner.<a href="#section-3.1.2-3.2.2" class="pilcrow">¶</a></p>
 </dd>
             <dd class="break"></dd>
-<dt id="section-3.1.2-2.3">Distributed:</dt>
-            <dd style="margin-left: 1.5em" id="section-3.1.2-2.4">
-This situation corresponds with the Intrinsic or intermediate schedule visibility, where a schedule (with a potentially limited time horizon from what is known at the orchestrator) is part of the managed data which is distributed to managed devices to be handled either by the Agent or by the routing Application itself.<a href="#section-3.1.2-2.4" class="pilcrow">¶</a>
+<dt id="section-3.1.2-3.3">Distributed Generation:</dt>
+            <dd style="margin-left: 1.5em" id="section-3.1.2-3.4">
+This situation corresponds with the Intrinsic or intermediate schedule visibility, where a schedule (with a potentially limited time horizon from what is known at the orchestrator) is part of the managed data which is distributed to managed devices to be handled either by the Agent or by the routing Application itself.<a href="#section-3.1.2-3.4" class="pilcrow">¶</a>
 </dd>
           <dd class="break"></dd>
 </dl>
 </section>
+</div>
+<div id="schedule-exec-locality">
+<section id="section-3.1.3">
+          <h4 id="name-execution-locality">
+<a href="#section-3.1.3" class="section-number selfRef">3.1.3. </a><a href="#name-execution-locality" class="section-name selfRef">Execution Locality</a>
+          </h4>
+<p id="section-3.1.3-1">
+Depending on the visibility of schedules within a data model (see <a href="#schedule-visibility" class="auto internal xref">Section 3.1.1</a>) there are different options for where the schedule may be executed to ultimately affect a time-varying configuration on a managed device.<a href="#section-3.1.3-1" class="pilcrow">¶</a></p>
+<p id="section-3.1.3-2">
+Two extremes for locality of schedule execution are:<a href="#section-3.1.3-2" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-3.1.3-3">
+            <dt id="section-3.1.3-3.1">Centralized Execution:</dt>
+            <dd style="margin-left: 1.5em" id="section-3.1.3-3.2">
+              <p id="section-3.1.3-3.2.1">
+In this situation, all schedule execution is centralized within a network Orchestrator and changes are sent to routing applications in wall-clock time via a management interface.
+This situation can apply to any type of schedule visibility, but only to centralized generation because the full scheduled data model needs to be available to the entity performing the execution.<a href="#section-3.1.3-3.2.1" class="pilcrow">¶</a></p>
+</dd>
+            <dd class="break"></dd>
+<dt id="section-3.1.3-3.3">Distributed Execution:</dt>
+            <dd style="margin-left: 1.5em" id="section-3.1.3-3.4">
+              <p id="section-3.1.3-3.4.1">
+In this situation, schedules are executed on each managed device independently but based on synchronized clocks.
+This situation corresponds with the Intrinsic or intermediate schedule visibility, where a schedule (with a potentially limited time horizon from what is known at the Orchestrator) is part of the managed data which is distributed to managed devices to be handled either by the Agent or by the routing Application itself.<a href="#section-3.1.3-3.4.1" class="pilcrow">¶</a></p>
+<p id="section-3.1.3-3.4.2">
+When schedules are distributed to the managed devices, it necessarily increases the amount of data that the managing device needs to synchronize across the network.
+The ratio of increased size can be mitigated by only distributing a limited time horizon to each device within a sliding window that moves forward in non-real-time.<a href="#section-3.1.3-3.4.2" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+</dl>
+</section>
+</div>
 </section>
 </div>
 <section id="section-3.2">
@@ -1533,7 +1581,7 @@ In other cases the model may allow indefinitely-large schedules but the processi
           </h4>
 <p id="section-3.2.3-1">
 Different time-variant models will require different granularities of planning time, either because of limitations or assumptions about wall-clock time or because of requirements within the modeled domain.
-It is up to specific models to define the precision of time values and the required accuracy and precison of wall-clocks which implement the schedules.<a href="#section-3.2.3-1" class="pilcrow">¶</a></p>
+It is up to specific models to define the precision of time values and the required accuracy and precison of wall-clocks which execute the schedules.<a href="#section-3.2.3-1" class="pilcrow">¶</a></p>
 </section>
 <section id="section-3.2.4">
           <h4 id="name-validity-in-a-schedule">
@@ -1608,6 +1656,7 @@ Higher order interpolations can result in properties that vary over schedule tim
 Regardless of the types of interpolation used, a model can choose to apply interpolation globally or per-property.
 Since different properties represent different physical or logical metrics of a network it is expected that different types of interpolation will be needed for different represented quantities.<a href="#section-3.2.8-3" class="pilcrow">¶</a></p>
 </section>
+<div id="sec-time-model-state-change">
 <section id="section-3.2.9">
           <h4 id="name-changes-to-model-state">
 <a href="#section-3.2.9" class="section-number selfRef">3.2.9. </a><a href="#name-changes-to-model-state" class="section-name selfRef">Changes to Model State</a>
@@ -1627,6 +1676,7 @@ A model which has an intrinsic notion of fine-grained superseding changes, possi
 </li>
           </ul>
 </section>
+</div>
 </section>
 <div id="topologies">
 <section id="section-3.3">
@@ -1781,6 +1831,30 @@ Likewise, the assigning of an address property at one layer does not imply the p
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-operational-considerations" class="section-name selfRef">Operational Considerations</a>
       </h2>
 <p id="section-5-1">TBD<a href="#section-5-1" class="pilcrow">¶</a></p>
+<section id="section-5.1">
+        <h3 id="name-risks-of-different-schedule">
+<a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-risks-of-different-schedule" class="section-name selfRef">Risks of Different Schedule Choices</a>
+        </h3>
+<p id="section-5.1-1">
+This section discusses risks and mitigations of those risks based on different choices or combinations of choices from <a href="#scheduling" class="auto internal xref">Section 3.1</a>.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
+<p id="section-5.1-2">
+When schedules are both generated and executed centrally, there is a consistency risk between different managed devices because if one device fails to be reconfigured in wall-clock time its configuration will no longer align with the other devices which are supposed to all operate on the same schedule.
+To recover from this kind of situation, either reattempts to configure the misaligned device can be made to bring it back into alignment with the other devices or the other devices' configurations must be rolled-back into consistency which will then cause all the devices to be off-schedule.<a href="#section-5.1-2" class="pilcrow">¶</a></p>
+<p id="section-5.1-3">
+When schedules are generated on each managed device, there is a risk that the source data used to generate each schedule is either out-of-date or inconsistent for some other reason.
+There is not much that can be done to mitigate this risk directly but an Orchestrator having visibility into a roll-up summary of the managed device could allow the Orchestrator to work around a de-synchronized device.<a href="#section-5.1-3" class="pilcrow">¶</a></p>
+<p id="section-5.1-4">
+When schedules are executed on each managed device, there is a risk that clocks on different devices become desynchronized beyond the time precision required of the schedule.
+Because real-time clocks are necessary for more than just schedule execution, and because accurate and precise time sources exist outside of network time (<em>e.g.</em>, GPS time) this risk can be made to have a low probability.<a href="#section-5.1-4" class="pilcrow">¶</a></p>
+<p id="section-5.1-5">
+When centralized generation is combined with distributed execution there is a risk that a manager loses connectivity with the managed device and the device eventually runs out of time horizon in the schedule.
+This risk can be mitigated by trading between the size and the horizon end-time of schedules distributed to managed devices. This trade can be different for different devices, where some well-connected devices operate closer to just-in-time with short horizons while other devices can be given a longer horizon to allow it to execute in the absense of near-continuous manager connectivity.<a href="#section-5.1-5" class="pilcrow">¶</a></p>
+<p id="section-5.1-6">
+Centralized generation and distributed execution also adds a risk that even though the managed device has a long enough time horizon the schedule state becomes out-of-date from the latest state generated on the Orchestrator.
+This illustrates the difference between having sufficient horizon with a schedule timeline but the actual model state becomes stale in wall-clock time.
+One way to mitigate this risk is for a design to allow fine-grained changes of state (as described in <a href="#sec-time-model-state-change" class="auto internal xref">Section 3.2.9</a>) to be communicated to a managed device over a shorter wall-clock time than communicating the full state each time an update is needed.
+This mitigation would help when communication is rate limited or usually available, but not when there are long periods of unavailability.<a href="#section-5.1-6" class="pilcrow">¶</a></p>
+</section>
 </section>
 </div>
 <div id="security-considerations">
@@ -1917,7 +1991,7 @@ Likewise, the assigning of an address property at one layer does not imply the p
 <dl class="references">
 <dt id="I-D.ietf-tvr-use-cases">[I-D.ietf-tvr-use-cases]</dt>
         <dd>
-<span class="refAuthor">Birrane, E. J.</span>, <span class="refAuthor">Kuhn, N.</span>, and <span class="refAuthor">Y. Qu</span>, <span class="refTitle">"TVR (Time-Variant Routing) Use Cases"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-tvr-use-cases-03</span>, <time datetime="2023-10-19" class="refDate">19 October 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-tvr-use-cases-03">https://datatracker.ietf.org/doc/html/draft-ietf-tvr-use-cases-03</a>&gt;</span>. </dd>
+<span class="refAuthor">Birrane, E. J.</span>, <span class="refAuthor">Kuhn, N.</span>, <span class="refAuthor">Qu, Y.</span>, <span class="refAuthor">Taylor, R.</span>, and <span class="refAuthor">L. Zhang</span>, <span class="refTitle">"TVR (Time-Variant Routing) Use Cases"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-tvr-use-cases-09</span>, <time datetime="2024-02-29" class="refDate">29 February 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-tvr-use-cases-09">https://datatracker.ietf.org/doc/html/draft-ietf-tvr-use-cases-09</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC2119">[RFC2119]</dt>
         <dd>
@@ -1940,7 +2014,7 @@ Likewise, the assigning of an address property at one layer does not imply the p
 <dd class="break"></dd>
 <dt id="I-D.contreras-tvr-alto-exposure">[I-D.contreras-tvr-alto-exposure]</dt>
         <dd>
-<span class="refAuthor">Contreras, L. M.</span>, <span class="refTitle">"Using ALTO for exposing Time-Variant Routing information"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-contreras-tvr-alto-exposure-02</span>, <time datetime="2023-10-14" class="refDate">14 October 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-contreras-tvr-alto-exposure-02">https://datatracker.ietf.org/doc/html/draft-contreras-tvr-alto-exposure-02</a>&gt;</span>. </dd>
+<span class="refAuthor">Contreras, L. M.</span>, <span class="refTitle">"Using ALTO for exposing Time-Variant Routing information"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-contreras-tvr-alto-exposure-03</span>, <time datetime="2024-02-27" class="refDate">27 February 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-contreras-tvr-alto-exposure-03">https://datatracker.ietf.org/doc/html/draft-contreras-tvr-alto-exposure-03</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.hou-tvr-satellite-network-usecases">[I-D.hou-tvr-satellite-network-usecases]</dt>
         <dd>
