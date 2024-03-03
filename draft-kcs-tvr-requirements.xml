@@ -135,16 +135,21 @@
 
       <section anchor="scheduling">
         <name>Resource Scheduling</name>
-        <t>Planned resource scheduling will be required for various scenarios; these include networks with mobile nodes, such as
-           crewless aerial vehicles and orbiting satellite constellations <xref target="I-D.ietf-tvr-use-cases"/>. In these scenarios, links are lost and re-established
-           as a function of the mobility of the platforms. Furthermore, link activity might be restricted to certain times of the
-           day in networks without reliable access to power, such as networks harvesting energy from tidal, wind, and solar
-           resources. Similarly, network traffic might be planned around energy costs or expected user data volumes in networks
-           prioritising green computing and energy efficiency over data rate.</t>
-        <section>
+        <t>
+Planned resource scheduling will be required for various scenarios; these include networks with mobile nodes, such as crewless aerial vehicles and orbiting satellite constellations <xref target="I-D.ietf-tvr-use-cases"/>.
+In these scenarios, links are lost and re-established as a function of the mobility of the platforms.
+Furthermore, link activity might be restricted to certain times of the day in networks without reliable access to power, such as networks harvesting energy from tidal, wind, and solar resources.
+Similarly, network traffic might be planned around energy costs or expected user data volumes in networks prioritising green computing and energy efficiency over data rate.
+        </t>
+        <t>
+This section discusses design choices available for resource scheduling, while later discussion in <xref target="operational-considerations"/> covers implications of combining these choices in various ways within a system.
+        </t>
+        <section anchor="schedule-visibility">
           <name>Schedule Visibility</name>
           <t>
 Because scheduled time-variance is not a part of exsting routing algorithms and managed data models, not all routing applications will be made to handle schedules as part of the routing parameters intrinsically.
+          </t>
+          <t>
 Two extremes of schedules being associated to routing data are:
           </t>
           <dl>
@@ -163,21 +168,57 @@ There is also the possibility of an intermediate situation where the schedule is
 This allows a more distributed use of scheduled data than centralizing its processing in an Orchestrator.
           </t>
         </section>
-        <section>
-          <name>Schedule Locality</name>
+        <section anchor="schedule-gen-locality">
+          <name>Generation Locality</name>
           <t>
-Similar to how different entities can have, or not have, visbility into a time-varying schedule there is also the aspect of where the schedule data is handled within the network topology.
-Two extremes for locality of schedule handling are:
+The generation of a scheduled data model depends on collecting source data (which likely has some temporal information in it to begin with), choosing a time horizon to schedule within, and then processing the source data into an overall schedule.
+          </t>
+          <t>
+Two extremes for locality of schedule generation are:
           </t>
           <dl>
-            <dt>Centralized:</dt>
+            <dt>Centralized Generation:</dt>
             <dd>
-In this situation, all schedule handling is centralized within a network Orchestrator and changes are sent to routing applications in wall-clock time via a management interface.
-This corresponds with the Extrinsic schedule visibility because the managed routers do not see the schedule to indicate why parameter changes are taking place.
+              <t>
+In this situation, all schedule generation is centralized within a network Orchestrator and changes are sent to routing applications in wall-clock time via a management interface.
+Even though the generation of the schedule is centralized, both the schedule visibility (within the data model) and the locality of how the schedule is executed are unconstrained.
+              </t>
+              <t>
+For example, a schedule could be generated in a central orchestrator synchronized to all managed devices which then execute the schedule in a distributed manner.
+              </t>
             </dd>
-            <dt>Distributed:</dt>
+            <dt>Distributed Generation:</dt>
             <dd>
 This situation corresponds with the Intrinsic or intermediate schedule visibility, where a schedule (with a potentially limited time horizon from what is known at the orchestrator) is part of the managed data which is distributed to managed devices to be handled either by the Agent or by the routing Application itself.
+            </dd>
+          </dl>
+        </section>
+        <section anchor="schedule-exec-locality">
+          <name>Execution Locality</name>
+          <t>
+Depending on the visibility of schedules within a data model (see <xref target="schedule-visibility"/>) there are different options for where the schedule may be executed to ultimately affect a time-varying configuration on a managed device.
+          </t>
+          <t>
+Two extremes for locality of schedule execution are:
+          </t>
+          <dl>
+            <dt>Centralized Execution:</dt>
+            <dd>
+              <t>
+In this situation, all schedule execution is centralized within a network Orchestrator and changes are sent to routing applications in wall-clock time via a management interface.
+This situation can apply to any type of schedule visibility, but only to centralized generation because the full scheduled data model needs to be available to the entity performing the execution.
+              </t>
+            </dd>
+            <dt>Distributed Execution:</dt>
+            <dd>
+              <t>
+In this situation, schedules are executed on each managed device independently but based on synchronized clocks.
+This situation corresponds with the Intrinsic or intermediate schedule visibility, where a schedule (with a potentially limited time horizon from what is known at the Orchestrator) is part of the managed data which is distributed to managed devices to be handled either by the Agent or by the routing Application itself.
+              </t>
+              <t>
+When schedules are distributed to the managed devices, it necessarily increases the amount of data that the managing device needs to synchronize across the network.
+The ratio of increased size can be mitigated by only distributing a limited time horizon to each device within a sliding window that moves forward in non-real-time.
+              </t>
             </dd>
           </dl>
         </section>
@@ -225,7 +266,7 @@ In other cases the model may allow indefinitely-large schedules but the processi
           <name>Time Precision</name>
           <t>
 Different time-variant models will require different granularities of planning time, either because of limitations or assumptions about wall-clock time or because of requirements within the modeled domain.
-It is up to specific models to define the precision of time values and the required accuracy and precison of wall-clocks which implement the schedules.
+It is up to specific models to define the precision of time values and the required accuracy and precison of wall-clocks which execute the schedules.
           </t>
         </section>
         <section>
@@ -296,7 +337,7 @@ Regardless of the types of interpolation used, a model can choose to apply inter
 Since different properties represent different physical or logical metrics of a network it is expected that different types of interpolation will be needed for different represented quantities.
           </t>
         </section>
-        <section>
+        <section anchor="sec-time-model-state-change">
           <name>Changes to Model State</name>
           <t>
 Separate from how a time-variant model can contain a schedule timeline within the model state, a model design will need to consider how changes to the model state itself (over wall-clock time) are handled.
@@ -432,6 +473,34 @@ Likewise, the assigning of an address property at one layer does not imply the p
      <section anchor="operational-considerations">
       <name>Operational Considerations</name>
       <t>TBD</t>
+      <section>
+        <name>Risks of Different Schedule Choices</name>
+        <t>
+This section discusses risks and mitigations of those risks based on different choices or combinations of choices from <xref target="scheduling"/>.
+        </t>
+          <t>
+When schedules are both generated and executed centrally, there is a consistency risk between different managed devices because if one device fails to be reconfigured in wall-clock time its configuration will no longer align with the other devices which are supposed to all operate on the same schedule.
+To recover from this kind of situation, either reattempts to configure the misaligned device can be made to bring it back into alignment with the other devices or the other devices' configurations must be rolled-back into consistency which will then cause all the devices to be off-schedule.
+          </t>
+          <t>
+When schedules are generated on each managed device, there is a risk that the source data used to generate each schedule is either out-of-date or inconsistent for some other reason.
+There is not much that can be done to mitigate this risk directly but an Orchestrator having visibility into a roll-up summary of the managed device could allow the Orchestrator to work around a de-synchronized device.
+          </t>
+          <t>
+When schedules are executed on each managed device, there is a risk that clocks on different devices become desynchronized beyond the time precision required of the schedule.
+Because real-time clocks are necessary for more than just schedule execution, and because accurate and precise time sources exist outside of network time (<em>e.g.</em>, GPS time) this risk can be made to have a low probability.
+          </t>
+          <t>
+When centralized generation is combined with distributed execution there is a risk that a manager loses connectivity with the managed device and the device eventually runs out of time horizon in the schedule.
+This risk can be mitigated by trading between the size and the horizon end-time of schedules distributed to managed devices. This trade can be different for different devices, where some well-connected devices operate closer to just-in-time with short horizons while other devices can be given a longer horizon to allow it to execute in the absense of near-continuous manager connectivity.
+          </t>
+          <t>
+Centralized generation and distributed execution also adds a risk that even though the managed device has a long enough time horizon the schedule state becomes out-of-date from the latest state generated on the Orchestrator.
+This illustrates the difference between having sufficient horizon with a schedule timeline but the actual model state becomes stale in wall-clock time.
+One way to mitigate this risk is for a design to allow fine-grained changes of state (as described in <xref target="sec-time-model-state-change"/>) to be communicated to a managed device over a shorter wall-clock time than communicating the full state each time an update is needed.
+This mitigation would help when communication is rate limited or usually available, but not when there are long periods of unavailability.
+          </t>
+      </section>
     </section>
 
      <section anchor="security-considerations">
