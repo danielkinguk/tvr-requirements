@@ -448,7 +448,7 @@ Likewise, the assigning of an address property at one layer does not imply the p
          <name>Centralized</name>
          <t>The network entities will receive the time variable information and traffic forwarding rules directly from a logically centralized source, an Orchestrator or network controller. The time-variable data may then be
 	    processed locally by the entity entered into the scheduled routing table and specific forwarding rules applied.</t>
-	      <t>Furthermore, a centralized approach could also be used to extend existing tunnel and path delivery mechanisms and protocols to distribute traffic forwarding rules along with time-variable information. However, in certain environments, a logically centralized source may lose connectivity with network entities (as described in Section 3.1.3), preventing timely delivery of traffic forwarding rules. To mitigate this risk, the time horizon for time-variable information should be extended accordingly.</t>
+	      <t>Furthermore, a centralized approach could also be used to extend existing tunnel and path delivery mechanisms and protocols to distribute traffic forwarding rules along with time-variable information. However, in certain environments, a logically centralized source may lose connectivity with network entities (as described in <xref target="schedule-exec-locality"/>), preventing timely delivery of traffic forwarding rules. To mitigate this risk, the time horizon for time-variable information should be extended accordingly.</t>
          </section>
          <section anchor="Distributed">
          <name>Distributed</name>
@@ -456,7 +456,7 @@ Likewise, the assigning of an address property at one layer does not imply the p
             extensions to existing routing schemes and techniques so that link, adjacency, cost, and schedule may be considered when making forwarding decisions for per-hop packets or calculating traffic
             engineered end-to-end paths. It should be noted that schedule distribution and entity computation latency may exist in some network environments.</t>
 
-         <t>In some environments, scheduling information may distributed through a management plane mechanism, such as NETCONF or gNMI (gRPC Network Management Interface ) , instead of the routing scheme.</t>
+         <t>In some environments, scheduling information may distributed through a management plane mechanism, such as NETCONF <xref target="RFC6241"/> or gNMI (gRPC Network Management Interface) <xref target="gNMI"/>, instead of the routing scheme.</t>
          </section>
          <section anchor="Hybrid">
          <name>Hybrid</name>
@@ -504,7 +504,7 @@ Likewise, the assigning of an address property at one layer does not imply the p
             consistency checks against expected network state, and mechanisms to detect and reject anomalous scheduling data. Additionally, fallback strategies
             should be considered to allow continued operation in cases where unexpected or inconsistent information is detected.</t>
 
-         <t>Specific security considerations are discussed in the Section 6. later in this document.</t>
+         <t>Specific security considerations are discussed in the <xref target="security-considerations"/>. later in this document.</t>
       </section>
     </section>
 
@@ -612,7 +612,7 @@ Likewise, the assigning of an address property at one layer does not imply the p
 
         <t>By integrating these security requirements into TVR implementations, networks can mitigate risks associated with malicious actors, misconfigurations,
            or unintended disruptions, ensuring the robustness of time-sensitive routing decisions. Specific security scenarios and negation and mitigation methods
-           are discussed in Section 6.</t>
+           are discussed in <xref target="security-considerations"/>.</t>
       </section>
     </section>
 
@@ -757,6 +757,7 @@ Likewise, the assigning of an address property at one layer does not imply the p
       <references title="Informative References">
         <?rfc include="reference.RFC.3339.xml"?>
         <?rfc include="reference.RFC.4655.xml"?>
+        <?rfc include="reference.RFC.6241.xml"?>
         <?rfc include="reference.RFC.8345.xml"?>
         <?rfc include="reference.RFC.8346.xml"?>
         <?rfc include="reference.RFC.8944.xml"?>
@@ -769,7 +770,30 @@ Likewise, the assigning of an address property at one layer does not imply the p
             <date year="2010" month="September" day="15"/>
           </front>
         </reference>
-    </references>
+	<reference anchor="gNMI" target="https://www.openconfig.net/docs/gnmi/gnmi-specification/">
+	  <front>
+	    <title>gRPC Network Management Interface (gNMI)</title>
+	    <author initials="P." surname="Borman" fullname="Paul Borman">
+	    </author>
+	    <author initials="M." surname="Hines" fullname="Marcus Hines">
+	    </author>
+	    <author initials="C." surname="Lebsack" fullname="Carl Lebsack">
+	    </author>
+	    <author initials="C." surname="Morrow" fullname="Chris Morrow">
+	    </author>
+	    <author initials="A." surname="Shaikh" fullname="Anees Shaikh">
+	    </author>
+	    <author initials="R." surname="Shakir" fullname="Rob Shakir">
+	    </author>
+	    <author initials="W." surname="Li" fullname="Wen Bo Li,">
+	    </author>
+	    <author initials="D." surname="Loher" fullname="Darren Loher">
+	    </author>
+	    <date month="May" year="2023"/>
+	  </front>
+	  <refcontent>Version 10.0</refcontent>
+	</reference>
+      </references>
     </references>
  </back>
 </rfc>
