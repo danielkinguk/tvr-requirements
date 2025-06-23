@@ -5,12 +5,12 @@
 Network Working Group                                            D. King
 Internet-Draft                                      Lancaster University
 Intended status: Informational                           L. M. Contreras
-Expires: 4 September 2025                                     Telefonica
+Expires: 25 December 2025                                     Telefonica
                                                                 B. Sipos
                                                                  JHU/APL
                                                                 L. Zhang
                                                                   Huawei
-                                                            3 March 2025
+                                                            23 June 2025
 
 
                 TVR (Time-Variant Routing) Requirements
@@ -59,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 4 September 2025.
+   This Internet-Draft will expire on 25 December 2025.
 
 Copyright Notice
 
