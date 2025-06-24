@@ -70,7 +70,7 @@
     <section anchor="introduction">
       <name>Introduction</name>
       <t>
-This document is an informational specification meant to inform the design and implentation of systems which manage time-variant routing (TVR) information, and to allow characterizing those systems with aspects which are understandable to network operators.
+This document is an informational specification meant to inform the design and implementation of systems which manage time-variant routing (TVR) information, and to allow characterizing those systems with aspects which are understandable to network operators.
 The terms discussed in this document are intentionally general and are intended to be tailored for specifics of those individual TVR systems.
       </t>
       <t>
@@ -104,7 +104,7 @@ Requirements on the design of TVR systems are then categorized and summarized in
           <dt>Subsequent:</dt>
           <dd>A time instant which is later in a timeline than some reference time instant. </dd>
           <dt>Snapshot:</dt>
-          <dd>A way to transform a model with scheduled time-variance into one that is time-invariant and applies only to a single time instant. That instant need not be the current wall-clock time. The term snapshot can be used as a verb, to mean the transofrmation itself, or as a noun, to mean the output of the transformation.</dd>
+          <dd>A way to transform a model with scheduled time-variance into one that is time-invariant and applies only to a single time instant. That instant need not be the current wall-clock time. The term snapshot can be used as a verb, to mean the transformation itself, or as a noun, to mean the output of the transformation.</dd>
           <dt>Orchestrator:</dt>
           <dd>The subsystem of a managing device which centralizes control of a network and applies policy to manage a network. A Path Computation Element (PCE) <xref target="RFC4655"/> is an example of an Orchestrator.</dd>
           <dt>Manager:</dt>
@@ -342,7 +342,7 @@ A model which restricts itself to a single interval of validity could run into d
           <name>Periodicity in a Schedule</name>
           <t>
 Separate from the concept of intervals of validity in absolute schedule time, there can be a need to model repetitive states in a concise way.
-One way to model a periodic change of state is to combine a set of absolute time intervals with a periodic parameterization (duration valid and duration invalid); this is the mdoel of <xref target="AIXM"/>.
+One way to model a periodic change of state is to combine a set of absolute time intervals with a periodic parameterization (duration valid and duration invalid); this is the model of <xref target="AIXM"/>.
           </t>
           <t>
 A model which does not include the notion of periodicity within a schedule could be used in situations where discrete intervals of validity are needed to handle periodic state changes which is neither storage nor processing efficient.
@@ -519,7 +519,7 @@ Likewise, the assigning of an address property at one layer does not imply the p
 
             <li>Weather Conditions: Weather can impact network performance, especially for wireless and satellite communications. Adverse
       weather conditions such as heavy rain, snow, or extreme temperatures can degrade signal quality. Incorporating predicted and real-time weather
-      data into network management strategies can help in adjusting transmission power, rerouting traffic, or pre-emptively switching to
+      data into network management strategies can help in adjusting transmission power, rerouting traffic, or preemptively switching to
       more resilient pathways.</li>
 
             <li>Network Maintenance and Upgrades: Scheduled maintenance or unexpected faults can introduce temporary constraints. By planning
@@ -740,7 +740,7 @@ Likewise, the assigning of an address property at one layer does not imply the p
 
     <section numbered="false" anchor="acknowledgments">
       <name>Acknowledgments</name>
-      <t>This work has benefited from the particpation of the TVR working group and the discussions on the mailing list.</t>
+      <t>This work has benefited from the participation of the TVR working group and the discussions on the mailing list.</t>
 
       <t>The authors would like to specifically thank Tony Li, Mark Blanchet, Alexander Petrescu, Ed Birrane,
     Jie Dong, Abdussalam Baryun and Joel Halpern</t>
