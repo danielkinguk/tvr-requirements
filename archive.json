@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2023-11-07T00:36:49.277814+00:00",
+  "timestamp": "2025-06-26T02:05:04.536173+00:00",
   "repo": "danielkinguk/tvr-requirements",
   "labels": [
     {
@@ -290,7 +290,7 @@
       "id": "I_kwDOJmJVRM51W5ZP",
       "title": "Create slides for IETF 118",
       "url": "https://github.com/danielkinguk/tvr-requirements/issues/21",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "danielkinguk",
       "authorAssociation": "OWNER",
       "assignees": [
@@ -299,8 +299,8 @@
       "labels": [],
       "body": "WIll create deck ASAP. ",
       "createdAt": "2023-10-30T18:00:51Z",
-      "updatedAt": "2023-10-30T18:00:52Z",
-      "closedAt": null,
+      "updatedAt": "2024-03-03T19:02:56Z",
+      "closedAt": "2024-03-03T19:02:56Z",
       "comments": []
     },
     {
@@ -308,7 +308,7 @@
       "id": "I_kwDOJmJVRM51W5rf",
       "title": "Address comments from Tony Li",
       "url": "https://github.com/danielkinguk/tvr-requirements/issues/22",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "danielkinguk",
       "authorAssociation": "OWNER",
       "assignees": [
@@ -317,8 +317,8 @@
       "labels": [],
       "body": "Received via TVR list: \r\n\r\n[WG chair hat: OFF]\r\nHi Authors,\r\nThank you for your work on the requirements document. I have a few comments.\r\n\r\nSubstantive comments:\r\n\r\n1) Given that this is an informational document and that you\u2019ve invoked RFC 2119/8174, I\u2019m a bit confused by your use of normative verbs. I think that you\u2019re trying to express requirements for the solutions. We normally use the normative verbs to express requirements on the solutions, in documents that are on the standards track.\r\n\r\nI would suggest that you consider dropping the normative verbs and explicitly list requirements on a solution.\r\n\r\n2) Section 3.4.2. Even if path computation is distributed, that does NOT imply that scheduling must be (or should be) distributed by the routing protocol. It could instead be distributed through a management plane mechanism, such as NETCONF or gnmi.\r\n\r\n3) Section 4.1. Will other per-use-case requirements be forthcoming? If not, perhaps this could be generalized.  Requirement 3 seems unclear. Perhaps more text that would explain the context a bit more might be helpful.\r\n\r\n4) Section 8.1. You write: \"In Time-Variant Routing, scheduling of the system are as expected.\u201d  Could you please expound a bit?  That sentence seems very vague.\r\n\r\n5) Section 8.2. Please consider using the term \u2018proxy\u2019.\r\n\r\n6) Section 8.3.  You write: \"If the system cannot timely identify and classify in a processing\r\nmanner after the entity properties change, \u2026\u201d. Please clarify, I\u2019m not able to parse this. You\u2019ve described a requirement here that is \"discovery and resolving methodology for the identification and classification of entity properties\u201d. I don\u2019t understand this. Aren\u2019t the properties part of the schedule?\r\n\r\n7) Section 8.4. You write: \u201c\u2026 requiring of to be reconfigured \u2026\u201d.  I can\u2019t parse this, please reword.  Aren\u2019t time interval changes a subset of schedule changes?\r\n\r\n8) Section 8.5.  Accuracy is not an absolute value. In the real world, everything is necessarily inaccurate at some level. Normally this is described as a tolerance. What are you really asking for?\r\n\r\n Editorial comments:\r\n\r\n1) Section 3.4. You use the word \u2018livelyness\u2019.  I think you want \u2018liveness\u2019. s/computating/computing/\r\n\r\n2) Section 3.4.1. s/a Orchestrator/an Orchestrator/. s/entuty/entity. Note that the usual term for this case is a Path Computation Element (PCE).\r\n\r\n3) Section 6. By convention, the security considerations section is at the end of the document, typically right in front of IANA considerations.\r\n\r\n4) Section 8.1. s/A entity/An entity/. s/If/if/ s/a advertisement/an advertisement/\r\n\r\nRegards,\r\nTony",
       "createdAt": "2023-10-30T18:01:36Z",
-      "updatedAt": "2023-10-30T18:02:16Z",
-      "closedAt": null,
+      "updatedAt": "2024-03-03T19:20:05Z",
+      "closedAt": "2024-03-03T19:20:05Z",
       "comments": [
         {
           "author": "danielkinguk",
@@ -334,7 +334,7 @@
       "id": "I_kwDOJmJVRM518PVa",
       "title": "IETF 118 Slides for TVR WG",
       "url": "https://github.com/danielkinguk/tvr-requirements/issues/23",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "danielkinguk",
       "authorAssociation": "OWNER",
       "assignees": [
@@ -345,8 +345,380 @@
       "labels": [],
       "body": "Please review and comment. I plan to submit Wednesday, 8 November - 17:00 (local Czech time). \r\n[Uploading slides-118-draft-ietf-tvr-requirements-01.pptx\u2026]()\r\n\r\n",
       "createdAt": "2023-11-06T09:50:18Z",
-      "updatedAt": "2023-11-06T09:58:24Z",
-      "closedAt": null,
+      "updatedAt": "2024-02-06T14:50:09Z",
+      "closedAt": "2024-02-06T14:50:09Z",
+      "comments": []
+    },
+    {
+      "number": 24,
+      "id": "I_kwDOJmJVRM5-acOc",
+      "title": "Need to add Operational and Security Considerations",
+      "url": "https://github.com/danielkinguk/tvr-requirements/issues/24",
+      "state": "CLOSED",
+      "author": "danielkinguk",
+      "authorAssociation": "OWNER",
+      "assignees": [
+        "danielkinguk"
+      ],
+      "labels": [],
+      "body": "Additional requirements if/as needed. ",
+      "createdAt": "2024-02-06T14:02:10Z",
+      "updatedAt": "2024-07-24T17:30:12Z",
+      "closedAt": "2024-07-24T17:30:12Z",
+      "comments": [
+        {
+          "author": "danielkinguk",
+          "authorAssociation": "OWNER",
+          "body": "Additional Requirements:\r\n\r\n- Manage TVR schedule peers. Do we implicitly trust neighbors for schedule updates, trust but verify?\r\n- How to synchronise clocks, at least we need a Requirement that the (implementation) time is consistent throughout the network.\r\n- Consider that the \"clock\" and mechanism(s) to provide the time to a TVR node, used to calculate the schedule could also be an attack vector and needs to highlighted as a Security risk. ",
+          "createdAt": "2024-02-06T14:17:14Z",
+          "updatedAt": "2024-02-06T14:17:14Z"
+        },
+        {
+          "author": "danielkinguk",
+          "authorAssociation": "OWNER",
+          "body": "Question/comment from IETF 118: \r\n\r\nAB: mentioned not specify sync mechanism. we depend on time sync\r\nespecially on distributed\r\nyes we need ensure a devices clock is accurate to apply schedule. actual\r\nmechanism (NTP) is not something we didnt need to specify, maybe should\r\nlist examples?\r\nAB: nice if we mention to specify mechanism for protocol\r\ncTL(chat): require nodes be time synced and mechanism out of scope",
+          "createdAt": "2024-02-06T14:46:03Z",
+          "updatedAt": "2024-02-06T14:46:03Z"
+        },
+        {
+          "author": "danielkinguk",
+          "authorAssociation": "OWNER",
+          "body": "Question from IETF 118: \r\n\r\nLZ: In the intrinsic mode, is there a need for the managed device to\r\nadvertise schedules to the managing devices? Can device get schedule\r\nfrom neighbor or need management node?",
+          "createdAt": "2024-02-06T14:53:12Z",
+          "updatedAt": "2024-02-06T14:53:12Z"
+        },
+        {
+          "author": "danielkinguk",
+          "authorAssociation": "OWNER",
+          "body": "New text added to Security section. \r\n\r\n>>\r\nThe security implications for networks using time-variant routing mechanisms must also be considered. Several potential security implications will need careful investigation, these include:\r\n\r\nDenial-of-Service (DoS) attacks: Malicious actors could manipulate or disrupt the time information shared within the network, leading to issues with routing protocols and potentially causing DoS attacks. This could impact the network's ability to function properly and deliver services to entities.\r\n\r\nTraffic analysis and route prediction: Predicting network activity: By analyzing the shared time information, attackers could potentially predict network activity patterns and routing decisions. This information could be used to launch targeted attacks or plan disruptions.\r\n\r\nIdentifying user activity: In some scenarios, precise time information might be linked to specific user or device activity or network usage patterns. This could raise privacy concerns if not properly anonymized or protected.\r\n\r\nSpoofing and manipulation: Fake or manipulated time information could be injected into the network, leading to incorrect routing decisions and disruptions. This could be used to redirect traffic, launch man-in-the-middle attacks, or gain unauthorized access to resources.\r\n<<",
+          "createdAt": "2024-03-03T20:09:28Z",
+          "updatedAt": "2024-03-03T20:09:28Z"
+        }
+      ]
+    },
+    {
+      "number": 25,
+      "id": "I_kwDOJmJVRM5-ahrK",
+      "title": "Constraints requirements (Section 3.4.4) needs work ",
+      "url": "https://github.com/danielkinguk/tvr-requirements/issues/25",
+      "state": "CLOSED",
+      "author": "danielkinguk",
+      "authorAssociation": "OWNER",
+      "assignees": [
+        "danielkinguk"
+      ],
+      "labels": [],
+      "body": "Need to consider impact on network when using schedule(s) and how it might be managed in a distributed and centralised. This also relates to Section 3.2.9., how often to disseminate and time to compute, what are the Security implications, et al. ",
+      "createdAt": "2024-02-06T14:12:30Z",
+      "updatedAt": "2024-03-03T20:10:27Z",
+      "closedAt": "2024-03-03T20:10:27Z",
+      "comments": [
+        {
+          "author": "danielkinguk",
+          "authorAssociation": "OWNER",
+          "body": "New security text added. Discussion merged with #24. ",
+          "createdAt": "2024-03-03T20:10:27Z",
+          "updatedAt": "2024-03-03T20:10:27Z"
+        }
+      ]
+    },
+    {
+      "number": 26,
+      "id": "I_kwDOJmJVRM5-aqkL",
+      "title": "Multi-Domain Considerations",
+      "url": "https://github.com/danielkinguk/tvr-requirements/issues/26",
+      "state": "CLOSED",
+      "author": "danielkinguk",
+      "authorAssociation": "OWNER",
+      "assignees": [
+        "luismcontreras"
+      ],
+      "labels": [],
+      "body": "Need to add assumptions section, and then highlight which requirements might be affected by a multi-domain network. Therefore, consideration of domain boundaries and what information is exchanged, how, when, and what, will need to be discussed.  ",
+      "createdAt": "2024-02-06T14:26:53Z",
+      "updatedAt": "2024-07-24T17:30:55Z",
+      "closedAt": "2024-07-24T17:30:55Z",
+      "comments": [
+        {
+          "author": "danielkinguk",
+          "authorAssociation": "OWNER",
+          "body": "Please also check Minutes from IETF 118, specifically: \r\n\r\nZL: routing based on address, do you think addressing a challenge\r\nespecially if mobile node?\r\npaticular scenario for some use cases but not directly in document. part\r\nof control plane discussion. maybe have a discussion?\r\nZL: new problems due to network?\r\nmaybe a little early to determine gaps in tooling, new dimension being\r\nadded here. can see new threat vectors - ex: modify physical clock",
+          "createdAt": "2024-02-06T14:42:22Z",
+          "updatedAt": "2024-02-06T14:42:22Z"
+        },
+        {
+          "author": "danielkinguk",
+          "authorAssociation": "OWNER",
+          "body": "Another topic to be added to \"Scope\". Why there is mobility and time changes, should not be considered in scope. From a TVR perspective it is out of scope.",
+          "createdAt": "2024-02-06T14:45:04Z",
+          "updatedAt": "2024-02-06T14:45:04Z"
+        },
+        {
+          "author": "luismcontreras",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I have prepared the following text for covering this issue:\r\n\r\n8< --\r\n# Assumptions\r\n\r\nThe requirements described in this document have been identified as applicable for Time-Variant Routing scenarios under the following assumptions.\r\n\r\n* The TVR information is generated and distributed within a single domain, where both the routing and the scheduling information is under control of the same administrative entity. In consequence, multi-domain scenarios are out of scope.    \r\n\r\n* The TVR changes are not due to random mobility events of end-users or nodes. While TVR considers scenarios where topological changes occur motivated by a mobility pattern (as in the case of non-terrestrial networks, where the mobiity pattern can be predicted anf follows a clear pattern), generic random mobility events are not considerd as part of the scope of this document. \r\n\r\n* The potential implications of topological changes on the addressing of nodes is considered out of scope for the requirements analysis. \r\n\r\n8< -- \r\n\r\nPlease, note the following:\r\n- The TVR charter states: \"For example, in networks with mobile nodes, such as aerial vehicles and some orbiting spacecraft constellations, links can be lost and re-established, or neighbors may change as a function of their mobility. \" So probably we need to reconsider the mobility part, taking it as part of the scope as well. As you can see I refer to \"random\" mobility events instead of predictable patterns, but not sure if that can overcome the charter text.\r\n- Should I add the text on the XML file? Maybe we could ocnsider to migrate to markdown. Anyway, the xml file seems to be old. What is the exact file for creating the pull request?",
+          "createdAt": "2024-02-13T17:05:22Z",
+          "updatedAt": "2024-02-13T17:05:22Z"
+        }
+      ]
+    },
+    {
+      "number": 27,
+      "id": "I_kwDOJmJVRM5-atbR",
+      "title": "Use of Conformance Language  ",
+      "url": "https://github.com/danielkinguk/tvr-requirements/issues/27",
+      "state": "CLOSED",
+      "author": "danielkinguk",
+      "authorAssociation": "OWNER",
+      "assignees": [
+        "danielkinguk"
+      ],
+      "labels": [],
+      "body": "Simply changing 2119/8174 uppercase to lowercase. ",
+      "createdAt": "2024-02-06T14:31:35Z",
+      "updatedAt": "2024-03-03T20:10:46Z",
+      "closedAt": "2024-03-03T20:10:46Z",
+      "comments": [
+        {
+          "author": "danielkinguk",
+          "authorAssociation": "OWNER",
+          "body": "Fixed in latest version.",
+          "createdAt": "2024-03-03T20:10:46Z",
+          "updatedAt": "2024-03-03T20:10:46Z"
+        }
+      ]
+    },
+    {
+      "number": 28,
+      "id": "I_kwDOJmJVRM5-ax96",
+      "title": "Need to synch Terminology ",
+      "url": "https://github.com/danielkinguk/tvr-requirements/issues/28",
+      "state": "CLOSED",
+      "author": "danielkinguk",
+      "authorAssociation": "OWNER",
+      "assignees": [
+        "danielkinguk"
+      ],
+      "labels": [],
+      "body": "This specifically relates to Orchestrator and Controller, and maybe other functional components that have an existing IETF definition. Such as Service Models Explained - https://datatracker.ietf.org/doc/html/rfc8309",
+      "createdAt": "2024-02-06T14:38:21Z",
+      "updatedAt": "2024-03-03T20:14:02Z",
+      "closedAt": "2024-03-03T20:14:02Z",
+      "comments": [
+        {
+          "author": "danielkinguk",
+          "authorAssociation": "OWNER",
+          "body": "Fixed.",
+          "createdAt": "2024-03-03T20:14:02Z",
+          "updatedAt": "2024-03-03T20:14:02Z"
+        }
+      ]
+    },
+    {
+      "number": 29,
+      "id": "I_kwDOJmJVRM5-azAQ",
+      "title": "Check Tony Li Satcom Routing Architecture for possible requirements ",
+      "url": "https://github.com/danielkinguk/tvr-requirements/issues/29",
+      "state": "CLOSED",
+      "author": "danielkinguk",
+      "authorAssociation": "OWNER",
+      "assignees": [
+        "danielkinguk"
+      ],
+      "labels": [],
+      "body": "See https://datatracker.ietf.org/doc/html/draft-li-arch-sat-04 and check for TVR requirements. ",
+      "createdAt": "2024-02-06T14:40:27Z",
+      "updatedAt": "2024-07-24T17:31:00Z",
+      "closedAt": "2024-07-24T17:31:00Z",
+      "comments": []
+    },
+    {
+      "number": 30,
+      "id": "I_kwDOJmJVRM5-a315",
+      "title": "Maintaining Schedule Consistency in different deployment scenarios",
+      "url": "https://github.com/danielkinguk/tvr-requirements/issues/30",
+      "state": "CLOSED",
+      "author": "danielkinguk",
+      "authorAssociation": "OWNER",
+      "assignees": [
+        "BrianSipos"
+      ],
+      "labels": [],
+      "body": "See comments from IETF 118:\r\n\r\nAA: need to backoff on schedule\r\ncomes back to NETCONF (?). very welcome to propose text.\r\nAA: resolution of schedule, variability\r\n\r\nText for for Section 3.4, 3.1 and 3.1.2. ",
+      "createdAt": "2024-02-06T14:49:18Z",
+      "updatedAt": "2024-03-03T18:26:27Z",
+      "closedAt": "2024-03-03T18:26:27Z",
+      "comments": []
+    },
+    {
+      "number": 31,
+      "id": "I_kwDOJmJVRM5-a5Zs",
+      "title": "Changes to Topology and Node",
+      "url": "https://github.com/danielkinguk/tvr-requirements/issues/31",
+      "state": "CLOSED",
+      "author": "danielkinguk",
+      "authorAssociation": "OWNER",
+      "assignees": [
+        "luismcontreras"
+      ],
+      "labels": [],
+      "body": "Comment from IETF 118:\r\n\r\nJW: change of entity properties may need topology change, can discuss in\r\nfuture.\r\ngreat way to attack the network\r\n\r\n",
+      "createdAt": "2024-02-06T14:52:16Z",
+      "updatedAt": "2024-03-03T20:17:02Z",
+      "closedAt": "2024-03-03T20:17:02Z",
+      "comments": [
+        {
+          "author": "luismcontreras",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Note that teh charter states: \"Time-based changes may include changes to links, adjacencies, cost, and - in some cases - traffic volumes.\" \r\n\r\nCurren text in section 3.3.3 states the following: \"Schedules on a link SHALL be used\r\n   to indicate the validity of the entire link or changing properties of\r\n   that entity.\"\r\n\r\nThus I think we already cover this as requirement. I propose to close this issue.\r\n",
+          "createdAt": "2024-02-13T17:23:23Z",
+          "updatedAt": "2024-02-13T17:23:23Z"
+        },
+        {
+          "author": "danielkinguk",
+          "authorAssociation": "OWNER",
+          "body": "Agree. Also removed conformance language in latest version.",
+          "createdAt": "2024-03-03T20:17:02Z",
+          "updatedAt": "2024-03-03T20:17:02Z"
+        }
+      ]
+    },
+    {
+      "number": 32,
+      "id": "I_kwDOJmJVRM5-a8aV",
+      "title": "Freshness of the Schedule ",
+      "url": "https://github.com/danielkinguk/tvr-requirements/issues/32",
+      "state": "CLOSED",
+      "author": "danielkinguk",
+      "authorAssociation": "OWNER",
+      "assignees": [
+        "BrianSipos",
+        "danielkinguk"
+      ],
+      "labels": [],
+      "body": "How to manage the freshness of a received schedule, how to manage multiple schedules from different sources and possible time variance, any precedence requirements, et al.?  ",
+      "createdAt": "2024-02-06T14:57:44Z",
+      "updatedAt": "2024-03-03T18:26:27Z",
+      "closedAt": "2024-03-03T18:26:27Z",
+      "comments": [
+        {
+          "author": "danielkinguk",
+          "authorAssociation": "OWNER",
+          "body": "It will be important for devices to have the ability to operate autonomously, yet their autonomy should be appropriately limited to prevent excessive freewheeling. Equally, the capability to differentiate between real-time adjustments, which may necessitate immediate alterations to the schedule, and modifications made by a centralized authority as part of a strategic planning process. Furthermore, the effectiveness of these scheduling updates, whether comprehensive or incremental, is significantly influenced by the reliability of communication to network nodes. Factors such as weather conditions can impact connectivity, thereby affecting the communication between the nodes and the central scheduling entity. ",
+          "createdAt": "2024-02-20T14:45:46Z",
+          "updatedAt": "2024-02-20T14:45:46Z"
+        },
+        {
+          "author": "danielkinguk",
+          "authorAssociation": "OWNER",
+          "body": "How to manage the freshness of a received schedule. \r\nHow to manage multiple schedules from different sources and possible time variance?\r\nAny precedence requirements, et al.?\r\nShould perceived level of \"Trust\" be factor, based on the originating source of schedule?",
+          "createdAt": "2024-02-20T14:53:54Z",
+          "updatedAt": "2024-02-20T14:53:54Z"
+        }
+      ]
+    },
+    {
+      "number": 33,
+      "id": "I_kwDOJmJVRM5-a9Xp",
+      "title": "Check TVR mailing list/sessions for questions/requirements that have not been addressed or comment on",
+      "url": "https://github.com/danielkinguk/tvr-requirements/issues/33",
+      "state": "CLOSED",
+      "author": "danielkinguk",
+      "authorAssociation": "OWNER",
+      "assignees": [
+        "danielkinguk"
+      ],
+      "labels": [],
+      "body": "Will check TVR mailing list and previous minutes to ensure we captured comments/requirements. ",
+      "createdAt": "2024-02-06T14:59:18Z",
+      "updatedAt": "2024-07-24T17:31:07Z",
+      "closedAt": "2024-07-24T17:31:07Z",
+      "comments": []
+    },
+    {
+      "number": 34,
+      "id": "I_kwDOJmJVRM5_IEEb",
+      "title": "Changes on LAG should be considered as part of TVR scope?",
+      "url": "https://github.com/danielkinguk/tvr-requirements/issues/34",
+      "state": "CLOSED",
+      "author": "luismcontreras",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "BrianSipos",
+        "danielkinguk"
+      ],
+      "labels": [],
+      "body": "When thinking on the issue open for the properties of the links, this point about link-aggregation came to my mind.\r\n\r\nShould any predictable change on link aggregation be considered as case for TVR? Probably not very frequent case, or in other words, a corner case. But just for figuring out an answer to some potential quesiton in the future.",
+      "createdAt": "2024-02-13T17:26:11Z",
+      "updatedAt": "2024-07-24T17:31:11Z",
+      "closedAt": "2024-07-24T17:31:11Z",
+      "comments": [
+        {
+          "author": "BrianSipos",
+          "authorAssociation": "COLLABORATOR",
+          "body": "If existing aggregation is modeled by a type of termination point which has an 'enabled' state, then this can be captured as a schedule applied to that entity which is coordinated to the state of the other constituent termination points being aggregated.",
+          "createdAt": "2024-02-19T16:31:13Z",
+          "updatedAt": "2024-02-19T16:31:13Z"
+        }
+      ]
+    },
+    {
+      "number": 36,
+      "id": "I_kwDOJmJVRM5_02dZ",
+      "title": "Defining \"Source Data\"",
+      "url": "https://github.com/danielkinguk/tvr-requirements/issues/36",
+      "state": "CLOSED",
+      "author": "danielkinguk",
+      "authorAssociation": "OWNER",
+      "assignees": [
+        "BrianSipos",
+        "danielkinguk"
+      ],
+      "labels": [],
+      "body": "For a TVR schedule generation system, \"source data\" refers to the raw, original data inputs that are used to create, populate, and inform the TVR scheduling process. This data serves as the foundational information from which the system generates schedules for network resource scheduling. The nature and structure of source data may vary depending on the specific application of the scheduling system, but it typically includes the following elements:\r\n\r\n- Resource Availability: Information about the availability of the resources to be scheduled. \r\n- Resource Constraints: Constraints related to schedule resources.\r\n- Resource Details: Required resources, dependencies, and any specific requirements.\r\n- Time Constraints: Restrictions related to time.",
+      "createdAt": "2024-02-20T14:51:07Z",
+      "updatedAt": "2024-07-24T17:31:20Z",
+      "closedAt": "2024-07-24T17:31:20Z",
+      "comments": []
+    },
+    {
+      "number": 37,
+      "id": "I_kwDOJmJVRM5_1CjU",
+      "title": "Managing Multiple Schedules from Different Sources with Possible Time Variance",
+      "url": "https://github.com/danielkinguk/tvr-requirements/issues/37",
+      "state": "CLOSED",
+      "author": "danielkinguk",
+      "authorAssociation": "OWNER",
+      "assignees": [
+        "BrianSipos",
+        "danielkinguk",
+        "luismcontreras"
+      ],
+      "labels": [],
+      "body": "Schedule Merging and Conflict Resolution: Implementing logic to merge schedules from different sources, resolving any conflicts based on predefined rules or priorities. This might involve algorithmic comparison of schedules to decide which elements take precedence.\r\n\r\nSource Identification and Trust Levels: Tag each schedule with source identification. This allows the node to apply different trust levels or precedence rules based on the originating source.",
+      "createdAt": "2024-02-20T15:13:24Z",
+      "updatedAt": "2024-07-24T17:31:27Z",
+      "closedAt": "2024-07-24T17:31:27Z",
+      "comments": []
+    },
+    {
+      "number": 38,
+      "id": "I_kwDOJmJVRM5_1EUN",
+      "title": "Schedule Trust as a Factor",
+      "url": "https://github.com/danielkinguk/tvr-requirements/issues/38",
+      "state": "CLOSED",
+      "author": "danielkinguk",
+      "authorAssociation": "OWNER",
+      "assignees": [
+        "BrianSipos",
+        "danielkinguk",
+        "luismcontreras"
+      ],
+      "labels": [],
+      "body": "Some additional ideas/requirements.\r\n\r\nSource Authentication and Authorisation\r\n- Implement mechanisms to authenticate the source of a schedule and authorise its application. This could involve digital signatures or certificates.\r\n\r\nTrustworthiness Metrics\r\n- Integrate metrics or ratings of trustworthiness for each source within the YANG model, influencing how schedules are evaluated and applied.",
+      "createdAt": "2024-02-20T15:15:53Z",
+      "updatedAt": "2024-07-24T17:31:33Z",
+      "closedAt": "2024-07-24T17:31:33Z",
       "comments": []
     }
   ],
@@ -391,7 +763,7 @@
       "labels": [],
       "body": "",
       "createdAt": "2023-06-27T15:42:42Z",
-      "updatedAt": "2023-07-08T19:06:44Z",
+      "updatedAt": "2024-02-06T15:00:53Z",
       "baseRepository": "danielkinguk/tvr-requirements",
       "baseRefName": "main",
       "baseRefOid": "ac905825ce800d24863d17b1c685237b7672272f",
@@ -880,7 +1252,7 @@
       "id": "PR_kwDOJmJVRM5dk7RD",
       "title": "Prepare for submission",
       "url": "https://github.com/danielkinguk/tvr-requirements/pull/20",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "danielkinguk",
       "authorAssociation": "OWNER",
       "assignees": [
@@ -889,13 +1261,123 @@
       "labels": [],
       "body": "",
       "createdAt": "2023-10-23T21:18:44Z",
-      "updatedAt": "2023-10-23T21:18:44Z",
+      "updatedAt": "2025-03-03T00:27:09Z",
       "baseRepository": "danielkinguk/tvr-requirements",
       "baseRefName": "main",
       "baseRefOid": "6f80421ef5ad5729e93c547666eb0697b90df1a3",
       "headRepository": "danielkinguk/tvr-requirements",
       "headRefName": "prepare-for-submission",
       "headRefOid": "3a97efa0bf25444c6e2b55f6c3391db5c4ddc690",
+      "closedAt": "2025-03-03T00:27:09Z",
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJmJVRM5yBupB",
+          "commit": {
+            "abbreviatedOid": "3a97efa"
+          },
+          "author": "danielkinguk",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "Approved.",
+          "createdAt": "2024-03-03T18:32:40Z",
+          "updatedAt": "2024-03-03T18:32:40Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 35,
+      "id": "PR_kwDOJmJVRM5nCWx2",
+      "title": "Adding discussion of generation and execution locality",
+      "url": "https://github.com/danielkinguk/tvr-requirements/pull/35",
+      "state": "MERGED",
+      "author": "BrianSipos",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "BrianSipos"
+      ],
+      "labels": [],
+      "body": "Closes #30 by explaining different execution locality and risks.\r\nThis also closes #32 by discussing the risk of out-of-date distributions.",
+      "createdAt": "2024-02-16T00:21:05Z",
+      "updatedAt": "2025-03-03T00:25:24Z",
+      "baseRepository": "danielkinguk/tvr-requirements",
+      "baseRefName": "main",
+      "baseRefOid": "6f80421ef5ad5729e93c547666eb0697b90df1a3",
+      "headRepository": "danielkinguk/tvr-requirements",
+      "headRefName": "30-schedule-consistency",
+      "headRefOid": "46b238b2ba60334631861163ef01792a3b363de6",
+      "closedAt": "2024-03-03T18:26:25Z",
+      "mergedAt": "2024-03-03T18:26:25Z",
+      "mergedBy": "danielkinguk",
+      "mergeCommit": {
+        "oid": "5ddcb15ad3bdebdc6285642ad0e044943973f17c"
+      },
+      "comments": [
+        {
+          "author": "BrianSipos",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I moved the commentary paragraphs into the Operational Considerations section since they are not about the design options but about implications of choosing combination of those options.",
+          "createdAt": "2024-02-16T19:55:05Z",
+          "updatedAt": "2024-02-16T19:55:05Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 39,
+      "id": "PR_kwDOJmJVRM6NFeGi",
+      "title": "Updates for rev 05",
+      "url": "https://github.com/danielkinguk/tvr-requirements/pull/39",
+      "state": "MERGED",
+      "author": "BrianSipos",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "BrianSipos"
+      ],
+      "labels": [],
+      "body": "This is the exact content from https://www.ietf.org/archive/id/draft-ietf-tvr-requirements-05.xml adjusted for the I-D tools to remove the revision number.",
+      "createdAt": "2025-03-03T02:20:02Z",
+      "updatedAt": "2025-06-24T15:45:10Z",
+      "baseRepository": "danielkinguk/tvr-requirements",
+      "baseRefName": "main",
+      "baseRefOid": "5ddcb15ad3bdebdc6285642ad0e044943973f17c",
+      "headRepository": "danielkinguk/tvr-requirements",
+      "headRefName": "updates-05",
+      "headRefOid": "83fde707602812daa82fc875217e7c51c47256d9",
+      "closedAt": "2025-06-24T15:44:57Z",
+      "mergedAt": "2025-06-24T15:44:57Z",
+      "mergedBy": "BrianSipos",
+      "mergeCommit": {
+        "oid": "d44ca811da0b9db551c58302fc2b031cce932d6e"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 40,
+      "id": "PR_kwDOJmJVRM6b5NRn",
+      "title": "Update terms to include snapshot",
+      "url": "https://github.com/danielkinguk/tvr-requirements/pull/40",
+      "state": "OPEN",
+      "author": "BrianSipos",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "BrianSipos"
+      ],
+      "labels": [],
+      "body": "This also adds some explanatory diagrams to section 2, and fixes a few misspellings caught by `make spellcheck`.",
+      "createdAt": "2025-06-24T15:46:20Z",
+      "updatedAt": "2025-06-24T16:13:15Z",
+      "baseRepository": "danielkinguk/tvr-requirements",
+      "baseRefName": "main",
+      "baseRefOid": "d44ca811da0b9db551c58302fc2b031cce932d6e",
+      "headRepository": "danielkinguk/tvr-requirements",
+      "headRefName": "sipos-update-terms",
+      "headRefOid": "129ab78195d4aa38470c5477c455091cc1c236f5",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
