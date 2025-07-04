@@ -1054,11 +1054,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">tvr-requirements</td>
-<td class="right">June 2025</td>
+<td class="right">July 2025</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">King, et al.</td>
-<td class="center">Expires 26 December 2025</td>
+<td class="center">Expires 5 January 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1071,12 +1071,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-tvr-requirements-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-06-24" class="published">24 June 2025</time>
+<time datetime="2025-07-04" class="published">4 July 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-12-26">26 December 2025</time></dd>
+<dd class="expires"><time datetime="2026-01-05">5 January 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1141,7 +1141,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 26 December 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 5 January 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1353,7 +1353,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
 <p id="section-1-1">
-This document is an informational specification meant to inform the design and implentation of systems which manage time-variant routing (TVR) information, and to allow characterizing those systems with aspects which are understandable to network operators.
+This document is an informational specification meant to inform the design and implementation of systems which manage time-variant routing (TVR) information, and to allow characterizing those systems with aspects which are understandable to network operators.
 The terms discussed in this document are intentionally general and are intended to be tailored for specifics of those individual TVR systems.<a href="#section-1-1" class="pilcrow">¶</a></p>
 <p id="section-1-2">
 This document starts with an overview of TVR networks and aspects of their time variance in <a href="#overview" class="auto internal xref">Section 2</a> and elaborates on TVR use cases in <a href="#tvr-use-case-requirements" class="auto internal xref">Section 3</a>.
@@ -1394,31 +1394,39 @@ Requirements on the design of TVR systems are then categorized and summarized in
 </dd>
           <dd class="break"></dd>
 <dt id="section-1.1-2.15">Time Instant:</dt>
-          <dd style="margin-left: 1.5em" id="section-1.1-2.16">A single instant of time, consistent with the concepts of date-time in <span>[<a href="#RFC3339" class="cite xref">RFC3339</a>]</span>.<a href="#section-1.1-2.16" class="pilcrow">¶</a>
+          <dd style="margin-left: 1.5em" id="section-1.1-2.16">A single instant of time, consistent with the concepts of <code>date-time</code> in <span>[<a href="#RFC3339" class="cite xref">RFC3339</a>]</span>.<a href="#section-1.1-2.16" class="pilcrow">¶</a>
 </dd>
           <dd class="break"></dd>
 <dt id="section-1.1-2.17">Timeline:</dt>
-          <dd style="margin-left: 1.5em" id="section-1.1-2.18">A possibly bounded interval of time, consistent with the concept of a period in <span>[<a href="#RFC3339" class="cite xref">RFC3339</a>]</span>.<a href="#section-1.1-2.18" class="pilcrow">¶</a>
+          <dd style="margin-left: 1.5em" id="section-1.1-2.18">A discrete or continuous sequence of time defined over a specific time datum.<a href="#section-1.1-2.18" class="pilcrow">¶</a>
 </dd>
           <dd class="break"></dd>
-<dt id="section-1.1-2.19">Subsequent:</dt>
-          <dd style="margin-left: 1.5em" id="section-1.1-2.20">A time instant which is later in a timeline than some reference time instant.<a href="#section-1.1-2.20" class="pilcrow">¶</a>
+<dt id="section-1.1-2.19">Time Horizon:</dt>
+          <dd style="margin-left: 1.5em" id="section-1.1-2.20">A bounded interval of time used to limit the applicability of a schedule or timeline, consistent with the concepts of <code>period</code> in <span>[<a href="#RFC3339" class="cite xref">RFC3339</a>]</span>.<a href="#section-1.1-2.20" class="pilcrow">¶</a>
 </dd>
           <dd class="break"></dd>
-<dt id="section-1.1-2.21">Orchestrator:</dt>
-          <dd style="margin-left: 1.5em" id="section-1.1-2.22">The subsystem of a managing device which centralizes control of a network and applies policy to manage a network. A Path Computation Element (PCE) <span>[<a href="#RFC4655" class="cite xref">RFC4655</a>]</span> is an example of an Orchestrator.<a href="#section-1.1-2.22" class="pilcrow">¶</a>
+<dt id="section-1.1-2.21">Subsequent:</dt>
+          <dd style="margin-left: 1.5em" id="section-1.1-2.22">A time instant which is later in a timeline than some reference time instant.<a href="#section-1.1-2.22" class="pilcrow">¶</a>
 </dd>
           <dd class="break"></dd>
-<dt id="section-1.1-2.23">Manager:</dt>
-          <dd style="margin-left: 1.5em" id="section-1.1-2.24">The subsystem in a managing device which operates a management protocol to control an Agent.<a href="#section-1.1-2.24" class="pilcrow">¶</a>
+<dt id="section-1.1-2.23">Snapshot:</dt>
+          <dd style="margin-left: 1.5em" id="section-1.1-2.24">A way to transform a model with scheduled time-variance into one that is time-invariant and applies only to a single time instant. That instant need not be the current wall-clock time. The term snapshot can be used as a verb, to mean the transformation itself, or as a noun, to mean the output of the transformation.<a href="#section-1.1-2.24" class="pilcrow">¶</a>
 </dd>
           <dd class="break"></dd>
-<dt id="section-1.1-2.25">Agent:</dt>
-          <dd style="margin-left: 1.5em" id="section-1.1-2.26">The subsystem in a managed device which operates a management protocol to be controlled by a Manager.<a href="#section-1.1-2.26" class="pilcrow">¶</a>
+<dt id="section-1.1-2.25">Orchestrator:</dt>
+          <dd style="margin-left: 1.5em" id="section-1.1-2.26">The subsystem of a managing device which centralizes control of a network and applies policy to manage a network. A Path Computation Element (PCE) <span>[<a href="#RFC4655" class="cite xref">RFC4655</a>]</span> is an example of an Orchestrator.<a href="#section-1.1-2.26" class="pilcrow">¶</a>
 </dd>
           <dd class="break"></dd>
-<dt id="section-1.1-2.27">(Routing) Application:</dt>
-          <dd style="margin-left: 1.5em" id="section-1.1-2.28">The subsystem of a managed device which performs the functions of a routing protocol and/or algorithm.<a href="#section-1.1-2.28" class="pilcrow">¶</a>
+<dt id="section-1.1-2.27">Manager:</dt>
+          <dd style="margin-left: 1.5em" id="section-1.1-2.28">The subsystem in a managing device which operates a management protocol to control an Agent.<a href="#section-1.1-2.28" class="pilcrow">¶</a>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-1.1-2.29">Agent:</dt>
+          <dd style="margin-left: 1.5em" id="section-1.1-2.30">The subsystem in a managed device which operates a management protocol to be controlled by a Manager.<a href="#section-1.1-2.30" class="pilcrow">¶</a>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-1.1-2.31">(Routing) Application:</dt>
+          <dd style="margin-left: 1.5em" id="section-1.1-2.32">The subsystem of a managed device which performs the functions of a routing protocol and/or algorithm.<a href="#section-1.1-2.32" class="pilcrow">¶</a>
 </dd>
         <dd class="break"></dd>
 </dl>
@@ -1567,6 +1575,50 @@ Because real-time clocks are necessary for more than just schedule execution, an
 <p id="section-2.1.3-6">
 With distributed execution there is also a risk that a manager loses connectivity with the managed device and the device eventually runs out of time horizon in the schedule which is known to it.
 This risk can be mitigated by trading between the size and the horizon end-time of schedules distributed to managed devices. This trade can be different for different devices, where some well-connected devices operate closer to just-in-time with short horizons while other devices can be given a longer horizon to allow it to execute in the absence of near-continuous manager connectivity.<a href="#section-2.1.3-6" class="pilcrow">¶</a></p>
+<p id="section-2.1.3-7">
+One possible combination of these options is depicted in <a href="#fig-distrib-snapshot" class="auto internal xref">Figure 2</a>, where inputs are collected in a centralized schedule generator, the schedule is executed on that centralized entity by taking a snapshot (periodically or as-needed when model state changes over schedule time) and distributing the time-invariant snapshot configuration.<a href="#section-2.1.3-7" class="pilcrow">¶</a></p>
+<span id="name-centralized-generation-with"></span><div id="fig-distrib-snapshot">
+<figure id="figure-2">
+            <div class="alignCenter art-ascii art-text artwork" id="section-2.1.3-8.1">
+<pre>
+       Schedule        Schedule          Config
+       Generation      Execution      Distribution
+           |               |               |
+--inputs--&gt;|               |               |--config--&gt;
+--inputs--&gt;|---schedule---&gt;|---snapshot---&gt;|--config--&gt;
+--inputs--&gt;|               |               |--config--&gt;
+
+&lt;-----------------------------------------------------&gt;
+Information                               Configuration
+Sources                                       Consumers
+</pre>
+</div>
+<figcaption><a href="#figure-2" class="selfRef">Figure 2</a>:
+<a href="#name-centralized-generation-with" class="selfRef">Centralized Generation with Centralized Execution</a>
+            </figcaption></figure>
+</div>
+<p id="section-2.1.3-9">
+An alternative combination is depicted in <a href="#fig-distrib-schedule" class="auto internal xref">Figure 3</a>, where inputs are also collected in and a schedule generated by a centralized entity, but in this alternative the scheduled model (or some filtered time horizon of it) is distributed to the managed devices to be executed independently on each device.<a href="#section-2.1.3-9" class="pilcrow">¶</a></p>
+<span id="name-centralized-generation-with-"></span><div id="fig-distrib-schedule">
+<figure id="figure-3">
+            <div class="alignCenter art-ascii art-text artwork" id="section-2.1.3-10.1">
+<pre>
+        Schedule        Schedule        Schedule
+       Generation     Distribution     Execution
+           |               |               |
+--inputs--&gt;|               |---schedule---&gt;|--config--&gt;
+--inputs--&gt;|---schedule---&gt;|---schedule---&gt;|--config--&gt;
+--inputs--&gt;|               |---schedule---&gt;|--config--&gt;
+
+&lt;-----------------------------------------------------&gt;
+Information                               Configuration
+Sources                                       Consumers
+</pre>
+</div>
+<figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
+<a href="#name-centralized-generation-with-" class="selfRef">Centralized Generation with Distributed Execution</a>
+            </figcaption></figure>
+</div>
 </section>
 </div>
 </section>
@@ -1614,7 +1666,7 @@ It is expected that the use of time-variability to data models will fit within t
 <p id="section-2.2.2-1">
 In an idealized model the schedules will apply indefinitely far in the past and the future, but in a realizable model with both processing and storage limitations there will need to be a time horizon within which the model applies and outside of which the model has no meaning.
 In some cases this horizon will be intrinsic to the model itself, with an explicit model parameter indicating the horizon.
-In other cases the model may allow indefinitely-large schedules but the processing of the planning timeline is bounded to limit resource needs.<a href="#section-2.2.2-1" class="pilcrow">¶</a></p>
+In other cases the model may allow indefinitely-large schedules but the processing of the schedule timeline is bounded to limit resource needs.<a href="#section-2.2.2-1" class="pilcrow">¶</a></p>
 </section>
 <section id="section-2.2.3">
           <h4 id="name-time-precision">
@@ -1629,7 +1681,7 @@ It is up to specific models to define the precision of time values and the requi
 <a href="#section-2.2.4" class="section-number selfRef">2.2.4. </a><a href="#name-validity-in-a-schedule" class="section-name selfRef">Validity in a Schedule</a>
           </h4>
 <p id="section-2.2.4-1">
-Within a single schedule over the planning timeline there will likely be a need to have multiple discrete intervals of validity over absolute schedule time.
+Within a single schedule over its timeline there will likely be a need to have multiple discrete intervals of validity over absolute schedule time.
 The time instants at which a schedule is invalid indicate an undefined property value, so it is important for a model to be able to accommodate multiple schedules as necessary to ensure that some properties can have values at all times.<a href="#section-2.2.4-1" class="pilcrow">¶</a></p>
 <p id="section-2.2.4-2">
 A model which restricts itself to a single interval of validity could run into difficulties over a long enough time horizon and would need to resort to having multiple model entities represent the same modeled "thing" which can lead to confusion and inefficiency.<a href="#section-2.2.4-2" class="pilcrow">¶</a></p>
@@ -1640,7 +1692,7 @@ A model which restricts itself to a single interval of validity could run into d
           </h4>
 <p id="section-2.2.5-1">
 Separate from the concept of intervals of validity in absolute schedule time, there can be a need to model repetitive states in a concise way.
-One way to model a periodic change of state is to combine a set of absolute time intervals with a periodic parameterization (duration valid and duration invalid); this is the mdoel of <span>[<a href="#AIXM" class="cite xref">AIXM</a>]</span>.<a href="#section-2.2.5-1" class="pilcrow">¶</a></p>
+One way to model a periodic change of state is to combine a set of absolute time intervals with a periodic parameterization (duration valid and duration invalid); this is the model of <span>[<a href="#AIXM" class="cite xref">AIXM</a>]</span>.<a href="#section-2.2.5-1" class="pilcrow">¶</a></p>
 <p id="section-2.2.5-2">
 A model which does not include the notion of periodicity within a schedule could be used in situations where discrete intervals of validity are needed to handle periodic state changes which is neither storage nor processing efficient.<a href="#section-2.2.5-2" class="pilcrow">¶</a></p>
 </section>
@@ -1846,7 +1898,7 @@ Likewise, the assigning of an address property at one layer does not imply the p
 </li>
             <li id="section-2.4.4-2.3">Weather Conditions: Weather can impact network performance, especially for wireless and satellite communications. Adverse
       weather conditions such as heavy rain, snow, or extreme temperatures can degrade signal quality. Incorporating predicted and real-time weather
-      data into network management strategies can help in adjusting transmission power, rerouting traffic, or pre-emptively switching to
+      data into network management strategies can help in adjusting transmission power, rerouting traffic, or preemptively switching to
       more resilient pathways.<a href="#section-2.4.4-2.3" class="pilcrow">¶</a>
 </li>
             <li id="section-2.4.4-2.4">Network Maintenance and Upgrades: Scheduled maintenance or unexpected faults can introduce temporary constraints. By planning
@@ -2087,7 +2139,7 @@ Likewise, the assigning of an address property at one layer does not imply the p
       <h2 id="name-acknowledgments">
 <a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
       </h2>
-<p id="section-7-1">This work has benefited from the particpation of the TVR working group and the discussions on the mailing list.<a href="#section-7-1" class="pilcrow">¶</a></p>
+<p id="section-7-1">This work has benefited from the participation of the TVR working group and the discussions on the mailing list.<a href="#section-7-1" class="pilcrow">¶</a></p>
 <p id="section-7-2">The authors would like to specifically thank Tony Li, Mark Blanchet, Alexander Petrescu, Ed Birrane,
     Jie Dong, Abdussalam Baryun and Joel Halpern<a href="#section-7-2" class="pilcrow">¶</a></p>
 <p id="section-7-3">This work is partly supported by the UK Department for Science, Innovation and Technology
