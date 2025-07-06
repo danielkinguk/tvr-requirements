@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-06-26T02:05:04.536173+00:00",
+  "timestamp": "2025-07-06T02:20:41.739211+00:00",
   "repo": "danielkinguk/tvr-requirements",
   "labels": [
     {
@@ -1362,7 +1362,7 @@
       "id": "PR_kwDOJmJVRM6b5NRn",
       "title": "Update terms to include snapshot",
       "url": "https://github.com/danielkinguk/tvr-requirements/pull/40",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "BrianSipos",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -1371,19 +1371,48 @@
       "labels": [],
       "body": "This also adds some explanatory diagrams to section 2, and fixes a few misspellings caught by `make spellcheck`.",
       "createdAt": "2025-06-24T15:46:20Z",
-      "updatedAt": "2025-06-24T16:13:15Z",
+      "updatedAt": "2025-07-04T13:41:18Z",
       "baseRepository": "danielkinguk/tvr-requirements",
       "baseRefName": "main",
       "baseRefOid": "d44ca811da0b9db551c58302fc2b031cce932d6e",
       "headRepository": "danielkinguk/tvr-requirements",
       "headRefName": "sipos-update-terms",
       "headRefOid": "129ab78195d4aa38470c5477c455091cc1c236f5",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-07-04T13:40:32Z",
+      "mergedAt": "2025-07-04T13:40:32Z",
+      "mergedBy": "danielkinguk",
+      "mergeCommit": {
+        "oid": "6ecbc50fb86e30ed215295fccaf3ee064719342c"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOJmJVRM6yDm2a",
+          "commit": {
+            "abbreviatedOid": "129ab78"
+          },
+          "author": "danielkinguk",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-07-04T13:40:15Z",
+          "updatedAt": "2025-07-04T13:40:15Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOJmJVRM6yDnrh",
+          "commit": {
+            "abbreviatedOid": "129ab78"
+          },
+          "author": "danielkinguk",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "Looks good. Thanks Brian. ",
+          "createdAt": "2025-07-04T13:41:02Z",
+          "updatedAt": "2025-07-04T13:41:02Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
