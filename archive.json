@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-07-08T02:06:38.204630+00:00",
+  "timestamp": "2025-07-24T02:19:06.746556+00:00",
   "repo": "danielkinguk/tvr-requirements",
   "labels": [
     {
@@ -719,6 +719,38 @@
       "createdAt": "2024-02-20T15:15:53Z",
       "updatedAt": "2024-07-24T17:31:33Z",
       "closedAt": "2024-07-24T17:31:33Z",
+      "comments": []
+    },
+    {
+      "number": 41,
+      "id": "I_kwDOJmJVRM7CHMMV",
+      "title": "Discuss possibility of multiple time-variant \"domains\" and multiple timelines",
+      "url": "https://github.com/danielkinguk/tvr-requirements/issues/41",
+      "state": "OPEN",
+      "author": "BrianSipos",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "During IETF 123 discussion, there was a question about how multiple independent time-variant domains can be described using the terminology of this document. It is currently not addressed but can be with both a new term and a new section explaining the choice of maybe: multiple schedules in the same timeline vs. completely separate domains with separate timelines.",
+      "createdAt": "2025-07-23T14:42:00Z",
+      "updatedAt": "2025-07-23T14:42:00Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 42,
+      "id": "I_kwDOJmJVRM7CHP6F",
+      "title": "Discuss notion of a margin in scheduled state changes",
+      "url": "https://github.com/danielkinguk/tvr-requirements/issues/42",
+      "state": "OPEN",
+      "author": "BrianSipos",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "During IETF 123 discussion, the topic of schedule-executing entities being mis-synchronized by some tolerable amount and allowing for a time margin (possibly during schedule generation) to be embedded in the schedule itself. This is probably worth a small discussion separate from the existing section on \"Time Accuracy\".",
+      "createdAt": "2025-07-23T14:46:06Z",
+      "updatedAt": "2025-07-23T14:46:06Z",
+      "closedAt": null,
       "comments": []
     }
   ],
