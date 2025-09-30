@@ -334,12 +334,18 @@ In an idealized model the schedules will apply indefinitely far in the past and 
 In some cases this horizon will be intrinsic to the model itself, with an explicit model parameter indicating the horizon.
 In other cases the model may allow indefinitely-large schedules but the processing of the schedule timeline is bounded to limit resource needs.
           </t>
+          <t>
+One possible rationale for separating schedule domains is the duration of the time horizon needed for entities in each domain.
+          </t>
         </section>
         <section>
-          <name>Time Precision</name>
+          <name>Time Precision and Accuracy</name>
           <t>
 Different time-variant models will require different granularities of planning time, either because of limitations or assumptions about wall-clock time or because of requirements within the modeled domain.
 It is up to specific models to define the precision of time values and the required accuracy and precision of wall-clocks which execute the schedules.
+          </t>
+          <t>
+One possible rationale for separating schedule domains is the level of time precision or accuracy of execution time able to be upheld across entities in each domain.
           </t>
         </section>
         <section>
