@@ -5,12 +5,12 @@
 Network Working Group                                            D. King
 Internet-Draft                                      Lancaster University
 Intended status: Informational                           L. M. Contreras
-Expires: 26 December 2025                                     Telefonica
+Expires: 3 April 2026                                         Telefonica
                                                                 B. Sipos
                                                                  JHU/APL
                                                                 L. Zhang
                                                                   Huawei
-                                                            24 June 2025
+                                                       30 September 2025
 
 
                 TVR (Time-Variant Routing) Requirements
@@ -59,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 26 December 2025.
+   This Internet-Draft will expire on 3 April 2026.
 
 Copyright Notice
 
@@ -199,6 +199,10 @@ Table of Contents
       The term snapshot can be used as a verb, to mean the
       transformation itself, or as a noun, to mean the output of the
       transformation.
+
+   Schedule Domain:  A set of time-variant entities that are expected to
+      be configured and operated jointly on the same timeline with a
+      bounded synchronization of execution in wall-clock time.
 
    Orchestrator:  The subsystem of a managing device which centralizes
       control of a network and applies policy to manage a network.  A
@@ -451,11 +455,42 @@ Table of Contents
    *  A model where every property of every entity can be scheduled
       independently.  This is the temporality model of [AIXM].
 
-   It is expected that the use of time-variability to data models will
-   fit within these extremes, possibly applying a schedule to each
-   entity indicating when that entity is valid or invalid, or applying a
-   schedule to groups of properties within the entity (while leaving
-   other properties time-invariant).
+   Separate from which entities can have a schedule applied to them is
+   the notion of which time-variant property values must be synchronized
+   for consistency of network operation.  In cases where there does not
+   need to be tight synchronization between some schedules, they can be
+   managed in separate domains and effectively form separate timelines
+   where the schedule time in one domain has no relation with any other
+   domain.
+
+   *  One extreme of this aspect is to combine all scheduled state
+      together into a single domain and single timeline.  For cases
+      where all nodes in a network have time-varying properties that
+      affect their topological neighbors, all of the nodes need to be
+      scheduled in the same domain to avoid misaligned configuration
+      between neighbors.  The orchestration and management burden in
+      this case is the need to consider all schedules jointly and the
+      operational burden is the need for synchronization of schedule
+      execution across managed devices.
+
+   *  The other extreme is to consider each managed device as a separate
+      scheduled domain, where property changes between devices need not
+      be synchronized.  This simplifies aspects of schedule execution
+      but would likely rely on control plane communication between
+      neighbors and peers to avoid mismatch between the actual
+      configuraiton of any node and how it is assumed to be configured
+      by other nodes.
+
+   It is expected that the use of time-variability in data models will
+   fit within these extremes.  For scope and granularity, possibly
+   applying a schedule to each entity indicating when that entity is
+   valid or invalid, or applying a schedule to groups of properties
+   within the entity (while leaving other properties time-invariant).
+   For schedule domains, possibly choosing to make some nodes or some
+   properties of nodes intentionally time-invariant in order to form a
+   logical boundary between schedule domains or possibly aligning
+   schedule domains with routing domains so that routing control
+   protocols can be used for online negotiation at domain boundaries.
 
 2.2.2.  Time Horizon
 
@@ -681,7 +716,7 @@ Table of Contents
    entities is critical.
 
    Three scenarios are currently considered when computing TVR-enabled
-   paths.
+   paths and described in the following subsections.
 
 2.4.1.  Centralized
 
