@@ -1205,7 +1205,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
                     <p id="section-toc.1-1.2.2.2.2.2.1"><a href="#section-2.2.2" class="auto internal xref">2.2.2</a>.  <a href="#name-time-horizon" class="internal xref">Time Horizon</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.2.2.3">
-                    <p id="section-toc.1-1.2.2.2.2.3.1"><a href="#section-2.2.3" class="auto internal xref">2.2.3</a>.  <a href="#name-time-precision" class="internal xref">Time Precision</a></p>
+                    <p id="section-toc.1-1.2.2.2.2.3.1"><a href="#section-2.2.3" class="auto internal xref">2.2.3</a>.  <a href="#name-time-precision-and-accuracy" class="internal xref">Time Precision and Accuracy</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.2.2.4">
                     <p id="section-toc.1-1.2.2.2.2.4.1"><a href="#section-2.2.4" class="auto internal xref">2.2.4</a>.  <a href="#name-validity-in-a-schedule" class="internal xref">Validity in a Schedule</a></p>
@@ -1682,14 +1682,18 @@ For schedule domains, possibly choosing to make some nodes or some properties of
 In an idealized model the schedules will apply indefinitely far in the past and the future, but in a realizable model with both processing and storage limitations there will need to be a time horizon within which the model applies and outside of which the model has no meaning.
 In some cases this horizon will be intrinsic to the model itself, with an explicit model parameter indicating the horizon.
 In other cases the model may allow indefinitely-large schedules but the processing of the schedule timeline is bounded to limit resource needs.<a href="#section-2.2.2-1" class="pilcrow">¶</a></p>
+<p id="section-2.2.2-2">
+One possible rationale for separating schedule domains is the duration of the time horizon needed for entities in each domain.<a href="#section-2.2.2-2" class="pilcrow">¶</a></p>
 </section>
 <section id="section-2.2.3">
-          <h4 id="name-time-precision">
-<a href="#section-2.2.3" class="section-number selfRef">2.2.3. </a><a href="#name-time-precision" class="section-name selfRef">Time Precision</a>
+          <h4 id="name-time-precision-and-accuracy">
+<a href="#section-2.2.3" class="section-number selfRef">2.2.3. </a><a href="#name-time-precision-and-accuracy" class="section-name selfRef">Time Precision and Accuracy</a>
           </h4>
 <p id="section-2.2.3-1">
 Different time-variant models will require different granularities of planning time, either because of limitations or assumptions about wall-clock time or because of requirements within the modeled domain.
 It is up to specific models to define the precision of time values and the required accuracy and precision of wall-clocks which execute the schedules.<a href="#section-2.2.3-1" class="pilcrow">¶</a></p>
+<p id="section-2.2.3-2">
+One possible rationale for separating schedule domains is the level of time precision or accuracy of execution time able to be upheld across entities in each domain.<a href="#section-2.2.3-2" class="pilcrow">¶</a></p>
 </section>
 <section id="section-2.2.4">
           <h4 id="name-validity-in-a-schedule">

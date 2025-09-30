@@ -87,7 +87,7 @@ Table of Contents
      2.2.  General Temporality
        2.2.1.  Scope of Time-Variability
        2.2.2.  Time Horizon
-       2.2.3.  Time Precision
+       2.2.3.  Time Precision and Accuracy
        2.2.4.  Validity in a Schedule
        2.2.5.  Periodicity in a Schedule
        2.2.6.  Continuity in a Schedule
@@ -504,7 +504,10 @@ Table of Contents
    schedules but the processing of the schedule timeline is bounded to
    limit resource needs.
 
-2.2.3.  Time Precision
+   One possible rationale for separating schedule domains is the
+   duration of the time horizon needed for entities in each domain.
+
+2.2.3.  Time Precision and Accuracy
 
    Different time-variant models will require different granularities of
    planning time, either because of limitations or assumptions about
@@ -512,6 +515,10 @@ Table of Contents
    It is up to specific models to define the precision of time values
    and the required accuracy and precision of wall-clocks which execute
    the schedules.
+
+   One possible rationale for separating schedule domains is the level
+   of time precision or accuracy of execution time able to be upheld
+   across entities in each domain.
 
 2.2.4.  Validity in a Schedule
 
