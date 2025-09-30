@@ -105,6 +105,8 @@ Requirements on the design of TVR systems are then categorized and summarized in
           <dd>A time instant which is later in a timeline than some reference time instant. </dd>
           <dt>Snapshot:</dt>
           <dd>A way to transform a model with scheduled time-variance into one that is time-invariant and applies only to a single time instant. That instant need not be the current wall-clock time. The term snapshot can be used as a verb, to mean the transformation itself, or as a noun, to mean the output of the transformation.</dd>
+          <dt>Schedule Domain:</dt>
+          <dd>A set of time-variant entities that are expected to be configured and operated jointly on the same timeline with a bounded synchronization of execution in wall-clock time.</dd>
           <dt>Orchestrator:</dt>
           <dd>The subsystem of a managing device which centralizes control of a network and applies policy to manage a network. A Path Computation Element (PCE) <xref target="RFC4655"/> is an example of an Orchestrator.</dd>
           <dt>Manager:</dt>
@@ -312,7 +314,17 @@ Two extremes of this aspect are:
             <li>A model where every property of every entity can be scheduled independently. This is the temporality model of <xref target="AIXM"/>.</li>
           </ul>
           <t>
-It is expected that the use of time-variability to data models will fit within these extremes, possibly applying a schedule to each entity indicating when that entity is valid or invalid, or applying a schedule to groups of properties within the entity (while leaving other properties time-invariant).
+Separate from which entities can have a schedule applied to them is the notion of which time-variant property values must be synchronized for consistency of network operation.
+In cases where there does not need to be tight synchronization between some schedules, they can be managed in separate domains and effectively form separate timelines where the schedule time in one domain has no relation with any other domain.
+          </t>
+          <ul>
+            <li>One extreme of this aspect is to combine all scheduled state together into a single domain and single timeline. For cases where all nodes in a network have time-varying properties that affect their topological neighbors, all of the nodes need to be scheduled in the same domain to avoid misaligned configuration between neighbors. The orchestration and management burden in this case is the need to consider all schedules jointly and the operational burden is the need for synchronization of schedule execution across managed devices.</li>
+            <li>The other extreme is to consider each managed device as a separate scheduled domain, where property changes between devices need not be synchronized. This simplifies aspects of schedule execution but would likely rely on control plane communication between neighbors and peers to avoid mismatch between the actual configuraiton of any node and how it is assumed to be configured by other nodes.</li>
+          </ul>
+          <t>
+It is expected that the use of time-variability in data models will fit within these extremes.
+For scope and granularity, possibly applying a schedule to each entity indicating when that entity is valid or invalid, or applying a schedule to groups of properties within the entity (while leaving other properties time-invariant).
+For schedule domains, possibly choosing to make some nodes or some properties of nodes intentionally time-invariant in order to form a logical boundary between schedule domains or possibly aligning schedule domains with routing domains so that routing control protocols can be used for online negotiation at domain boundaries.
           </t>
         </section>
         <section>
@@ -483,7 +495,7 @@ Likewise, the assigning of an address property at one layer does not imply the p
 	<t>Time-Variant Routing (TVR) introduces a scenario of calculating a path, or sub-path within a network, taking into account the timing
 	   of message transmission or receipt as an integral part of the overall route computation.</t>
 	<t>Furthermore, synchronization of network time across TVR-capable entities is critical.</t>
-	<t>Three scenarios are currently considered when computing TVR-enabled paths.</t>
+	<t>Three scenarios are currently considered when computing TVR-enabled paths and described in the following subsections.</t>
          <section anchor="Centralized">
          <name>Centralized</name>
          <t>The network entities will receive the time variable information and traffic forwarding rules directly from a logically centralized source, an Orchestrator or network controller. The time-variable data may then be
