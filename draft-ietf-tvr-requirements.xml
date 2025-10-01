@@ -239,7 +239,7 @@ When schedules are both generated and executed centrally, there is a consistency
 To recover from this kind of situation, either reattempt to configure the misaligned device may be made to bring it back into alignment with the other devices or the other devices' configurations must be rolled-back into consistency which will then cause all the devices to be off-schedule.
           </t>
           <t>
-When schedules are executed on each device, there is a risk that clocks on different devices become desynchronized beyond the time precision required of the schedule.
+When schedules are executed on each device, there is a risk that clocks on different devices become de-synchronized beyond the time precision required of the schedule.
 Because real-time clocks are necessary for more than just schedule execution, and because accurate and precise time sources exist outside of network time (<em>e.g.</em>, GPS time) this risk can be made to have a low probability.
           </t>
           <t>
@@ -331,6 +331,24 @@ It is up to specific models to define the precision of time values and the requi
           </t>
         </section>
         <section>
+          <name>Time Synchronization and Margin</name>
+          <t>
+Any schedule execution and device configuration (see locality options in <xref target="schedule-exec-locality"/>) will necessarily have some misalignment in the synchronization of time across all devices operating in the same timeline.
+This misalignment is hopefully bounded by design and able to be characterized statistically.
+          </t>
+          <t>
+It is important for the activity of schedule generation (see <xref target="schedule-gen-locality"/>) to take the misalignment into account as some form of margin around the instants of scheduled change.
+The exact form that this margin would take depends on the specific time-varying properties.
+          </t>
+          <t>
+Another source of time margin in a time-varying system can be due to a desire to model the time delay between changing the administrative state of some subsystem and a subsequent change to its operational state as a consequence.
+For example, a known delay between enabling the modem supporting a termination point or link and the entity actually being usable for sending traffic.
+          </t>
+          <t>
+Regardless of the reason for a schedule margin being accounted for, it is critical that the margin is not double-counted by different activities in the schedule processing chain.
+          </t>
+        </section>
+        <section>
           <name>Validity in a Schedule</name>
           <t>
 Within a single schedule over its timeline there will likely be a need to have multiple discrete intervals of validity over absolute schedule time.
@@ -348,6 +366,7 @@ One way to model a periodic change of state is to combine a set of absolute time
           </t>
           <t>
 A model which does not include the notion of periodicity within a schedule could be used in situations where discrete intervals of validity are needed to handle periodic state changes which is neither storage nor processing efficient.
+Periodicity can also be seen as unnecessary when the time horizon will always be small enough compared to any schedule time period that only one repetition is ever seen within the horizon in one state.
           </t>
         </section>
         <section>
@@ -536,7 +555,7 @@ Likewise, the assigning of an address property at one layer does not imply the p
          <t>Time-variant network relies on accurate and timely dissemination of time-variant routing and forwarding information. However, the presence of
             malicious or unintended divergent information introduces risks that can impact network stability and operational correctness. An adversary could
             manipulate scheduled routing updates to introduce black holes, persistent loops, or denial-of-service conditions by injecting false time-sensitive
-            state changes. Even in non-malicious scenarios, incorrect or misaligned scheduling or misconfiguration, or time desynchronization, may lead to
+            state changes. Even in non-malicious scenarios, incorrect or misaligned scheduling or misconfiguration, or time de-synchronization, may lead to
             unintended forwarding behavior, potentially degrading performance or causing service disruptions.</t>
 
          <t>To mitigate these risks, TVR solution mechanisms should incorporate integrity validation and trust enforcement to ensure the correctness and
