@@ -82,7 +82,7 @@ Requirements on the design of TVR systems are then categorized and summarized in
         <t>Specific terms used within this document are as follows:</t>
         <dl>
           <dt>Model:</dt>
-          <dd>The universe being modeled, which defines a parameter space.</dd>
+          <dd>The universe being modeled, which defines a parameter state space.</dd>
           <dt>Entity:</dt>
           <dd>A single separable item within the model. Each entity has a stable identity which is time-invariant.</dd>
           <dt>Property:</dt>
@@ -290,7 +290,12 @@ Sources                                       Consumers
         <name>General Temporality</name>
         <t>
 This section covers different aspects of how temporality applies to any potential TVR information model.
-Each aspect is roughly independent and informs how a model can choose to include temporality in its parameter space.
+Each aspect is roughly independent and informs how a model can choose to include temporality in its parameter state space.
+        </t>
+        <t>
+Each of these aspects can be different across different schedule domains, but are expected to be consistent within a single schedule domain.
+Also, just because an entire model or domain allows high <xref target="time-scope">granularity</xref> or high <xref target="time-precision">precision</xref> does not mean that every single entity needs to make use of those aspects (or even that every entity needs to have time-variance at all).
+It is perfectly valid for some entities to have time-variance and others to have none.
         </t>
         <section anchor="time-scope">
           <name>Scope of Time-Variability</name>
@@ -315,7 +320,7 @@ Two extremes of this aspect are:
           </ul>
           <t>
 Separate from which entities can have a schedule applied to them is the notion of which time-variant property values must be synchronized for consistency of network operation.
-In cases where there does not need to be tight synchronization between some schedules, they can be managed in separate domains and effectively form separate timelines where the schedule time in one domain has no relation with any other domain.
+In cases where there does not need to be tight synchronization between some schedules, they can be managed in separate domains and effectively form separate timelines where the schedule time in one domain has little to no relation with any other domain.
           </t>
           <ul>
             <li>One extreme of this aspect is to combine all scheduled state together into a single domain and single timeline. For cases where all nodes in a network have time-varying properties that affect their topological neighbors, all of the nodes need to be scheduled in the same domain to avoid misaligned configuration between neighbors. The orchestration and management burden in this case is the need to consider all schedules jointly and the operational burden is the need for synchronization of schedule execution across managed devices.</li>
@@ -338,7 +343,7 @@ In other cases the model may allow indefinitely-large schedules but the processi
 One possible rationale for separating schedule domains is the duration of the time horizon needed for entities in each domain.
           </t>
         </section>
-        <section>
+        <section anchor="time-precision">
           <name>Time Precision and Accuracy</name>
           <t>
 Different time-variant models will require different granularities of planning time, either because of limitations or assumptions about wall-clock time or because of requirements within the modeled domain.
