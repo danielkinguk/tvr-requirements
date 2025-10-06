@@ -35,7 +35,7 @@
     PyYAML 6.0.2
     requests 2.32.5
     setuptools 80.9.0
-    wcwidth 0.2.13
+    wcwidth 0.2.14
 -->
 <link href="draft-ietf-tvr-requirements.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -1058,7 +1058,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">King, et al.</td>
-<td class="center">Expires 4 April 2026</td>
+<td class="center">Expires 9 April 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1071,12 +1071,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-tvr-requirements-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-10-01" class="published">1 October 2025</time>
+<time datetime="2025-10-06" class="published">6 October 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-04-04">4 April 2026</time></dd>
+<dd class="expires"><time datetime="2026-04-09">9 April 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1141,7 +1141,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 4 April 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 9 April 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1192,6 +1192,9 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.1.2.3">
                     <p id="section-toc.1-1.2.2.1.2.3.1"><a href="#section-2.1.3" class="auto internal xref">2.1.3</a>.  <a href="#name-execution-locality" class="internal xref">Execution Locality</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.1.2.4">
+                    <p id="section-toc.1-1.2.2.1.2.4.1"><a href="#section-2.1.4" class="auto internal xref">2.1.4</a>.  <a href="#name-configuration-and-operation" class="internal xref">Configuration and Operational State</a></p>
 </li>
                 </ul>
 </li>
@@ -1624,6 +1627,18 @@ Sources                                       Consumers
 </div>
 </section>
 </div>
+<section id="section-2.1.4">
+          <h4 id="name-configuration-and-operation">
+<a href="#section-2.1.4" class="section-number selfRef">2.1.4. </a><a href="#name-configuration-and-operation" class="section-name selfRef">Configuration and Operational State</a>
+          </h4>
+<p id="section-2.1.4-1">
+Most of the discussion in this document treats scheduling as the means for influencing when configuration on some managed device is planned to be updated.
+But as explained in <span>[<a href="#X.731" class="cite xref">X.731</a>]</span> devices are expected to have an operational state alongside many administrative states.
+For example, a known delay between enabling the modem supporting a termination point or link and the modem actually being usable for sending traffic.<a href="#section-2.1.4-1" class="pilcrow">¶</a></p>
+<p id="section-2.1.4-2">
+Strategies for modeling time margins around changes of configuration are discussed in <a href="#time-sync" class="auto internal xref">Section 2.2.4</a>.
+Even when time margins are taken into account, the schedules are still being applied to cascading subsequent changes of administrative state within configurations and have no immediate or direct relationship to (expected) subsequent changes in operational state.<a href="#section-2.1.4-2" class="pilcrow">¶</a></p>
+</section>
 </section>
 </div>
 <section id="section-2.2">
@@ -1679,6 +1694,7 @@ In other cases the model may allow indefinitely-large schedules but the processi
 Different time-variant models will require different granularities of planning time, either because of limitations or assumptions about wall-clock time or because of requirements within the modeled domain.
 It is up to specific models to define the precision of time values and the required accuracy and precision of wall-clocks which execute the schedules.<a href="#section-2.2.3-1" class="pilcrow">¶</a></p>
 </section>
+<div id="time-sync">
 <section id="section-2.2.4">
           <h4 id="name-time-synchronization-and-ma">
 <a href="#section-2.2.4" class="section-number selfRef">2.2.4. </a><a href="#name-time-synchronization-and-ma" class="section-name selfRef">Time Synchronization and Margin</a>
@@ -1690,11 +1706,11 @@ This misalignment is hopefully bounded by design and able to be characterized st
 It is important for the activity of schedule generation (see <a href="#schedule-gen-locality" class="auto internal xref">Section 2.1.2</a>) to take the misalignment into account as some form of margin around the instants of scheduled change.
 The exact form that this margin would take depends on the specific time-varying properties.<a href="#section-2.2.4-2" class="pilcrow">¶</a></p>
 <p id="section-2.2.4-3">
-Another source of time margin in a time-varying system can be due to a desire to model the time delay between changing the administrative state of some subsystem and a subsequent change to its operational state as a consequence.
-For example, a known delay between enabling the modem supporting a termination point or link and the entity actually being usable for sending traffic.<a href="#section-2.2.4-3" class="pilcrow">¶</a></p>
+Another source of time margin in a time-varying system can be due to a desire to model the time delay between changing the administrative state of some subsystem and a subsequent change to its operational state as a consequence.<a href="#section-2.2.4-3" class="pilcrow">¶</a></p>
 <p id="section-2.2.4-4">
 Regardless of the reason for a schedule margin being accounted for, it is critical that the margin is not double-counted by different activities in the schedule processing chain.<a href="#section-2.2.4-4" class="pilcrow">¶</a></p>
 </section>
+</div>
 <section id="section-2.2.5">
           <h4 id="name-validity-in-a-schedule">
 <a href="#section-2.2.5" class="section-number selfRef">2.2.5. </a><a href="#name-validity-in-a-schedule" class="section-name selfRef">Validity in a Schedule</a>
@@ -1859,13 +1875,13 @@ Likewise, the assigning of an address property at one layer does not imply the p
 <a href="#section-2.4" class="section-number selfRef">2.4. </a><a href="#name-routing" class="section-name selfRef">Routing</a>
         </h3>
 <p id="section-2.4-1">Traditional network routing techniques typically use link bandwidth and delay for path calculation, and do not consider time-based factors. TVR should be
-    capable of improving network performance and reliability in environments where entities liveness and link availability is a time-based consideration, with various factors,
+           capable of improving network performance and reliability in environments where entities liveness and link availability is a time-based consideration, with various factors,
            including power availability, interface line of sight or expected demand.<a href="#section-2.4-1" class="pilcrow">¶</a></p>
 <p id="section-2.4-2">However, even if some adjacency failures are predictable, others are not, including link failures and entity outages.
            Therefore, any new technique or routing protocol extension for TVR environments must be capable of handling planned and unexpected
            resource losses.<a href="#section-2.4-2" class="pilcrow">¶</a></p>
 <p id="section-2.4-3">Time-Variant Routing (TVR) introduces a scenario of calculating a path, or sub-path within a network, taking into account the timing
-    of message transmission or receipt as an integral part of the overall route computation.<a href="#section-2.4-3" class="pilcrow">¶</a></p>
+           of message transmission or receipt as an integral part of the overall route computation.<a href="#section-2.4-3" class="pilcrow">¶</a></p>
 <p id="section-2.4-4">Furthermore, synchronization of network time across TVR-capable entities is critical.<a href="#section-2.4-4" class="pilcrow">¶</a></p>
 <p id="section-2.4-5">Three scenarios are currently considered when computing TVR-enabled paths.<a href="#section-2.4-5" class="pilcrow">¶</a></p>
 <div id="Centralized">
@@ -1874,7 +1890,7 @@ Likewise, the assigning of an address property at one layer does not imply the p
 <a href="#section-2.4.1" class="section-number selfRef">2.4.1. </a><a href="#name-centralized" class="section-name selfRef">Centralized</a>
           </h4>
 <p id="section-2.4.1-1">The network entities will receive the time variable information and traffic forwarding rules directly from a logically centralized source, an Orchestrator or network controller. The time-variable data may then be
-     processed locally by the entity entered into the scheduled routing table and specific forwarding rules applied.<a href="#section-2.4.1-1" class="pilcrow">¶</a></p>
+            processed locally by the entity entered into the scheduled routing table and specific forwarding rules applied.<a href="#section-2.4.1-1" class="pilcrow">¶</a></p>
 <p id="section-2.4.1-2">Furthermore, a centralized approach could also be used to extend existing tunnel and path delivery mechanisms and protocols to distribute traffic forwarding rules along with time-variable information. However, in certain environments, a logically centralized source may lose connectivity with network entities (as described in <a href="#schedule-exec-locality" class="auto internal xref">Section 2.1.3</a>), preventing timely delivery of traffic forwarding rules. To mitigate this risk, the time horizon for time-variable information should be extended accordingly.<a href="#section-2.4.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1895,7 +1911,7 @@ Likewise, the assigning of an address property at one layer does not imply the p
 <a href="#section-2.4.3" class="section-number selfRef">2.4.3. </a><a href="#name-hybrid" class="section-name selfRef">Hybrid</a>
           </h4>
 <p id="section-2.4.3-1">In this scenario, mixed-entity TVR capability exists. Some entities will require a schedule provided by a centralized source, and others will be capable of advertising and learning scheduled information
-     via a distributed mechanism.<a href="#section-2.4.3-1" class="pilcrow">¶</a></p>
+            via a distributed mechanism.<a href="#section-2.4.3-1" class="pilcrow">¶</a></p>
 <p id="section-2.4.3-2">This scenario presents time and schedule synchronization and source verification challenges and will require further study, but are out of scope for this document.<a href="#section-2.4.3-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1955,7 +1971,7 @@ Likewise, the assigning of an address property at one layer does not imply the p
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-time-variant-use-case-requi" class="section-name selfRef">Time-Variant Use Case Requirements</a>
       </h2>
 <p id="section-3-1">Several TVR use cases have been identified and discussed in <span>[<a href="#RFC9657" class="cite xref">RFC9657</a>]</span>. This section provides
- further detail on specific requirements to meet use case needs.<a href="#section-3-1" class="pilcrow">¶</a></p>
+        further detail on specific requirements to meet use case needs.<a href="#section-3-1" class="pilcrow">¶</a></p>
 <section id="section-3.1">
         <h3 id="name-operating-efficiency-use-ca">
 <a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-operating-efficiency-use-ca" class="section-name selfRef">Operating Efficiency Use Case</a>
@@ -1963,14 +1979,14 @@ Likewise, the assigning of an address property at one layer does not imply the p
 <p id="section-3.1-1">Several operational efficiency requirements exist; these include:<a href="#section-3.1-1" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-3.1-2">
             <li id="section-3.1-2.1">Distribution of Predicted Topology-change. The predicted topology-change information may include the valid time,
- invalid time, link costs at different times, and change periods.<a href="#section-3.1-2.1" class="pilcrow">¶</a>
+                invalid time, link costs at different times, and change periods.<a href="#section-3.1-2.1" class="pilcrow">¶</a>
 </li>
           <li id="section-3.1-2.2">Topology Changes. The predicted topology-change information may change due to forecasted or unforecasted changes. The managing entity should be capable of providing a partial or full topology update as often as needed.<a href="#section-3.1-2.2" class="pilcrow">¶</a>
 </li>
           <li id="section-3.1-2.3">The Minimum Route Recalculation Interval and Threshold. Although some cases may assume that the cost persists for a sufficient
- amount of time, considering that each route contains multiple links, the change frequency of the path may be much higher than
- the cost. In this case, the minimum recalculation interval or cost change threshold is needed to determine when a route
- recalculation is required. Of course, scheduled topology connection changes must be considered when path calculation is required.<a href="#section-3.1-2.3" class="pilcrow">¶</a>
+                amount of time, considering that each route contains multiple links, the change frequency of the path may be much higher than
+                the cost. In this case, the minimum recalculation interval or cost change threshold is needed to determine when a route
+                recalculation is required. Of course, scheduled topology connection changes must be considered when path calculation is required.<a href="#section-3.1-2.3" class="pilcrow">¶</a>
 </li>
         </ol>
 </section>
@@ -1996,7 +2012,7 @@ Likewise, the assigning of an address property at one layer does not imply the p
         time to achieve the stability of Time-Variant Routing and avoid
         redundant advertisements. For example, an entity in the system is
         suddenly damaged due to external factors.
- Changes in entity state outside of a schedule are communicated to other entities in a network through existing routing protocol mechanism, where they exist.<a href="#section-4.1-3" class="pilcrow">¶</a></p>
+        Changes in entity state outside of a schedule are communicated to other entities in a network through existing routing protocol mechanism, where they exist.<a href="#section-4.1-3" class="pilcrow">¶</a></p>
 <p id="section-4.1-4">A manager should provide an advertisement methodology for responding to
         abnormal changes in the system.<a href="#section-4.1-4" class="pilcrow">¶</a></p>
 </section>
@@ -2254,8 +2270,12 @@ Likewise, the assigning of an address property at one layer does not imply the p
 <span class="refAuthor">Clemm, A.</span>, <span class="refAuthor">Medved, J.</span>, <span class="refAuthor">Varga, R.</span>, <span class="refAuthor">Liu, X.</span>, <span class="refAuthor">Ananthakrishnan, H.</span>, and <span class="refAuthor">N. Bahadur</span>, <span class="refTitle">"A YANG Data Model for Layer 3 Topologies"</span>, <span class="seriesInfo">RFC 8346</span>, <span class="seriesInfo">DOI 10.17487/RFC8346</span>, <time datetime="2018-03" class="refDate">March 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8346">https://www.rfc-editor.org/info/rfc8346</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC8944">[RFC8944]</dt>
-      <dd>
+        <dd>
 <span class="refAuthor">Dong, J.</span>, <span class="refAuthor">Wei, X.</span>, <span class="refAuthor">Wu, Q.</span>, <span class="refAuthor">Boucadair, M.</span>, and <span class="refAuthor">A. Liu</span>, <span class="refTitle">"A YANG Data Model for Layer 2 Network Topologies"</span>, <span class="seriesInfo">RFC 8944</span>, <span class="seriesInfo">DOI 10.17487/RFC8944</span>, <time datetime="2020-11" class="refDate">November 2020</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8944">https://www.rfc-editor.org/info/rfc8944</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="X.731">[X.731]</dt>
+      <dd>
+<span class="refAuthor">ITU</span>, <span class="refTitle">"Information Technology - Open Systems Interconnection - System Management: State Management Function"</span>, <span class="seriesInfo">ITU-T X.731</span>, <time datetime="1993-01-31" class="refDate">31 January 1993</time>, <span>&lt;<a href="https://www.itu.int/rec/T-REC-X.731">https://www.itu.int/rec/T-REC-X.731</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
