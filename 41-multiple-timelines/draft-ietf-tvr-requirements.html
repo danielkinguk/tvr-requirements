@@ -35,7 +35,7 @@
     PyYAML 6.0.2
     requests 2.32.5
     setuptools 80.9.0
-    wcwidth 0.2.13
+    wcwidth 0.2.14
 -->
 <link href="draft-ietf-tvr-requirements.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -1054,11 +1054,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">tvr-requirements</td>
-<td class="right">September 2025</td>
+<td class="right">October 2025</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">King, et al.</td>
-<td class="center">Expires 3 April 2026</td>
+<td class="center">Expires 9 April 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1071,12 +1071,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-tvr-requirements-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-09-30" class="published">30 September 2025</time>
+<time datetime="2025-10-06" class="published">6 October 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-04-03">3 April 2026</time></dd>
+<dd class="expires"><time datetime="2026-04-09">9 April 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1141,7 +1141,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 3 April 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 9 April 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1366,7 +1366,7 @@ Requirements on the design of TVR systems are then categorized and summarized in
 <p id="section-1.1-1">Specific terms used within this document are as follows:<a href="#section-1.1-1" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlParallel" id="section-1.1-2">
           <dt id="section-1.1-2.1">Model:</dt>
-          <dd style="margin-left: 1.5em" id="section-1.1-2.2">The universe being modeled, which defines a parameter space.<a href="#section-1.1-2.2" class="pilcrow">¶</a>
+          <dd style="margin-left: 1.5em" id="section-1.1-2.2">The universe being modeled, which defines a parameter state space.<a href="#section-1.1-2.2" class="pilcrow">¶</a>
 </dd>
           <dd class="break"></dd>
 <dt id="section-1.1-2.3">Entity:</dt>
@@ -1633,7 +1633,11 @@ Sources                                       Consumers
         </h3>
 <p id="section-2.2-1">
 This section covers different aspects of how temporality applies to any potential TVR information model.
-Each aspect is roughly independent and informs how a model can choose to include temporality in its parameter space.<a href="#section-2.2-1" class="pilcrow">¶</a></p>
+Each aspect is roughly independent and informs how a model can choose to include temporality in its parameter state space.<a href="#section-2.2-1" class="pilcrow">¶</a></p>
+<p id="section-2.2-2">
+Each of these aspects can be different across different schedule domains, but are expected to be consistent within a single schedule domain.
+Also, just because an entire model or domain allows high <span><a href="#time-scope" class="internal xref">granularity</a> (<a href="#time-scope" class="auto internal xref">Section 2.2.1</a>)</span> or high <span><a href="#time-precision" class="internal xref">precision</a> (<a href="#time-precision" class="auto internal xref">Section 2.2.3</a>)</span> does not mean that every single entity needs to make use of those aspects (or even that every entity needs to have time-variance at all).
+It is perfectly valid for some entities to have time-variance and others to have none.<a href="#section-2.2-2" class="pilcrow">¶</a></p>
 <div id="time-scope">
 <section id="section-2.2.1">
           <h4 id="name-scope-of-time-variability">
@@ -1661,7 +1665,7 @@ Two extremes of this aspect are:<a href="#section-2.2.1-4" class="pilcrow">¶</a
           </ul>
 <p id="section-2.2.1-6">
 Separate from which entities can have a schedule applied to them is the notion of which time-variant property values must be synchronized for consistency of network operation.
-In cases where there does not need to be tight synchronization between some schedules, they can be managed in separate domains and effectively form separate timelines where the schedule time in one domain has no relation with any other domain.<a href="#section-2.2.1-6" class="pilcrow">¶</a></p>
+In cases where there does not need to be tight synchronization between some schedules, they can be managed in separate domains and effectively form separate timelines where the schedule time in one domain has little to no relation with any other domain.<a href="#section-2.2.1-6" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-2.2.1-7.1">One extreme of this aspect is to combine all scheduled state together into a single domain and single timeline. For cases where all nodes in a network have time-varying properties that affect their topological neighbors, all of the nodes need to be scheduled in the same domain to avoid misaligned configuration between neighbors. The orchestration and management burden in this case is the need to consider all schedules jointly and the operational burden is the need for synchronization of schedule execution across managed devices.<a href="#section-2.2.1-7.1" class="pilcrow">¶</a>
 </li>
@@ -1685,6 +1689,7 @@ In other cases the model may allow indefinitely-large schedules but the processi
 <p id="section-2.2.2-2">
 One possible rationale for separating schedule domains is the duration of the time horizon needed for entities in each domain.<a href="#section-2.2.2-2" class="pilcrow">¶</a></p>
 </section>
+<div id="time-precision">
 <section id="section-2.2.3">
           <h4 id="name-time-precision-and-accuracy">
 <a href="#section-2.2.3" class="section-number selfRef">2.2.3. </a><a href="#name-time-precision-and-accuracy" class="section-name selfRef">Time Precision and Accuracy</a>
@@ -1695,6 +1700,7 @@ It is up to specific models to define the precision of time values and the requi
 <p id="section-2.2.3-2">
 One possible rationale for separating schedule domains is the level of time precision or accuracy of execution time able to be upheld across entities in each domain.<a href="#section-2.2.3-2" class="pilcrow">¶</a></p>
 </section>
+</div>
 <section id="section-2.2.4">
           <h4 id="name-validity-in-a-schedule">
 <a href="#section-2.2.4" class="section-number selfRef">2.2.4. </a><a href="#name-validity-in-a-schedule" class="section-name selfRef">Validity in a Schedule</a>

@@ -5,12 +5,12 @@
 Network Working Group                                            D. King
 Internet-Draft                                      Lancaster University
 Intended status: Informational                           L. M. Contreras
-Expires: 3 April 2026                                         Telefonica
+Expires: 9 April 2026                                         Telefonica
                                                                 B. Sipos
                                                                  JHU/APL
                                                                 L. Zhang
                                                                   Huawei
-                                                       30 September 2025
+                                                          6 October 2025
 
 
                 TVR (Time-Variant Routing) Requirements
@@ -59,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 3 April 2026.
+   This Internet-Draft will expire on 9 April 2026.
 
 Copyright Notice
 
@@ -151,7 +151,8 @@ Table of Contents
 
    Specific terms used within this document are as follows:
 
-   Model:  The universe being modeled, which defines a parameter space.
+   Model:  The universe being modeled, which defines a parameter state
+      space.
 
    Entity:  A single separable item within the model.  Each entity has a
       stable identity which is time-invariant.
@@ -429,7 +430,16 @@ Table of Contents
    This section covers different aspects of how temporality applies to
    any potential TVR information model.  Each aspect is roughly
    independent and informs how a model can choose to include temporality
-   in its parameter space.
+   in its parameter state space.
+
+   Each of these aspects can be different across different schedule
+   domains, but are expected to be consistent within a single schedule
+   domain.  Also, just because an entire model or domain allows high
+   granularity (Section 2.2.1) or high precision (Section 2.2.3) does
+   not mean that every single entity needs to make use of those aspects
+   (or even that every entity needs to have time-variance at all).  It
+   is perfectly valid for some entities to have time-variance and others
+   to have none.
 
 2.2.1.  Scope of Time-Variability
 
@@ -460,8 +470,8 @@ Table of Contents
    for consistency of network operation.  In cases where there does not
    need to be tight synchronization between some schedules, they can be
    managed in separate domains and effectively form separate timelines
-   where the schedule time in one domain has no relation with any other
-   domain.
+   where the schedule time in one domain has little to no relation with
+   any other domain.
 
    *  One extreme of this aspect is to combine all scheduled state
       together into a single domain and single timeline.  For cases
