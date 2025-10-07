@@ -538,7 +538,7 @@ Likewise, the assigning of an address property at one layer does not imply the p
         <t>Time-Variant Routing (TVR) introduces a scenario of calculating a path, or sub-path within a network, taking into account the timing
            of message transmission or receipt as an integral part of the overall route computation.</t>
         <t>Furthermore, synchronization of network time across TVR-capable entities is critical.</t>
-        <t>Three scenarios are currently considered when computing TVR-enabled paths.</t>
+        <t>Three scenarios are currently considered when computing TVR-enabled paths and described in the following subsections.</t>
          <section anchor="Centralized">
          <name>Centralized</name>
          <t>The network entities will receive the time variable information and traffic forwarding rules directly from a logically centralized source, an Orchestrator or network controller. The time-variable data may then be
