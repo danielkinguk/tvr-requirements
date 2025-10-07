@@ -5,12 +5,12 @@
 Network Working Group                                            D. King
 Internet-Draft                                      Lancaster University
 Intended status: Informational                           L. M. Contreras
-Expires: 9 April 2026                                         Telefonica
+Expires: 10 April 2026                                        Telefonica
                                                                 B. Sipos
                                                                  JHU/APL
                                                                 L. Zhang
                                                                   Huawei
-                                                          6 October 2025
+                                                          7 October 2025
 
 
                 TVR (Time-Variant Routing) Requirements
@@ -59,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 9 April 2026.
+   This Internet-Draft will expire on 10 April 2026.
 
 Copyright Notice
 
@@ -84,16 +84,18 @@ Table of Contents
        2.1.1.  Schedule Visibility
        2.1.2.  Generation Locality
        2.1.3.  Execution Locality
+       2.1.4.  Configuration and Operational State
      2.2.  General Temporality
        2.2.1.  Scope of Time-Variability
        2.2.2.  Time Horizon
        2.2.3.  Time Precision and Accuracy
-       2.2.4.  Validity in a Schedule
-       2.2.5.  Periodicity in a Schedule
-       2.2.6.  Continuity in a Schedule
-       2.2.7.  Time-Overlap and Priority
-       2.2.8.  Property Value Interpolation
-       2.2.9.  Changes to Model State
+       2.2.4.  Time Synchronization and Margin
+       2.2.5.  Validity in a Schedule
+       2.2.6.  Periodicity in a Schedule
+       2.2.7.  Continuity in a Schedule
+       2.2.8.  Time-Overlap and Priority
+       2.2.9.  Property Value Interpolation
+       2.2.10. Changes to Model State
      2.3.  Topologies
        2.3.1.  Nodes
        2.3.2.  Termination Points
@@ -371,7 +373,7 @@ Table of Contents
    which will then cause all the devices to be off-schedule.
 
    When schedules are executed on each device, there is a risk that
-   clocks on different devices become desynchronized beyond the time
+   clocks on different devices become de-synchronized beyond the time
    precision required of the schedule.  Because real-time clocks are
    necessary for more than just schedule execution, and because accurate
    and precise time sources exist outside of network time (_e.g._, GPS
@@ -424,6 +426,26 @@ Table of Contents
           Sources                                       Consumers
 
         Figure 3: Centralized Generation with Distributed Execution
+
+2.1.4.  Configuration and Operational State
+
+   Most of the discussion in this document treats scheduling as the
+   means for influencing when configuration on some managed device is
+   planned to be updated.  But as explained in [X.731] devices are
+   expected to have an operational state alongside many administrative
+   states being configured.  For example, a known delay between enabling
+   the modem supporting a termination point or link and the modem
+   actually being usable for sending traffic.
+
+   Strategies for modeling time margins around changes of configuration
+   are discussed in Section 2.2.4.  Even when time margins are taken
+   into account, the schedules are still being applied to cascading
+   subsequent changes of administrative state within configurations.
+   Those changes can motivate subsequent changes in operational states.
+   While the administrative changes follow the schedule times, the
+   operational states could be effective at different times across
+   devices (_e.g._, because of different implementations or other
+   device-specific reasons).
 
 2.2.  General Temporality
 
@@ -530,7 +552,30 @@ Table of Contents
    of time precision or accuracy of execution time able to be upheld
    across entities in each domain.
 
-2.2.4.  Validity in a Schedule
+2.2.4.  Time Synchronization and Margin
+
+   Any schedule execution and device configuration (see locality options
+   in Section 2.1.3) will necessarily have some misalignment in the
+   synchronization of time across all devices operating in the same
+   timeline.  This misalignment is hopefully bounded by design and able
+   to be characterized statistically.
+
+   It is important for the activity of schedule generation (see
+   Section 2.1.2) to take the misalignment into account as some form of
+   margin around the instants of scheduled change.  The exact form that
+   this margin would take depends on the specific time-varying
+   properties.
+
+   Another source of time margin in a time-varying system can be due to
+   a desire to model the time delay between changing the administrative
+   state of some subsystem and a subsequent change to its operational
+   state as a consequence.
+
+   Regardless of the reason for a schedule margin being accounted for,
+   it is critical that the margin is not double-counted by different
+   activities in the schedule processing chain.
+
+2.2.5.  Validity in a Schedule
 
    Within a single schedule over its timeline there will likely be a
    need to have multiple discrete intervals of validity over absolute
@@ -544,7 +589,7 @@ Table of Contents
    to resort to having multiple model entities represent the same
    modeled "thing" which can lead to confusion and inefficiency.
 
-2.2.5.  Periodicity in a Schedule
+2.2.6.  Periodicity in a Schedule
 
    Separate from the concept of intervals of validity in absolute
    schedule time, there can be a need to model repetitive states in a
@@ -556,9 +601,12 @@ Table of Contents
    A model which does not include the notion of periodicity within a
    schedule could be used in situations where discrete intervals of
    validity are needed to handle periodic state changes which is neither
-   storage nor processing efficient.
+   storage nor processing efficient.  Periodicity can also be seen as
+   unnecessary when the time horizon will always be small enough
+   compared to any schedule time period that only one repetition is ever
+   seen within the horizon in one state.
 
-2.2.6.  Continuity in a Schedule
+2.2.7.  Continuity in a Schedule
 
    A schedule which includes a sequence of time intervals needs to
    ensure that the interpretation of those intervals in the schedule
@@ -572,7 +620,7 @@ Table of Contents
    in the schedule timeline, that the scheduled state takes effect at an
    interval's start and continues until the subsequent state.
 
-2.2.7.  Time-Overlap and Priority
+2.2.8.  Time-Overlap and Priority
 
    In an ideal situation a model would be guaranteed by design to
    contain only contiguous and non-overlapping schedules for each time-
@@ -586,7 +634,7 @@ Table of Contents
    can be temporarily (in schedule time) superseded by a short-duration
    state.
 
-2.2.8.  Property Value Interpolation
+2.2.9.  Property Value Interpolation
 
    When a schedule is applied to an entity in a way which is more
    granular (Section 2.2.1) than just indicating when that whole entity
@@ -620,7 +668,7 @@ Table of Contents
    network it is expected that different types of interpolation will be
    needed for different represented quantities.
 
-2.2.9.  Changes to Model State
+2.2.10.  Changes to Model State
 
    Separate from how a time-variant model can contain a schedule
    timeline within the model state, a model design will need to consider
@@ -733,7 +781,7 @@ Table of Contents
    entities is critical.
 
    Three scenarios are currently considered when computing TVR-enabled
-   paths and described in the following subsections.
+   paths.
 
 2.4.1.  Centralized
 
@@ -827,7 +875,7 @@ Table of Contents
    black holes, persistent loops, or denial-of-service conditions by
    injecting false time-sensitive state changes.  Even in non-malicious
    scenarios, incorrect or misaligned scheduling or misconfiguration, or
-   time desynchronization, may lead to unintended forwarding behavior,
+   time de-synchronization, may lead to unintended forwarding behavior,
    potentially degrading performance or causing service disruptions.
 
    To mitigate these risks, TVR solution mechanisms should incorporate
@@ -1176,6 +1224,11 @@ Informative References
               YANG Data Model for Layer 2 Network Topologies", RFC 8944,
               DOI 10.17487/RFC8944, November 2020,
               <https://www.rfc-editor.org/info/rfc8944>.
+
+   [X.731]    ITU, "Information Technology - Open Systems
+              Interconnection - System Management: State Management
+              Function", ITU-T X.731, 31 January 1993,
+              <https://www.itu.int/rec/T-REC-X.731>.
 
 Authors' Addresses
 
