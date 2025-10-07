@@ -428,9 +428,9 @@ Table of Contents
    means for influencing when configuration on some managed device is
    planned to be updated.  But as explained in [X.731] devices are
    expected to have an operational state alongside many administrative
-   states.  For example, a known delay between enabling the modem
-   supporting a termination point or link and the modem actually being
-   usable for sending traffic.
+   states being configured.  For example, a known delay between enabling
+   the modem supporting a termination point or link and the modem
+   actually being usable for sending traffic.
 
    Strategies for modeling time margins around changes of configuration
    are discussed in Section 2.2.4.  Even when time margins are taken
