@@ -292,7 +292,9 @@ For example, a known delay between enabling the modem supporting a termination p
           </t>
           <t>
 Strategies for modeling time margins around changes of configuration are discussed in <xref target="time-sync"/>.
-Even when time margins are taken into account, the schedules are still being applied to cascading subsequent changes of administrative state within configurations and have no immediate or direct relationship to (expected) subsequent changes in operational state.
+Even when time margins are taken into account, the schedules are still being applied to cascading subsequent changes of administrative state within configurations.
+Those changes can motivate subsequent changes in operational states.
+While the administrative changes follow the schedule times, the operational states could be effective at different times across devices (<em>e.g.</em>, because of different implementations or other device-specific reasons).
           </t>
         </section>
       </section>
