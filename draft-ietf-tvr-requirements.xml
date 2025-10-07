@@ -241,7 +241,7 @@ When schedules are both generated and executed centrally, there is a consistency
 To recover from this kind of situation, either reattempt to configure the misaligned device may be made to bring it back into alignment with the other devices or the other devices' configurations must be rolled-back into consistency which will then cause all the devices to be off-schedule.
           </t>
           <t>
-When schedules are executed on each device, there is a risk that clocks on different devices become desynchronized beyond the time precision required of the schedule.
+When schedules are executed on each device, there is a risk that clocks on different devices become de-synchronized beyond the time precision required of the schedule.
 Because real-time clocks are necessary for more than just schedule execution, and because accurate and precise time sources exist outside of network time (<em>e.g.</em>, GPS time) this risk can be made to have a low probability.
           </t>
           <t>
@@ -284,6 +284,20 @@ Information                               Configuration
 Sources                                       Consumers
             </artwork>
           </figure>
+        </section>
+        <section>
+          <name>Configuration and Operational State</name>
+          <t>
+Most of the discussion in this document treats scheduling as the means for influencing when configuration on some managed device is planned to be updated.
+But as explained in <xref target="X.731"/> devices are expected to have an operational state alongside many administrative states being configured.
+For example, a known delay between enabling the modem supporting a termination point or link and the modem actually being usable for sending traffic.
+          </t>
+          <t>
+Strategies for modeling time margins around changes of configuration are discussed in <xref target="time-sync"/>.
+Even when time margins are taken into account, the schedules are still being applied to cascading subsequent changes of administrative state within configurations.
+Those changes can motivate subsequent changes in operational states.
+While the administrative changes follow the schedule times, the operational states could be effective at different times across devices (<em>e.g.</em>, because of different implementations or other device-specific reasons).
+          </t>
         </section>
       </section>
       <section>
@@ -353,6 +367,23 @@ It is up to specific models to define the precision of time values and the requi
 One possible rationale for separating schedule domains is the level of time precision or accuracy of execution time able to be upheld across entities in each domain.
           </t>
         </section>
+        <section anchor="time-sync">
+          <name>Time Synchronization and Margin</name>
+          <t>
+Any schedule execution and device configuration (see locality options in <xref target="schedule-exec-locality"/>) will necessarily have some misalignment in the synchronization of time across all devices operating in the same timeline.
+This misalignment is hopefully bounded by design and able to be characterized statistically.
+          </t>
+          <t>
+It is important for the activity of schedule generation (see <xref target="schedule-gen-locality"/>) to take the misalignment into account as some form of margin around the instants of scheduled change.
+The exact form that this margin would take depends on the specific time-varying properties.
+          </t>
+          <t>
+Another source of time margin in a time-varying system can be due to a desire to model the time delay between changing the administrative state of some subsystem and a subsequent change to its operational state as a consequence.
+          </t>
+          <t>
+Regardless of the reason for a schedule margin being accounted for, it is critical that the margin is not double-counted by different activities in the schedule processing chain.
+          </t>
+        </section>
         <section>
           <name>Validity in a Schedule</name>
           <t>
@@ -371,6 +402,7 @@ One way to model a periodic change of state is to combine a set of absolute time
           </t>
           <t>
 A model which does not include the notion of periodicity within a schedule could be used in situations where discrete intervals of validity are needed to handle periodic state changes which is neither storage nor processing efficient.
+Periodicity can also be seen as unnecessary when the time horizon will always be small enough compared to any schedule time period that only one repetition is ever seen within the horizon in one state.
           </t>
         </section>
         <section>
@@ -498,20 +530,20 @@ Likewise, the assigning of an address property at one layer does not imply the p
       <section anchor="routing">
         <name>Routing</name>
         <t>Traditional network routing techniques typically use link bandwidth and delay for path calculation, and do not consider time-based factors. TVR should be
-	   capable of improving network performance and reliability in environments where entities liveness and link availability is a time-based consideration, with various factors,
+           capable of improving network performance and reliability in environments where entities liveness and link availability is a time-based consideration, with various factors,
            including power availability, interface line of sight or expected demand. </t>
         <t>However, even if some adjacency failures are predictable, others are not, including link failures and entity outages.
            Therefore, any new technique or routing protocol extension for TVR environments must be capable of handling planned and unexpected
            resource losses.</t>
-	<t>Time-Variant Routing (TVR) introduces a scenario of calculating a path, or sub-path within a network, taking into account the timing
-	   of message transmission or receipt as an integral part of the overall route computation.</t>
-	<t>Furthermore, synchronization of network time across TVR-capable entities is critical.</t>
-	<t>Three scenarios are currently considered when computing TVR-enabled paths and described in the following subsections.</t>
+        <t>Time-Variant Routing (TVR) introduces a scenario of calculating a path, or sub-path within a network, taking into account the timing
+           of message transmission or receipt as an integral part of the overall route computation.</t>
+        <t>Furthermore, synchronization of network time across TVR-capable entities is critical.</t>
+        <t>Three scenarios are currently considered when computing TVR-enabled paths.</t>
          <section anchor="Centralized">
          <name>Centralized</name>
          <t>The network entities will receive the time variable information and traffic forwarding rules directly from a logically centralized source, an Orchestrator or network controller. The time-variable data may then be
-	    processed locally by the entity entered into the scheduled routing table and specific forwarding rules applied.</t>
-	      <t>Furthermore, a centralized approach could also be used to extend existing tunnel and path delivery mechanisms and protocols to distribute traffic forwarding rules along with time-variable information. However, in certain environments, a logically centralized source may lose connectivity with network entities (as described in <xref target="schedule-exec-locality"/>), preventing timely delivery of traffic forwarding rules. To mitigate this risk, the time horizon for time-variable information should be extended accordingly.</t>
+            processed locally by the entity entered into the scheduled routing table and specific forwarding rules applied.</t>
+              <t>Furthermore, a centralized approach could also be used to extend existing tunnel and path delivery mechanisms and protocols to distribute traffic forwarding rules along with time-variable information. However, in certain environments, a logically centralized source may lose connectivity with network entities (as described in <xref target="schedule-exec-locality"/>), preventing timely delivery of traffic forwarding rules. To mitigate this risk, the time horizon for time-variable information should be extended accordingly.</t>
          </section>
          <section anchor="Distributed">
          <name>Distributed</name>
@@ -524,8 +556,8 @@ Likewise, the assigning of an address property at one layer does not imply the p
          <section anchor="Hybrid">
          <name>Hybrid</name>
          <t>In this scenario, mixed-entity TVR capability exists. Some entities will require a schedule provided by a centralized source, and others will be capable of advertising and learning scheduled information
-	    via a distributed mechanism.</t>
-	 <t>This scenario presents time and schedule synchronization and source verification challenges and will require further study, but are out of scope for this document.</t>
+            via a distributed mechanism.</t>
+         <t>This scenario presents time and schedule synchronization and source verification challenges and will require further study, but are out of scope for this document.</t>
          </section>
          <section anchor="constraints">
          <name>Constraints</name>
@@ -559,7 +591,7 @@ Likewise, the assigning of an address property at one layer does not imply the p
          <t>Time-variant network relies on accurate and timely dissemination of time-variant routing and forwarding information. However, the presence of
             malicious or unintended divergent information introduces risks that can impact network stability and operational correctness. An adversary could
             manipulate scheduled routing updates to introduce black holes, persistent loops, or denial-of-service conditions by injecting false time-sensitive
-            state changes. Even in non-malicious scenarios, incorrect or misaligned scheduling or misconfiguration, or time desynchronization, may lead to
+            state changes. Even in non-malicious scenarios, incorrect or misaligned scheduling or misconfiguration, or time de-synchronization, may lead to
             unintended forwarding behavior, potentially degrading performance or causing service disruptions.</t>
 
          <t>To mitigate these risks, TVR solution mechanisms should incorporate integrity validation and trust enforcement to ensure the correctness and
@@ -574,23 +606,22 @@ Likewise, the assigning of an address property at one layer does not imply the p
      <section anchor="tvr-use-case-requirements">
       <name>Time-Variant Use Case Requirements</name>
       <t>Several TVR use cases have been identified and discussed in <xref target="RFC9657"/>. This section provides
-	further detail on specific requirements to meet use case needs.</t>
+        further detail on specific requirements to meet use case needs.</t>
       <section>
          <name>Operating Efficiency Use Case</name>
          <t>Several operational efficiency requirements exist; these include:</t>
 
         <ol spacing="normal" type="1">
             <li>Distribution of Predicted Topology-change. The predicted topology-change information may include the valid time,
-		invalid time, link costs at different times, and change periods. </li>
+                invalid time, link costs at different times, and change periods. </li>
 
             <li>Topology Changes. The predicted topology-change information may change due to forecasted or unforecasted changes. The managing entity should be capable of providing a partial or full topology update as often as needed.</li>
 
             <li>The Minimum Route Recalculation Interval and Threshold. Although some cases may assume that the cost persists for a sufficient
-		amount of time, considering that each route contains multiple links, the change frequency of the path may be much higher than
-		the cost. In this case, the minimum recalculation interval or cost change threshold is needed to determine when a route
-		recalculation is required. Of course, scheduled topology connection changes must be considered when path calculation is required.</li>
+                amount of time, considering that each route contains multiple links, the change frequency of the path may be much higher than
+                the cost. In this case, the minimum recalculation interval or cost change threshold is needed to determine when a route
+                recalculation is required. Of course, scheduled topology connection changes must be considered when path calculation is required.</li>
           </ol>
-		
      </section>
     </section>
 
@@ -611,8 +642,8 @@ Likewise, the assigning of an address property at one layer does not imply the p
         time to achieve the stability of Time-Variant Routing and avoid
         redundant advertisements. For example, an entity in the system is
         suddenly damaged due to external factors.
-	Changes in entity state outside of a schedule are communicated to other entities in a network through existing routing protocol mechanism, where they exist.
-	</t>
+        Changes in entity state outside of a schedule are communicated to other entities in a network through existing routing protocol mechanism, where they exist.
+        </t>
 
         <t>A manager should provide an advertisement methodology for responding to
         abnormal changes in the system.</t>
@@ -757,7 +788,7 @@ Likewise, the assigning of an address property at one layer does not imply the p
 
        </section>
     </section>
-	
+
     <section anchor="iana-considerations">
       <name>IANA Considerations</name>
       <t>This document has no IANA actions.</t>
@@ -790,7 +821,7 @@ Likewise, the assigning of an address property at one layer does not imply the p
    China Mobile
    China
    Email: liupengyjy@chinamobile.com
-		
+
    Zheng (Sandy) Zhang
    ZTE Corporation
    China
@@ -833,29 +864,39 @@ Likewise, the assigning of an address property at one layer does not imply the p
             <date year="2010" month="September" day="15"/>
           </front>
         </reference>
-	<reference anchor="gNMI" target="https://www.openconfig.net/docs/gnmi/gnmi-specification/">
-	  <front>
-	    <title>gRPC Network Management Interface (gNMI)</title>
-	    <author initials="P." surname="Borman" fullname="Paul Borman">
-	    </author>
-	    <author initials="M." surname="Hines" fullname="Marcus Hines">
-	    </author>
-	    <author initials="C." surname="Lebsack" fullname="Carl Lebsack">
-	    </author>
-	    <author initials="C." surname="Morrow" fullname="Chris Morrow">
-	    </author>
-	    <author initials="A." surname="Shaikh" fullname="Anees Shaikh">
-	    </author>
-	    <author initials="R." surname="Shakir" fullname="Rob Shakir">
-	    </author>
-	    <author initials="W." surname="Li" fullname="Wen Bo Li,">
-	    </author>
-	    <author initials="D." surname="Loher" fullname="Darren Loher">
-	    </author>
-	    <date month="May" year="2023"/>
-	  </front>
-	  <refcontent>Version 10.0</refcontent>
-	</reference>
+        <reference anchor="gNMI" target="https://www.openconfig.net/docs/gnmi/gnmi-specification/">
+          <front>
+            <title>gRPC Network Management Interface (gNMI)</title>
+            <author initials="P." surname="Borman" fullname="Paul Borman">
+            </author>
+            <author initials="M." surname="Hines" fullname="Marcus Hines">
+            </author>
+            <author initials="C." surname="Lebsack" fullname="Carl Lebsack">
+            </author>
+            <author initials="C." surname="Morrow" fullname="Chris Morrow">
+            </author>
+            <author initials="A." surname="Shaikh" fullname="Anees Shaikh">
+            </author>
+            <author initials="R." surname="Shakir" fullname="Rob Shakir">
+            </author>
+            <author initials="W." surname="Li" fullname="Wen Bo Li,">
+            </author>
+            <author initials="D." surname="Loher" fullname="Darren Loher">
+            </author>
+            <date month="May" year="2023"/>
+          </front>
+          <refcontent>Version 10.0</refcontent>
+        </reference>
+        <reference anchor="X.731" target="https://www.itu.int/rec/T-REC-X.731">
+          <front>
+            <title>Information Technology - Open Systems Interconnection - System Management: State Management Function</title>
+            <seriesInfo name="ITU-T" value="X.731"/>
+            <author>
+              <organization>ITU</organization>
+            </author>
+            <date year="1993" month="January" day="31"/>
+          </front>
+        </reference>
       </references>
     </references>
  </back>
