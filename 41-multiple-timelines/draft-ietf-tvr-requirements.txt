@@ -781,7 +781,7 @@ Table of Contents
    entities is critical.
 
    Three scenarios are currently considered when computing TVR-enabled
-   paths.
+   paths and described in the following subsections.
 
 2.4.1.  Centralized
 
