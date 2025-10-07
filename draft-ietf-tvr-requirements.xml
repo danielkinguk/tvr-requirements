@@ -287,7 +287,7 @@ Sources                                       Consumers
           <name>Configuration and Operational State</name>
           <t>
 Most of the discussion in this document treats scheduling as the means for influencing when configuration on some managed device is planned to be updated.
-But as explained in <xref target="X.731"/> devices are expected to have an operational state alongside many administrative states.
+But as explained in <xref target="X.731"/> devices are expected to have an operational state alongside many administrative states being configured.
 For example, a known delay between enabling the modem supporting a termination point or link and the modem actually being usable for sending traffic.
           </t>
           <t>
