@@ -5,12 +5,12 @@
 Network Working Group                                            D. King
 Internet-Draft                                      Lancaster University
 Intended status: Informational                           L. M. Contreras
-Expires: 9 April 2026                                         Telefonica
+Expires: 10 April 2026                                        Telefonica
                                                                 B. Sipos
                                                                  JHU/APL
                                                                 L. Zhang
                                                                   Huawei
-                                                          6 October 2025
+                                                          7 October 2025
 
 
                 TVR (Time-Variant Routing) Requirements
@@ -59,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 9 April 2026.
+   This Internet-Draft will expire on 10 April 2026.
 
 Copyright Notice
 
@@ -435,9 +435,12 @@ Table of Contents
    Strategies for modeling time margins around changes of configuration
    are discussed in Section 2.2.4.  Even when time margins are taken
    into account, the schedules are still being applied to cascading
-   subsequent changes of administrative state within configurations and
-   have no immediate or direct relationship to (expected) subsequent
-   changes in operational state.
+   subsequent changes of administrative state within configurations.
+   Those changes can motivate subsequent changes in operational states.
+   While the administrative changes follow the schedule times, the
+   operational states could be effective at different times across
+   devices (_e.g._, because of different implementations or other
+   device-specific reasons).
 
 2.2.  General Temporality
 
