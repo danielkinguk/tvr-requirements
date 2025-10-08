@@ -338,7 +338,7 @@ In cases where there does not need to be tight synchronization between some sche
           </t>
           <ul>
             <li>One extreme of this aspect is to combine all scheduled state together into a single domain and single timeline. For cases where all nodes in a network have time-varying properties that affect their topological neighbors, all of the nodes need to be scheduled in the same domain to avoid misaligned configuration between neighbors. The orchestration and management burden in this case is the need to consider all schedules jointly and the operational burden is the need for synchronization of schedule execution across managed devices.</li>
-            <li>The other extreme is to consider each managed device as a separate scheduled domain, where property changes between devices need not be synchronized. This simplifies aspects of schedule execution but would likely rely on control plane communication between neighbors and peers to avoid mismatch between the actual configuraiton of any node and how it is assumed to be configured by other nodes.</li>
+            <li>The other extreme is to consider each managed device as a separate scheduled domain, where property changes between devices need not be synchronized. This simplifies aspects of schedule execution but would likely rely on control plane communication between neighbors and peers to avoid mismatch between the actual configuration of any node and how it is assumed to be configured by other nodes.</li>
           </ul>
           <t>
 It is expected that the use of time-variability in data models will fit within these extremes.
