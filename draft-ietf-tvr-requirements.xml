@@ -158,7 +158,39 @@ Requirements on the design of TVR systems are then categorized and summarized in
            as a function of the mobility of the platforms. Furthermore, link activity might be restricted to certain times of the
            day in networks without reliable access to power, such as networks harvesting energy from tidal, wind, and solar
            resources. Similarly, network traffic might be planned around energy costs or expected user data volumes in networks
-           prioritising green computing and energy efficiency over data rate.</t>
+           prioritising green computing and energy efficiency over data rate.
+        </t>
+        <section anchor="schedule-domain">
+          <name>Schedule Domains</name>
+          <t>
+The concept of a schedule domain is to allow partitioning the universe of managed entities into separate sets of entities, each with independent timelines having independent <xref target="schedule-exec-locality">schedule execution</xref> and likely independent <xref target="schedule-gen-locality">schedule generation</xref>.
+Within each domain, all schedules need to use the same timeline, need scynchronized execution, and joint schedule generation.
+          </t>
+          <t>
+Two extremes of how a system can organize schedule domains are:
+          </t>
+          <dl>
+            <dt>Universal Domain:</dt>
+            <dd>
+This extreme is to combine all scheduled state together into a single domain and single timeline.
+For cases where all nodes in a network have time-varying properties that affect their topological neighbors, all of the nodes need to be scheduled in the same domain to avoid misaligned configuration between devices.
+The orchestration and management burden in this case is the need to consider all schedules jointly and the operational burden is the need for synchronization of schedule execution across managed devices.
+            </dd>
+            <dt>Per-Device Domains:</dt>
+            <dd>
+This extreme is to consider each managed device as a separate scheduled domain, where property changes between devices need not be synchronized.
+This simplifies aspects of schedule execution but would likely rely on control plane communication between devices to avoid mismatch between the actual configuration of any node and how it is assumed to be configured by other nodes.
+The orchestration of schedules within a device in this case would likely be based on device-local needs such as for power control.
+            </dd>
+          </dl>
+          <t>
+In cases where there does not need to be tight synchronization between some schedules, they can be managed in separate domains and effectively form separate timelines where the schedule time in one domain has little to no relation with any other domain.
+          </t>
+          <t>
+A system design can choose to make some "edge" nodes or some properties of edge nodes intentionally time-invariant in order to form a logical boundary around schedule domains or possibly aligning schedule domains with routing domains so that schedule edge nodes correspond with routing edge nodes.
+This would allow routing control protocols to be used for online negotiation at domain boundaries.
+          </t>
+        </section>
         <section anchor="schedule-visibility">
           <name>Schedule Visibility</name>
           <t>
@@ -333,17 +365,8 @@ Two extremes of this aspect are:
             <li>A model where every property of every entity can be scheduled independently. This is the temporality model of <xref target="AIXM"/>.</li>
           </ul>
           <t>
-Separate from which entities can have a schedule applied to them is the notion of which time-variant property values must be synchronized for consistency of network operation.
-In cases where there does not need to be tight synchronization between some schedules, they can be managed in separate domains and effectively form separate timelines where the schedule time in one domain has little to no relation with any other domain.
-          </t>
-          <ul>
-            <li>One extreme of this aspect is to combine all scheduled state together into a single domain and single timeline. For cases where all nodes in a network have time-varying properties that affect their topological neighbors, all of the nodes need to be scheduled in the same domain to avoid misaligned configuration between neighbors. The orchestration and management burden in this case is the need to consider all schedules jointly and the operational burden is the need for synchronization of schedule execution across managed devices.</li>
-            <li>The other extreme is to consider each managed device as a separate scheduled domain, where property changes between devices need not be synchronized. This simplifies aspects of schedule execution but would likely rely on control plane communication between neighbors and peers to avoid mismatch between the actual configuration of any node and how it is assumed to be configured by other nodes.</li>
-          </ul>
-          <t>
 It is expected that the use of time-variability in data models will fit within these extremes.
 For scope and granularity, possibly applying a schedule to each entity indicating when that entity is valid or invalid, or applying a schedule to groups of properties within the entity (while leaving other properties time-invariant).
-For schedule domains, possibly choosing to make some nodes or some properties of nodes intentionally time-invariant in order to form a logical boundary between schedule domains or possibly aligning schedule domains with routing domains so that routing control protocols can be used for online negotiation at domain boundaries.
           </t>
         </section>
         <section>
