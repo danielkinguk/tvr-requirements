@@ -1058,7 +1058,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">King, et al.</td>
-<td class="center">Expires 10 April 2026</td>
+<td class="center">Expires 11 April 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1071,12 +1071,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-tvr-requirements-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-10-07" class="published">7 October 2025</time>
+<time datetime="2025-10-08" class="published">8 October 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-04-10">10 April 2026</time></dd>
+<dd class="expires"><time datetime="2026-04-11">11 April 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1141,7 +1141,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 10 April 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 11 April 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1185,16 +1185,19 @@ svg :is([fill="white"], [fill^="#fff"]) {
                 <p id="section-toc.1-1.2.2.1.1"><a href="#section-2.1" class="auto internal xref">2.1</a>.  <a href="#name-resource-scheduling" class="internal xref">Resource Scheduling</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.1.2.1">
-                    <p id="section-toc.1-1.2.2.1.2.1.1" class="keepWithNext"><a href="#section-2.1.1" class="auto internal xref">2.1.1</a>.  <a href="#name-schedule-visibility" class="internal xref">Schedule Visibility</a></p>
+                    <p id="section-toc.1-1.2.2.1.2.1.1" class="keepWithNext"><a href="#section-2.1.1" class="auto internal xref">2.1.1</a>.  <a href="#name-schedule-domains" class="internal xref">Schedule Domains</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.1.2.2">
-                    <p id="section-toc.1-1.2.2.1.2.2.1"><a href="#section-2.1.2" class="auto internal xref">2.1.2</a>.  <a href="#name-generation-locality" class="internal xref">Generation Locality</a></p>
+                    <p id="section-toc.1-1.2.2.1.2.2.1"><a href="#section-2.1.2" class="auto internal xref">2.1.2</a>.  <a href="#name-schedule-visibility" class="internal xref">Schedule Visibility</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.1.2.3">
-                    <p id="section-toc.1-1.2.2.1.2.3.1"><a href="#section-2.1.3" class="auto internal xref">2.1.3</a>.  <a href="#name-execution-locality" class="internal xref">Execution Locality</a></p>
+                    <p id="section-toc.1-1.2.2.1.2.3.1"><a href="#section-2.1.3" class="auto internal xref">2.1.3</a>.  <a href="#name-generation-locality" class="internal xref">Generation Locality</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.1.2.4">
-                    <p id="section-toc.1-1.2.2.1.2.4.1"><a href="#section-2.1.4" class="auto internal xref">2.1.4</a>.  <a href="#name-configuration-and-operation" class="internal xref">Configuration and Operational State</a></p>
+                    <p id="section-toc.1-1.2.2.1.2.4.1"><a href="#section-2.1.4" class="auto internal xref">2.1.4</a>.  <a href="#name-execution-locality" class="internal xref">Execution Locality</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.1.2.5">
+                    <p id="section-toc.1-1.2.2.1.2.5.1"><a href="#section-2.1.5" class="auto internal xref">2.1.5</a>.  <a href="#name-configuration-and-operation" class="internal xref">Configuration and Operational State</a></p>
 </li>
                 </ul>
 </li>
@@ -1494,102 +1497,135 @@ Requirements on the design of TVR systems are then categorized and summarized in
            day in networks without reliable access to power, such as networks harvesting energy from tidal, wind, and solar
            resources. Similarly, network traffic might be planned around energy costs or expected user data volumes in networks
            prioritising green computing and energy efficiency over data rate.<a href="#section-2.1-1" class="pilcrow">¶</a></p>
-<div id="schedule-visibility">
+<div id="schedule-domain">
 <section id="section-2.1.1">
-          <h4 id="name-schedule-visibility">
-<a href="#section-2.1.1" class="section-number selfRef">2.1.1. </a><a href="#name-schedule-visibility" class="section-name selfRef">Schedule Visibility</a>
+          <h4 id="name-schedule-domains">
+<a href="#section-2.1.1" class="section-number selfRef">2.1.1. </a><a href="#name-schedule-domains" class="section-name selfRef">Schedule Domains</a>
           </h4>
 <p id="section-2.1.1-1">
-Because scheduled time-variance is not a part of existing routing algorithms and managed data models, not all routing applications will be made to handle schedules as part of the routing parameters intrinsically.<a href="#section-2.1.1-1" class="pilcrow">¶</a></p>
+The concept of a schedule domain is to allow partitioning the universe of managed entities into separate sets of entities, each with independent timelines having independent <span><a href="#schedule-exec-locality" class="internal xref">schedule execution</a> (<a href="#schedule-exec-locality" class="auto internal xref">Section 2.1.4</a>)</span> and likely independent <span><a href="#schedule-gen-locality" class="internal xref">schedule generation</a> (<a href="#schedule-gen-locality" class="auto internal xref">Section 2.1.3</a>)</span>.
+Within each domain, all schedules need to use the same timeline, need scynchronized execution, and joint schedule generation.<a href="#section-2.1.1-1" class="pilcrow">¶</a></p>
 <p id="section-2.1.1-2">
-Two extremes of schedules being associated with routing data are:<a href="#section-2.1.1-2" class="pilcrow">¶</a></p>
+Two extremes of how a system can organize schedule domains are:<a href="#section-2.1.1-2" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlParallel" id="section-2.1.1-3">
-            <dt id="section-2.1.1-3.1">Intrinsic Schedule:</dt>
+            <dt id="section-2.1.1-3.1">Universal Domain:</dt>
             <dd style="margin-left: 1.5em" id="section-2.1.1-3.2">
-In this situation, the schedule is an intrinsic part of the managed data model which is visible to the routing application and used as part of the routing algorithms.
-When the schedule is intrinsic, there is not necessarily the notion of a schedule being "executed" in wall-clock time because the time-varying parameters are ingested as part of the routing algorithms natural functioning.<a href="#section-2.1.1-3.2" class="pilcrow">¶</a>
+This extreme is to combine all scheduled state together into a single domain and single timeline.
+For cases where all nodes in a network have time-varying properties that affect their topological neighbors, all of the nodes need to be scheduled in the same domain to avoid misaligned configuration between devices.
+The orchestration and management burden in this case is the need to consider all schedules jointly and the operational burden is the need for synchronization of schedule execution across managed devices.<a href="#section-2.1.1-3.2" class="pilcrow">¶</a>
 </dd>
             <dd class="break"></dd>
-<dt id="section-2.1.1-3.3">Extrinsic Schedule:</dt>
+<dt id="section-2.1.1-3.3">Per-Device Domains:</dt>
             <dd style="margin-left: 1.5em" id="section-2.1.1-3.4">
-In this situation, the schedule is not part of the managed data proper but maintained within the Orchestrator; the routing application only sees the effects of changes in routing parameters as the schedule is executed (in wall-clock time) by the Agent.<a href="#section-2.1.1-3.4" class="pilcrow">¶</a>
+This extreme is to consider each managed device as a separate scheduled domain, where property changes between devices need not be synchronized.
+This simplifies aspects of schedule execution but would likely rely on control plane communication between devices to avoid mismatch between the actual configuration of any node and how it is assumed to be configured by other nodes.
+The orchestration of schedules within a device in this case would likely be based on device-local needs such as for power control.<a href="#section-2.1.1-3.4" class="pilcrow">¶</a>
 </dd>
           <dd class="break"></dd>
 </dl>
 <p id="section-2.1.1-4">
+In cases where there does not need to be tight synchronization between some schedules, they can be managed in separate domains and effectively form separate timelines where the schedule time in one domain has little to no relation with any other domain.<a href="#section-2.1.1-4" class="pilcrow">¶</a></p>
+<p id="section-2.1.1-5">
+A system design can choose to make some "edge" nodes or some properties of edge nodes intentionally time-invariant in order to form a logical boundary around schedule domains or possibly aligning schedule domains with routing domains so that schedule edge nodes correspond with routing edge nodes.
+This would allow routing control protocols to be used for online negotiation at domain boundaries.<a href="#section-2.1.1-5" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="schedule-visibility">
+<section id="section-2.1.2">
+          <h4 id="name-schedule-visibility">
+<a href="#section-2.1.2" class="section-number selfRef">2.1.2. </a><a href="#name-schedule-visibility" class="section-name selfRef">Schedule Visibility</a>
+          </h4>
+<p id="section-2.1.2-1">
+Because scheduled time-variance is not a part of existing routing algorithms and managed data models, not all routing applications will be made to handle schedules as part of the routing parameters intrinsically.<a href="#section-2.1.2-1" class="pilcrow">¶</a></p>
+<p id="section-2.1.2-2">
+Two extremes of schedules being associated with routing data are:<a href="#section-2.1.2-2" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-2.1.2-3">
+            <dt id="section-2.1.2-3.1">Intrinsic Schedule:</dt>
+            <dd style="margin-left: 1.5em" id="section-2.1.2-3.2">
+In this situation, the schedule is an intrinsic part of the managed data model which is visible to the routing application and used as part of the routing algorithms.
+When the schedule is intrinsic, there is not necessarily the notion of a schedule being "executed" in wall-clock time because the time-varying parameters are ingested as part of the routing algorithms natural functioning.<a href="#section-2.1.2-3.2" class="pilcrow">¶</a>
+</dd>
+            <dd class="break"></dd>
+<dt id="section-2.1.2-3.3">Extrinsic Schedule:</dt>
+            <dd style="margin-left: 1.5em" id="section-2.1.2-3.4">
+In this situation, the schedule is not part of the managed data proper but maintained within the Orchestrator; the routing application only sees the effects of changes in routing parameters as the schedule is executed (in wall-clock time) by the Agent.<a href="#section-2.1.2-3.4" class="pilcrow">¶</a>
+</dd>
+          <dd class="break"></dd>
+</dl>
+<p id="section-2.1.2-4">
 There is also the possibility of an intermediate situation where the schedule is still part of the managed data model but is visible only to, and executed in wall-clock time by, the management Agent.
-This allows a more distributed use of scheduled data than centralizing its processing in an Orchestrator.<a href="#section-2.1.1-4" class="pilcrow">¶</a></p>
+This allows a more distributed use of scheduled data than centralizing its processing in an Orchestrator.<a href="#section-2.1.2-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="schedule-gen-locality">
-<section id="section-2.1.2">
+<section id="section-2.1.3">
           <h4 id="name-generation-locality">
-<a href="#section-2.1.2" class="section-number selfRef">2.1.2. </a><a href="#name-generation-locality" class="section-name selfRef">Generation Locality</a>
+<a href="#section-2.1.3" class="section-number selfRef">2.1.3. </a><a href="#name-generation-locality" class="section-name selfRef">Generation Locality</a>
           </h4>
-<p id="section-2.1.2-1">
-The generation of a scheduled data model depends on collecting source data (which likely has some temporal information in it to begin with), choosing a time horizon to schedule within, and then processing the source data into an overall schedule.<a href="#section-2.1.2-1" class="pilcrow">¶</a></p>
-<p id="section-2.1.2-2">
-Two extremes for locality of schedule generation are:<a href="#section-2.1.2-2" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlParallel" id="section-2.1.2-3">
-            <dt id="section-2.1.2-3.1">Centralized Generation:</dt>
-            <dd style="margin-left: 1.5em" id="section-2.1.2-3.2">
-              <p id="section-2.1.2-3.2.1">
+<p id="section-2.1.3-1">
+The generation of a scheduled data model depends on collecting source data (which likely has some temporal information in it to begin with), choosing a time horizon to schedule within, and then processing the source data into an overall schedule.<a href="#section-2.1.3-1" class="pilcrow">¶</a></p>
+<p id="section-2.1.3-2">
+Two extremes for locality of schedule generation are:<a href="#section-2.1.3-2" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-2.1.3-3">
+            <dt id="section-2.1.3-3.1">Centralized Generation:</dt>
+            <dd style="margin-left: 1.5em" id="section-2.1.3-3.2">
+              <p id="section-2.1.3-3.2.1">
 In this situation, all schedule generation is centralized within a network Orchestrator and changes are sent to routing applications in wall-clock time via a management interface.
-Even though the generation of the schedule is centralized, both the schedule visibility (within the data model) and the locality of how the schedule is executed are unconstrained.<a href="#section-2.1.2-3.2.1" class="pilcrow">¶</a></p>
-<p id="section-2.1.2-3.2.2">
-For example, a schedule could be generated in a central orchestrator synchronized to all managed devices which then execute the schedule in a distributed manner.<a href="#section-2.1.2-3.2.2" class="pilcrow">¶</a></p>
+Even though the generation of the schedule is centralized, both the schedule visibility (within the data model) and the locality of how the schedule is executed are unconstrained.<a href="#section-2.1.3-3.2.1" class="pilcrow">¶</a></p>
+<p id="section-2.1.3-3.2.2">
+For example, a schedule could be generated in a central orchestrator synchronized to all managed devices which then execute the schedule in a distributed manner.<a href="#section-2.1.3-3.2.2" class="pilcrow">¶</a></p>
 </dd>
             <dd class="break"></dd>
-<dt id="section-2.1.2-3.3">Distributed Generation:</dt>
-            <dd style="margin-left: 1.5em" id="section-2.1.2-3.4">
-This situation corresponds with the intrinsic or intermediate schedule visibility. Where a schedule (with a potentially limited time horizon from what is known at the orchestrator) is part of the managed data which is distributed to managed devices to be handled either by the Agent or by the routing Application itself.<a href="#section-2.1.2-3.4" class="pilcrow">¶</a>
+<dt id="section-2.1.3-3.3">Distributed Generation:</dt>
+            <dd style="margin-left: 1.5em" id="section-2.1.3-3.4">
+This situation corresponds with the intrinsic or intermediate schedule visibility. Where a schedule (with a potentially limited time horizon from what is known at the orchestrator) is part of the managed data which is distributed to managed devices to be handled either by the Agent or by the routing Application itself.<a href="#section-2.1.3-3.4" class="pilcrow">¶</a>
 </dd>
           <dd class="break"></dd>
 </dl>
 </section>
 </div>
 <div id="schedule-exec-locality">
-<section id="section-2.1.3">
+<section id="section-2.1.4">
           <h4 id="name-execution-locality">
-<a href="#section-2.1.3" class="section-number selfRef">2.1.3. </a><a href="#name-execution-locality" class="section-name selfRef">Execution Locality</a>
+<a href="#section-2.1.4" class="section-number selfRef">2.1.4. </a><a href="#name-execution-locality" class="section-name selfRef">Execution Locality</a>
           </h4>
-<p id="section-2.1.3-1">
-Depending on the visibility of schedules within a data model (see <a href="#schedule-visibility" class="auto internal xref">Section 2.1.1</a>) there are different options for where the schedule may be executed, and ultimately influence a time-varying configuration on a managed device.<a href="#section-2.1.3-1" class="pilcrow">¶</a></p>
-<p id="section-2.1.3-2">
-Two extremes for locality of schedule execution are:<a href="#section-2.1.3-2" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlParallel" id="section-2.1.3-3">
-            <dt id="section-2.1.3-3.1">Centralized Execution:</dt>
-            <dd style="margin-left: 1.5em" id="section-2.1.3-3.2">
-              <p id="section-2.1.3-3.2.1">
+<p id="section-2.1.4-1">
+Depending on the visibility of schedules within a data model (see <a href="#schedule-visibility" class="auto internal xref">Section 2.1.2</a>) there are different options for where the schedule may be executed, and ultimately influence a time-varying configuration on a managed device.<a href="#section-2.1.4-1" class="pilcrow">¶</a></p>
+<p id="section-2.1.4-2">
+Two extremes for locality of schedule execution are:<a href="#section-2.1.4-2" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-2.1.4-3">
+            <dt id="section-2.1.4-3.1">Centralized Execution:</dt>
+            <dd style="margin-left: 1.5em" id="section-2.1.4-3.2">
+              <p id="section-2.1.4-3.2.1">
 In this situation, all schedule execution is centralized within a network Orchestrator and changes are sent to routing applications in wall-clock time via a management interface.
-This situation can apply to any type of schedule visibility, but only to centralized generation because the full scheduled data model needs to be available to the entity performing the execution.<a href="#section-2.1.3-3.2.1" class="pilcrow">¶</a></p>
+This situation can apply to any type of schedule visibility, but only to centralized generation because the full scheduled data model needs to be available to the entity performing the execution.<a href="#section-2.1.4-3.2.1" class="pilcrow">¶</a></p>
 </dd>
             <dd class="break"></dd>
-<dt id="section-2.1.3-3.3">Distributed Execution:</dt>
-            <dd style="margin-left: 1.5em" id="section-2.1.3-3.4">
-              <p id="section-2.1.3-3.4.1">
+<dt id="section-2.1.4-3.3">Distributed Execution:</dt>
+            <dd style="margin-left: 1.5em" id="section-2.1.4-3.4">
+              <p id="section-2.1.4-3.4.1">
 In this situation, schedules are executed on each managed device independently but based on synchronized clocks.
-This situation corresponds with the Intrinsic or intermediate schedule visibility, where a schedule (with a potentially limited time horizon from what is known at the Orchestrator) is part of the managed data which is distributed to managed devices to be handled either by the Agent or by the routing Application itself.<a href="#section-2.1.3-3.4.1" class="pilcrow">¶</a></p>
-<p id="section-2.1.3-3.4.2">
+This situation corresponds with the Intrinsic or intermediate schedule visibility, where a schedule (with a potentially limited time horizon from what is known at the Orchestrator) is part of the managed data which is distributed to managed devices to be handled either by the Agent or by the routing Application itself.<a href="#section-2.1.4-3.4.1" class="pilcrow">¶</a></p>
+<p id="section-2.1.4-3.4.2">
 When schedules are distributed to the managed devices, it necessarily increases the amount of data that the managing device needs to synchronize across the network.
-The ratio of increased size can be mitigated by only distributing a limited time horizon to each device within a sliding window that moves forward in non-real-time.<a href="#section-2.1.3-3.4.2" class="pilcrow">¶</a></p>
+The ratio of increased size can be mitigated by only distributing a limited time horizon to each device within a sliding window that moves forward in non-real-time.<a href="#section-2.1.4-3.4.2" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 </dl>
-<p id="section-2.1.3-4">
+<p id="section-2.1.4-4">
 When schedules are both generated and executed centrally, there is a consistency risk between different managed devices because if one device fails to be reconfigured in wall-clock time its configuration will no longer align with the other devices which are supposed to all operate on the same schedule.
-To recover from this kind of situation, either reattempt to configure the misaligned device may be made to bring it back into alignment with the other devices or the other devices' configurations must be rolled-back into consistency which will then cause all the devices to be off-schedule.<a href="#section-2.1.3-4" class="pilcrow">¶</a></p>
-<p id="section-2.1.3-5">
+To recover from this kind of situation, either reattempt to configure the misaligned device may be made to bring it back into alignment with the other devices or the other devices' configurations must be rolled-back into consistency which will then cause all the devices to be off-schedule.<a href="#section-2.1.4-4" class="pilcrow">¶</a></p>
+<p id="section-2.1.4-5">
 When schedules are executed on each device, there is a risk that clocks on different devices become de-synchronized beyond the time precision required of the schedule.
-Because real-time clocks are necessary for more than just schedule execution, and because accurate and precise time sources exist outside of network time (<em>e.g.</em>, GPS time) this risk can be made to have a low probability.<a href="#section-2.1.3-5" class="pilcrow">¶</a></p>
-<p id="section-2.1.3-6">
+Because real-time clocks are necessary for more than just schedule execution, and because accurate and precise time sources exist outside of network time (<em>e.g.</em>, GPS time) this risk can be made to have a low probability.<a href="#section-2.1.4-5" class="pilcrow">¶</a></p>
+<p id="section-2.1.4-6">
 With distributed execution there is also a risk that a manager loses connectivity with the managed device and the device eventually runs out of time horizon in the schedule which is known to it.
-This risk can be mitigated by trading between the size and the horizon end-time of schedules distributed to managed devices. This trade can be different for different devices, where some well-connected devices operate closer to just-in-time with short horizons while other devices can be given a longer horizon to allow it to execute in the absence of near-continuous manager connectivity.<a href="#section-2.1.3-6" class="pilcrow">¶</a></p>
-<p id="section-2.1.3-7">
-One possible combination of these options is depicted in <a href="#fig-distrib-snapshot" class="auto internal xref">Figure 2</a>, where inputs are collected in a centralized schedule generator, the schedule is executed on that centralized entity by taking a snapshot (periodically or as-needed when model state changes over schedule time) and distributing the time-invariant snapshot configuration.<a href="#section-2.1.3-7" class="pilcrow">¶</a></p>
+This risk can be mitigated by trading between the size and the horizon end-time of schedules distributed to managed devices. This trade can be different for different devices, where some well-connected devices operate closer to just-in-time with short horizons while other devices can be given a longer horizon to allow it to execute in the absence of near-continuous manager connectivity.<a href="#section-2.1.4-6" class="pilcrow">¶</a></p>
+<p id="section-2.1.4-7">
+One possible combination of these options is depicted in <a href="#fig-distrib-snapshot" class="auto internal xref">Figure 2</a>, where inputs are collected in a centralized schedule generator, the schedule is executed on that centralized entity by taking a snapshot (periodically or as-needed when model state changes over schedule time) and distributing the time-invariant snapshot configuration.<a href="#section-2.1.4-7" class="pilcrow">¶</a></p>
 <span id="name-centralized-generation-with"></span><div id="fig-distrib-snapshot">
 <figure id="figure-2">
-            <div class="alignCenter art-ascii art-text artwork" id="section-2.1.3-8.1">
+            <div class="alignCenter art-ascii art-text artwork" id="section-2.1.4-8.1">
 <pre>
        Schedule        Schedule          Config
        Generation      Execution      Distribution
@@ -1607,11 +1643,11 @@ Sources                                       Consumers
 <a href="#name-centralized-generation-with" class="selfRef">Centralized Generation with Centralized Execution</a>
             </figcaption></figure>
 </div>
-<p id="section-2.1.3-9">
-An alternative combination is depicted in <a href="#fig-distrib-schedule" class="auto internal xref">Figure 3</a>, where inputs are also collected in and a schedule generated by a centralized entity, but in this alternative the scheduled model (or some filtered time horizon of it) is distributed to the managed devices to be executed independently on each device.<a href="#section-2.1.3-9" class="pilcrow">¶</a></p>
+<p id="section-2.1.4-9">
+An alternative combination is depicted in <a href="#fig-distrib-schedule" class="auto internal xref">Figure 3</a>, where inputs are also collected in and a schedule generated by a centralized entity, but in this alternative the scheduled model (or some filtered time horizon of it) is distributed to the managed devices to be executed independently on each device.<a href="#section-2.1.4-9" class="pilcrow">¶</a></p>
 <span id="name-centralized-generation-with-"></span><div id="fig-distrib-schedule">
 <figure id="figure-3">
-            <div class="alignCenter art-ascii art-text artwork" id="section-2.1.3-10.1">
+            <div class="alignCenter art-ascii art-text artwork" id="section-2.1.4-10.1">
 <pre>
         Schedule        Schedule        Schedule
        Generation     Distribution     Execution
@@ -1631,19 +1667,19 @@ Sources                                       Consumers
 </div>
 </section>
 </div>
-<section id="section-2.1.4">
+<section id="section-2.1.5">
           <h4 id="name-configuration-and-operation">
-<a href="#section-2.1.4" class="section-number selfRef">2.1.4. </a><a href="#name-configuration-and-operation" class="section-name selfRef">Configuration and Operational State</a>
+<a href="#section-2.1.5" class="section-number selfRef">2.1.5. </a><a href="#name-configuration-and-operation" class="section-name selfRef">Configuration and Operational State</a>
           </h4>
-<p id="section-2.1.4-1">
+<p id="section-2.1.5-1">
 Most of the discussion in this document treats scheduling as the means for influencing when configuration on some managed device is planned to be updated.
 But as explained in <span>[<a href="#X.731" class="cite xref">X.731</a>]</span> devices are expected to have an operational state alongside many administrative states being configured.
-For example, a known delay between enabling the modem supporting a termination point or link and the modem actually being usable for sending traffic.<a href="#section-2.1.4-1" class="pilcrow">¶</a></p>
-<p id="section-2.1.4-2">
+For example, a known delay between enabling the modem supporting a termination point or link and the modem actually being usable for sending traffic.<a href="#section-2.1.5-1" class="pilcrow">¶</a></p>
+<p id="section-2.1.5-2">
 Strategies for modeling time margins around changes of configuration are discussed in <a href="#time-sync" class="auto internal xref">Section 2.2.4</a>.
 Even when time margins are taken into account, the schedules are still being applied to cascading subsequent changes of administrative state within configurations.
 Those changes can motivate subsequent changes in operational states.
-While the administrative changes follow the schedule times, the operational states could be effective at different times across devices (<em>e.g.</em>, because of different implementations or other device-specific reasons).<a href="#section-2.1.4-2" class="pilcrow">¶</a></p>
+While the administrative changes follow the schedule times, the operational states could be effective at different times across devices (<em>e.g.</em>, because of different implementations or other device-specific reasons).<a href="#section-2.1.5-2" class="pilcrow">¶</a></p>
 </section>
 </section>
 </div>
@@ -1684,18 +1720,8 @@ Two extremes of this aspect are:<a href="#section-2.2.1-4" class="pilcrow">¶</a
 </li>
           </ul>
 <p id="section-2.2.1-6">
-Separate from which entities can have a schedule applied to them is the notion of which time-variant property values must be synchronized for consistency of network operation.
-In cases where there does not need to be tight synchronization between some schedules, they can be managed in separate domains and effectively form separate timelines where the schedule time in one domain has little to no relation with any other domain.<a href="#section-2.2.1-6" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-2.2.1-7.1">One extreme of this aspect is to combine all scheduled state together into a single domain and single timeline. For cases where all nodes in a network have time-varying properties that affect their topological neighbors, all of the nodes need to be scheduled in the same domain to avoid misaligned configuration between neighbors. The orchestration and management burden in this case is the need to consider all schedules jointly and the operational burden is the need for synchronization of schedule execution across managed devices.<a href="#section-2.2.1-7.1" class="pilcrow">¶</a>
-</li>
-            <li class="normal" id="section-2.2.1-7.2">The other extreme is to consider each managed device as a separate scheduled domain, where property changes between devices need not be synchronized. This simplifies aspects of schedule execution but would likely rely on control plane communication between neighbors and peers to avoid mismatch between the actual configuraiton of any node and how it is assumed to be configured by other nodes.<a href="#section-2.2.1-7.2" class="pilcrow">¶</a>
-</li>
-          </ul>
-<p id="section-2.2.1-8">
 It is expected that the use of time-variability in data models will fit within these extremes.
-For scope and granularity, possibly applying a schedule to each entity indicating when that entity is valid or invalid, or applying a schedule to groups of properties within the entity (while leaving other properties time-invariant).
-For schedule domains, possibly choosing to make some nodes or some properties of nodes intentionally time-invariant in order to form a logical boundary between schedule domains or possibly aligning schedule domains with routing domains so that routing control protocols can be used for online negotiation at domain boundaries.<a href="#section-2.2.1-8" class="pilcrow">¶</a></p>
+For scope and granularity, possibly applying a schedule to each entity indicating when that entity is valid or invalid, or applying a schedule to groups of properties within the entity (while leaving other properties time-invariant).<a href="#section-2.2.1-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 <section id="section-2.2.2">
@@ -1727,10 +1753,10 @@ One possible rationale for separating schedule domains is the level of time prec
 <a href="#section-2.2.4" class="section-number selfRef">2.2.4. </a><a href="#name-time-synchronization-and-ma" class="section-name selfRef">Time Synchronization and Margin</a>
           </h4>
 <p id="section-2.2.4-1">
-Any schedule execution and device configuration (see locality options in <a href="#schedule-exec-locality" class="auto internal xref">Section 2.1.3</a>) will necessarily have some misalignment in the synchronization of time across all devices operating in the same timeline.
+Any schedule execution and device configuration (see locality options in <a href="#schedule-exec-locality" class="auto internal xref">Section 2.1.4</a>) will necessarily have some misalignment in the synchronization of time across all devices operating in the same timeline.
 This misalignment is hopefully bounded by design and able to be characterized statistically.<a href="#section-2.2.4-1" class="pilcrow">¶</a></p>
 <p id="section-2.2.4-2">
-It is important for the activity of schedule generation (see <a href="#schedule-gen-locality" class="auto internal xref">Section 2.1.2</a>) to take the misalignment into account as some form of margin around the instants of scheduled change.
+It is important for the activity of schedule generation (see <a href="#schedule-gen-locality" class="auto internal xref">Section 2.1.3</a>) to take the misalignment into account as some form of margin around the instants of scheduled change.
 The exact form that this margin would take depends on the specific time-varying properties.<a href="#section-2.2.4-2" class="pilcrow">¶</a></p>
 <p id="section-2.2.4-3">
 Another source of time margin in a time-varying system can be due to a desire to model the time delay between changing the administrative state of some subsystem and a subsequent change to its operational state as a consequence.<a href="#section-2.2.4-3" class="pilcrow">¶</a></p>
@@ -1918,7 +1944,7 @@ Likewise, the assigning of an address property at one layer does not imply the p
           </h4>
 <p id="section-2.4.1-1">The network entities will receive the time variable information and traffic forwarding rules directly from a logically centralized source, an Orchestrator or network controller. The time-variable data may then be
             processed locally by the entity entered into the scheduled routing table and specific forwarding rules applied.<a href="#section-2.4.1-1" class="pilcrow">¶</a></p>
-<p id="section-2.4.1-2">Furthermore, a centralized approach could also be used to extend existing tunnel and path delivery mechanisms and protocols to distribute traffic forwarding rules along with time-variable information. However, in certain environments, a logically centralized source may lose connectivity with network entities (as described in <a href="#schedule-exec-locality" class="auto internal xref">Section 2.1.3</a>), preventing timely delivery of traffic forwarding rules. To mitigate this risk, the time horizon for time-variable information should be extended accordingly.<a href="#section-2.4.1-2" class="pilcrow">¶</a></p>
+<p id="section-2.4.1-2">Furthermore, a centralized approach could also be used to extend existing tunnel and path delivery mechanisms and protocols to distribute traffic forwarding rules along with time-variable information. However, in certain environments, a logically centralized source may lose connectivity with network entities (as described in <a href="#schedule-exec-locality" class="auto internal xref">Section 2.1.4</a>), preventing timely delivery of traffic forwarding rules. To mitigate this risk, the time horizon for time-variable information should be extended accordingly.<a href="#section-2.4.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="Distributed">
