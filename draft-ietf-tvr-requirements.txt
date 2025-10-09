@@ -5,12 +5,12 @@
 Network Working Group                                            D. King
 Internet-Draft                                      Lancaster University
 Intended status: Informational                           L. M. Contreras
-Expires: 10 April 2026                                        Telefonica
+Expires: 12 April 2026                                        Telefonica
                                                                 B. Sipos
                                                                  JHU/APL
                                                                 L. Zhang
                                                                   Huawei
-                                                          7 October 2025
+                                                          9 October 2025
 
 
                 TVR (Time-Variant Routing) Requirements
@@ -59,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 10 April 2026.
+   This Internet-Draft will expire on 12 April 2026.
 
 Copyright Notice
 
@@ -81,14 +81,15 @@ Table of Contents
      1.1.  Conventions and Definitions
    2.  Overview of Time-Variant Networks
      2.1.  Resource Scheduling
-       2.1.1.  Schedule Visibility
-       2.1.2.  Generation Locality
-       2.1.3.  Execution Locality
-       2.1.4.  Configuration and Operational State
+       2.1.1.  Schedule Domains
+       2.1.2.  Schedule Visibility
+       2.1.3.  Generation Locality
+       2.1.4.  Execution Locality
+       2.1.5.  Configuration and Operational State
      2.2.  General Temporality
        2.2.1.  Scope of Time-Variability
        2.2.2.  Time Horizon
-       2.2.3.  Time Precision
+       2.2.3.  Time Precision and Accuracy
        2.2.4.  Time Synchronization and Margin
        2.2.5.  Validity in a Schedule
        2.2.6.  Periodicity in a Schedule
@@ -153,7 +154,8 @@ Table of Contents
 
    Specific terms used within this document are as follows:
 
-   Model:  The universe being modeled, which defines a parameter space.
+   Model:  The universe being modeled, which defines a parameter state
+      space.
 
    Entity:  A single separable item within the model.  Each entity has a
       stable identity which is time-invariant.
@@ -201,6 +203,10 @@ Table of Contents
       The term snapshot can be used as a verb, to mean the
       transformation itself, or as a noun, to mean the output of the
       transformation.
+
+   Schedule Domain:  A set of time-variant entities that are expected to
+      be configured and operated jointly on the same timeline with a
+      bounded synchronization of execution in wall-clock time.
 
    Orchestrator:  The subsystem of a managing device which centralizes
       control of a network and applies policy to manage a network.  A
@@ -267,7 +273,51 @@ Table of Contents
    around energy costs or expected user data volumes in networks
    prioritising green computing and energy efficiency over data rate.
 
-2.1.1.  Schedule Visibility
+2.1.1.  Schedule Domains
+
+   The concept of a schedule domain is to allow partitioning the
+   universe of managed entities into separate sets of entities, each
+   with independent timelines having independent schedule execution
+   (Section 2.1.4) and likely independent schedule generation
+   (Section 2.1.3).  Within each domain, all schedules need to use the
+   same timeline, need scynchronized execution, and joint schedule
+   generation.
+
+   Two extremes of how a system can organize schedule domains are:
+
+   Universal Domain:  This extreme is to combine all scheduled state
+      together into a single domain and single timeline.  For cases
+      where all nodes in a network have time-varying properties that
+      affect their topological neighbors, all of the nodes need to be
+      scheduled in the same domain to avoid misaligned configuration
+      between devices.  The orchestration and management burden in this
+      case is the need to consider all schedules jointly and the
+      operational burden is the need for synchronization of schedule
+      execution across managed devices.
+
+   Per-Device Domains:  This extreme is to consider each managed device
+      as a separate scheduled domain, where property changes between
+      devices need not be synchronized.  This simplifies aspects of
+      schedule execution but would likely rely on control plane
+      communication between devices to avoid mismatch between the actual
+      configuration of any node and how it is assumed to be configured
+      by other nodes.  The orchestration of schedules within a device in
+      this case would likely be based on device-local needs such as for
+      power control.
+
+   In cases where there does not need to be tight synchronization
+   between some schedules, they can be managed in separate domains and
+   effectively form separate timelines where the schedule time in one
+   domain has little to no relation with any other domain.
+
+   A system design can choose to make some "edge" nodes or some
+   properties of edge nodes intentionally time-invariant in order to
+   form a logical boundary around schedule domains or possibly aligning
+   schedule domains with routing domains so that schedule edge nodes
+   correspond with routing edge nodes.  This would allow routing control
+   protocols to be used for online negotiation at domain boundaries.
+
+2.1.2.  Schedule Visibility
 
    Because scheduled time-variance is not a part of existing routing
    algorithms and managed data models, not all routing applications will
@@ -296,7 +346,7 @@ Table of Contents
    allows a more distributed use of scheduled data than centralizing its
    processing in an Orchestrator.
 
-2.1.2.  Generation Locality
+2.1.3.  Generation Locality
 
    The generation of a scheduled data model depends on collecting source
    data (which likely has some temporal information in it to begin
@@ -324,10 +374,10 @@ Table of Contents
       managed devices to be handled either by the Agent or by the
       routing Application itself.
 
-2.1.3.  Execution Locality
+2.1.4.  Execution Locality
 
    Depending on the visibility of schedules within a data model (see
-   Section 2.1.1) there are different options for where the schedule may
+   Section 2.1.2) there are different options for where the schedule may
    be executed, and ultimately influence a time-varying configuration on
    a managed device.
 
@@ -422,7 +472,7 @@ Table of Contents
 
         Figure 3: Centralized Generation with Distributed Execution
 
-2.1.4.  Configuration and Operational State
+2.1.5.  Configuration and Operational State
 
    Most of the discussion in this document treats scheduling as the
    means for influencing when configuration on some managed device is
@@ -447,7 +497,16 @@ Table of Contents
    This section covers different aspects of how temporality applies to
    any potential TVR information model.  Each aspect is roughly
    independent and informs how a model can choose to include temporality
-   in its parameter space.
+   in its parameter state space.
+
+   Each of these aspects can be different across different schedule
+   domains, but are expected to be consistent within a single schedule
+   domain.  Also, just because an entire model or domain allows high
+   granularity (Section 2.2.1) or high precision (Section 2.2.3) does
+   not mean that every single entity needs to make use of those aspects
+   (or even that every entity needs to have time-variance at all).  It
+   is perfectly valid for some entities to have time-variance and others
+   to have none.
 
 2.2.1.  Scope of Time-Variability
 
@@ -473,11 +532,11 @@ Table of Contents
    *  A model where every property of every entity can be scheduled
       independently.  This is the temporality model of [AIXM].
 
-   It is expected that the use of time-variability to data models will
-   fit within these extremes, possibly applying a schedule to each
-   entity indicating when that entity is valid or invalid, or applying a
-   schedule to groups of properties within the entity (while leaving
-   other properties time-invariant).
+   It is expected that the use of time-variability in data models will
+   fit within these extremes.  One possibility is to apply a schedule to
+   each entity indicating when that entire entity is valid or invalid.
+   Another possibility is to apply a schedule to groups of properties
+   within an entity (while leaving other properties time-invariant).
 
 2.2.2.  Time Horizon
 
@@ -491,7 +550,10 @@ Table of Contents
    schedules but the processing of the schedule timeline is bounded to
    limit resource needs.
 
-2.2.3.  Time Precision
+   One possible rationale for separating schedule domains is the
+   duration of the time horizon needed for entities in each domain.
+
+2.2.3.  Time Precision and Accuracy
 
    Different time-variant models will require different granularities of
    planning time, either because of limitations or assumptions about
@@ -500,16 +562,20 @@ Table of Contents
    and the required accuracy and precision of wall-clocks which execute
    the schedules.
 
+   One possible rationale for separating schedule domains is the level
+   of time precision or accuracy of execution time able to be upheld
+   across entities in each domain.
+
 2.2.4.  Time Synchronization and Margin
 
    Any schedule execution and device configuration (see locality options
-   in Section 2.1.3) will necessarily have some misalignment in the
+   in Section 2.1.4) will necessarily have some misalignment in the
    synchronization of time across all devices operating in the same
    timeline.  This misalignment is hopefully bounded by design and able
    to be characterized statistically.
 
    It is important for the activity of schedule generation (see
-   Section 2.1.2) to take the misalignment into account as some form of
+   Section 2.1.3) to take the misalignment into account as some form of
    margin around the instants of scheduled change.  The exact form that
    this margin would take depends on the specific time-varying
    properties.
@@ -729,7 +795,7 @@ Table of Contents
    entities is critical.
 
    Three scenarios are currently considered when computing TVR-enabled
-   paths.
+   paths and described in the following subsections.
 
 2.4.1.  Centralized
 
@@ -744,7 +810,7 @@ Table of Contents
    distribute traffic forwarding rules along with time-variable
    information.  However, in certain environments, a logically
    centralized source may lose connectivity with network entities (as
-   described in Section 2.1.3), preventing timely delivery of traffic
+   described in Section 2.1.4), preventing timely delivery of traffic
    forwarding rules.  To mitigate this risk, the time horizon for time-
    variable information should be extended accordingly.
 
