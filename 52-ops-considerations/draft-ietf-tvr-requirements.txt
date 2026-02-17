@@ -120,6 +120,8 @@ Table of Contents
      4.5.  Support Appropriate Time Accuracy
      4.6.  Support Robust Security
    5.  Operational Considerations
+     5.1.  Schedule Domain Consistency
+     5.2.  Incremental Deployment
    6.  Security Considerations
      6.1.  Denial-of-Service (DoS) Attack
      6.2.  Traffic Analysis and Path Prediction
@@ -1036,6 +1038,38 @@ Table of Contents
 
 5.  Operational Considerations
 
+   Introducing time-variance to network operations and management in any
+   capacity adds complexity to those areas of system design and
+   implementations.  This section discusses considerations for those
+   areas in the spirit of [RFC5706] but without concrete details of a
+   specific TVR system design.
+
+5.1.  Schedule Domain Consistency
+
+   As explained in Section 2.1.1, the purpose of a schedule domain is to
+   organize managed devices based on their time-variant needs and
+   capabilities.  The choice of which devices to include in a domain is
+   subjective, but should take into consideration the schedule-awareness
+   capabilities of the devices and temporal sensitivities of their
+   configurations.
+
+   For example, including in a single domain devices which can handle
+   data models with intrinsic schedules and devices which cannot will
+   increase the burden on the network orchestrator to validate the joint
+   configurations of those devices.  Segmenting into different schedule
+   domains would allow for a more simple validation of the time-
+   invariant device configurations and a more narrow but complex
+   validation of the time-variant device configurations.
+
+   Another important consideration for schedule domains is the time
+   sensitivity (_i.e._, the required wall-clock precision or accuracy)
+   of devices in each domain.  A single domain which includes devices
+   needing only coarse time precision as well as those needing tight
+   precision can add unnecessary burden to planning and validation of
+   schedules for the coarse-precision devices.
+
+5.2.  Incremental Deployment
+
    There is an expectation that the intentionally simplified view of
    Figure 1 would actually contain a large number of separate but
    possibly inter-related data models being managed for even a modestly
@@ -1268,6 +1302,11 @@ Informative References
               Computation Element (PCE)-Based Architecture", RFC 4655,
               DOI 10.17487/RFC4655, August 2006,
               <https://www.rfc-editor.org/info/rfc4655>.
+
+   [RFC5706]  Harrington, D., "Guidelines for Considering Operations and
+              Management of New Protocols and Protocol Extensions",
+              RFC 5706, DOI 10.17487/RFC5706, November 2009,
+              <https://www.rfc-editor.org/info/rfc5706>.
 
    [RFC6241]  Enns, R., Ed., Bjorklund, M., Ed., Schoenwaelder, J., Ed.,
               and A. Bierman, Ed., "Network Configuration Protocol
