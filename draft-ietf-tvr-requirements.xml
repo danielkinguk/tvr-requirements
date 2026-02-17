@@ -75,7 +75,7 @@ The terms discussed in this document are intentionally general and are intended 
       </t>
       <t>
 This document starts with an overview of TVR networks and aspects of their time variance in <xref target="overview"/> and elaborates on TVR use cases in <xref target="tvr-use-case-requirements"/>.
-Requirements on the design of TVR systems are then categorized and summarized in <xref target="requirements-summary"/> with security considerations provided for those systems in <xref target="security-considerations"/>.
+Requirements on the design of TVR systems are then categorized and summarized in <xref target="requirements-summary"/> with operational considerations for those systems in <xref target="ops-considerations"/>, and security considerations in <xref target="security-considerations"/>.
       </t>
       <section anchor="conventions-and-definitions">
         <name>Conventions and Definitions</name>
