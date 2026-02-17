@@ -736,35 +736,60 @@ Likewise, the assigning of an address property at one layer does not imply the p
     <section anchor="ops-considerations">
       <name>Operational Considerations</name>
       <t>
+Introducing time-variance to network operations and management in any capacity adds complexity to those areas of system design and implementations.
+This section discusses considerations for those areas in the spirit of <xref target="RFC5706"/> but without concrete details of a specific TVR system design.
+      </t>
+      <section>
+        <name>Schedule Domain Consistency</name>
+        <t>
+As explained in <xref target="schedule-domain"/>, the purpose of a schedule domain is to organize managed devices based on their time-variant needs and capabilities.
+The choice of which devices to include in a domain is subjective, but should take into consideration the schedule-awareness capabilities of the devices and temporal sensitivities of their configurations.
+        </t>
+        <t>
+For example, including in a single domain devices which can handle data models with intrinsic schedules and devices which cannot will increase the burden on the network orchestrator to validate the joint configurations of those devices.
+Segmenting into different schedule domains would allow for a more simple validation of the time-invariant device configurations and a more narrow but complex validation of the time-variant device configurations.
+        </t>
+        <t>
+Another important consideration for schedule domains is the time sensitivity (<em>i.e.</em>, the required wall-clock precision or accuracy) of devices in each domain.
+A single domain which includes devices needing only coarse time precision as well as those needing tight precision can add unnecessary burden to planning and validation of schedules for the coarse-precision devices.
+        </t>
+      </section>
+      <section>
+        <name>Incremental Deployment</name>
+        <t>
 There is an expectation that the intentionally simplified view of <xref target="fig-mgmt-ents"/> would actually contain a large number of separate but possibly inter-related data models being managed for even a modestly complex managed device.
 And that figure shows only a single managed device while a real network is expected to contain a large number of managed devices, possibly with a diverse set of management protocols serving different sets of devices, but under the control of a central orchestrator.
 Because of these expectations, the introduction of TVR into an existing management ecosystem is meant to be able to be deployed incrementally, possibly along different aspects in different increments.
-      </t>
-      <t>
+        </t>
+        <t>
 Within the aspect of <xref target="schedule-domain">schedule domains</xref> it is possible to start with a single completely time-invariant domain, add TVR as a single time-variant domain covering a portion of devices most in need of scheduled behavior.
 From there the operator can either grow that time-variant domain to cover more devices or add other time-variant domains to suit the operator's needs over deployment increments.
-      </t>
-      <t>
+        </t>
+        <t>
 Within the aspect of <xref target="schedule-visibility">schedule visibility</xref> it is possible to deploy TVR first as extrinsic schedules known only to the network orchestrator and executed centrally there.
 From there the operator can transition a portion of those extrinsic schedules to intrinsic schedules, which requires support for (some form of) schedule execution on the managed devices.
 As needs change or device support is updated, the scope of intrinsic schedules can be grown or adjusted to suit over deployment increments.
-      </t>
-      <t>
+        </t>
+        <t>
 Within the aspect of <xref target="schedule-gen-locality">generation locality</xref> a time-variant domain can start out as a fully externally-controlled device and possibly expand to allow managed devices themselves to propose schedules based on locally-sensed conditions such as traffic periodicity or resource (<em>e.g.</em>, power) availability.
 Managed devices might propose schedules which can then be simulated and verified by an orchestrator and augmented as intrinsic schedules back to those devices.
-      </t>
-      <t>
+        </t>
+        <t>
 The complexity and scope of supported schedules can also be adjusted incrementally, starting with a time-variant domain that operates on very simple schedules with coarse-grained scope and short time horizons.
 From there, an operator can incrementally increase schedule complexity, make schedule scope more fine grained, or expand time horizons as device support is updated.
 These changes can all be mediated through schedule domains focused based on that device support.
-      </t>
+        </t>
+      </section>
     </section>
     <section anchor="security-considerations">
       <name>Security Considerations</name>
-      <t>Using time-variant mechanisms introduces unique security vulnerabilities that must be carefully considered to
-         ensure the integrity, availability, and confidentiality of the network. Networks relying on time-sensitive data for
-         forwarding decisions are particularly susceptible to attacks that exploit temporal aspects and timing dependencies.</t>
-       <t>The following potential security considerations warrant detailed investigation as solutions are developed and deployed.</t>
+      <t>
+Using time-variant mechanisms introduces unique security vulnerabilities that must be carefully considered to ensure the integrity, availability, and confidentiality of the network.
+Networks relying on time-sensitive data for forwarding decisions are particularly susceptible to attacks that exploit temporal aspects and timing dependencies.
+      </t>
+      <t>
+The following potential security considerations warrant detailed investigation as solutions are developed and deployed.
+      </t>
       <section>
         <name>Denial-of-Service (DoS) Attack</name>
            <t>Precisely coordinating time information across devices and routers is critical to
@@ -887,7 +912,6 @@ These changes can all be mediated through schedule domains focused based on that
        </artwork>
     </section>
   </middle>
-
   <back>
   <references>
       <name>References</name>
@@ -898,6 +922,7 @@ These changes can all be mediated through schedule domains focused based on that
       <references title="Informative References">
         <?rfc include="reference.RFC.3339.xml"?>
         <?rfc include="reference.RFC.4655.xml"?>
+        <?rfc include="reference.RFC.5706.xml"?>
         <?rfc include="reference.RFC.6241.xml"?>
         <?rfc include="reference.RFC.8345.xml"?>
         <?rfc include="reference.RFC.8346.xml"?>
