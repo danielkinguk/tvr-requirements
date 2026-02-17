@@ -10,7 +10,7 @@
 <rfc xmlns:xi="http://www.w3.org/2001/XInclude" ipr="trust200902" docName="draft-ietf-tvr-requirements-latest" category="info" submissionType="IETF" tocInclude="true" sortRefs="true" symRefs="true" version="3">
   <!-- xml2rfc v2v3 conversion 3.17.0 -->
   <front>
-    <title abbrev="tvr-requirements">TVR (Time-Variant Routing) Requirements</title>
+    <title abbrev="TVR Requirements">Time-Variant Routing (TVR) Requirements</title>
     <seriesInfo name="Internet-Draft" value="draft-ietf-tvr-requirements-latest"/>
     <author fullname="D. King">
       <organization>Lancaster University</organization>
