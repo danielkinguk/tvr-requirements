@@ -113,29 +113,36 @@ Requirements on the design of TVR systems are then categorized and summarized in
           <dd>The subsystem in a managing device which operates a management protocol to control an Agent.</dd>
           <dt>Agent:</dt>
           <dd>The subsystem in a managed device which operates a management protocol to be controlled by a Manager.</dd>
+          <dt>Management Protocol:</dt>
+          <dd>The mechanism used to exchange data between Managing and Managed devices, goverened by a data model shared by the two devices.</dd>
           <dt>(Routing) Application:</dt>
           <dd>The subsystem of a managed device which performs the functions of a routing protocol and/or algorithm.</dd>
         </dl>
         <figure anchor="fig-mgmt-ents">
           <name>Management Entities</name>
           <artwork type="ascii" align="center">
-+--------------------+       +-------------------+
-|   Managing Device  |       |   Managed Device  |
-|                    |       |                   |
-|  +--------------+  |       |  +-------------+  |
-|  | Orchestrator |  |       |  | Application |  |
-|  +--------------+  |       |  +-------------+  |
-|         |          |       |         |         |
-|  +--------------+  |       |  +-------------+  |
-|  |    Manager   |  |---+---|  |     Agent   |  |
-|  +--------------+  |   :   |  +-------------+  |
-+--------------------+   :   +-------------------+
-                         :
-                  +-------------+
-                  |  Data Model |
-                  +-------------+
++--------------------+             +-------------------+
+|   Managing Device  |             |   Managed Device  |
+|                    |             |                   |
+|  +--------------+  |             |  +-------------+  |
+|  | Orchestrator |  |             |  | Application |  |
+|  +--------------+  |             |  +-------------+  |
+|         |          |  Management |         |         |
+|  +--------------+  |   Protocol  |  +-------------+  |
+|  |    Manager   |  |------+------|  |     Agent   |  |
+|  +--------------+  |      :      |  +-------------+  |
++--------------------+      :      +-------------------+
+                            :
+                     +-------------+
+                     |  Data Model |
+                     +-------------+
 </artwork>
         </figure>
+        <t>
+As a concrete example for the use of <xref target="fig-mgmt-ents"/> when applied to existing IETF standards, the management protocol could be NETCONF <xref target="RFC6241"/> which would be governed by a set of YANG data models <xref target="RFC7950"/> known to the Manager and its Orchestrator and implemented on the Agent and its Application.
+In this example, if the system uses all <em>extrinsic schedules</em> the data model does not need to be time-variant and all schedule execution would occur within the Orchestrator.
+If the system uses any <em>intrinsic schedules</em> then those need to be present within the data model, which would be communicated to and executed within the Application.
+        </t>
       </section>
     </section>
     <section anchor="overview">
@@ -335,7 +342,7 @@ While the administrative changes follow the schedule times, the operational stat
       <section>
         <name>General Temporality</name>
         <t>
-This section covers different aspects of how temporality applies to any potential TVR information model.
+This section covers different aspects of how temporality applies to any potential TVR data model or TVR augmentation of a time-invarient data model.
 Each aspect is roughly independent and informs how a model can choose to include temporality in its parameter state space.
         </t>
         <t>
@@ -872,10 +879,12 @@ Likewise, the assigning of an address property at one layer does not imply the p
         <name>Normative References</name>
         <?rfc include="reference.RFC.9657.xml"?>
       </references>
-      <references title="Informative References">
+      <references>
+        <name>Informative References</name>
         <?rfc include="reference.RFC.3339.xml"?>
         <?rfc include="reference.RFC.4655.xml"?>
         <?rfc include="reference.RFC.6241.xml"?>
+        <?rfc include="reference.RFC.7950.xml"?>
         <?rfc include="reference.RFC.8345.xml"?>
         <?rfc include="reference.RFC.8346.xml"?>
         <?rfc include="reference.RFC.8944.xml"?>
