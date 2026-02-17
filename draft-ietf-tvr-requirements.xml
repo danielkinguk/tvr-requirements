@@ -733,17 +733,40 @@ Likewise, the assigning of an address property at one layer does not imply the p
            are discussed in <xref target="security-considerations"/>.</t>
       </section>
     </section>
-
-     <section anchor="security-considerations">
+    <section anchor="ops-considerations">
+      <name>Operational Considerations</name>
+      <t>
+There is an expectation that the intentionally simplified view of <xref target="fig-mgmt-ents"/> would actually contain a large number of separate but possibly inter-related data models being managed for even a modestly complex managed device.
+And that figure shows only a single managed device while a real network is expected to contain a large number of managed devices, possibly with a diverse set of management protocols serving different sets of devices, but under the control of a central orchestrator.
+Because of these expectations, the introduction of TVR into an existing management ecosystem is meant to be able to be deployed incrementally, possibly along different aspects in different increments.
+      </t>
+      <t>
+Within the aspect of <xref target="schedule-domain">schedule domains</xref> it is possible to start with a single completely time-invariant domain, add TVR as a single time-variant domain covering a portion of devices most in need of scheduled behavior.
+From there the operator can either grow that time-variant domain to cover more devices or add other time-variant domains to suit the operator's needs over deployment increments.
+      </t>
+      <t>
+Within the aspect of <xref target="schedule-visibility">schedule visibility</xref> it is possible to deploy TVR first as extrinsic schedules known only to the network orchestrator and executed centrally there.
+From there the operator can transition a portion of those extrinsic schedules to intrinsic schedules, which requires support for (some form of) schedule execution on the managed devices.
+As needs change or device support is updated, the scope of intrinsic schedules can be grown or adjusted to suit over deployment increments.
+      </t>
+      <t>
+Within the aspect of <xref target="schedule-gen-locality">generation locality</xref> a time-variant domain can start out as a fully externally-controlled device and possibly expand to allow managed devices themselves to propose schedules based on locally-sensed conditions such as traffic periodicity or resource (<em>e.g.</em>, power) availability.
+Managed devices might propose schedules which can then be simulated and verified by an orchestrator and augmented as intrinsic schedules back to those devices.
+      </t>
+      <t>
+The complexity and scope of supported schedules can also be adjusted incrementally, starting with a time-variant domain that operates on very simple schedules with coarse-grained scope and short time horizons.
+From there, an operator can incrementally increase schedule complexity, make schedule scope more fine grained, or expand time horizons as device support is updated.
+These changes can all be mediated through schedule domains focused based on that device support.
+      </t>
+    </section>
+    <section anchor="security-considerations">
       <name>Security Considerations</name>
       <t>Using time-variant mechanisms introduces unique security vulnerabilities that must be carefully considered to
          ensure the integrity, availability, and confidentiality of the network. Networks relying on time-sensitive data for
          forwarding decisions are particularly susceptible to attacks that exploit temporal aspects and timing dependencies.</t>
-
        <t>The following potential security considerations warrant detailed investigation as solutions are developed and deployed.</t>
-
-      <section title="Denial-of-Service (DoS) Attack">
-
+      <section>
+        <name>Denial-of-Service (DoS) Attack</name>
            <t>Precisely coordinating time information across devices and routers is critical to
               maintaining network stability. Malicious actors could exploit this dependency by disrupting or manipulating the time
               synchronization process. For example, an attacker could intentionally delay or corrupt time signals exchanged within
@@ -754,8 +777,8 @@ Likewise, the assigning of an address property at one layer does not imply the p
               mechanisms, such as Network Time Protocol (NTP) or Precision Time Protocol (PTP), is essential to mitigate these risks.</t>
         </section>
 
-       <section title="Traffic Analysis and Path Prediction">
-
+       <section>
+        <name>Traffic Analysis and Path Prediction</name>
            <t>Time variant networks may involve frequent updates and adjustments to routing tables
               based on current and forecasted network conditions. If time information is not adequately protected, attackers could
               conduct traffic analysis to infer routing decisions, network load, or usage patterns. The schedule ability could enable
@@ -765,8 +788,8 @@ Likewise, the assigning of an address property at one layer does not imply the p
               vital to encrypt time-sensitive data and limit the exposure of time-related metadata to unauthorized entities.</t>
        </section>
 
-       <section title="Activity Identification and Privacy">
-
+       <section>
+        <name>Activity Identification and Privacy</name>
            <t>In certain scenarios, precise time information exchanged within the network
               could be correlated with specific user or device behavior, inadvertently revealing private information. For instance,
               time scheduling decisions could be analyzed to determine when and where certain devices are active, allowing an attacker to
@@ -776,8 +799,8 @@ Likewise, the assigning of an address property at one layer does not imply the p
               malicious activities.</t>
        </section>
 
-       <section title="Spoofing and Manipulation of Time Information">
-
+       <section>
+        <name>Spoofing and Manipulation of Time Information</name>
           <t>The accuracy and integrity of time information are crucial for making correct
               routing decisions. If an attacker were to inject false or manipulated time data into the network, it could cause routers and
               devices to make incorrect decisions, potentially leading to traffic misrouting, network partitions, or inefficient use of
@@ -789,8 +812,8 @@ Likewise, the assigning of an address property at one layer does not imply the p
               resilience against single points of failure.</t>
        </section>
 
-       <section title="Replay Attacks on Time-Sensitive Data">
-
+       <section>
+        <name>Replay Attacks on Time-Sensitive Data</name>
           <t>Replay Attacks on Time-Sensitive Data: Time variant network data and schedule updates may be susceptible to replay attacks,
               where a malicious actor intercepts and retransmits valid time-based data at a later time. This could cause network devices to
               act on outdated information, leading to inconsistent routing decisions, misaligned schedules, or security gaps.
@@ -800,8 +823,8 @@ Likewise, the assigning of an address property at one layer does not imply the p
 
        </section>
 
-       <section title="Compromised Time Sources">
-
+       <section>
+        <name>Compromised Time Sources</name>
           <t>Compromised Time Sources: The reliance on external time sources for synchronization purposes presents a potential attack surface
               for time-variant networks. If a trusted time source, such as a GPS signal or an NTP server, is compromised, the attacker could
               feed erroneous time information to the entire network, disrupting its operation. Such an attack could lead to cascading failures
