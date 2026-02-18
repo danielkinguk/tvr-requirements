@@ -589,7 +589,7 @@ Likewise, the assigning of an address property at one layer does not imply the p
        data and can vary significantly depending on multiple factors. By considering time-variant constraints, network operators can enhance the efficiency, reliability, and performance of telecom networks. The main
        factors influencing these constraints include:</t>
 
-         <ol spacing="normal" type="1">
+         <ol spacing="normal">
             <li>Predicted Traffic Demand: Network usage patterns fluctuate throughout the day, with peak times typically occurring during
       business hours and in the evening. Predicting these patterns accurately allows for proactive resource allocation, ensuring that
       sufficient bandwidth is available during high-demand periods without over-provisioning during low-demand times.</li>
@@ -629,27 +629,48 @@ Likewise, the assigning of an address property at one layer does not imply the p
 
      <section anchor="tvr-use-case-requirements">
       <name>Time-Variant Use Case Requirements</name>
-      <t>Several TVR use cases have been identified and discussed in <xref target="RFC9657"/>. This section provides
-        further detail on specific requirements to meet use case needs.</t>
+      <t>
+Several TVR use cases have been identified and discussed in <xref target="RFC9657"/>.
+This section provides further detail on specific requirements to meet use case needs.
+      </t>
       <section>
-         <name>Operating Efficiency Use Case</name>
-         <t>Several operational efficiency requirements exist; these include:</t>
-
-        <ol spacing="normal" type="1">
-            <li>Distribution of Predicted Topology-change. The predicted topology-change information may include the valid time,
-                invalid time, link costs at different times, and change periods. </li>
-
-            <li>Topology Changes. The predicted topology-change information may change due to forecasted or unforecasted changes. The managing entity should be capable of providing a partial or full topology update as often as needed.</li>
-
-            <li>The Minimum Route Recalculation Interval and Threshold. Although some cases may assume that the cost persists for a sufficient
+        <name>Resource Preservation Use Case</name>
+        <t>This use case is about managed devices being reactive to sensed conditions, but also providing feedback to an Orchestrator to allow coarse schedules of expected resource availability. Its requirements include:</t>
+        <dl>
+          <dt>Temporality tailored to system dynamics:</dt>
+          <dd>Because managed devices are either powered-off or severely degraded in performance when preserving resources, the schedules governing expected topology must be of sufficient precision and synchronization to capture the dynamics of the managed devices.</dd>
+          <dt>Parameterization of periodicity:</dt>
+          <dd>Resource availability based on diurnal activity on Earth fits well into a periodicity based strictly on time-of-day. But when resources are available based on other natural phenomina (<em>e.g.</em>, orbital periods) the schedules must have a periodicity which is parameterized in such a way that allows matching the resource dynamics.</dd>
+          <dt>Time horizon tailored to uncertainty:</dt>
+          <dd>Even when periodicity is well understood, characterized, and parameterized in a data model, there must be allowance for uncertainty of expected resource availability. This operates both in the sense of having a large enough time horizon to enable a device to "ride out" times of low resources without needing schedule updates, as well as the horizon being limited to avoid large schedules which far exceed the point where actual system state will diverge from the model state.</dd>
+        </dl>
+      </section>
+      <section>
+        <name>Operating Efficiency Use Case</name>
+        <t>This use case is about scheduling resources proactively to improve efficiencies. Its requirements include:</t>
+        <dl>
+            <dt>Distribution of Predicted Topology-change:</dt>
+            <dd>The predicted topology-change information may include the valid time,
+                invalid time, link costs at different times, and change periods. </dd>
+            <dt>Topology Changes:</dt>
+            <dd>The predicted topology-change information may change due to forecasted or unforecasted changes. The managing entity should be capable of providing a partial or full topology update as often as needed.</dd>
+            <dt>Minimum Route Recalculation Interval and Threshold:</dt>
+            <dd>Although some cases may assume that the cost persists for a sufficient
                 amount of time, considering that each route contains multiple links, the change frequency of the path may be much higher than
                 the cost. In this case, the minimum recalculation interval or cost change threshold is needed to determine when a route
-                recalculation is required. Of course, scheduled topology connection changes must be considered when path calculation is required.</li>
-          </ol>
-     </section>
+                recalculation is required. Of course, scheduled topology connection changes must be considered when path calculation is required.</dd>
+        </dl>
+      </section>
+      <section>
+        <name>Dynamic Reachability Use Case</name>
+        <t>This use case is about geometric and kinematic constraints of mobile devices influencing their ability to establish or maintain links to neighbors. Its requirements include:</t>
+        <dl>
+          <dt>Pairwise consideration of synchronization and margins:</dt>
+          <dd>When scheduling links, the execution clock synchronization of its two endpoints as well as any margin needed on each of those endpoints must be considered when generating schedules for those links. Additionally, schedules on long-distance (<em>i.e.</em>, interplanetary scale) links must consider the effects of light-speed delays for distribution and execution.</dd>
+        </dl>
+      </section>
     </section>
-
-     <section anchor="requirements-summary">
+    <section anchor="requirements-summary">
       <name>Requirements Summary</name>
 
       <section title="Support the Identification and Advertisement of Entity Property Changes">
