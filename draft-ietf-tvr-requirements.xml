@@ -166,7 +166,7 @@ Requirements on the design of TVR systems are then categorized and summarized in
           <name>Schedule Domains</name>
           <t>
 The concept of a schedule domain is to allow partitioning the universe of managed entities into separate sets of entities, each with independent timelines having independent <xref target="schedule-exec-locality">schedule execution</xref> and likely independent <xref target="schedule-gen-locality">schedule generation</xref>.
-Within each domain, all schedules need to use the same timeline, need scynchronized execution, and joint schedule generation.
+Within each domain, all schedules need to use the same timeline, need synchronized execution, and joint schedule generation.
           </t>
           <t>
 Two extremes of how a system can organize schedule domains are:
