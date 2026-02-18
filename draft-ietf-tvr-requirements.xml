@@ -43,12 +43,14 @@
     <keyword>Mobility</keyword>
     <keyword>Requirements</keyword>
     <abstract>
-      <t>Time-Variant Routing (TVR) refers to calculating a path or subpath through a network where the time of message transmission
-         (or receipt) is part of the overall route computation. This means that, all things being equal, a TVR computation might
-         produce different results depending on the time that the computation is performed without other detectable changes to the
-         network topology or other cost functions associated with the route.</t>
-
-      <t>This document introduces requirements where TVR computations could improve message exchange in a network.</t>
+      <t>
+Time-Variant Routing (TVR) refers to calculating a path or subpath through a network where the time of message transmission (or receipt) is part of the overall route computation.
+This means that, all things being equal, a TVR computation might produce different results depending on the time that the computation is performed without other detectable changes to the network topology or other cost functions associated with the route.
+      </t>
+      <t>
+This document introduces requirements for the design and implementation of systems which perform TVR computations.
+It also explains different aspects of a TVR system which need to be considered during its design.
+      </t>
     </abstract>
     <note removeInRFC="true">
       <name>About This Document</name>
@@ -146,7 +148,7 @@ Requirements on the design of TVR systems are then categorized and summarized in
          changes to the routing topology are an expected part of network operations. In these scenarios, the pre-planned loss and
          restoration of an adjacency, or formation of an alternate adjacency, should be seen as a non-disruptive event.</t>
 
-      <t>Time-Variant Routing (TVR) refers to calculating a path or subpath through a network where the time of message transmission
+      <t>TVR refers to calculating a path or subpath through a network where the time of message transmission
          (or receipt) is part of the overall route computation.  Therefore, a TVR computation might produce different results
          depending on the time a calculation is performed without other detectable changes to the network topology or other
          cost functions associated with the route.</t>
@@ -203,11 +205,11 @@ Two extremes of schedules being associated with routing data are:
             <dt>Intrinsic Schedule:</dt>
             <dd>
 In this situation, the schedule is an intrinsic part of the managed data model which is visible to the routing application and used as part of the routing algorithms.
-When the schedule is intrinsic, there is not necessarily the notion of a schedule being "executed" in wall-clock time because the time-varying parameters are ingested as part of the routing algorithms natural functioning.
+When the schedule is intrinsic, there is not necessarily the notion of a schedule being "executed" in wall-clock time because the time-varying parameters are ingested as part of the routing algorithm functioning (see <xref target="routing"/>).
             </dd>
             <dt>Extrinsic Schedule:</dt>
             <dd>
-In this situation, the schedule is not part of the managed data proper but maintained within the Orchestrator; the routing application only sees the effects of changes in routing parameters as the schedule is executed (in wall-clock time) by the Agent.
+In this situation, the schedule is not part of the managed data model for the Managed Device but maintained within the Orchestrator; the routing application only sees the effects of changes in routing parameters as the schedule is executed (in wall-clock time) by the Orchestrator.
             </dd>
           </dl>
           <t>
@@ -277,8 +279,8 @@ When schedules are executed on each device, there is a risk that clocks on diffe
 Because real-time clocks are necessary for more than just schedule execution, and because accurate and precise time sources exist outside of network time (<em>e.g.</em>, GPS time) this risk can be made to have a low probability.
           </t>
           <t>
-With distributed execution there is also a risk that a manager loses connectivity with the managed device and the device eventually runs out of time horizon in the schedule which is known to it.
-This risk can be mitigated by trading between the size and the horizon end-time of schedules distributed to managed devices. This trade can be different for different devices, where some well-connected devices operate closer to just-in-time with short horizons while other devices can be given a longer horizon to allow it to execute in the absence of near-continuous manager connectivity.
+With distributed execution there is also a risk that a Manager loses connectivity with the managed device and the device eventually runs out of time horizon in the schedule which is known to it.
+This risk can be mitigated by trading between the size and the horizon end-time of schedules distributed to managed devices. This trade can be different for different devices, where some well-connected devices operate closer to just-in-time with short horizons while other devices can be given a longer horizon to allow it to execute in the absence of near-continuous Manager connectivity.
           </t>
           <t>
 One possible combination of these options is depicted in <xref target="fig-distrib-snapshot"/>, where inputs are collected in a centralized schedule generator, the schedule is executed on that centralized entity by taking a snapshot (periodically or as-needed when model state changes over schedule time) and distributing the time-invariant snapshot configuration.
@@ -552,14 +554,14 @@ Likewise, the assigning of an address property at one layer does not imply the p
         </section>
       </section>
       <section anchor="routing">
-        <name>Routing</name>
+        <name>Routing Strategies</name>
         <t>Traditional network routing techniques typically use link bandwidth and delay for path calculation, and do not consider time-based factors. TVR should be
            capable of improving network performance and reliability in environments where entities liveness and link availability is a time-based consideration, with various factors,
            including power availability, interface line of sight or expected demand. </t>
         <t>However, even if some adjacency failures are predictable, others are not, including link failures and entity outages.
            Therefore, any new technique or routing protocol extension for TVR environments must be capable of handling planned and unexpected
-           resource losses.</t>
-        <t>Time-Variant Routing (TVR) introduces a scenario of calculating a path, or sub-path within a network, taking into account the timing
+           resource losses or other changes.</t>
+        <t>TVR introduces a scenario of calculating a path, or sub-path within a network, taking into account the timing
            of message transmission or receipt as an integral part of the overall route computation.</t>
         <t>Furthermore, synchronization of network time across TVR-capable entities is critical.</t>
         <t>Three scenarios are currently considered when computing TVR-enabled paths and described in the following subsections.</t>
@@ -669,7 +671,7 @@ Likewise, the assigning of an address property at one layer does not imply the p
         Changes in entity state outside of a schedule are communicated to other entities in a network through existing routing protocol mechanism, where they exist.
         </t>
 
-        <t>A manager should provide an advertisement methodology for responding to
+        <t>A Manager should provide an advertisement methodology for responding to
         abnormal changes in the system.</t>
       </section>
 
