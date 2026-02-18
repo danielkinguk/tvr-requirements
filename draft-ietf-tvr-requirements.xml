@@ -702,7 +702,7 @@ This section provides further detail on specific requirements to meet use case n
         functions to advertise information, thus improving the efficiency of
         the network. Therefore,</t>
 
-        <t>o Must support proxy entities to help non-routing nodes implement
+        <t>Systems must support proxy entities to help non-routing nodes implement
         information advertisement.</t>
       </section>
 
@@ -712,7 +712,7 @@ This section provides further detail on specific requirements to meet use case n
         manner after the entity properties change, it will lead to suboptimal
         routing decisions. Therefore,</t>
 
-        <t>o Must provide a discovery and resolving methodology for the
+        <t>Systems must provide a discovery and resolving methodology for the
         identification and classification of entity schedule changes.</t>
       </section>
 
@@ -720,35 +720,35 @@ This section provides further detail on specific requirements to meet use case n
         <t>The system's schedule may change, requiring entity configuration updates rather than being fixed and unmodifiable.
         Additionally, time-variant intervals in the system may also vary. Therefore,</t>
 
-        <t>o Must support system schedule changes.</t>
+        <t>Systems must support system schedule changes.</t>
 
-        <t>o Must support time interval changes.</t>
+        <t>Systems must support time interval changes.</t>
       </section>
 
       <section title="Support Appropriate Time Accuracy">
         <t>The accuracy of the time cannot be too large or too small;
         otherwise, convergence may not be possible. Therefore,</t>
 
-        <t>o Must support appropriate time tolerance.</t>
+        <t>Systems must support appropriate time tolerance.</t>
       </section>
 
       <section title="Support Robust Security">
         <t>Implementations must address security risks associated with time-variant information to ensure the reliability and integrity of
            scheduled network operations. The following security-related requirements should be considered,</t>
-
-        <t>o Integrity Protection: Mechanisms must be in place to ensure that time-sensitive routing updates are protected from unauthorized modification.</t>
-
-        <t>o Authentication and Authorization: Entities generating or modifying TVR schedules must be authenticated,
-           and only authorized entities should be permitted to inject, update, or override scheduled routing information.</t>
-
-        <t>o Resilience Against Malicious or Erroneous Inputs: a TVR network must be resilient against the injection of incorrect or maliciously crafted scheduling information.</t>
-
-        <t>o Time Synchronization Robustness: Since TVR relies on time-sensitive operations, it must ensure the trustworthiness of external time sources.
-           Protection against time-based attacks, such as replay attacks or clock manipulation, should also be considered.</t>
-
-        <t>o Rollback and Recovery: In the event of conflicting, missing, or compromised time-variant routing data, TVR implementations should include fallback mechanisms to
-           maintain network stability.</t>
-
+        <dl>
+          <dt>Integrity Protection:</dt>
+          <dd>Mechanisms must be in place to ensure that time-sensitive routing updates are protected from unauthorized modification.</dd>
+          <dt>Authentication and Authorization:</dt>
+          <dd>Entities generating or modifying TVR schedules must be authenticated,
+             and only authorized entities should be permitted to inject, update, or override scheduled routing information.</dd>
+          <dt>Resilience Against Malicious or Erroneous Inputs:</dt>
+          <dd>A TVR network must be resilient against the injection of incorrect or maliciously crafted scheduling information.</dd>
+          <dt>Time Synchronization Robustness:</dt>
+          <dd>Since TVR relies on time-sensitive operations, it must ensure the trustworthiness of external time sources.
+             Protection against time-based attacks, such as replay attacks or clock manipulation, should also be considered.</dd>
+          <dt>Rollback and Recovery:</dt>
+          <dd>>In the event of conflicting, missing, or compromised time-variant routing data, TVR implementations should include fallback mechanisms to maintain network stability.</dd>
+        </dl>
         <t>By integrating these security requirements into TVR implementations, networks can mitigate risks associated with malicious actors, misconfigurations,
            or unintended disruptions, ensuring the robustness of time-sensitive routing decisions. Specific security scenarios and negation and mitigation methods
            are discussed in <xref target="security-considerations"/>.</t>
