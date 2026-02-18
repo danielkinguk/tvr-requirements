@@ -205,7 +205,7 @@ Two extremes of schedules being associated with routing data are:
             <dt>Intrinsic Schedule:</dt>
             <dd>
 In this situation, the schedule is an intrinsic part of the managed data model which is visible to the routing application and used as part of the routing algorithms.
-When the schedule is intrinsic, there is not necessarily the notion of a schedule being "executed" in wall-clock time because the time-varying parameters are ingested as part of the routing algorithm functioning (see <xref target="routing"/>).
+When the schedule is intrinsic, there is not necessarily the notion of a schedule being "executed" as a single activity in wall-clock time because the time-varying parameters are ingested as part of the routing algorithm functioning (see <xref target="routing"/>) when routing is needed.
             </dd>
             <dt>Extrinsic Schedule:</dt>
             <dd>
