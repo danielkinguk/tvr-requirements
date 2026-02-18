@@ -1012,8 +1012,8 @@ Table of Contents
    functions to advertise information, thus improving the efficiency of
    the network.  Therefore,
 
-   o Must support proxy entities to help non-routing nodes implement
-   information advertisement.
+   Systems must support proxy entities to help non-routing nodes
+   implement information advertisement.
 
 4.3.  Support Identification and Classification of Node Properties
 
@@ -1022,7 +1022,7 @@ Table of Contents
    manner after the entity properties change, it will lead to suboptimal
    routing decisions.  Therefore,
 
-   o Must provide a discovery and resolving methodology for the
+   Systems must provide a discovery and resolving methodology for the
    identification and classification of entity schedule changes.
 
 4.4.  Support System Schedule and Time Interval Changes
@@ -1031,16 +1031,16 @@ Table of Contents
    updates rather than being fixed and unmodifiable.  Additionally,
    time-variant intervals in the system may also vary.  Therefore,
 
-   o Must support system schedule changes.
+   Systems must support system schedule changes.
 
-   o Must support time interval changes.
+   Systems must support time interval changes.
 
 4.5.  Support Appropriate Time Accuracy
 
    The accuracy of the time cannot be too large or too small; otherwise,
    convergence may not be possible.  Therefore,
 
-   o Must support appropriate time tolerance.
+   Systems must support appropriate time tolerance.
 
 4.6.  Support Robust Security
 
@@ -1049,27 +1049,27 @@ Table of Contents
    scheduled network operations.  The following security-related
    requirements should be considered,
 
-   o Integrity Protection: Mechanisms must be in place to ensure that
-   time-sensitive routing updates are protected from unauthorized
-   modification.
+   Integrity Protection:  Mechanisms must be in place to ensure that
+      time-sensitive routing updates are protected from unauthorized
+      modification.
 
-   o Authentication and Authorization: Entities generating or modifying
-   TVR schedules must be authenticated, and only authorized entities
-   should be permitted to inject, update, or override scheduled routing
-   information.
+   Authentication and Authorization:  Entities generating or modifying
+      TVR schedules must be authenticated, and only authorized entities
+      should be permitted to inject, update, or override scheduled
+      routing information.
 
-   o Resilience Against Malicious or Erroneous Inputs: a TVR network
-   must be resilient against the injection of incorrect or maliciously
-   crafted scheduling information.
+   Resilience Against Malicious or Erroneous Inputs:  A TVR network must
+      be resilient against the injection of incorrect or maliciously
+      crafted scheduling information.
 
-   o Time Synchronization Robustness: Since TVR relies on time-sensitive
-   operations, it must ensure the trustworthiness of external time
-   sources.  Protection against time-based attacks, such as replay
-   attacks or clock manipulation, should also be considered.
+   Time Synchronization Robustness:  Since TVR relies on time-sensitive
+      operations, it must ensure the trustworthiness of external time
+      sources.  Protection against time-based attacks, such as replay
+      attacks or clock manipulation, should also be considered.
 
-   o Rollback and Recovery: In the event of conflicting, missing, or
-   compromised time-variant routing data, TVR implementations should
-   include fallback mechanisms to maintain network stability.
+   Rollback and Recovery:  >In the event of conflicting, missing, or
+      compromised time-variant routing data, TVR implementations should
+      include fallback mechanisms to maintain network stability.
 
    By integrating these security requirements into TVR implementations,
    networks can mitigate risks associated with malicious actors,

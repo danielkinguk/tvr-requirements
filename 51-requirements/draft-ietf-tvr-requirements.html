@@ -2124,7 +2124,7 @@ This section provides further detail on specific requirements to meet use case n
         other entities  in the network. Proxy nodes can help nodes without routing
         functions to advertise information, thus improving the efficiency of
         the network. Therefore,<a href="#section-4.2-1" class="pilcrow">¶</a></p>
-<p id="section-4.2-2">o Must support proxy entities to help non-routing nodes implement
+<p id="section-4.2-2">Systems must support proxy entities to help non-routing nodes implement
         information advertisement.<a href="#section-4.2-2" class="pilcrow">¶</a></p>
 </section>
 <section id="section-4.3">
@@ -2135,7 +2135,7 @@ This section provides further detail on specific requirements to meet use case n
         If the system cannot timely identify and classify in a processing
         manner after the entity properties change, it will lead to suboptimal
         routing decisions. Therefore,<a href="#section-4.3-1" class="pilcrow">¶</a></p>
-<p id="section-4.3-2">o Must provide a discovery and resolving methodology for the
+<p id="section-4.3-2">Systems must provide a discovery and resolving methodology for the
         identification and classification of entity schedule changes.<a href="#section-4.3-2" class="pilcrow">¶</a></p>
 </section>
 <section id="section-4.4">
@@ -2144,8 +2144,8 @@ This section provides further detail on specific requirements to meet use case n
         </h3>
 <p id="section-4.4-1">The system's schedule may change, requiring entity configuration updates rather than being fixed and unmodifiable.
         Additionally, time-variant intervals in the system may also vary. Therefore,<a href="#section-4.4-1" class="pilcrow">¶</a></p>
-<p id="section-4.4-2">o Must support system schedule changes.<a href="#section-4.4-2" class="pilcrow">¶</a></p>
-<p id="section-4.4-3">o Must support time interval changes.<a href="#section-4.4-3" class="pilcrow">¶</a></p>
+<p id="section-4.4-2">Systems must support system schedule changes.<a href="#section-4.4-2" class="pilcrow">¶</a></p>
+<p id="section-4.4-3">Systems must support time interval changes.<a href="#section-4.4-3" class="pilcrow">¶</a></p>
 </section>
 <section id="section-4.5">
         <h3 id="name-support-appropriate-time-ac">
@@ -2153,7 +2153,7 @@ This section provides further detail on specific requirements to meet use case n
         </h3>
 <p id="section-4.5-1">The accuracy of the time cannot be too large or too small;
         otherwise, convergence may not be possible. Therefore,<a href="#section-4.5-1" class="pilcrow">¶</a></p>
-<p id="section-4.5-2">o Must support appropriate time tolerance.<a href="#section-4.5-2" class="pilcrow">¶</a></p>
+<p id="section-4.5-2">Systems must support appropriate time tolerance.<a href="#section-4.5-2" class="pilcrow">¶</a></p>
 </section>
 <section id="section-4.6">
         <h3 id="name-support-robust-security">
@@ -2161,17 +2161,33 @@ This section provides further detail on specific requirements to meet use case n
         </h3>
 <p id="section-4.6-1">Implementations must address security risks associated with time-variant information to ensure the reliability and integrity of
            scheduled network operations. The following security-related requirements should be considered,<a href="#section-4.6-1" class="pilcrow">¶</a></p>
-<p id="section-4.6-2">o Integrity Protection: Mechanisms must be in place to ensure that time-sensitive routing updates are protected from unauthorized modification.<a href="#section-4.6-2" class="pilcrow">¶</a></p>
-<p id="section-4.6-3">o Authentication and Authorization: Entities generating or modifying TVR schedules must be authenticated,
-           and only authorized entities should be permitted to inject, update, or override scheduled routing information.<a href="#section-4.6-3" class="pilcrow">¶</a></p>
-<p id="section-4.6-4">o Resilience Against Malicious or Erroneous Inputs: a TVR network must be resilient against the injection of incorrect or maliciously crafted scheduling information.<a href="#section-4.6-4" class="pilcrow">¶</a></p>
-<p id="section-4.6-5">o Time Synchronization Robustness: Since TVR relies on time-sensitive operations, it must ensure the trustworthiness of external time sources.
-           Protection against time-based attacks, such as replay attacks or clock manipulation, should also be considered.<a href="#section-4.6-5" class="pilcrow">¶</a></p>
-<p id="section-4.6-6">o Rollback and Recovery: In the event of conflicting, missing, or compromised time-variant routing data, TVR implementations should include fallback mechanisms to
-           maintain network stability.<a href="#section-4.6-6" class="pilcrow">¶</a></p>
-<p id="section-4.6-7">By integrating these security requirements into TVR implementations, networks can mitigate risks associated with malicious actors, misconfigurations,
+<span class="break"></span><dl class="dlParallel" id="section-4.6-2">
+          <dt id="section-4.6-2.1">Integrity Protection:</dt>
+          <dd style="margin-left: 1.5em" id="section-4.6-2.2">Mechanisms must be in place to ensure that time-sensitive routing updates are protected from unauthorized modification.<a href="#section-4.6-2.2" class="pilcrow">¶</a>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-4.6-2.3">Authentication and Authorization:</dt>
+          <dd style="margin-left: 1.5em" id="section-4.6-2.4">Entities generating or modifying TVR schedules must be authenticated,
+             and only authorized entities should be permitted to inject, update, or override scheduled routing information.<a href="#section-4.6-2.4" class="pilcrow">¶</a>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-4.6-2.5">Resilience Against Malicious or Erroneous Inputs:</dt>
+          <dd style="margin-left: 1.5em" id="section-4.6-2.6">A TVR network must be resilient against the injection of incorrect or maliciously crafted scheduling information.<a href="#section-4.6-2.6" class="pilcrow">¶</a>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-4.6-2.7">Time Synchronization Robustness:</dt>
+          <dd style="margin-left: 1.5em" id="section-4.6-2.8">Since TVR relies on time-sensitive operations, it must ensure the trustworthiness of external time sources.
+             Protection against time-based attacks, such as replay attacks or clock manipulation, should also be considered.<a href="#section-4.6-2.8" class="pilcrow">¶</a>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-4.6-2.9">Rollback and Recovery:</dt>
+          <dd style="margin-left: 1.5em" id="section-4.6-2.10">&gt;In the event of conflicting, missing, or compromised time-variant routing data, TVR implementations should include fallback mechanisms to maintain network stability.<a href="#section-4.6-2.10" class="pilcrow">¶</a>
+</dd>
+        <dd class="break"></dd>
+</dl>
+<p id="section-4.6-3">By integrating these security requirements into TVR implementations, networks can mitigate risks associated with malicious actors, misconfigurations,
            or unintended disruptions, ensuring the robustness of time-sensitive routing decisions. Specific security scenarios and negation and mitigation methods
-           are discussed in <a href="#security-considerations" class="auto internal xref">Section 5</a>.<a href="#section-4.6-7" class="pilcrow">¶</a></p>
+           are discussed in <a href="#security-considerations" class="auto internal xref">Section 5</a>.<a href="#section-4.6-3" class="pilcrow">¶</a></p>
 </section>
 </section>
 </div>
