@@ -979,6 +979,14 @@ Table of Contents
       scale) links must consider the effects of light-speed delays for
       distribution and execution.
 
+   Schedule independence from geometry:  One important concept of
+      distributed schedule execution is that a consistent shared
+      timeline and a wall-clock ticker across maaged devices is the
+      unified mechanism to synchronize state across devices.  Managed
+      device states should not rely on other externally sensed
+      conditions such as location, orientation, or other geometric or
+      kinematic properties.
+
 4.  Requirements Summary
 
 4.1.  Support the Identification and Advertisement of Entity Property
