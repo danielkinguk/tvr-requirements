@@ -1018,9 +1018,9 @@ Table of Contents
       scale) links must consider the effects of light-speed delays for
       distribution and execution.
 
-   Schedule independence from external conditions:  One important
-      concept of distributed schedule execution is that a consistent
-      shared timeline and a wall-clock ticker across maaged devices is
+   Schedule independence from external conditions:  An important concept
+      of distributed schedule execution in TVR is that a consistent
+      shared timeline and a wall-clock ticker across managed devices is
       the unified mechanism to synchronize state across devices.
       Schedule entries should not depend on externally sensed conditions
       such as location, orientation, or other geometric or kinematic
