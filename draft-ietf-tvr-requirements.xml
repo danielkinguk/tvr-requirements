@@ -750,8 +750,12 @@ For example, including in a single domain devices which can handle data models w
 Segmenting into different schedule domains would allow for a more simple validation of the time-invariant device configurations and a more narrow but complex validation of the time-variant device configurations.
         </t>
         <t>
-Another important consideration for schedule domains is the time sensitivity (<em>i.e.</em>, the required wall-clock precision or accuracy) of devices in each domain.
+Another important consideration for schedule domains is the required wall-clock time precision and accuracy of devices in each domain, as explained in <xref target="time-precision"/>.
 A single domain which includes devices needing only coarse time precision as well as those needing tight precision can add unnecessary burden to planning and validation of schedules for the coarse-precision devices.
+        </t>
+        <t>
+Similarly, the required time synchronization for devices in each domain, as explained in <xref target="time-sync"/>, affects the amount of and types of analysis that a network orchestrator needs to validate configurations of those devices.
+A single domain which includes some devices needing only loose synchronization and some with very tight requirements adds burden to planning and validation of schedules.
         </t>
       </section>
       <section>
