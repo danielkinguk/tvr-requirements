@@ -139,12 +139,18 @@ Table of Contents
 1.  Introduction
 
    This document is an informational specification meant to inform the
-   design and implementation of systems which manage time-variant
-   routing (TVR) information, and to allow characterizing those systems
-   with aspects which are understandable to network operators.  The
-   terms discussed in this document are intentionally general and are
-   intended to be tailored for specifics of those individual TVR
-   systems.
+   design and implementation of systems that manage time-variant routing
+   (TVR) information, and to characterize those systems using design
+   aspects understandable to network operators.  The terms discussed in
+   this document are intentionally general and are intended to be
+   tailored for specifics of those individual TVR systems.
+
+   The motivation for this work is explained in the TVR Use Cases
+   document [RFC9657], which justifies why there is value in having some
+   form of time-variance in a system.  This document discusses technical
+   detail of aspects that designers and operators could adopt and
+   considerations for when (or when not) to need to incorporate each of
+   these aspects in a system design.
 
    This document starts with an overview of TVR networks and aspects of
    their time variance in Section 2 and elaborates on TVR use cases in
