@@ -2105,11 +2105,17 @@ This section provides further detail on specific requirements to meet use case n
 <p id="section-3.3-1">This use case is about geometric and kinematic constraints of mobile devices influencing their ability to establish or maintain links to neighbors. Its requirements include:<a href="#section-3.3-1" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlParallel" id="section-3.3-2">
           <dt id="section-3.3-2.1">Pairwise consideration of synchronization and margins:</dt>
-          <dd style="margin-left: 1.5em" id="section-3.3-2.2">When scheduling links, the execution clock synchronization of its two endpoints as well as any margin needed on each of those endpoints must be considered when generating schedules for those links. Additionally, schedules on long-distance (<em>i.e.</em>, interplanetary scale) links must consider the effects of light-speed delays for distribution and execution.<a href="#section-3.3-2.2" class="pilcrow">¶</a>
+          <dd style="margin-left: 1.5em" id="section-3.3-2.2">
+When scheduling links, the execution clock synchronization of its two endpoints as well as any margin needed on each of those endpoints must be considered when generating schedules for those links.
+Additionally, schedules on long-distance (<em>i.e.</em>, interplanetary scale) links must consider the effects of light-speed delays for distribution and execution.<a href="#section-3.3-2.2" class="pilcrow">¶</a>
 </dd>
           <dd class="break"></dd>
-<dt id="section-3.3-2.3">Schedule independence from geometry:</dt>
-          <dd style="margin-left: 1.5em" id="section-3.3-2.4">One important concept of distributed schedule execution is that a consistent shared timeline and a wall-clock ticker across maaged devices is the unified mechanism to synchronize state across devices. Managed device states should not rely on other externally sensed conditions such as location, orientation, or other geometric or kinematic properties.<a href="#section-3.3-2.4" class="pilcrow">¶</a>
+<dt id="section-3.3-2.3">Schedule independence from external conditions:</dt>
+          <dd style="margin-left: 1.5em" id="section-3.3-2.4">
+One important concept of distributed schedule execution is that a consistent shared timeline and a wall-clock ticker across maaged devices is the unified mechanism to synchronize state across devices.
+Schedule entries should not depend on externally sensed conditions such as location, orientation, or other geometric or kinematic properties.
+Changes arising from such external conditions that are not captured in the schedules are outside the scope of TVR and are handled reactively by the network.
+Schedule-based TVR and condition-based reactive mechanisms can coexist within the same network and within its devices.<a href="#section-3.3-2.4" class="pilcrow">¶</a>
 </dd>
         <dd class="break"></dd>
 </dl>
