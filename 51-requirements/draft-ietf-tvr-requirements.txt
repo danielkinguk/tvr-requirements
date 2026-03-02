@@ -123,14 +123,17 @@ Table of Contents
      4.4.  Support System Schedule and Time Interval Changes
      4.5.  Support Appropriate Time Accuracy
      4.6.  Support Robust Security
-   5.  Security Considerations
-     5.1.  Denial-of-Service (DoS) Attack
-     5.2.  Traffic Analysis and Path Prediction
-     5.3.  Activity Identification and Privacy
-     5.4.  Spoofing and Manipulation of Time Information
-     5.5.  Replay Attacks on Time-Sensitive Data
-     5.6.  Compromised Time Sources
-   6.  IANA Considerations
+   5.  Operational Considerations
+     5.1.  Schedule Domain Consistency
+     5.2.  Incremental Deployment
+   6.  Security Considerations
+     6.1.  Denial-of-Service (DoS) Attack
+     6.2.  Traffic Analysis and Path Prediction
+     6.3.  Activity Identification and Privacy
+     6.4.  Spoofing and Manipulation of Time Information
+     6.5.  Replay Attacks on Time-Sensitive Data
+     6.6.  Compromised Time Sources
+   7.  IANA Considerations
    Acknowledgments
    Contributors
    References
@@ -157,8 +160,9 @@ Table of Contents
    This document starts with an overview of TVR networks and aspects of
    their time variance in Section 2 and elaborates on TVR use cases in
    Section 3.  Requirements on the design of TVR systems are then
-   categorized and summarized in Section 4 with security considerations
-   provided for those systems in Section 5.
+   categorized and summarized in Section 4 with operational
+   considerations for those systems in Section 5, and security
+   considerations in Section 6.
 
 1.1.  Conventions and Definitions
 
@@ -943,7 +947,7 @@ Table of Contents
    continued operation in cases where unexpected or inconsistent
    information is detected.
 
-   Specific security considerations are discussed in the Section 5.
+   Specific security considerations are discussed in the Section 6.
    later in this document.
 
 3.  Time-Variant Use Case Requirements
@@ -1126,9 +1130,96 @@ Table of Contents
    networks can mitigate risks associated with malicious actors,
    misconfigurations, or unintended disruptions, ensuring the robustness
    of time-sensitive routing decisions.  Specific security scenarios and
-   negation and mitigation methods are discussed in Section 5.
+   negation and mitigation methods are discussed in Section 6.
 
-5.  Security Considerations
+5.  Operational Considerations
+
+   Introducing time-variance to network operations and management in any
+   capacity adds complexity to those areas of system design and
+   implementations.  This section discusses considerations for those
+   areas in the spirit of [RFC5706] but without concrete details of a
+   specific TVR system design.
+
+5.1.  Schedule Domain Consistency
+
+   As explained in Section 2.1.1, the purpose of a schedule domain is to
+   organize managed devices based on their time-variant needs and
+   capabilities.  The choice of which devices to include in a domain is
+   subjective, but should take into consideration the schedule-awareness
+   capabilities of the devices and temporal sensitivities of their
+   configurations.
+
+   For example, including in a single domain devices which can handle
+   data models with intrinsic schedules and devices which cannot will
+   increase the burden on the network orchestrator to validate the joint
+   configurations of those devices.  Segmenting into different schedule
+   domains would allow for a more simple validation of the time-
+   invariant device configurations and a more narrow but complex
+   validation of the time-variant device configurations.
+
+   Another important consideration for schedule domains is the required
+   wall-clock time precision and accuracy of devices in each domain, as
+   explained in Section 2.2.3.  A single domain which includes devices
+   needing only coarse time precision as well as those needing tight
+   precision can add unnecessary burden to planning and validation of
+   schedules for the coarse-precision devices.
+
+   Similarly, the required time synchronization for devices in each
+   domain, as explained in Section 2.2.4, affects the amount of and
+   types of analysis that a network orchestrator needs to validate
+   configurations of those devices.  A single domain which includes some
+   devices needing only loose synchronization and some with very tight
+   requirements adds burden to planning and validation of schedules.
+
+5.2.  Incremental Deployment
+
+   There is an expectation that the intentionally simplified view of
+   Figure 1 would actually contain a large number of separate but
+   possibly inter-related data models being managed for even a modestly
+   complex managed device.  And that figure shows only a single managed
+   device while a real network is expected to contain a large number of
+   managed devices, possibly with a diverse set of management protocols
+   serving different sets of devices, but under the control of a central
+   orchestrator.  Because of these expectations, the introduction of TVR
+   into an existing management ecosystem is meant to be able to be
+   deployed incrementally, possibly along different aspects in different
+   increments.
+
+   Within the aspect of schedule domains (Section 2.1.1) it is possible
+   to start with a single completely time-invariant domain, add TVR as a
+   single time-variant domain covering a portion of devices most in need
+   of scheduled behavior.  From there the operator can either grow that
+   time-variant domain to cover more devices or add other time-variant
+   domains to suit the operator's needs over deployment increments.
+
+   Within the aspect of schedule visibility (Section 2.1.2) it is
+   possible to deploy TVR first as extrinsic schedules known only to the
+   network orchestrator and executed centrally there.  From there the
+   operator can transition a portion of those extrinsic schedules to
+   intrinsic schedules, which requires support for (some form of)
+   schedule execution on the managed devices.  As needs change or device
+   support is updated, the scope of intrinsic schedules can be grown or
+   adjusted to suit over deployment increments.
+
+   Within the aspect of generation locality (Section 2.1.3) a time-
+   variant domain can start out as a fully externally-controlled device
+   and possibly expand to allow managed devices themselves to propose
+   schedules based on locally-sensed conditions such as traffic
+   periodicity or resource (_e.g._, power) availability.  Managed
+   devices might propose schedules which can then be simulated and
+   verified by an orchestrator and augmented as intrinsic schedules back
+   to those devices.
+
+   The complexity and scope of supported schedules can also be adjusted
+   incrementally, starting with a time-variant domain that operates on
+   very simple schedules with coarse-grained scope and short time
+   horizons.  From there, an operator can incrementally increase
+   schedule complexity, make schedule scope more fine grained, or expand
+   time horizons as device support is updated.  These changes can all be
+   mediated through schedule domains focused based on that device
+   support.
+
+6.  Security Considerations
 
    Using time-variant mechanisms introduces unique security
    vulnerabilities that must be carefully considered to ensure the
@@ -1140,7 +1231,7 @@ Table of Contents
    The following potential security considerations warrant detailed
    investigation as solutions are developed and deployed.
 
-5.1.  Denial-of-Service (DoS) Attack
+6.1.  Denial-of-Service (DoS) Attack
 
    Precisely coordinating time information across devices and routers is
    critical to maintaining network stability.  Malicious actors could
@@ -1157,7 +1248,7 @@ Table of Contents
    synchronization mechanisms, such as Network Time Protocol (NTP) or
    Precision Time Protocol (PTP), is essential to mitigate these risks.
 
-5.2.  Traffic Analysis and Path Prediction
+6.2.  Traffic Analysis and Path Prediction
 
    Time variant networks may involve frequent updates and adjustments to
    routing tables based on current and forecasted network conditions.
@@ -1172,7 +1263,7 @@ Table of Contents
    threats, it is vital to encrypt time-sensitive data and limit the
    exposure of time-related metadata to unauthorized entities.
 
-5.3.  Activity Identification and Privacy
+6.3.  Activity Identification and Privacy
 
    In certain scenarios, precise time information exchanged within the
    network could be correlated with specific user or device behavior,
@@ -1186,7 +1277,7 @@ Table of Contents
    network users, which could be exploited for social engineering
    attacks, surveillance, or other malicious activities.
 
-5.4.  Spoofing and Manipulation of Time Information
+6.4.  Spoofing and Manipulation of Time Information
 
    The accuracy and integrity of time information are crucial for making
    correct routing decisions.  If an attacker were to inject false or
@@ -1205,7 +1296,7 @@ Table of Contents
    multiple time sources) can provide resilience against single points
    of failure.
 
-5.5.  Replay Attacks on Time-Sensitive Data
+6.5.  Replay Attacks on Time-Sensitive Data
 
    Replay Attacks on Time-Sensitive Data: Time variant network data and
    schedule updates may be susceptible to replay attacks, where a
@@ -1219,7 +1310,7 @@ Table of Contents
    protocol for time-variant schedules that mitigates such attacks while
    ensuring the validity and timeliness of received information.
 
-5.6.  Compromised Time Sources
+6.6.  Compromised Time Sources
 
    Compromised Time Sources: The reliance on external time sources for
    synchronization purposes presents a potential attack surface for
@@ -1235,7 +1326,7 @@ Table of Contents
    be in place to detect significant deviations in time data that could
    indicate an attack.
 
-6.  IANA Considerations
+7.  IANA Considerations
 
    This document has no IANA actions.
 
@@ -1314,6 +1405,11 @@ Informative References
               Computation Element (PCE)-Based Architecture", RFC 4655,
               DOI 10.17487/RFC4655, August 2006,
               <https://www.rfc-editor.org/info/rfc4655>.
+
+   [RFC5706]  Harrington, D., "Guidelines for Considering Operations and
+              Management of New Protocols and Protocol Extensions",
+              RFC 5706, DOI 10.17487/RFC5706, November 2009,
+              <https://www.rfc-editor.org/info/rfc5706>.
 
    [RFC6241]  Enns, R., Ed., Bjorklund, M., Ed., Schoenwaelder, J., Ed.,
               and A. Bierman, Ed., "Network Configuration Protocol
