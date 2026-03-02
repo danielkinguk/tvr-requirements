@@ -154,7 +154,7 @@ depending on the time a calculation is performed without other detectable change
 cost functions associated with the route.
       </t>
       <t>
-This section is organized into the following: <xref target="scheduling"/> includes some basic definitions for when and how schedules would relate to a general data model, <xref target="time"/> discusses the temporal aspects within a schedule itself, <xref target="topologies"/> explains the entities of a network model expected to benefit from a schedule, <xref target="routing"/> discusses complex routing behaviors enabled by a network model with intrinsic schedules, and <xref target="integrity"/> discusses considerations needed when schedules are present in a data model.
+This section is organized into the following: <xref target="scheduling"/> includes some basic definitions for when and how schedules would relate to a general data model, <xref target="time"/> discusses the temporal aspects within a schedule itself, <xref target="topologies"/> explains the entities of an IETF network model expected to benefit from a schedule, <xref target="routing"/> discusses complex routing behaviors enabled by a network model with intrinsic schedules, and <xref target="integrity"/> discusses considerations needed when schedules are present in a data model.
       </t>
       <section anchor="scheduling">
         <name>Resource Scheduling</name>
