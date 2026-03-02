@@ -70,7 +70,7 @@
     <section anchor="introduction">
       <name>Introduction</name>
       <t>
-This document is an informational specification meant to inform the design and implementation of systems which manage time-variant routing (TVR) information, and to allow characterizing those systems with design aspects which are understandable to network operators.
+This document is an informational specification meant to inform the design and implementation of systems that manage time-variant routing (TVR) information, and to characterize those systems using design aspects understandable to network operators.
 The terms discussed in this document are intentionally general and are intended to be tailored for specifics of those individual TVR systems.
       </t>
       <t>
