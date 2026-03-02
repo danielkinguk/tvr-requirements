@@ -146,17 +146,22 @@ Requirements on the design of TVR systems are then categorized and summarized in
     </section>
     <section anchor="overview">
       <name>Overview of Time-Variant Networks</name>
-      <t>Existing Internet routing techniques maintain end-to-end connected paths across a network. Routing mechanisms exist to recover
-         connectivity and resume normal traffic forwarding as the topology changes. Occasionally, optimization of routes may also be
-         requested, especially post-topology changes due to disruptive events. However, there are a growing number of use cases where
-         changes to the routing topology are an expected part of network operations. In these scenarios, the pre-planned loss and
-         restoration of an adjacency, or formation of an alternate adjacency, should be seen as a non-disruptive event.</t>
-
-      <t>TVR refers to calculating a path or subpath through a network where the time of message transmission
-         (or receipt) is part of the overall route computation.  Therefore, a TVR computation might produce different results
-         depending on the time a calculation is performed without other detectable changes to the network topology or other
-         cost functions associated with the route.</t>
-
+      <t>
+Existing Internet routing techniques maintain end-to-end connected paths across a network. Routing mechanisms exist to recover
+connectivity and resume normal traffic forwarding as the topology changes. Occasionally, optimization of routes may also be
+requested, especially post-topology changes due to disruptive events. However, there are a growing number of use cases where
+changes to the routing topology are an expected part of network operations. In these scenarios, the pre-planned loss and
+restoration of an adjacency, or formation of an alternate adjacency, should be seen as a non-disruptive event.
+      </t>
+      <t>
+TVR refers to calculating a path or subpath through a network where the time of message transmission
+(or receipt) is part of the overall route computation.  Therefore, a TVR computation might produce different results
+depending on the time a calculation is performed without other detectable changes to the network topology or other
+cost functions associated with the route.
+      </t>
+      <t>
+This section is organized into the following: <xref target="scheduling"/> includes some basic definitions for when and how schedules would relate to a general data model, <xref target="time"/> discusses the temporal aspects within a schedule itself, <xref target="topologies"/> explains the entities of an IETF network model expected to benefit from a schedule, <xref target="routing"/> discusses complex routing behaviors enabled by a network model with intrinsic schedules, and <xref target="integrity"/> discusses considerations needed when schedules are present in a data model.
+      </t>
       <section anchor="scheduling">
         <name>Resource Scheduling</name>
         <t>Planned resource scheduling is essential for various scenarios, including networks with mobile entities such as unmanned
@@ -338,7 +343,7 @@ While the administrative changes follow the schedule times, the operational stat
           </t>
         </section>
       </section>
-      <section>
+      <section anchor="time">
         <name>General Temporality</name>
         <t>
 This section covers different aspects of how temporality applies to any potential TVR information model.
@@ -616,7 +621,7 @@ Likewise, the assigning of an address property at one layer does not imply the p
        </ol>
          </section>
       </section>
-         <section anchor="Considerations">
+         <section anchor="integrity">
          <name>Integrity Considerations</name>
          <t>Time-variant network relies on accurate and timely dissemination of time-variant routing and forwarding information. However, the presence of
             malicious or unintended divergent information introduces risks that can impact network stability and operational correctness. An adversary could
