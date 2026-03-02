@@ -5,12 +5,12 @@
 Network Working Group                                            D. King
 Internet-Draft                                      Lancaster University
 Intended status: Informational                           L. M. Contreras
-Expires: 21 August 2026                                       Telefonica
+Expires: 3 September 2026                                     Telefonica
                                                                 B. Sipos
                                                                  JHU/APL
                                                                 L. Zhang
                                                                   Huawei
-                                                        17 February 2026
+                                                            2 March 2026
 
 
                 TVR (Time-Variant Routing) Requirements
@@ -59,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 21 August 2026.
+   This Internet-Draft will expire on 3 September 2026.
 
 Copyright Notice
 
@@ -137,12 +137,11 @@ Table of Contents
 1.  Introduction
 
    This document is an informational specification meant to inform the
-   design and implementation of systems which manage time-variant
-   routing (TVR) information, and to allow characterizing those systems
-   with design aspects which are understandable to network operators.
-   The terms discussed in this document are intentionally general and
-   are intended to be tailored for specifics of those individual TVR
-   systems.
+   design and implementation of systems that manage time-variant routing
+   (TVR) information, and to characterize those systems using design
+   aspects understandable to network operators.  The terms discussed in
+   this document are intentionally general and are intended to be
+   tailored for specifics of those individual TVR systems.
 
    The motivation for this work is explained in the TVR Use Cases
    document [RFC9657], which justifies why there is value in having some
