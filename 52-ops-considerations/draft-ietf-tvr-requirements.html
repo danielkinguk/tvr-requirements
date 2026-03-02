@@ -1053,11 +1053,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">tvr-requirements</td>
-<td class="right">February 2026</td>
+<td class="right">March 2026</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">King, et al.</td>
-<td class="center">Expires 21 August 2026</td>
+<td class="center">Expires 3 September 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1070,12 +1070,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-tvr-requirements-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-02-17" class="published">17 February 2026</time>
+<time datetime="2026-03-02" class="published">2 March 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-08-21">21 August 2026</time></dd>
+<dd class="expires"><time datetime="2026-09-03">3 September 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1140,7 +1140,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 21 August 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 3 September 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -2160,8 +2160,11 @@ The choice of which devices to include in a domain is subjective, but should tak
 For example, including in a single domain devices which can handle data models with intrinsic schedules and devices which cannot will increase the burden on the network orchestrator to validate the joint configurations of those devices.
 Segmenting into different schedule domains would allow for a more simple validation of the time-invariant device configurations and a more narrow but complex validation of the time-variant device configurations.<a href="#section-5.1-2" class="pilcrow">¶</a></p>
 <p id="section-5.1-3">
-Another important consideration for schedule domains is the time sensitivity (<em>i.e.</em>, the required wall-clock precision or accuracy) of devices in each domain.
+Another important consideration for schedule domains is the required wall-clock time precision and accuracy of devices in each domain, as explained in <a href="#time-precision" class="auto internal xref">Section 2.2.3</a>.
 A single domain which includes devices needing only coarse time precision as well as those needing tight precision can add unnecessary burden to planning and validation of schedules for the coarse-precision devices.<a href="#section-5.1-3" class="pilcrow">¶</a></p>
+<p id="section-5.1-4">
+Similarly, the required time synchronization for devices in each domain, as explained in <a href="#time-sync" class="auto internal xref">Section 2.2.4</a>, affects the amount of and types of analysis that a network orchestrator needs to validate configurations of those devices.
+A single domain which includes some devices needing only loose synchronization and some with very tight requirements adds burden to planning and validation of schedules.<a href="#section-5.1-4" class="pilcrow">¶</a></p>
 </section>
 <section id="section-5.2">
         <h3 id="name-incremental-deployment">

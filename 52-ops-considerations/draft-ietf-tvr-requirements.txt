@@ -5,12 +5,12 @@
 Network Working Group                                            D. King
 Internet-Draft                                      Lancaster University
 Intended status: Informational                           L. M. Contreras
-Expires: 21 August 2026                                       Telefonica
+Expires: 3 September 2026                                     Telefonica
                                                                 B. Sipos
                                                                  JHU/APL
                                                                 L. Zhang
                                                                   Huawei
-                                                        17 February 2026
+                                                            2 March 2026
 
 
                 TVR (Time-Variant Routing) Requirements
@@ -59,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 21 August 2026.
+   This Internet-Draft will expire on 3 September 2026.
 
 Copyright Notice
 
@@ -1061,12 +1061,19 @@ Table of Contents
    invariant device configurations and a more narrow but complex
    validation of the time-variant device configurations.
 
-   Another important consideration for schedule domains is the time
-   sensitivity (_i.e._, the required wall-clock precision or accuracy)
-   of devices in each domain.  A single domain which includes devices
+   Another important consideration for schedule domains is the required
+   wall-clock time precision and accuracy of devices in each domain, as
+   explained in Section 2.2.3.  A single domain which includes devices
    needing only coarse time precision as well as those needing tight
    precision can add unnecessary burden to planning and validation of
    schedules for the coarse-precision devices.
+
+   Similarly, the required time synchronization for devices in each
+   domain, as explained in Section 2.2.4, affects the amount of and
+   types of analysis that a network orchestrator needs to validate
+   configurations of those devices.  A single domain which includes some
+   devices needing only loose synchronization and some with very tight
+   requirements adds burden to planning and validation of schedules.
 
 5.2.  Incremental Deployment
 
