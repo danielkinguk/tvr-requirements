@@ -1483,15 +1483,19 @@ Requirements on the design of TVR systems are then categorized and summarized in
       <h2 id="name-overview-of-time-variant-ne">
 <a href="#section-2" class="section-number selfRef">2. </a><a href="#name-overview-of-time-variant-ne" class="section-name selfRef">Overview of Time-Variant Networks</a>
       </h2>
-<p id="section-2-1">Existing Internet routing techniques maintain end-to-end connected paths across a network. Routing mechanisms exist to recover
-         connectivity and resume normal traffic forwarding as the topology changes. Occasionally, optimization of routes may also be
-         requested, especially post-topology changes due to disruptive events. However, there are a growing number of use cases where
-         changes to the routing topology are an expected part of network operations. In these scenarios, the pre-planned loss and
-         restoration of an adjacency, or formation of an alternate adjacency, should be seen as a non-disruptive event.<a href="#section-2-1" class="pilcrow">¶</a></p>
-<p id="section-2-2">TVR refers to calculating a path or subpath through a network where the time of message transmission
-         (or receipt) is part of the overall route computation.  Therefore, a TVR computation might produce different results
-         depending on the time a calculation is performed without other detectable changes to the network topology or other
-         cost functions associated with the route.<a href="#section-2-2" class="pilcrow">¶</a></p>
+<p id="section-2-1">
+Existing Internet routing techniques maintain end-to-end connected paths across a network. Routing mechanisms exist to recover
+connectivity and resume normal traffic forwarding as the topology changes. Occasionally, optimization of routes may also be
+requested, especially post-topology changes due to disruptive events. However, there are a growing number of use cases where
+changes to the routing topology are an expected part of network operations. In these scenarios, the pre-planned loss and
+restoration of an adjacency, or formation of an alternate adjacency, should be seen as a non-disruptive event.<a href="#section-2-1" class="pilcrow">¶</a></p>
+<p id="section-2-2">
+TVR refers to calculating a path or subpath through a network where the time of message transmission
+(or receipt) is part of the overall route computation.  Therefore, a TVR computation might produce different results
+depending on the time a calculation is performed without other detectable changes to the network topology or other
+cost functions associated with the route.<a href="#section-2-2" class="pilcrow">¶</a></p>
+<p id="section-2-3">
+This section is organized into the following: <a href="#scheduling" class="auto internal xref">Section 2.1</a> includes some basic definitions for when and how schedules would relate to a general data model, <a href="#time" class="auto internal xref">Section 2.2</a> discusses the temporal aspects within a schedule itself, <a href="#topologies" class="auto internal xref">Section 2.3</a> explains the entities of an IETF network model expected to benefit from a schedule, <a href="#routing" class="auto internal xref">Section 2.4</a> discusses complex routing behaviors enabled by a network model with intrinsic schedules, and <a href="#integrity" class="auto internal xref">Section 2.5</a> discusses considerations needed when schedules are present in a data model.<a href="#section-2-3" class="pilcrow">¶</a></p>
 <div id="scheduling">
 <section id="section-2.1">
         <h3 id="name-resource-scheduling">
@@ -1689,6 +1693,7 @@ While the administrative changes follow the schedule times, the operational stat
 </section>
 </section>
 </div>
+<div id="time">
 <section id="section-2.2">
         <h3 id="name-general-temporality">
 <a href="#section-2.2" class="section-number selfRef">2.2. </a><a href="#name-general-temporality" class="section-name selfRef">General Temporality</a>
@@ -1865,6 +1870,7 @@ A model which has an intrinsic notion of fine-grained superseding changes, possi
           </ul>
 </section>
 </section>
+</div>
 <div id="topologies">
 <section id="section-2.3">
         <h3 id="name-topologies">
@@ -2006,7 +2012,7 @@ Likewise, the assigning of an address property at one layer does not imply the p
 </div>
 </section>
 </div>
-<div id="Considerations">
+<div id="integrity">
 <section id="section-2.5">
         <h3 id="name-integrity-considerations">
 <a href="#section-2.5" class="section-number selfRef">2.5. </a><a href="#name-integrity-considerations" class="section-name selfRef">Integrity Considerations</a>
