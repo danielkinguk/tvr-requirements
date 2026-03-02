@@ -10,7 +10,7 @@
 <rfc xmlns:xi="http://www.w3.org/2001/XInclude" ipr="trust200902" docName="draft-ietf-tvr-requirements-latest" category="info" submissionType="IETF" tocInclude="true" sortRefs="true" symRefs="true" version="3">
   <!-- xml2rfc v2v3 conversion 3.17.0 -->
   <front>
-    <title abbrev="tvr-requirements">TVR (Time-Variant Routing) Requirements</title>
+    <title abbrev="TVR Requirements">Time-Variant Routing (TVR) Requirements</title>
     <seriesInfo name="Internet-Draft" value="draft-ietf-tvr-requirements-latest"/>
     <author fullname="D. King">
       <organization>Lancaster University</organization>
@@ -43,12 +43,14 @@
     <keyword>Mobility</keyword>
     <keyword>Requirements</keyword>
     <abstract>
-      <t>Time-Variant Routing (TVR) refers to calculating a path or subpath through a network where the time of message transmission
-         (or receipt) is part of the overall route computation. This means that, all things being equal, a TVR computation might
-         produce different results depending on the time that the computation is performed without other detectable changes to the
-         network topology or other cost functions associated with the route.</t>
-
-      <t>This document introduces requirements where TVR computations could improve message exchange in a network.</t>
+      <t>
+Time-Variant Routing (TVR) refers to calculating a path or subpath through a network where the time of message transmission (or receipt) is part of the overall route computation.
+This means that, all things being equal, a TVR computation might produce different results depending on the time that the computation is performed without other detectable changes to the network topology or other cost functions associated with the route.
+      </t>
+      <t>
+This document introduces requirements for the design and implementation of systems which perform TVR computations.
+It also explains different aspects of a TVR system which need to be considered during its design.
+      </t>
     </abstract>
     <note removeInRFC="true">
       <name>About This Document</name>
@@ -70,8 +72,12 @@
     <section anchor="introduction">
       <name>Introduction</name>
       <t>
-This document is an informational specification meant to inform the design and implementation of systems which manage time-variant routing (TVR) information, and to allow characterizing those systems with aspects which are understandable to network operators.
+This document is an informational specification meant to inform the design and implementation of systems that manage time-variant routing (TVR) information, and to characterize those systems using design aspects understandable to network operators.
 The terms discussed in this document are intentionally general and are intended to be tailored for specifics of those individual TVR systems.
+      </t>
+      <t>
+The motivation for this work is explained in the TVR Use Cases document <xref target="RFC9657"/>, which justifies why there is value in having some form of time-variance in a system.
+This document discusses technical detail of aspects that designers and operators could adopt and considerations for when (or when not) to need to incorporate each of these aspects in a system design.
       </t>
       <t>
 This document starts with an overview of TVR networks and aspects of their time variance in <xref target="overview"/> and elaborates on TVR use cases in <xref target="tvr-use-case-requirements"/>.
@@ -113,44 +119,56 @@ Requirements on the design of TVR systems are then categorized and summarized in
           <dd>The subsystem in a managing device which operates a management protocol to control an Agent.</dd>
           <dt>Agent:</dt>
           <dd>The subsystem in a managed device which operates a management protocol to be controlled by a Manager.</dd>
+          <dt>Management Protocol:</dt>
+          <dd>The mechanism used to exchange data between Managing and Managed devices, goverened by a data model shared by the two devices.</dd>
           <dt>(Routing) Application:</dt>
           <dd>The subsystem of a managed device which performs the functions of a routing protocol and/or algorithm.</dd>
         </dl>
         <figure anchor="fig-mgmt-ents">
           <name>Management Entities</name>
           <artwork type="ascii" align="center">
-+--------------------+       +-------------------+
-|   Managing Device  |       |   Managed Device  |
-|                    |       |                   |
-|  +--------------+  |       |  +-------------+  |
-|  | Orchestrator |  |       |  | Application |  |
-|  +--------------+  |       |  +-------------+  |
-|         |          |       |         |         |
-|  +--------------+  |       |  +-------------+  |
-|  |    Manager   |  |---+---|  |     Agent   |  |
-|  +--------------+  |   :   |  +-------------+  |
-+--------------------+   :   +-------------------+
-                         :
-                  +-------------+
-                  |  Data Model |
-                  +-------------+
++--------------------+             +-------------------+
+|   Managing Device  |             |   Managed Device  |
+|                    |             |                   |
+|  +--------------+  |             |  +-------------+  |
+|  | Orchestrator |  |             |  | Application |  |
+|  +--------------+  |             |  +-------------+  |
+|         |          |  Management |         |         |
+|  +--------------+  |   Protocol  |  +-------------+  |
+|  |    Manager   |  |------+------|  |     Agent   |  |
+|  +--------------+  |      :      |  +-------------+  |
++--------------------+      :      +-------------------+
+                            :
+                     +-------------+
+                     |  Data Model |
+                     +-------------+
 </artwork>
         </figure>
+        <t>
+As a concrete example for the use of <xref target="fig-mgmt-ents"/> when applied to existing IETF standards, the management protocol could be NETCONF <xref target="RFC6241"/> which would be governed by a set of YANG data models <xref target="RFC7950"/> known to the Manager and its Orchestrator and implemented on the Agent and its Application.
+In this example, if the system uses all <em>extrinsic schedules</em> the data model does not need to be time-variant and all schedule execution would occur within the Orchestrator.
+If the system uses any <em>intrinsic schedules</em> then those need to be present within the data model, which would be communicated to and executed within the Application.
+        </t>
       </section>
     </section>
     <section anchor="overview">
       <name>Overview of Time-Variant Networks</name>
-      <t>Existing Internet routing techniques maintain end-to-end connected paths across a network. Routing mechanisms exist to recover
-         connectivity and resume normal traffic forwarding as the topology changes. Occasionally, optimization of routes may also be
-         requested, especially post-topology changes due to disruptive events. However, there are a growing number of use cases where
-         changes to the routing topology are an expected part of network operations. In these scenarios, the pre-planned loss and
-         restoration of an adjacency, or formation of an alternate adjacency, should be seen as a non-disruptive event.</t>
-
-      <t>Time-Variant Routing (TVR) refers to calculating a path or subpath through a network where the time of message transmission
-         (or receipt) is part of the overall route computation.  Therefore, a TVR computation might produce different results
-         depending on the time a calculation is performed without other detectable changes to the network topology or other
-         cost functions associated with the route.</t>
-
+      <t>
+Existing Internet routing techniques maintain end-to-end connected paths across a network. Routing mechanisms exist to recover
+connectivity and resume normal traffic forwarding as the topology changes. Occasionally, optimization of routes may also be
+requested, especially post-topology changes due to disruptive events. However, there are a growing number of use cases where
+changes to the routing topology are an expected part of network operations. In these scenarios, the pre-planned loss and
+restoration of an adjacency, or formation of an alternate adjacency, should be seen as a non-disruptive event.
+      </t>
+      <t>
+TVR refers to calculating a path or subpath through a network where the time of message transmission
+(or receipt) is part of the overall route computation.  Therefore, a TVR computation might produce different results
+depending on the time a calculation is performed without other detectable changes to the network topology or other
+cost functions associated with the route.
+      </t>
+      <t>
+This section is organized into the following: <xref target="scheduling"/> includes some basic definitions for when and how schedules would relate to a general data model, <xref target="time"/> discusses the temporal aspects within a schedule itself, <xref target="topologies"/> explains the entities of an IETF network model expected to benefit from a schedule, <xref target="routing"/> discusses complex routing behaviors enabled by a network model with intrinsic schedules, and <xref target="integrity"/> discusses considerations needed when schedules are present in a data model.
+      </t>
       <section anchor="scheduling">
         <name>Resource Scheduling</name>
         <t>Planned resource scheduling is essential for various scenarios, including networks with mobile entities such as unmanned
@@ -164,7 +182,7 @@ Requirements on the design of TVR systems are then categorized and summarized in
           <name>Schedule Domains</name>
           <t>
 The concept of a schedule domain is to allow partitioning the universe of managed entities into separate sets of entities, each with independent timelines having independent <xref target="schedule-exec-locality">schedule execution</xref> and likely independent <xref target="schedule-gen-locality">schedule generation</xref>.
-Within each domain, all schedules need to use the same timeline, need scynchronized execution, and joint schedule generation.
+Within each domain, all schedules need to use the same timeline, need synchronized execution, and joint schedule generation.
           </t>
           <t>
 Two extremes of how a system can organize schedule domains are:
@@ -203,11 +221,11 @@ Two extremes of schedules being associated with routing data are:
             <dt>Intrinsic Schedule:</dt>
             <dd>
 In this situation, the schedule is an intrinsic part of the managed data model which is visible to the routing application and used as part of the routing algorithms.
-When the schedule is intrinsic, there is not necessarily the notion of a schedule being "executed" in wall-clock time because the time-varying parameters are ingested as part of the routing algorithms natural functioning.
+When the schedule is intrinsic, there is not necessarily the notion of a schedule being "executed" as a single activity in wall-clock time because the time-varying parameters are ingested as part of the routing algorithm functioning (see <xref target="routing"/>) when routing is needed.
             </dd>
             <dt>Extrinsic Schedule:</dt>
             <dd>
-In this situation, the schedule is not part of the managed data proper but maintained within the Orchestrator; the routing application only sees the effects of changes in routing parameters as the schedule is executed (in wall-clock time) by the Agent.
+In this situation, the schedule is not part of the managed data model for the Managed Device but maintained within the Orchestrator; the routing application only sees the effects of changes in routing parameters as the schedule is executed (in wall-clock time) by the Orchestrator.
             </dd>
           </dl>
           <t>
@@ -277,8 +295,8 @@ When schedules are executed on each device, there is a risk that clocks on diffe
 Because real-time clocks are necessary for more than just schedule execution, and because accurate and precise time sources exist outside of network time (<em>e.g.</em>, GPS time) this risk can be made to have a low probability.
           </t>
           <t>
-With distributed execution there is also a risk that a manager loses connectivity with the managed device and the device eventually runs out of time horizon in the schedule which is known to it.
-This risk can be mitigated by trading between the size and the horizon end-time of schedules distributed to managed devices. This trade can be different for different devices, where some well-connected devices operate closer to just-in-time with short horizons while other devices can be given a longer horizon to allow it to execute in the absence of near-continuous manager connectivity.
+With distributed execution there is also a risk that a Manager loses connectivity with the managed device and the device eventually runs out of time horizon in the schedule which is known to it.
+This risk can be mitigated by trading between the size and the horizon end-time of schedules distributed to managed devices. This trade can be different for different devices, where some well-connected devices operate closer to just-in-time with short horizons while other devices can be given a longer horizon to allow it to execute in the absence of near-continuous Manager connectivity.
           </t>
           <t>
 One possible combination of these options is depicted in <xref target="fig-distrib-snapshot"/>, where inputs are collected in a centralized schedule generator, the schedule is executed on that centralized entity by taking a snapshot (periodically or as-needed when model state changes over schedule time) and distributing the time-invariant snapshot configuration.
@@ -299,7 +317,7 @@ Sources                                       Consumers
             </artwork>
           </figure>
           <t>
-An alternative combination is depicted in <xref target="fig-distrib-schedule"/>, where inputs are also collected in and a schedule generated by a centralized entity, but in this alternative the scheduled model (or some filtered time horizon of it) is distributed to the managed devices to be executed independently on each device.
+An alternative combination is depicted in <xref target="fig-distrib-schedule"/>, where inputs are also collected in and a schedule generated by a centralized entity, but in this alternative the scheduled data model (or some filtered time horizon of it) is distributed to the managed devices to be executed independently on each device.
           </t>
           <figure anchor="fig-distrib-schedule">
             <name>Centralized Generation with Distributed Execution</name>
@@ -332,21 +350,21 @@ While the administrative changes follow the schedule times, the operational stat
           </t>
         </section>
       </section>
-      <section>
+      <section anchor="time">
         <name>General Temporality</name>
         <t>
-This section covers different aspects of how temporality applies to any potential TVR information model.
+This section covers different aspects of how temporality applies to any potential TVR data model or TVR augmentation of a time-invarient data model.
 Each aspect is roughly independent and informs how a model can choose to include temporality in its parameter state space.
         </t>
         <t>
-Each of these aspects can be different across different schedule domains, but are expected to be consistent within a single schedule domain.
+Each of these aspects can be different across different <xref target="schedule-domain">schedule domains</xref>, but are expected to be consistent within a single schedule domain.
 Also, just because an entire model or domain allows high <xref target="time-scope">granularity</xref> or high <xref target="time-precision">precision</xref> does not mean that every single entity needs to make use of those aspects (or even that every entity needs to have time-variance at all).
 It is perfectly valid for some entities to have time-variance and others to have none.
         </t>
         <section anchor="time-scope">
           <name>Scope of Time-Variability</name>
           <t>
-One aspect of any time-varying model is the scope of what may be time-variable.
+One aspect of any time-variant data model is the scope of what may be time-variable.
 Two extremes of this aspect are:
           </t>
           <ul>
@@ -357,7 +375,7 @@ Two extremes of this aspect are:
 It is expected that an application of time-variability to real world data models will keep some entities within the model time-invariant and allow scheduling of other, specific entities.
           </t>
           <t>
-Another aspect of any time-varying model is the granularity of state to which a schedule can be applied.
+Another aspect of any time-variant data model is the granularity of state to which a schedule can be applied.
 Two extremes of this aspect are:
           </t>
           <ul>
@@ -373,12 +391,12 @@ Another possibility is to apply a schedule to groups of properties within an ent
         <section>
           <name>Time Horizon</name>
           <t>
-In an idealized model the schedules will apply indefinitely far in the past and the future, but in a realizable model with both processing and storage limitations there will need to be a time horizon within which the model applies and outside of which the model has no meaning.
-In some cases this horizon will be intrinsic to the model itself, with an explicit model parameter indicating the horizon.
-In other cases the model may allow indefinitely-large schedules but the processing of the schedule timeline is bounded to limit resource needs.
+In an idealized model the schedules will apply indefinitely far in the past and the future, but in a realizable data model with both processing and storage limitations there will need to be a time horizon within which the model applies and outside of which the model has no meaning.
+In some cases this horizon will be intrinsic to the data model itself, with an explicit model parameter indicating the horizon.
+In other cases the data model may allow indefinitely-large schedules but the processing of the schedule timeline is bounded to limit resource needs.
           </t>
           <t>
-One possible rationale for separating schedule domains is the duration of the time horizon needed for entities in each domain.
+One possible rationale for separating <xref target="schedule-domain">schedule domains</xref> is the duration of the time horizon needed for entities in each domain.
           </t>
         </section>
         <section anchor="time-precision">
@@ -388,7 +406,7 @@ Different time-variant models will require different granularities of planning t
 It is up to specific models to define the precision of time values and the required accuracy and precision of wall-clocks which execute the schedules.
           </t>
           <t>
-One possible rationale for separating schedule domains is the level of time precision or accuracy of execution time able to be upheld across entities in each domain.
+One possible rationale for separating <xref target="schedule-domain">schedule domains</xref> is the level of time precision or accuracy of execution time able to be upheld across entities in each domain.
           </t>
         </section>
         <section anchor="time-sync">
@@ -500,8 +518,9 @@ A model which has an intrinsic notion of fine-grained superseding changes, possi
       <section anchor="topologies">
         <name>Topologies</name>
         <t>
-The primary entities of a topological network model, as realized in <xref target="RFC8345"/> and similar predecessors, are nodes and unidirectional links, with a secondary entity representing the "termination point" for each side of a link at a node.
+The primary entities of a topological network model, as realized in the IETF <xref target="RFC8345"/> and similar predecessors, are <em>nodes</em> and unidirectional <em>links</em>, with a secondary entity representing the <em>termination point</em> for each side of a link at a node.
 Following the concepts described in <xref target="scheduling"/> these are the entities to which an intrinsic schedule can be applied.
+Since TVR is focused on the routing aspect of scheduled systems, relating schedules to entities in an network model used for routing is meant to give concrete guidance about where there is value to put a schedule in a TVR system.
         </t>
         <section anchor="nodes">
           <name>Nodes</name>
@@ -552,14 +571,14 @@ Likewise, the assigning of an address property at one layer does not imply the p
         </section>
       </section>
       <section anchor="routing">
-        <name>Routing</name>
+        <name>Routing Strategies</name>
         <t>Traditional network routing techniques typically use link bandwidth and delay for path calculation, and do not consider time-based factors. TVR should be
            capable of improving network performance and reliability in environments where entities liveness and link availability is a time-based consideration, with various factors,
            including power availability, interface line of sight or expected demand. </t>
         <t>However, even if some adjacency failures are predictable, others are not, including link failures and entity outages.
            Therefore, any new technique or routing protocol extension for TVR environments must be capable of handling planned and unexpected
-           resource losses.</t>
-        <t>Time-Variant Routing (TVR) introduces a scenario of calculating a path, or sub-path within a network, taking into account the timing
+           resource losses or other changes.</t>
+        <t>TVR introduces a scenario of calculating a path, or sub-path within a network, taking into account the timing
            of message transmission or receipt as an integral part of the overall route computation.</t>
         <t>Furthermore, synchronization of network time across TVR-capable entities is critical.</t>
         <t>Three scenarios are currently considered when computing TVR-enabled paths and described in the following subsections.</t>
@@ -610,7 +629,7 @@ Likewise, the assigning of an address property at one layer does not imply the p
        </ol>
          </section>
       </section>
-         <section anchor="Considerations">
+         <section anchor="integrity">
          <name>Integrity Considerations</name>
          <t>Time-variant network relies on accurate and timely dissemination of time-variant routing and forwarding information. However, the presence of
             malicious or unintended divergent information introduces risks that can impact network stability and operational correctness. An adversary could
@@ -692,7 +711,7 @@ This section provides further detail on specific requirements to meet use case n
         Changes in entity state outside of a schedule are communicated to other entities in a network through existing routing protocol mechanism, where they exist.
         </t>
 
-        <t>A manager should provide an advertisement methodology for responding to
+        <t>A Manager should provide an advertisement methodology for responding to
         abnormal changes in the system.</t>
       </section>
 
@@ -895,10 +914,12 @@ This section provides further detail on specific requirements to meet use case n
         <name>Normative References</name>
         <?rfc include="reference.RFC.9657.xml"?>
       </references>
-      <references title="Informative References">
+      <references>
+        <name>Informative References</name>
         <?rfc include="reference.RFC.3339.xml"?>
         <?rfc include="reference.RFC.4655.xml"?>
         <?rfc include="reference.RFC.6241.xml"?>
+        <?rfc include="reference.RFC.7950.xml"?>
         <?rfc include="reference.RFC.8345.xml"?>
         <?rfc include="reference.RFC.8346.xml"?>
         <?rfc include="reference.RFC.8944.xml"?>

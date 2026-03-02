@@ -23,3 +23,4 @@ draft-kcs-tvr-requirements.xml
 package-lock.json
 report.xml
 !requirements.txt
+/build/
