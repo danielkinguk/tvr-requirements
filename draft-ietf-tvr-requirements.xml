@@ -776,7 +776,7 @@ Schedule-based TVR and condition-based reactive mechanisms can coexist within th
           <dd>Since TVR relies on time-sensitive operations, it must ensure the trustworthiness of external time sources.
              Protection against time-based attacks, such as replay attacks or clock manipulation, should also be considered.</dd>
           <dt>Rollback and Recovery:</dt>
-          <dd>>In the event of conflicting, missing, or compromised time-variant routing data, TVR implementations should include fallback mechanisms to maintain network stability.</dd>
+          <dd>In the event of conflicting, missing, or compromised time-variant routing data, TVR implementations should include fallback mechanisms to maintain network stability.</dd>
         </dl>
         <t>By integrating these security requirements into TVR implementations, networks can mitigate risks associated with malicious actors, misconfigurations,
            or unintended disruptions, ensuring the robustness of time-sensitive routing decisions. Specific security scenarios and negation and mitigation methods
