@@ -974,7 +974,9 @@ Table of Contents
       strictly on time-of-day.  But when resources are available based
       on other natural phenomina (_e.g._, orbital periods) the schedules
       must have a periodicity which is parameterized in such a way that
-      allows matching the resource dynamics.
+      allows matching the resource dynamics (_e.g._, repeating
+      subsequent intervals of durations of seconds available and seconds
+      unavailable).
 
    Time horizon tailored to uncertainty:  Even when periodicity is well
       understood, characterized, and parameterized in a data model,
