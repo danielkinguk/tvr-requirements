@@ -13,7 +13,7 @@ Expires: 3 September 2026                                     Telefonica
                                                             2 March 2026
 
 
-                TVR (Time-Variant Routing) Requirements
+                Time-Variant Routing (TVR) Requirements
                    draft-ietf-tvr-requirements-latest
 
 Abstract
