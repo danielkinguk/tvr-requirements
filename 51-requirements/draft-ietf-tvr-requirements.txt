@@ -1118,7 +1118,7 @@ Table of Contents
       sources.  Protection against time-based attacks, such as replay
       attacks or clock manipulation, should also be considered.
 
-   Rollback and Recovery:  >In the event of conflicting, missing, or
+   Rollback and Recovery:  In the event of conflicting, missing, or
       compromised time-variant routing data, TVR implementations should
       include fallback mechanisms to maintain network stability.
 
