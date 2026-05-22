@@ -179,8 +179,9 @@ Table of Contents
       space.
 
    Data Model:  A concrete representation of a model, suitable for
-      exchange between management entities.  A YANG module is an example
-      of a data model.
+      exchange between management entities.  A YANG module (or a
+      collection of cooperating YANG modules) is an example of a data
+      model.
 
    Network Model:  A data model that represents network topology or
       network state, including entities such as nodes, termination
