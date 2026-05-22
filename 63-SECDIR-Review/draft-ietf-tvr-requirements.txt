@@ -5,12 +5,12 @@
 Network Working Group                                            D. King
 Internet-Draft                                      Lancaster University
 Intended status: Informational                           L. M. Contreras
-Expires: 25 October 2026                                      Telefonica
+Expires: 23 November 2026                                     Telefonica
                                                                 B. Sipos
                                                                  JHU/APL
                                                                 L. Zhang
                                                                   Huawei
-                                                           23 April 2026
+                                                             22 May 2026
 
 
                 Time-Variant Routing (TVR) Requirements
@@ -61,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 25 October 2026.
+   This Internet-Draft will expire on 23 November 2026.
 
 Copyright Notice
 
@@ -379,12 +379,11 @@ Table of Contents
       effects of changes in routing parameters as the schedule is
       executed (in wall-clock time) by the Orchestrator.
 
-   Intermediate Schedule:  There is also the possibility of an
-      intermediate situation where the schedule is still part of the
-      managed data model but is visible only to, and executed in wall-
-      clock time by, the management Agent.  This allows a more
-      distributed use of scheduled data than centralizing its processing
-      in an Orchestrator.
+   There is also the possibility of an intermediate schedule, where the
+   schedule is still part of the managed data model but is visible only
+   to, and executed in wall-clock time by, the management Agent.  This
+   intermediate schedule allows a more distributed use of scheduled data
+   than centralizing its processing in an Orchestrator.
 
 2.1.3.  Generation Locality
 
