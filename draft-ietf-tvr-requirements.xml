@@ -92,7 +92,7 @@ Requirements on the design of TVR systems are then categorized and summarized in
           <dt>Model:</dt>
           <dd>The universe being modeled, which defines a parameter state space.</dd>
           <dt>Data Model:</dt>
-          <dd>A concrete representation of a model, suitable for exchange between management entities. A YANG module is an example of a data model.</dd>
+          <dd>A concrete representation of a model, suitable for exchange between management entities. A YANG module (or a collection of cooperating YANG modules) is an example of a data model.</dd>
           <dt>Network Model:</dt>
           <dd>A data model that represents network topology or network state, including entities such as nodes, termination points, and links.</dd>
           <dt>TVR System:</dt>
