@@ -1591,8 +1591,8 @@ In this situation, the schedule is not part of the managed data model for the Ma
           <dd class="break"></dd>
 </dl>
 <p id="section-2.1.2-4">
-There is also the possibility of an intermediate situation where the schedule is still part of the managed data model but is visible only to, and executed in wall-clock time by, the management Agent.
-This allows a more distributed use of scheduled data than centralizing its processing in an Orchestrator.<a href="#section-2.1.2-4" class="pilcrow">¶</a></p>
+There is also the possibility of an intermediate schedule, where the schedule is still part of the managed data model but is visible only to, and executed in wall-clock time by, the management Agent.
+This intermediate schedule allows a more distributed use of scheduled data than centralizing its processing in an Orchestrator.<a href="#section-2.1.2-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="schedule-gen-locality">
@@ -2320,7 +2320,7 @@ The following potential security considerations warrant detailed investigation a
         </h3>
 <p id="section-6.2-1">Time variant networks may involve frequent updates and adjustments to routing tables
               based on current and forecasted network conditions. If time information is not adequately protected, attackers could
-              conduct traffic analysis to infer routing decisions, network load, or usage patterns. The schedule ability could enable
+              conduct traffic analysis to infer routing decisions, network load, or usage patterns. The schedule availability could enable
               attackers to launch highly targeted attacks, such as selectively overloading certain links or intercepting sensitive
               communications. Moreover, long-term analysis of time-variant network data could provide attackers with insights into the
               underlying structure of the network, enabling them to plan more sophisticated attacks. To counter these threats, it is

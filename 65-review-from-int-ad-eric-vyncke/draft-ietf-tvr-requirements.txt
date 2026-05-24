@@ -380,11 +380,11 @@ Table of Contents
       effects of changes in routing parameters as the schedule is
       executed (in wall-clock time) by the Orchestrator.
 
-   There is also the possibility of an intermediate situation where the
+   There is also the possibility of an intermediate schedule, where the
    schedule is still part of the managed data model but is visible only
    to, and executed in wall-clock time by, the management Agent.  This
-   allows a more distributed use of scheduled data than centralizing its
-   processing in an Orchestrator.
+   intermediate schedule allows a more distributed use of scheduled data
+   than centralizing its processing in an Orchestrator.
 
 2.1.3.  Generation Locality
 
@@ -1262,7 +1262,7 @@ Table of Contents
    routing tables based on current and forecasted network conditions.
    If time information is not adequately protected, attackers could
    conduct traffic analysis to infer routing decisions, network load, or
-   usage patterns.  The schedule ability could enable attackers to
+   usage patterns.  The schedule availability could enable attackers to
    launch highly targeted attacks, such as selectively overloading
    certain links or intercepting sensitive communications.  Moreover,
    long-term analysis of time-variant network data could provide
