@@ -155,7 +155,10 @@ Table of Contents
    form of time-variance in a system.  This document discusses technical
    detail of aspects that designers and operators could adopt and
    considerations for when (or when not) to need to incorporate each of
-   these aspects in a system design.
+   these aspects in a system design.  This document builds on the use
+   cases described in [RFC9657] by deriving design requirements and
+   operational considerations for TVR systems, but it does not define a
+   protocol solution and is not limited to a single use case.
 
    This document starts with an overview of TVR networks and aspects of
    their time variance in Section 2 and elaborates on TVR use cases in
@@ -170,6 +173,14 @@ Table of Contents
 
    Model:  The universe being modeled, which defines a parameter state
       space.
+
+   Data Model:  A concrete representation of a model, suitable for
+      exchange between management entities.  A YANG module is an example
+      of a data model.
+
+   Network Model:  A data model that represents network topology or
+      network state, including entities such as nodes, termination
+      points, and links.
 
    Entity:  A single separable item within the model.  Each entity has a
       stable identity which is time-invariant.
@@ -260,12 +271,13 @@ Table of Contents
 
    As a concrete example for the use of Figure 1 when applied to
    existing IETF standards, the management protocol could be NETCONF
-   [RFC6241] which would be governed by a set of YANG data models
-   [RFC7950] known to the Manager and its Orchestrator and implemented
-   on the Agent and its Application.  In this example, if the system
-   uses all _extrinsic schedules_ the data model does not need to be
-   time-variant and all schedule execution would occur within the
-   Orchestrator.  If the system uses any _intrinsic schedules_ then
+   [RFC6241], RESTCONF [RFC8040], or gNMI (gRPC Network Management
+   Interface) [gNMI], which would be governed by a set of YANG data
+   models [RFC7950] known to the Manager and its Orchestrator and
+   implemented on the Agent and its Application.  In this example, if
+   the system uses all _extrinsic schedules_ the data model does not
+   need to be time-variant and all schedule execution would occur within
+   the Orchestrator.  If the system uses any _intrinsic schedules_ then
    those need to be present within the data model, which would be
    communicated to and executed within the Application.
 
@@ -296,7 +308,11 @@ Table of Contents
    network model expected to benefit from a schedule, Section 2.4
    discusses complex routing behaviors enabled by a network model with
    intrinsic schedules, and Section 2.5 discusses considerations needed
-   when schedules are present in a data model.
+   when schedules are present in a data model.  The discussion
+   progresses from where scheduled information can be generated,
+   distributed, and executed; to how schedule time is represented; and
+   finally to where scheduled properties apply in network topology and
+   routing systems.
 
 2.1.  Resource Scheduling
 
@@ -1043,6 +1059,13 @@ Table of Contents
 
 4.  Requirements Summary
 
+   The requirements in this section are derived from the use case needs
+   discussed in Section 3 and from the design aspects introduced in
+   Section 2.  Not every architectural option or temporal property
+   described in Section 2 results in an independent requirement; rather,
+   those aspects inform the requirements that TVR systems need to
+   support when they are applicable to a deployment.
+
 4.1.  Support the Identification and Advertisement of Entity Property
       Changes
 
@@ -1191,7 +1214,10 @@ Table of Contents
    orchestrator.  Because of these expectations, the introduction of TVR
    into an existing management ecosystem is meant to be able to be
    deployed incrementally, possibly along different aspects in different
-   increments.
+   increments.  This supports both greenfield deployments, where TVR can
+   be designed into the initial architecture, and brownfield
+   deployments, where TVR capabilities coexist with and gradually
+   augment non-TVR operation.
 
    Within the aspect of schedule domains (Section 2.1.1) it is possible
    to start with a single completely time-invariant domain, add TVR as a
@@ -1426,6 +1452,10 @@ Informative References
    [RFC7950]  Bjorklund, M., Ed., "The YANG 1.1 Data Modeling Language",
               RFC 7950, DOI 10.17487/RFC7950, August 2016,
               <https://www.rfc-editor.org/info/rfc7950>.
+
+   [RFC8040]  Bierman, A., Bjorklund, M., and K. Watsen, "RESTCONF
+              Protocol", RFC 8040, DOI 10.17487/RFC8040, January 2017,
+              <https://www.rfc-editor.org/info/rfc8040>.
 
    [RFC8345]  Clemm, A., Medved, J., Varga, R., Bahadur, N.,
               Ananthakrishnan, H., and X. Liu, "A YANG Data Model for
