@@ -756,12 +756,12 @@ Not every architectural option or temporal property described in <xref target="o
       </section>
 
       <section title="Support Proxy Advertisement">
-        <t>Proxies can help to improve the efficiency of the network.
-        There are some entities in the network that do not have routing
-        functions. When their properties change, they are unable to notify
-        other entities  in the network. Proxy nodes can help nodes without routing
-        functions to advertise information, thus improving the efficiency of
-        the network. Therefore,</t>
+        <t>A proxy is an entity that advertises TVR-relevant property changes on behalf of another entity that cannot originate such advertisements itself.
+        For example, a node with routing or management capabilities can advertise scheduled or unscheduled property changes for an attached non-routing node, interface, or other modeled entity.
+        A proxy advertisement needs to preserve the identity of the represented entity and the properties being advertised, so receivers can distinguish between the proxy itself and the entity on whose behalf it is acting.</t>
+
+        <t>Supporting proxy entities means that a TVR system can designate, authenticate, and authorize an entity to advertise information for another entity, and can process those advertisements as applying to the represented entity rather than to the proxy.
+        Proxy nodes can help nodes without routing functions to advertise information, thus improving the efficiency of the network. Therefore,</t>
 
         <t>Systems must support proxy entities to help non-routing nodes implement
         information advertisement.</t>
