@@ -806,7 +806,9 @@ Not every architectural option or temporal property described in <xref target="o
           <dd>Mechanisms must ensure that time-sensitive routing updates are delivered within the time bounds needed for the affected schedule horizon, or that late updates are detected and handled safely.</dd>
           <dt>Authentication and Authorization:</dt>
           <dd>Entities generating or modifying TVR schedules must be authenticated,
-             and only authorized entities are permitted to inject, update, or override scheduled routing information.</dd>
+             and only authorized entities should be permitted to inject, update, or override scheduled routing information.</dd>
+          <dt>Confidentiality of Schedule Information:</dt>
+          <dd>TVR implementations must protect schedule information when disclosure could reveal sensitive operational plans, business relationships, or other information about future network behavior.</dd>
           <dt>Resilience Against Malicious or Erroneous Inputs:</dt>
           <dd>A TVR network must be resilient against the injection of incorrect or maliciously crafted scheduling information.</dd>
           <dt>Time Synchronization Robustness:</dt>
@@ -906,6 +908,13 @@ The following potential security considerations warrant detailed investigation a
        </section>
 
        <section>
+        <name>Schedule Disclosure</name>
+           <t>Schedule information can reveal future network behavior before it occurs.
+              In some deployments, disclosure of planned topology changes, resource availability, or forwarding behavior could reveal sensitive operational plans, business relationships, or other confidential information.
+              TVR solutions need to protect schedule information from unauthorized disclosure when the schedule itself is sensitive.</t>
+       </section>
+
+       <section>
         <name>Activity Identification and Privacy</name>
            <t>In certain scenarios, precise time information exchanged within the network
               could be correlated with specific user or device behavior, inadvertently revealing private information. For instance,
@@ -960,8 +969,6 @@ The following potential security considerations warrant detailed investigation a
 
     <section numbered="false" anchor="acknowledgments">
       <name>Acknowledgments</name>
-      <t>This work has benefited from the participation of the TVR working group and the discussions on the mailing list.</t>
-
       <t>The authors would like to specifically thank Tony Li, Mark Blanchet, Alexander Petrescu, Ed Birrane,
     Jie Dong, Abdussalam Baryun and Joel Halpern</t>
 
