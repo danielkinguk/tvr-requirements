@@ -143,12 +143,12 @@ Table of Contents
 
 1.  Introduction
 
-   This document is an informational specification meant to inform the
-   design and implementation of systems that manage time-variant routing
-   (TVR) information, and to characterize those systems using design
-   aspects understandable to network operators.  The terms discussed in
-   this document are intentionally general and are intended to be
-   tailored for specifics of those individual TVR systems.
+   This document was written to inform the design and implementation of
+   systems that manage time-variant routing (TVR) information, and to
+   characterize those systems using design aspects understandable to
+   network operators.  The terms discussed in this document are
+   intentionally general and are intended to be tailored for specifics
+   of those individual TVR systems.
 
    The motivation for this work is explained in the TVR Use Cases
    document [RFC9657], which justifies why there is value in having some
@@ -447,13 +447,13 @@ Table of Contents
       unconstrained.
 
       For example, a schedule could be generated in a central
-      orchestrator synchronized to all managed devices which then
+      Orchestrator synchronized to all managed devices which then
       execute the schedule in a distributed manner.
 
    Distributed Generation:  This situation corresponds with the
       intrinsic or intermediate schedule visibility.  Where a schedule
       (with a potentially limited time horizon from what is known at the
-      orchestrator) is part of the managed data which is distributed to
+      Orchestrator) is part of the managed data which is distributed to
       managed devices to be handled either by the Agent or by the
       routing Application itself.
 
@@ -504,8 +504,9 @@ Table of Contents
    clocks on different devices become de-synchronized beyond the time
    precision required of the schedule.  Because real-time clocks are
    necessary for more than just schedule execution, and because accurate
-   and precise time sources exist outside of network time (_e.g._, GPS
-   time) this risk can be made to have a low probability.
+   and precise time sources exist outside of network time (_e.g._, UTC-
+   traceable time sources) this risk can be made to have a low
+   probability.
 
    With distributed execution there is also a risk that a Manager loses
    connectivity with the managed device and the device eventually runs
@@ -844,16 +845,16 @@ Table of Contents
    interpolation method, either globally or per-property.
 
    A termination point is associated with an IP address in Layer 3
-   [RFC8346] and a MAC address in Layer 2 [RFC8944] topologies.
-   Schedules on a termination point could be used to indicate the
-   validity of the layer-2/3 interface represented by the entity or
-   changing properties of that entity.  When a schedule indicates that a
-   termination point is not valid for a schedule time instant, a model
-   can define whether that condition affects links anchored at that
-   termination point.  This logic allows a schedule to represent, for
-   example, the expected power-on or administrative-enabled state of an
-   attached network interface card (NIC) or virtual private network
-   (VPN) endpoint.
+   [RFC8346] and a link-layer identifier, such as an EUI-48 or EUI-64
+   identifier, in Layer 2 [RFC8944] topologies.  Schedules on a
+   termination point could be used to indicate the validity of the
+   layer-2/3 interface represented by the entity or changing properties
+   of that entity.  When a schedule indicates that a termination point
+   is not valid for a schedule time instant, a model can define whether
+   that condition affects links anchored at that termination point.
+   This logic allows a schedule to represent, for example, the expected
+   power-on or administrative-enabled state of an attached network
+   interface card (NIC) or virtual private network (VPN) endpoint.
 
 2.3.3.  Links
 
@@ -1208,6 +1209,11 @@ Table of Contents
       time-sensitive routing updates are protected from unauthorized
       modification.
 
+   Timely Delivery:  Mechanisms must ensure that time-sensitive routing
+      updates are delivered within the time bounds needed for the
+      affected schedule horizon, or that late updates are detected and
+      handled safely.
+
    Authentication and Authorization:  Entities generating or modifying
       TVR schedules must be authenticated, and only authorized entities
       are permitted to inject, update, or override scheduled routing
@@ -1251,7 +1257,7 @@ Table of Contents
 
    For example, including in a single domain devices which can handle
    data models with intrinsic schedules and devices which cannot will
-   increase the burden on the network orchestrator to validate the joint
+   increase the burden on the network Orchestrator to validate the joint
    configurations of those devices.  Segmenting into different schedule
    domains would allow for a more simple validation of the time-
    invariant device configurations and a more narrow but complex
@@ -1266,7 +1272,7 @@ Table of Contents
 
    Similarly, the required time synchronization for devices in each
    domain, as explained in Section 2.2.4, affects the amount of and
-   types of analysis that a network orchestrator needs to validate
+   types of analysis that a network Orchestrator needs to validate
    configurations of those devices.  A single domain which includes some
    devices needing only loose synchronization and some with very tight
    requirements adds burden to planning and validation of schedules.
@@ -1280,7 +1286,7 @@ Table of Contents
    device while a real network is expected to contain a large number of
    managed devices, possibly with a diverse set of management protocols
    serving different sets of devices, but under the control of a central
-   orchestrator.  Because of these expectations, the introduction of TVR
+   Orchestrator.  Because of these expectations, the introduction of TVR
    into an existing management ecosystem is meant to be able to be
    deployed incrementally, possibly along different aspects in different
    increments.  This supports both greenfield deployments, where TVR can
@@ -1297,7 +1303,7 @@ Table of Contents
 
    Within the aspect of schedule visibility (Section 2.1.2) it is
    possible to deploy TVR first as extrinsic schedules known only to the
-   network orchestrator and executed centrally there.  From there the
+   network Orchestrator and executed centrally there.  From there the
    operator can transition a portion of those extrinsic schedules to
    intrinsic schedules, which requires support for (some form of)
    schedule execution on the managed devices.  As needs change or device
@@ -1310,7 +1316,7 @@ Table of Contents
    schedules based on locally-sensed conditions such as traffic
    periodicity or resource (_e.g._, power) availability.  Managed
    devices might propose schedules which can then be simulated and
-   verified by an orchestrator and augmented as intrinsic schedules back
+   verified by an Orchestrator and augmented as intrinsic schedules back
    to those devices.
 
    The complexity and scope of supported schedules can also be adjusted
