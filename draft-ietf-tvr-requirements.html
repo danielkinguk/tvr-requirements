@@ -2204,14 +2204,13 @@ Not every architectural option or temporal property described in <a href="#overv
         <h3 id="name-support-proxy-advertisement">
 <a href="#section-4.2" class="section-number selfRef">4.2. </a><a href="#name-support-proxy-advertisement" class="section-name selfRef">Support Proxy Advertisement</a>
         </h3>
-<p id="section-4.2-1">Proxies can help to improve the efficiency of the network.
-        There are some entities in the network that do not have routing
-        functions. When their properties change, they are unable to notify
-        other entities  in the network. Proxy nodes can help nodes without routing
-        functions to advertise information, thus improving the efficiency of
-        the network. Therefore,<a href="#section-4.2-1" class="pilcrow">¶</a></p>
-<p id="section-4.2-2">Systems must support proxy entities to help non-routing nodes implement
-        information advertisement.<a href="#section-4.2-2" class="pilcrow">¶</a></p>
+<p id="section-4.2-1">A proxy is an entity that advertises TVR-relevant property changes on behalf of another entity that cannot originate such advertisements itself.
+        For example, a node with routing or management capabilities can advertise scheduled or unscheduled property changes for an attached non-routing node, interface, or other modeled entity.
+        A proxy advertisement needs to preserve the identity of the represented entity and the properties being advertised, so receivers can distinguish between the proxy itself and the entity on whose behalf it is acting.<a href="#section-4.2-1" class="pilcrow">¶</a></p>
+<p id="section-4.2-2">Supporting proxy entities means that a TVR system can designate, authenticate, and authorize an entity to advertise information for another entity, and can process those advertisements as applying to the represented entity rather than to the proxy.
+        Proxy nodes can help nodes without routing functions to advertise information, thus improving the efficiency of the network. Therefore,<a href="#section-4.2-2" class="pilcrow">¶</a></p>
+<p id="section-4.2-3">Systems must support proxy entities to help non-routing nodes implement
+        information advertisement.<a href="#section-4.2-3" class="pilcrow">¶</a></p>
 </section>
 <section id="section-4.3">
         <h3 id="name-support-identification-and-">
