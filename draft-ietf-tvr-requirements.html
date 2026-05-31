@@ -1336,16 +1336,19 @@ It also explains different aspects of a TVR system which need to be considered d
                 <p id="section-toc.1-1.6.2.2.1"><a href="#section-6.2" class="auto internal xref">6.2</a>.  <a href="#name-traffic-analysis-and-path-p" class="internal xref">Traffic Analysis and Path Prediction</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.3">
-                <p id="section-toc.1-1.6.2.3.1"><a href="#section-6.3" class="auto internal xref">6.3</a>.  <a href="#name-activity-identification-and" class="internal xref">Activity Identification and Privacy</a></p>
+                <p id="section-toc.1-1.6.2.3.1"><a href="#section-6.3" class="auto internal xref">6.3</a>.  <a href="#name-schedule-disclosure" class="internal xref">Schedule Disclosure</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.4">
-                <p id="section-toc.1-1.6.2.4.1"><a href="#section-6.4" class="auto internal xref">6.4</a>.  <a href="#name-spoofing-and-manipulation-o" class="internal xref">Spoofing and Manipulation of Time Information</a></p>
+                <p id="section-toc.1-1.6.2.4.1"><a href="#section-6.4" class="auto internal xref">6.4</a>.  <a href="#name-activity-identification-and" class="internal xref">Activity Identification and Privacy</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.5">
-                <p id="section-toc.1-1.6.2.5.1"><a href="#section-6.5" class="auto internal xref">6.5</a>.  <a href="#name-replay-attacks-on-time-sens" class="internal xref">Replay Attacks on Time-Sensitive Data</a></p>
+                <p id="section-toc.1-1.6.2.5.1"><a href="#section-6.5" class="auto internal xref">6.5</a>.  <a href="#name-spoofing-and-manipulation-o" class="internal xref">Spoofing and Manipulation of Time Information</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.6">
-                <p id="section-toc.1-1.6.2.6.1"><a href="#section-6.6" class="auto internal xref">6.6</a>.  <a href="#name-compromised-time-sources" class="internal xref">Compromised Time Sources</a></p>
+                <p id="section-toc.1-1.6.2.6.1"><a href="#section-6.6" class="auto internal xref">6.6</a>.  <a href="#name-replay-attacks-on-time-sens" class="internal xref">Replay Attacks on Time-Sensitive Data</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.7">
+                <p id="section-toc.1-1.6.2.7.1"><a href="#section-6.7" class="auto internal xref">6.7</a>.  <a href="#name-compromised-time-sources" class="internal xref">Compromised Time Sources</a></p>
 </li>
             </ul>
 </li>
@@ -2260,20 +2263,24 @@ Not every architectural option or temporal property described in <a href="#overv
           <dd class="break"></dd>
 <dt id="section-4.6-3.5">Authentication and Authorization:</dt>
           <dd style="margin-left: 1.5em" id="section-4.6-3.6">Entities generating or modifying TVR schedules must be authenticated,
-             and only authorized entities are permitted to inject, update, or override scheduled routing information.<a href="#section-4.6-3.6" class="pilcrow">¶</a>
+             and only authorized entities should be permitted to inject, update, or override scheduled routing information.<a href="#section-4.6-3.6" class="pilcrow">¶</a>
 </dd>
           <dd class="break"></dd>
-<dt id="section-4.6-3.7">Resilience Against Malicious or Erroneous Inputs:</dt>
-          <dd style="margin-left: 1.5em" id="section-4.6-3.8">A TVR network must be resilient against the injection of incorrect or maliciously crafted scheduling information.<a href="#section-4.6-3.8" class="pilcrow">¶</a>
+<dt id="section-4.6-3.7">Confidentiality of Schedule Information:</dt>
+          <dd style="margin-left: 1.5em" id="section-4.6-3.8">TVR implementations must protect schedule information when disclosure could reveal sensitive operational plans, business relationships, or other information about future network behavior.<a href="#section-4.6-3.8" class="pilcrow">¶</a>
 </dd>
           <dd class="break"></dd>
-<dt id="section-4.6-3.9">Time Synchronization Robustness:</dt>
-          <dd style="margin-left: 1.5em" id="section-4.6-3.10">Since TVR relies on time-sensitive operations, it must ensure the trustworthiness of external time sources.
-             Protection against time-based attacks, such as replay attacks or clock manipulation, is also considered.<a href="#section-4.6-3.10" class="pilcrow">¶</a>
+<dt id="section-4.6-3.9">Resilience Against Malicious or Erroneous Inputs:</dt>
+          <dd style="margin-left: 1.5em" id="section-4.6-3.10">A TVR network must be resilient against the injection of incorrect or maliciously crafted scheduling information.<a href="#section-4.6-3.10" class="pilcrow">¶</a>
 </dd>
           <dd class="break"></dd>
-<dt id="section-4.6-3.11">Rollback and Recovery:</dt>
-          <dd style="margin-left: 1.5em" id="section-4.6-3.12">In the event of conflicting, missing, or compromised time-variant routing data, TVR implementations include fallback mechanisms to maintain network stability.<a href="#section-4.6-3.12" class="pilcrow">¶</a>
+<dt id="section-4.6-3.11">Time Synchronization Robustness:</dt>
+          <dd style="margin-left: 1.5em" id="section-4.6-3.12">Since TVR relies on time-sensitive operations, it must ensure the trustworthiness of external time sources.
+             Protection against time-based attacks, such as replay attacks or clock manipulation, is also considered.<a href="#section-4.6-3.12" class="pilcrow">¶</a>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-4.6-3.13">Rollback and Recovery:</dt>
+          <dd style="margin-left: 1.5em" id="section-4.6-3.14">In the event of conflicting, missing, or compromised time-variant routing data, TVR implementations include fallback mechanisms to maintain network stability.<a href="#section-4.6-3.14" class="pilcrow">¶</a>
 </dd>
         <dd class="break"></dd>
 </dl>
@@ -2370,22 +2377,30 @@ The following potential security considerations warrant detailed investigation a
               vital to encrypt time-sensitive data and limit the exposure of time-related metadata to unauthorized entities.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
 </section>
 <section id="section-6.3">
-        <h3 id="name-activity-identification-and">
-<a href="#section-6.3" class="section-number selfRef">6.3. </a><a href="#name-activity-identification-and" class="section-name selfRef">Activity Identification and Privacy</a>
+        <h3 id="name-schedule-disclosure">
+<a href="#section-6.3" class="section-number selfRef">6.3. </a><a href="#name-schedule-disclosure" class="section-name selfRef">Schedule Disclosure</a>
         </h3>
-<p id="section-6.3-1">In certain scenarios, precise time information exchanged within the network
+<p id="section-6.3-1">Schedule information can reveal future network behavior before it occurs.
+              In some deployments, disclosure of planned topology changes, resource availability, or forwarding behavior could reveal sensitive operational plans, business relationships, or other confidential information.
+              TVR solutions need to protect schedule information from unauthorized disclosure when the schedule itself is sensitive.<a href="#section-6.3-1" class="pilcrow">¶</a></p>
+</section>
+<section id="section-6.4">
+        <h3 id="name-activity-identification-and">
+<a href="#section-6.4" class="section-number selfRef">6.4. </a><a href="#name-activity-identification-and" class="section-name selfRef">Activity Identification and Privacy</a>
+        </h3>
+<p id="section-6.4-1">In certain scenarios, precise time information exchanged within the network
               could be correlated with specific user or device behavior, inadvertently revealing private information. For instance,
               time scheduling decisions could be analyzed to determine when and where certain devices are active, allowing an attacker to
               infer user habits, locations, or preferences. This could pose significant privacy concerns, particularly in environments
               where sensitive personal or organizational data is transmitted. Furthermore, attackers could use this information to create
               detailed profiles of network users, which could be exploited for social engineering attacks, surveillance, or other
-              malicious activities.<a href="#section-6.3-1" class="pilcrow">¶</a></p>
+              malicious activities.<a href="#section-6.4-1" class="pilcrow">¶</a></p>
 </section>
-<section id="section-6.4">
+<section id="section-6.5">
         <h3 id="name-spoofing-and-manipulation-o">
-<a href="#section-6.4" class="section-number selfRef">6.4. </a><a href="#name-spoofing-and-manipulation-o" class="section-name selfRef">Spoofing and Manipulation of Time Information</a>
+<a href="#section-6.5" class="section-number selfRef">6.5. </a><a href="#name-spoofing-and-manipulation-o" class="section-name selfRef">Spoofing and Manipulation of Time Information</a>
         </h3>
-<p id="section-6.4-1">The accuracy and integrity of time information are crucial for making correct
+<p id="section-6.5-1">The accuracy and integrity of time information are crucial for making correct
               routing decisions. If an attacker were to inject false or manipulated time data into the network, it could cause routers and
               devices to make incorrect decisions, potentially leading to traffic misrouting, network partitions, or inefficient use of
               resources. Such spoofing attacks could divert traffic through malicious nodes, enabling man-in-the-middle attacks, data
@@ -2393,30 +2408,30 @@ The following potential security considerations warrant detailed investigation a
               by continuously altering the perceived time, thereby forcing the network into a constant state of flux and instability.
               Robust authentication mechanisms for time sources and integrity checks on time-related messages are essential to defend against
               these types of attacks. Moreover, implementing redundancy in time synchronization (e.g., multiple time sources) can provide
-              resilience against single points of failure.<a href="#section-6.4-1" class="pilcrow">¶</a></p>
+              resilience against single points of failure.<a href="#section-6.5-1" class="pilcrow">¶</a></p>
 </section>
-<section id="section-6.5">
+<section id="section-6.6">
         <h3 id="name-replay-attacks-on-time-sens">
-<a href="#section-6.5" class="section-number selfRef">6.5. </a><a href="#name-replay-attacks-on-time-sens" class="section-name selfRef">Replay Attacks on Time-Sensitive Data</a>
+<a href="#section-6.6" class="section-number selfRef">6.6. </a><a href="#name-replay-attacks-on-time-sens" class="section-name selfRef">Replay Attacks on Time-Sensitive Data</a>
         </h3>
-<p id="section-6.5-1">Time-variant network data and schedule updates may be susceptible to replay attacks,
+<p id="section-6.6-1">Time-variant network data and schedule updates may be susceptible to replay attacks,
               where a malicious actor intercepts and retransmits valid time-based data at a later time. This could cause network devices to
               act on outdated information, leading to inconsistent routing decisions, misaligned schedules, or security gaps.
               In particular, attackers could exploit replay attacks to force devices into outdated configurations or interfere with the
               synchronization of schedules across the network. To prevent this type of attack, it is important to use a messaging protocol for
-              time-variant schedules that mitigates such attacks while ensuring the validity and timeliness of received information.<a href="#section-6.5-1" class="pilcrow">¶</a></p>
+              time-variant schedules that mitigates such attacks while ensuring the validity and timeliness of received information.<a href="#section-6.6-1" class="pilcrow">¶</a></p>
 </section>
-<section id="section-6.6">
+<section id="section-6.7">
         <h3 id="name-compromised-time-sources">
-<a href="#section-6.6" class="section-number selfRef">6.6. </a><a href="#name-compromised-time-sources" class="section-name selfRef">Compromised Time Sources</a>
+<a href="#section-6.7" class="section-number selfRef">6.7. </a><a href="#name-compromised-time-sources" class="section-name selfRef">Compromised Time Sources</a>
         </h3>
-<p id="section-6.6-1">The reliance on external time sources for synchronization purposes presents a potential attack surface
+<p id="section-6.7-1">The reliance on external time sources for synchronization purposes presents a potential attack surface
               for time-variant networks. If a trusted time source, such as a GPS signal or an NTP server, is compromised, the attacker could
               feed erroneous time information to the entire network, disrupting its operation. Such an attack could lead to cascading failures
               as devices attempt to synchronize with the compromised source, ultimately resulting in incorrect routing decisions or even the
               collapse of the network. To address this, network operators can implement multiple, redundant time sources and regularly
               verify the integrity of these sources. In addition, alerting mechanisms can be in place to detect significant deviations in
-              time data that could indicate an attack.<a href="#section-6.6-1" class="pilcrow">¶</a></p>
+              time data that could indicate an attack.<a href="#section-6.7-1" class="pilcrow">¶</a></p>
 </section>
 </section>
 </div>
@@ -2433,12 +2448,11 @@ The following potential security considerations warrant detailed investigation a
       <h2 id="name-acknowledgments">
 <a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
       </h2>
-<p id="section-8-1">This work has benefited from the participation of the TVR working group and the discussions on the mailing list.<a href="#section-8-1" class="pilcrow">¶</a></p>
-<p id="section-8-2">The authors would like to specifically thank Tony Li, Mark Blanchet, Alexander Petrescu, Ed Birrane,
-    Jie Dong, Abdussalam Baryun and Joel Halpern<a href="#section-8-2" class="pilcrow">¶</a></p>
-<p id="section-8-3">This work is partly supported by the UK Department for Science, Innovation and Technology
+<p id="section-8-1">The authors would like to specifically thank Tony Li, Mark Blanchet, Alexander Petrescu, Ed Birrane,
+    Jie Dong, Abdussalam Baryun and Joel Halpern<a href="#section-8-1" class="pilcrow">¶</a></p>
+<p id="section-8-2">This work is partly supported by the UK Department for Science, Innovation and Technology
     under the Future Open Networks Research Challenge project TUDOR (Towards Ubiquitous 3D Open Resilient
-    Network).<a href="#section-8-3" class="pilcrow">¶</a></p>
+    Network).<a href="#section-8-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="contributors">

@@ -129,10 +129,11 @@ Table of Contents
    6.  Security Considerations
      6.1.  Denial-of-Service (DoS) Attack
      6.2.  Traffic Analysis and Path Prediction
-     6.3.  Activity Identification and Privacy
-     6.4.  Spoofing and Manipulation of Time Information
-     6.5.  Replay Attacks on Time-Sensitive Data
-     6.6.  Compromised Time Sources
+     6.3.  Schedule Disclosure
+     6.4.  Activity Identification and Privacy
+     6.5.  Spoofing and Manipulation of Time Information
+     6.6.  Replay Attacks on Time-Sensitive Data
+     6.7.  Compromised Time Sources
    7.  IANA Considerations
    Acknowledgments
    Contributors
@@ -1216,8 +1217,13 @@ Table of Contents
 
    Authentication and Authorization:  Entities generating or modifying
       TVR schedules must be authenticated, and only authorized entities
-      are permitted to inject, update, or override scheduled routing
-      information.
+      should be permitted to inject, update, or override scheduled
+      routing information.
+
+   Confidentiality of Schedule Information:  TVR implementations must
+      protect schedule information when disclosure could reveal
+      sensitive operational plans, business relationships, or other
+      information about future network behavior.
 
    Resilience Against Malicious or Erroneous Inputs:  A TVR network must
       be resilient against the injection of incorrect or maliciously
@@ -1372,7 +1378,16 @@ Table of Contents
    threats, it is vital to encrypt time-sensitive data and limit the
    exposure of time-related metadata to unauthorized entities.
 
-6.3.  Activity Identification and Privacy
+6.3.  Schedule Disclosure
+
+   Schedule information can reveal future network behavior before it
+   occurs.  In some deployments, disclosure of planned topology changes,
+   resource availability, or forwarding behavior could reveal sensitive
+   operational plans, business relationships, or other confidential
+   information.  TVR solutions need to protect schedule information from
+   unauthorized disclosure when the schedule itself is sensitive.
+
+6.4.  Activity Identification and Privacy
 
    In certain scenarios, precise time information exchanged within the
    network could be correlated with specific user or device behavior,
@@ -1386,7 +1401,7 @@ Table of Contents
    network users, which could be exploited for social engineering
    attacks, surveillance, or other malicious activities.
 
-6.4.  Spoofing and Manipulation of Time Information
+6.5.  Spoofing and Manipulation of Time Information
 
    The accuracy and integrity of time information are crucial for making
    correct routing decisions.  If an attacker were to inject false or
@@ -1405,7 +1420,7 @@ Table of Contents
    multiple time sources) can provide resilience against single points
    of failure.
 
-6.5.  Replay Attacks on Time-Sensitive Data
+6.6.  Replay Attacks on Time-Sensitive Data
 
    Time-variant network data and schedule updates may be susceptible to
    replay attacks, where a malicious actor intercepts and retransmits
@@ -1419,7 +1434,7 @@ Table of Contents
    mitigates such attacks while ensuring the validity and timeliness of
    received information.
 
-6.6.  Compromised Time Sources
+6.7.  Compromised Time Sources
 
    The reliance on external time sources for synchronization purposes
    presents a potential attack surface for time-variant networks.  If a
@@ -1439,9 +1454,6 @@ Table of Contents
    This document has no IANA actions.
 
 Acknowledgments
-
-   This work has benefited from the participation of the TVR working
-   group and the discussions on the mailing list.
 
    The authors would like to specifically thank Tony Li, Mark Blanchet,
    Alexander Petrescu, Ed Birrane, Jie Dong, Abdussalam Baryun and Joel
