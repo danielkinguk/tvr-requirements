@@ -1438,16 +1438,17 @@ Table of Contents
 
    The reliance on external time sources for synchronization purposes
    presents a potential attack surface for time-variant networks.  If a
-   trusted time source, such as a GPS signal or an NTP server, is
-   compromised, the attacker could feed erroneous time information to
-   the entire network, disrupting its operation.  Such an attack could
-   lead to cascading failures as devices attempt to synchronize with the
-   compromised source, ultimately resulting in incorrect routing
-   decisions or even the collapse of the network.  To address this,
-   network operators can implement multiple, redundant time sources and
-   regularly verify the integrity of these sources.  In addition,
-   alerting mechanisms can be in place to detect significant deviations
-   in time data that could indicate an attack.
+   trusted time source, such as a GNSS (Global Navigation Satellite
+   System) signal, PTP or an NTP server, is compromised, the attacker
+   could feed erroneous time information to the entire network,
+   disrupting its operation.  Such an attack could lead to cascading
+   failures as devices attempt to synchronize with the compromised
+   source, ultimately resulting in incorrect routing decisions or even
+   the collapse of the network.  To address this, network operators can
+   implement multiple, redundant time sources and regularly verify the
+   integrity of these sources.  In addition, alerting mechanisms can be
+   in place to detect significant deviations in time data that could
+   indicate an attack.
 
 7.  IANA Considerations
 
