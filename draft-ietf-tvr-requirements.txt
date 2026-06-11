@@ -5,12 +5,12 @@
 Network Working Group                                            D. King
 Internet-Draft                                      Lancaster University
 Intended status: Informational                           L. M. Contreras
-Expires: 2 December 2026                                      Telefonica
+Expires: 13 December 2026                                     Telefonica
                                                                 B. Sipos
                                                                  JHU/APL
                                                                 L. Zhang
                                                                   Huawei
-                                                             31 May 2026
+                                                            11 June 2026
 
 
                 Time-Variant Routing (TVR) Requirements
@@ -61,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 2 December 2026.
+   This Internet-Draft will expire on 13 December 2026.
 
 Copyright Notice
 
@@ -1106,11 +1106,13 @@ Table of Contents
 4.  Requirements Summary
 
    The requirements in this section are derived from the use case needs
-   discussed in Section 3 and from the design aspects introduced in
-   Section 2.  Not every architectural option or temporal property
-   described in Section 2 results in an independent requirement; rather,
-   those aspects inform the requirements that TVR systems need to
-   support when they are applicable to a deployment.
+   discussed in Section 3 and from the design aspects introduced in this
+   document.
+
+   Not every architectural option or property described in this document
+   results in a hard requirement; rather, those aspects inform the
+   requirements that TVR systems need to support when they are
+   applicable to a deployment or use case.
 
 4.1.  Support the Identification and Advertisement of Entity Property
       Changes
