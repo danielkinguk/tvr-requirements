@@ -731,8 +731,10 @@ Schedule-based TVR and condition-based reactive mechanisms can coexist within th
     <section anchor="requirements-summary">
       <name>Requirements Summary</name>
       <t>
-The requirements in this section are derived from the use case needs discussed in <xref target="tvr-use-case-requirements"/> and from the design aspects introduced in <xref target="overview"/>.
-Not every architectural option or temporal property described in <xref target="overview"/> results in an independent requirement; rather, those aspects inform the requirements that TVR systems need to support when they are applicable to a deployment.
+The requirements in this section are derived from the use case needs discussed in <xref target="tvr-use-case-requirements"/> and from the design aspects introduced in this document.
+      </t>
+      <t>
+Not every architectural option or property described in this document results in a hard requirement; rather, those aspects inform the requirements that TVR systems need to support when they are applicable to a deployment or use case.
       </t>
 
       <section title="Support the Identification and Advertisement of Entity Property Changes">
