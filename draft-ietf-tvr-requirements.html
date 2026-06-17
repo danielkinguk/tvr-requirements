@@ -1060,7 +1060,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">King, et al.</td>
-<td class="center">Expires 13 December 2026</td>
+<td class="center">Expires 19 December 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1073,12 +1073,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-tvr-requirements-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-06-11" class="published">11 June 2026</time>
+<time datetime="2026-06-17" class="published">17 June 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-12-13">13 December 2026</time></dd>
+<dd class="expires"><time datetime="2026-12-19">19 December 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1144,7 +1144,7 @@ It also explains different aspects of a TVR system which need to be considered d
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 13 December 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 19 December 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -2213,7 +2213,7 @@ Not every architectural option or property described in this document results in
         A proxy advertisement needs to preserve the identity of the represented entity and the properties being advertised, so receivers can distinguish between the proxy itself and the entity on whose behalf it is acting.<a href="#section-4.2-1" class="pilcrow">¶</a></p>
 <p id="section-4.2-2">Supporting proxy entities means that a TVR system can designate, authenticate, and authorize an entity to advertise information for another entity, and can process those advertisements as applying to the represented entity rather than to the proxy.
         Proxy nodes can help nodes without routing functions to advertise information, thus improving the efficiency of the network. Therefore,<a href="#section-4.2-2" class="pilcrow">¶</a></p>
-<p id="section-4.2-3">Systems must support proxy entities to help non-routing nodes implement
+<p id="section-4.2-3">Systems should support proxy entities to help non-routing nodes implement
         information advertisement.<a href="#section-4.2-3" class="pilcrow">¶</a></p>
 </section>
 <section id="section-4.3">
@@ -2233,8 +2233,7 @@ Not every architectural option or property described in this document results in
         </h3>
 <p id="section-4.4-1">The system's schedule may change, requiring entity configuration updates rather than being fixed and unmodifiable.
         Additionally, time-variant intervals in the system may also vary. Therefore,<a href="#section-4.4-1" class="pilcrow">¶</a></p>
-<p id="section-4.4-2">Systems must support system schedule changes.<a href="#section-4.4-2" class="pilcrow">¶</a></p>
-<p id="section-4.4-3">Systems must support time interval changes.<a href="#section-4.4-3" class="pilcrow">¶</a></p>
+<p id="section-4.4-2">Systems must support system schedule changes and time interval changes, the frequency of update depends on the detailed scenarios. A rollback mechanism is necessary in case of incorrect updates.<a href="#section-4.4-2" class="pilcrow">¶</a></p>
 </section>
 <section id="section-4.5">
         <h3 id="name-support-appropriate-time-ac">
@@ -2528,7 +2527,7 @@ The following potential security considerations warrant detailed investigation a
 <dd class="break"></dd>
 <dt id="I-D.ietf-tvr-schedule-yang">[I-D.ietf-tvr-schedule-yang]</dt>
         <dd>
-<span class="refAuthor">Qu, Y.</span>, <span class="refAuthor">Lindem, A.</span>, <span class="refAuthor">Kinzie, E.</span>, <span class="refAuthor">Fedyk, D.</span>, and <span class="refAuthor">M. Blanchet</span>, <span class="refTitle">"YANG Data Model for Scheduled Attributes"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-tvr-schedule-yang-08</span>, <time datetime="2026-02-09" class="refDate">9 February 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-tvr-schedule-yang-08">https://datatracker.ietf.org/doc/html/draft-ietf-tvr-schedule-yang-08</a>&gt;</span>. </dd>
+<span class="refAuthor">Qu, Y.</span>, <span class="refAuthor">Lindem, A.</span>, <span class="refAuthor">Kinzie, E.</span>, <span class="refAuthor">Fedyk, D.</span>, and <span class="refAuthor">M. Blanchet</span>, <span class="refTitle">"A YANG Data Model for Scheduled Attributes"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-tvr-schedule-yang-12</span>, <time datetime="2026-06-10" class="refDate">10 June 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-tvr-schedule-yang-12">https://datatracker.ietf.org/doc/html/draft-ietf-tvr-schedule-yang-12</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC3339">[RFC3339]</dt>
         <dd>
