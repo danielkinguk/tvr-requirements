@@ -784,7 +784,6 @@ Not every architectural option or property described in this document results in
         Additionally, time-variant intervals in the system may also vary. Therefore,</t>
 
         <t>Systems must support system schedule changes and time interval changes, the frequency of update depends on the detailed scenarios. A rollback mechanism is necessary in case of incorrect updates.</t>
-        
       </section>
 
       <section title="Support Appropriate Time Accuracy">
