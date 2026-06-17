@@ -765,7 +765,7 @@ Not every architectural option or property described in this document results in
         <t>Supporting proxy entities means that a TVR system can designate, authenticate, and authorize an entity to advertise information for another entity, and can process those advertisements as applying to the represented entity rather than to the proxy.
         Proxy nodes can help nodes without routing functions to advertise information, thus improving the efficiency of the network. Therefore,</t>
 
-        <t>Systems must support proxy entities to help non-routing nodes implement
+        <t>Systems should support proxy entities to help non-routing nodes implement
         information advertisement.</t>
       </section>
 
@@ -783,9 +783,8 @@ Not every architectural option or property described in this document results in
         <t>The system's schedule may change, requiring entity configuration updates rather than being fixed and unmodifiable.
         Additionally, time-variant intervals in the system may also vary. Therefore,</t>
 
-        <t>Systems must support system schedule changes.</t>
-
-        <t>Systems must support time interval changes.</t>
+        <t>Systems must support system schedule changes and time interval changes, the frequency of update depends on the detailed scenarios. A rollback mechanism is necessary in case of incorrect updates.</t>
+        
       </section>
 
       <section title="Support Appropriate Time Accuracy">
