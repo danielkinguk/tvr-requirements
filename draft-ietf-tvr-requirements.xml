@@ -175,7 +175,7 @@ The figure is intended to show the functional relationships involved in TVR mana
       <t>
 Existing Internet routing techniques maintain end-to-end connected paths across a network. Routing mechanisms exist to recover
 connectivity and resume normal traffic forwarding as the topology changes. Occasionally, optimization of routes may also be
-requested, especially post-topology changes due to disruptive events. However, there are a growing number of use cases where
+requested, especially post-topology changes due to disruptive events. However, there are a number of use cases <xref target="RFC9657"/> where
 changes to the routing topology are an expected part of network operations. In these scenarios, the pre-planned loss and
 restoration of an adjacency, or formation of an alternate adjacency, can be treated as a non-disruptive event.
       </t>
@@ -743,7 +743,7 @@ Not every architectural option or property described in this document results in
         converted back and forth between Time-Variant and Non-Time-Variant
         nodes.</t>
 
-        <t>An entity must support the identification and advertisement of non-scheduled
+        <t>REQ_NON_SCH_CHANGE_ENTITY: An entity must support the identification and advertisement of non-scheduled
         property changes.</t>
 
         <t>Besides, if there are abnormal changes in the system, it is
@@ -754,7 +754,7 @@ Not every architectural option or property described in this document results in
         Changes in entity state outside of a schedule are communicated to other entities in a network through existing routing protocol mechanism, where they exist.
         </t>
 
-        <t>A Manager should provide a mechanism to advertise unscheduled changes that invalidate or supersede previously distributed scheduled state, so that other entities can react without waiting for the next scheduled update.</t>
+        <t>REQ_NON_SCH_CHANGE_MANAGER: A Manager should provide a mechanism to advertise unscheduled changes that invalidate or supersede previously distributed scheduled state, so that other entities can react without waiting for the next scheduled update.</t>
       </section>
 
       <section title="Support Proxy Advertisement">
@@ -765,7 +765,7 @@ Not every architectural option or property described in this document results in
         <t>Supporting proxy entities means that a TVR system can designate, authenticate, and authorize an entity to advertise information for another entity, and can process those advertisements as applying to the represented entity rather than to the proxy.
         Proxy nodes can help nodes without routing functions to advertise information, thus improving the efficiency of the network. Therefore,</t>
 
-        <t>Systems must support proxy entities to help non-routing nodes implement
+        <t>REQ_PROXY_ADV: Systems must support proxy entities to help non-routing nodes implement
         information advertisement.</t>
       </section>
 
@@ -775,7 +775,7 @@ Not every architectural option or property described in this document results in
         manner after the entity properties change, it will lead to suboptimal
         routing decisions. Therefore,</t>
 
-        <t>Systems must provide a discovery and resolving methodology for the
+        <t>REQ_IDENT_CLASS_NODE_PROP: Systems must provide a discovery and resolving methodology for the
         identification and classification of entity schedule changes.</t>
       </section>
 
@@ -783,9 +783,9 @@ Not every architectural option or property described in this document results in
         <t>The system's schedule may change, requiring entity configuration updates rather than being fixed and unmodifiable.
         Additionally, time-variant intervals in the system may also vary. Therefore,</t>
 
-        <t>Systems must support system schedule changes.</t>
+        <t>REQ_SCH_CHANGE: Systems must support system schedule changes.</t>
 
-        <t>Systems must support time interval changes.</t>
+        <t>REQ_INTERV_CHANGE: Systems must support time interval changes.</t>
       </section>
 
       <section title="Support Appropriate Time Accuracy">
@@ -793,7 +793,7 @@ Not every architectural option or property described in this document results in
         If the tolerated time error is too large for a deployment, entities can apply scheduled state at different effective times and produce inconsistent forwarding behavior.
         If the required tolerance is unnecessarily small, the system can impose avoidable implementation and operational cost. Therefore,</t>
 
-        <t>Systems must support configurable or otherwise specified time tolerance appropriate to the schedule precision, synchronization uncertainty, and convergence needs of the deployment.</t>
+        <t>REQ_TIME_TOL: Systems must support configurable or otherwise specified time tolerance appropriate to the schedule precision, synchronization uncertainty, and convergence needs of the deployment.</t>
       </section>
 
       <section title="Support Robust Security for TVR Information">
