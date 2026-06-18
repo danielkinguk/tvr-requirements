@@ -110,11 +110,11 @@ Table of Contents
        2.4.3.  Hybrid
        2.4.4.  Constraints
      2.5.  Integrity Considerations
-   3.  Time-Variant Use Case Needs
+   3.  TVR Use Case Needs
      3.1.  Resource Preservation Use Case
      3.2.  Operating Efficiency Use Case
      3.3.  Dynamic Reachability Use Case
-   4.  Requirements Summary
+   4.  TVR Requirements Summary
      4.1.  Support the Identification and Advertisement of Entity
            Property Changes
      4.2.  Support Proxy Advertisement
@@ -1017,7 +1017,7 @@ Table of Contents
    Specific security considerations are discussed in Section 6 later in
    this document.
 
-3.  Time-Variant Use Case Needs
+3.  TVR Use Case Needs
 
    Several TVR use cases have been identified and discussed in an
    earlier TVR document [RFC9657].  This section provides further detail
@@ -1103,7 +1103,7 @@ Table of Contents
       based TVR and condition-based reactive mechanisms can coexist
       within the same network and within its devices.
 
-4.  Requirements Summary
+4.  TVR Requirements Summary
 
    The requirements in this section are derived from the use case needs
    discussed in Section 3 and from the design aspects introduced in this
