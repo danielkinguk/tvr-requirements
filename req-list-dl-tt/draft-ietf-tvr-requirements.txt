@@ -110,7 +110,7 @@ Table of Contents
        2.4.3.  Hybrid
        2.4.4.  Constraints
      2.5.  Integrity Considerations
-   3.  Time-Variant Use Case Requirements
+   3.  Time-Variant Use Case Needs
      3.1.  Resource Preservation Use Case
      3.2.  Operating Efficiency Use Case
      3.3.  Dynamic Reachability Use Case
@@ -1017,17 +1017,17 @@ Table of Contents
    Specific security considerations are discussed in Section 6 later in
    this document.
 
-3.  Time-Variant Use Case Requirements
+3.  Time-Variant Use Case Needs
 
-   Several TVR use cases have been identified and discussed in
-   [RFC9657].  This section provides further detail on specific
-   requirements to meet use case needs.
+   Several TVR use cases have been identified and discussed in an
+   earlier TVR document [RFC9657].  This section provides further detail
+   on specific needs from those use cases.
 
 3.1.  Resource Preservation Use Case
 
    This use case is about managed devices being reactive to sensed
    conditions, but also providing feedback to an Orchestrator to allow
-   coarse schedules of expected resource availability.  Its requirements
+   coarse schedules of expected resource availability.  Its needs
    include:
 
    Temporality tailored to system dynamics:  Because managed devices are
@@ -1057,7 +1057,7 @@ Table of Contents
 3.2.  Operating Efficiency Use Case
 
    This use case is about scheduling resources proactively to improve
-   efficiencies.  Its requirements include:
+   efficiencies.  Its needs include:
 
    Distribution of Predicted Topology-change:  The predicted topology-
       change information may include the valid time, invalid time, link
@@ -1081,7 +1081,7 @@ Table of Contents
 
    This use case is about geometric and kinematic constraints of mobile
    devices influencing their ability to establish or maintain links to
-   neighbors.  Its requirements include:
+   neighbors.  Its needs include:
 
    Pairwise consideration of synchronization and margins:  When
       scheduling links, the execution clock synchronization of its two
