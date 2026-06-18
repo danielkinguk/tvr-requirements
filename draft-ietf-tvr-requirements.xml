@@ -742,10 +742,10 @@ Not every architectural option or property described in this document results in
         In practical situations, however, the properties of entities can be
         converted back and forth between Time-Variant and Non-Time-Variant
         nodes.</t>
-
-        <t>REQ_NON_SCH_CHANGE_ENTITY: An entity must support the identification and advertisement of non-scheduled
-        property changes.</t>
-
+        <dl>
+          <dt><tt>REQ_NON_SCH_CHANGE_ENTITY:</tt></dt>
+          <dd>An entity must support the identification and advertisement of non-scheduled property changes.</dd>
+        </dl>
         <t>Besides, if there are abnormal changes in the system, it is
         necessary to advertise them through the existing routing protocols in
         time to achieve the stability of Time-Variant Routing and avoid
@@ -753,8 +753,10 @@ Not every architectural option or property described in this document results in
         suddenly damaged due to external factors.
         Changes in entity state outside of a schedule are communicated to other entities in a network through existing routing protocol mechanism, where they exist.
         </t>
-
-        <t>REQ_NON_SCH_CHANGE_MANAGER: A Manager should provide a mechanism to advertise unscheduled changes that invalidate or supersede previously distributed scheduled state, so that other entities can react without waiting for the next scheduled update.</t>
+        <dl>
+          <dt><tt>REQ_NON_SCH_CHANGE_MANAGER:</tt></dt>
+          <dd>A Manager should provide a mechanism to advertise unscheduled changes that invalidate or supersede previously distributed scheduled state, so that other entities can react without waiting for the next scheduled update.</dd>
+        </dl>
       </section>
 
       <section title="Support Proxy Advertisement">
@@ -764,9 +766,10 @@ Not every architectural option or property described in this document results in
 
         <t>Supporting proxy entities means that a TVR system can designate, authenticate, and authorize an entity to advertise information for another entity, and can process those advertisements as applying to the represented entity rather than to the proxy.
         Proxy nodes can help nodes without routing functions to advertise information, thus improving the efficiency of the network. Therefore,</t>
-
-        <t>REQ_PROXY_ADV: Systems should support proxy entities to help non-routing nodes implement
-        information advertisement.</t>
+        <dl>
+          <dt><tt>REQ_PROXY_ADV:</tt></dt>
+          <dd>Systems should support proxy entities to help non-routing nodes implement information advertisement.</dd>
+        </dl>
       </section>
 
       <section title="Support Identification and Classification of Node Properties">
@@ -774,24 +777,29 @@ Not every architectural option or property described in this document results in
         If the system cannot timely identify and classify in a processing
         manner after the entity properties change, it will lead to suboptimal
         routing decisions. Therefore,</t>
-
-        <t>REQ_IDENT_CLASS_NODE_PROP: Systems must provide a discovery and resolving methodology for the
-        identification and classification of entity schedule changes.</t>
+        <dl>
+          <dt><tt>REQ_IDENT_CLASS_NODE_PROP:</tt></dt>
+          <dd>Systems must provide a discovery and resolving methodology for the identification and classification of entity schedule changes.</dd>
+        </dl>
       </section>
 
       <section title="Support System Schedule and Time Interval Changes">
         <t>The system's schedule may change, requiring entity configuration updates rather than being fixed and unmodifiable.
         Additionally, time-variant intervals in the system may also vary. Therefore,</t>
-
-        <t>REQ_SCH_CHANGE: Systems must support system schedule changes and time interval changes, the frequency of update depends on the detailed scenarios. A rollback mechanism is necessary in case of incorrect updates.</t>
+        <dl>
+          <dt><tt>REQ_SCH_CHANGE:</tt></dt>
+          <dd>Systems must support system schedule changes and time interval changes, the frequency of update depends on the detailed scenarios. A rollback mechanism is necessary in case of incorrect updates.</dd>
+        </dl>
       </section>
 
       <section title="Support Appropriate Time Accuracy">
         <t>TVR schedule execution depends on the relationship between time accuracy, schedule precision, synchronization error, and network convergence behavior.
         If the tolerated time error is too large for a deployment, entities can apply scheduled state at different effective times and produce inconsistent forwarding behavior.
         If the required tolerance is unnecessarily small, the system can impose avoidable implementation and operational cost. Therefore,</t>
-
-        <t>REQ_TIME_TOL: Systems must support configurable or otherwise specified time tolerance appropriate to the schedule precision, synchronization uncertainty, and convergence needs of the deployment.</t>
+        <dl>
+          <dt><tt>REQ_TIME_TOL:</tt></dt>
+          <dd>Systems must support configurable or otherwise specified time tolerance appropriate to the schedule precision, synchronization uncertainty, and convergence needs of the deployment.</dd>
+        </dl>
       </section>
 
       <section title="Support Robust Security for TVR Information">
@@ -800,22 +808,22 @@ Not every architectural option or property described in this document results in
         <t>Implementations must address security risks associated with time-variant information to ensure the reliability and integrity of
            scheduled network operations. The following security-related requirements are to be considered:</t>
         <dl>
-          <dt>Integrity Protection:</dt>
+          <dt><tt>REQ_INTEGRITY</tt>:</dt>
           <dd>Mechanisms must be in place to ensure that time-sensitive routing updates are protected from unauthorized modification.</dd>
-          <dt>Timely Delivery:</dt>
+          <dt><tt>REQ_PROMPT_DELIVER</tt>:</dt>
           <dd>Mechanisms must ensure that time-sensitive routing updates are delivered within the time bounds needed for the affected schedule horizon, or that late updates are detected and handled safely.</dd>
-          <dt>Authentication and Authorization:</dt>
+          <dt><tt>REQ_AUTHN_AUTHZ</tt>:</dt>
           <dd>Entities generating or modifying TVR schedules must be authenticated,
              and only authorized entities should be permitted to inject, update, or override scheduled routing information.</dd>
-          <dt>Confidentiality of Schedule Information:</dt>
-          <dd>TVR implementations must protect schedule information when disclosure could reveal sensitive operational plans, business relationships, or other information about future network behavior.</dd>
-          <dt>Resilience Against Malicious or Erroneous Inputs:</dt>
+          <dt><tt>REQ_CONFIDENTIALITY</tt>:</dt>
+          <dd>TVR implementations must protect confidentiality of schedule information when disclosure could reveal sensitive operational plans, business relationships, or other information about future network behavior.</dd>
+          <dt><tt>REQ_RESILIENCE</tt>:</dt>
           <dd>A TVR network must be resilient against the injection of incorrect or maliciously crafted scheduling information.</dd>
-          <dt>Time Synchronization Robustness:</dt>
+          <dt><tt>REQ_ROBUSTNESS</tt>:</dt>
           <dd>Since TVR relies on time-sensitive operations, it must ensure the trustworthiness of external time sources.
              Protection against time-based attacks, such as replay attacks or clock manipulation, is also considered.</dd>
-          <dt>Rollback and Recovery:</dt>
-          <dd>In the event of conflicting, missing, or compromised time-variant routing data, TVR implementations include fallback mechanisms to maintain network stability.</dd>
+          <dt><tt>REQ_STABILITY</tt>:</dt>
+          <dd>In the event of conflicting, missing, or compromised time-variant routing data, TVR implementations include fallback (contingency alternative configuration), rollback (to previously working configuration), and/or recovery (adapt configuration to new sensed conditions) mechanisms to maintain network stability.</dd>
         </dl>
         <t>By integrating these security requirements into TVR implementations, networks can mitigate risks associated with malicious actors, misconfigurations,
            or unintended disruptions, ensuring the robustness of time-sensitive routing decisions. Specific security scenarios and negation and mitigation methods
