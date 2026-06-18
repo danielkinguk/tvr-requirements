@@ -1033,21 +1033,21 @@ Table of Contents
    Temporality tailored to system dynamics:  Because managed devices are
       either powered-off or severely degraded in performance when
       preserving resources, the schedules governing expected topology
-      must be of sufficient precision and synchronization to capture the
-      dynamics of the managed devices.
+      need to be of sufficient precision and synchronization to capture
+      the dynamics of the managed devices.
 
    Parameterization of periodicity:  Resource availability based on
       diurnal activity on Earth fits well into a periodicity based
       strictly on time-of-day.  But when resources are available based
       on other natural phenomena (_e.g._, orbital periods) the schedules
-      must have a periodicity which is parameterized in such a way that
-      allows matching the resource dynamics (_e.g._, repeating
+      need to have a periodicity which is parameterized in such a way
+      that allows matching the resource dynamics (_e.g._, repeating
       subsequent intervals of durations of seconds available and seconds
       unavailable).
 
    Time horizon tailored to uncertainty:  Even when periodicity is well
       understood, characterized, and parameterized in a data model,
-      there must be allowance for uncertainty of expected resource
+      there needs to be allowance for uncertainty of expected resource
       availability.  This operates both in the sense of having a large
       enough time horizon to enable a device to "ride out" times of low
       resources without needing schedule updates, as well as the horizon
@@ -1074,8 +1074,8 @@ Table of Contents
       change frequency of the path may be much higher than the cost.  In
       this case, the minimum recalculation interval or cost change
       threshold is needed to determine when a route recalculation is
-      required.  Of course, scheduled topology connection changes must
-      be considered when path calculation is required.
+      required.  Of course, scheduled topology connection changes need
+      to be considered when path calculation is required.
 
 3.3.  Dynamic Reachability Use Case
 
@@ -1086,10 +1086,10 @@ Table of Contents
    Pairwise consideration of synchronization and margins:  When
       scheduling links, the execution clock synchronization of its two
       endpoints as well as any margin needed on each of those endpoints
-      must be considered when generating schedules for those links.
+      need to be considered when generating schedules for those links.
       Additionally, schedules on long-distance (_i.e._, interplanetary
-      scale) links must consider the effects of light-speed delays for
-      distribution and execution.
+      scale) links need to be planned for the effects of light-speed
+      delays on distribution and execution.
 
    Schedule independence from external conditions:  An important concept
       of distributed schedule execution in TVR is that a consistent
@@ -1206,7 +1206,7 @@ Table of Contents
    schedule can affect future forwarding behavior even before the
    affected time interval begins.
 
-   Implementations must address security risks associated with time-
+   Implementations need to address security risks associated with time-
    variant information to ensure the reliability and integrity of
    scheduled network operations.  The following security-related
    requirements are to be considered:
