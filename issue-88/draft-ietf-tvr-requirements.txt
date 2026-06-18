@@ -5,12 +5,12 @@
 Network Working Group                                            D. King
 Internet-Draft                                      Lancaster University
 Intended status: Informational                           L. M. Contreras
-Expires: 19 December 2026                                     Telefonica
+Expires: 20 December 2026                                     Telefonica
                                                                 B. Sipos
                                                                  JHU/APL
                                                                 L. Zhang
                                                                   Huawei
-                                                            17 June 2026
+                                                            18 June 2026
 
 
                 Time-Variant Routing (TVR) Requirements
@@ -61,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 19 December 2026.
+   This Internet-Draft will expire on 20 December 2026.
 
 Copyright Notice
 
@@ -1157,7 +1157,7 @@ Table of Contents
    help nodes without routing functions to advertise information, thus
    improving the efficiency of the network.  Therefore,
 
-   REQ_PROXY_ADV: Systems must support proxy entities to help non-
+   REQ_PROXY_ADV: Systems should support proxy entities to help non-
    routing nodes implement information advertisement.
 
 4.3.  Support Identification and Classification of Node Properties
@@ -1177,9 +1177,10 @@ Table of Contents
    updates rather than being fixed and unmodifiable.  Additionally,
    time-variant intervals in the system may also vary.  Therefore,
 
-   REQ_SCH_CHANGE: Systems must support system schedule changes.
-
-   REQ_INTERV_CHANGE: Systems must support time interval changes.
+   REQ_SCH_CHANGE: Systems must support system schedule changes and time
+   interval changes, the frequency of update depends on the detailed
+   scenarios.  A rollback mechanism is necessary in case of incorrect
+   updates.
 
 4.5.  Support Appropriate Time Accuracy
 
