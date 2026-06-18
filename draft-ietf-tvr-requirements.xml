@@ -82,7 +82,7 @@ This document builds on the use cases described in <xref target="RFC9657"/> by d
 These requirements are intended to inform solution work, such as the YANG data model for scheduled attributes in <xref target="I-D.ietf-tvr-schedule-yang"/>, by identifying the time-variant information and operational behavior that such solutions need to represent.
       </t>
       <t>
-This document starts with an overview of TVR networks and aspects of their time variance in <xref target="overview"/> and elaborates on TVR use cases in <xref target="tvr-use-case-requirements"/>.
+This document starts with an overview of TVR networks and aspects of their time variance in <xref target="overview"/> and elaborates on TVR use cases in <xref target="tvr-use-cases"/>.
 Requirements on the design of TVR systems are then categorized and summarized in <xref target="requirements-summary"/> with operational considerations for those systems in <xref target="ops-considerations"/>, and security considerations in <xref target="security-considerations"/>.
       </t>
       <section anchor="conventions-and-definitions">
@@ -675,15 +675,15 @@ Likewise, the assigning of an address property at one layer does not imply the p
       </section>
     </section>
 
-     <section anchor="tvr-use-case-requirements">
-      <name>Time-Variant Use Case Requirements</name>
+     <section anchor="tvr-use-cases">
+      <name>Time-Variant Use Case Needs</name>
       <t>
-Several TVR use cases have been identified and discussed in <xref target="RFC9657"/>.
-This section provides further detail on specific requirements to meet use case needs.
+Several TVR use cases have been identified and discussed in an earlier TVR document <xref target="RFC9657"/>.
+This section provides further detail on specific needs from those use cases.
       </t>
       <section anchor="resource-preservation-use-case">
         <name>Resource Preservation Use Case</name>
-        <t>This use case is about managed devices being reactive to sensed conditions, but also providing feedback to an Orchestrator to allow coarse schedules of expected resource availability. Its requirements include:</t>
+        <t>This use case is about managed devices being reactive to sensed conditions, but also providing feedback to an Orchestrator to allow coarse schedules of expected resource availability. Its needs include:</t>
         <dl>
           <dt>Temporality tailored to system dynamics:</dt>
           <dd>Because managed devices are either powered-off or severely degraded in performance when preserving resources, the schedules governing expected topology need to be of sufficient precision and synchronization to capture the dynamics of the managed devices.</dd>
@@ -695,7 +695,7 @@ This section provides further detail on specific requirements to meet use case n
       </section>
       <section>
         <name>Operating Efficiency Use Case</name>
-        <t>This use case is about scheduling resources proactively to improve efficiencies. Its requirements include:</t>
+        <t>This use case is about scheduling resources proactively to improve efficiencies. Its needs include:</t>
         <dl>
             <dt>Distribution of Predicted Topology-change:</dt>
             <dd>The predicted topology-change information may include the valid time,
@@ -711,7 +711,7 @@ This section provides further detail on specific requirements to meet use case n
       </section>
       <section>
         <name>Dynamic Reachability Use Case</name>
-        <t>This use case is about geometric and kinematic constraints of mobile devices influencing their ability to establish or maintain links to neighbors. Its requirements include:</t>
+        <t>This use case is about geometric and kinematic constraints of mobile devices influencing their ability to establish or maintain links to neighbors. Its needs include:</t>
         <dl>
           <dt>Pairwise consideration of synchronization and margins:</dt>
           <dd>
@@ -731,7 +731,7 @@ Schedule-based TVR and condition-based reactive mechanisms can coexist within th
     <section anchor="requirements-summary">
       <name>Requirements Summary</name>
       <t>
-The requirements in this section are derived from the use case needs discussed in <xref target="tvr-use-case-requirements"/> and from the design aspects introduced in this document.
+The requirements in this section are derived from the use case needs discussed in <xref target="tvr-use-cases"/> and from the design aspects introduced in this document.
       </t>
       <t>
 Not every architectural option or property described in this document results in a hard requirement; rather, those aspects inform the requirements that TVR systems need to support when they are applicable to a deployment or use case.
