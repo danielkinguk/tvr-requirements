@@ -676,7 +676,7 @@ Likewise, the assigning of an address property at one layer does not imply the p
     </section>
 
      <section anchor="tvr-use-cases">
-      <name>Time-Variant Use Case Needs</name>
+      <name>TVR Use Case Needs</name>
       <t>
 Several TVR use cases have been identified and discussed in an earlier TVR document <xref target="RFC9657"/>.
 This section provides further detail on specific needs from those use cases.
@@ -729,7 +729,7 @@ Schedule-based TVR and condition-based reactive mechanisms can coexist within th
       </section>
     </section>
     <section anchor="requirements-summary">
-      <name>Requirements Summary</name>
+      <name>TVR Requirements Summary</name>
       <t>
 The requirements in this section are derived from the use case needs discussed in <xref target="tvr-use-cases"/> and from the design aspects introduced in this document.
       </t>
