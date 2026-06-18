@@ -686,11 +686,11 @@ This section provides further detail on specific requirements to meet use case n
         <t>This use case is about managed devices being reactive to sensed conditions, but also providing feedback to an Orchestrator to allow coarse schedules of expected resource availability. Its requirements include:</t>
         <dl>
           <dt>Temporality tailored to system dynamics:</dt>
-          <dd>Because managed devices are either powered-off or severely degraded in performance when preserving resources, the schedules governing expected topology must be of sufficient precision and synchronization to capture the dynamics of the managed devices.</dd>
+          <dd>Because managed devices are either powered-off or severely degraded in performance when preserving resources, the schedules governing expected topology need to be of sufficient precision and synchronization to capture the dynamics of the managed devices.</dd>
           <dt>Parameterization of periodicity:</dt>
-          <dd>Resource availability based on diurnal activity on Earth fits well into a periodicity based strictly on time-of-day. But when resources are available based on other natural phenomena (<em>e.g.</em>, orbital periods) the schedules must have a periodicity which is parameterized in such a way that allows matching the resource dynamics (<em>e.g.</em>, repeating subsequent intervals of durations of seconds available and seconds unavailable).</dd>
+          <dd>Resource availability based on diurnal activity on Earth fits well into a periodicity based strictly on time-of-day. But when resources are available based on other natural phenomena (<em>e.g.</em>, orbital periods) the schedules need to have a periodicity which is parameterized in such a way that allows matching the resource dynamics (<em>e.g.</em>, repeating subsequent intervals of durations of seconds available and seconds unavailable).</dd>
           <dt>Time horizon tailored to uncertainty:</dt>
-          <dd>Even when periodicity is well understood, characterized, and parameterized in a data model, there must be allowance for uncertainty of expected resource availability. This operates both in the sense of having a large enough time horizon to enable a device to "ride out" times of low resources without needing schedule updates, as well as the horizon being limited to avoid large schedules which far exceed the point where actual system state will diverge from the model state.</dd>
+          <dd>Even when periodicity is well understood, characterized, and parameterized in a data model, there needs to be allowance for uncertainty of expected resource availability. This operates both in the sense of having a large enough time horizon to enable a device to "ride out" times of low resources without needing schedule updates, as well as the horizon being limited to avoid large schedules which far exceed the point where actual system state will diverge from the model state.</dd>
         </dl>
       </section>
       <section>
@@ -706,7 +706,7 @@ This section provides further detail on specific requirements to meet use case n
             <dd>Although some cases may assume that the cost persists for a sufficient
                 amount of time, considering that each route contains multiple links, the change frequency of the path may be much higher than
                 the cost. In this case, the minimum recalculation interval or cost change threshold is needed to determine when a route
-                recalculation is required. Of course, scheduled topology connection changes must be considered when path calculation is required.</dd>
+                recalculation is required. Of course, scheduled topology connection changes need to be considered when path calculation is required.</dd>
         </dl>
       </section>
       <section>
@@ -715,8 +715,8 @@ This section provides further detail on specific requirements to meet use case n
         <dl>
           <dt>Pairwise consideration of synchronization and margins:</dt>
           <dd>
-When scheduling links, the execution clock synchronization of its two endpoints as well as any margin needed on each of those endpoints must be considered when generating schedules for those links.
-Additionally, schedules on long-distance (<em>i.e.</em>, interplanetary scale) links must consider the effects of light-speed delays for distribution and execution.
+When scheduling links, the execution clock synchronization of its two endpoints as well as any margin needed on each of those endpoints need to be considered when generating schedules for those links.
+Additionally, schedules on long-distance (<em>i.e.</em>, interplanetary scale) links need to be planned for the effects of light-speed delays on distribution and execution.
           </dd>
           <dt>Schedule independence from external conditions:</dt>
           <dd>
@@ -805,7 +805,7 @@ Not every architectural option or property described in this document results in
       <section title="Support Robust Security for TVR Information">
         <t>The security properties listed here are not unique to TVR and are generally applicable to routing information systems.
         TVR adds specific sensitivity to the correctness, authorization, timing, and freshness of scheduled routing information, because an incorrect schedule can affect future forwarding behavior even before the affected time interval begins.</t>
-        <t>Implementations must address security risks associated with time-variant information to ensure the reliability and integrity of
+        <t>Implementations need to address security risks associated with time-variant information to ensure the reliability and integrity of
            scheduled network operations. The following security-related requirements are to be considered:</t>
         <dl>
           <dt><tt>REQ_INTEGRITY</tt>:</dt>
