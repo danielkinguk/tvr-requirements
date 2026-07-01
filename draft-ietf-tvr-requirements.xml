@@ -92,15 +92,15 @@ Requirements on the design of TVR systems are then categorized and summarized in
           <dt>Model:</dt>
           <dd>The universe being modeled, which defines a parameter state space.</dd>
           <dt>Data Model:</dt>
-          <dd>A concrete representation of a model, suitable for exchange between management entities. A YANG module (or a collection of cooperating YANG modules) is an example of a data model.</dd>
+          <dd>Describes how data is represented and accessed. YANG structures data models into modules for ease of use <xref target="RFC8309"/>. See Section 2.5 of <xref target="RFC9907"/>.</dd>
           <dt>Network Model:</dt>
-          <dd>A data model that represents network topology or network state, including entities such as nodes, termination points, and links.</dd>
+          <dd>Describes a network-level abstraction (or a subset of aspects of a network infrastructure), including devices and their subsystems, and relevant protocols operating at the link and network layers across multiple devices. This model corresponds to the network configuration model discussed in <xref target="RFC8309"/>. See Section 3.5.1 of <xref target="RFC9907"/>.</dd>
           <dt>TVR System:</dt>
           <dd>A set of functions, protocols, data models, and operational procedures that produce, distribute, execute, or use scheduled time-variant routing information.</dd>
           <dt>Route:</dt>
           <dd>The forwarding information used to direct traffic toward a destination.</dd>
           <dt>Path:</dt>
-          <dd>The ordered sequence of nodes, links, and termination points used by traffic crossing a network.</dd>
+          <dd>The ordered sequence of nodes, links, and termination points used by traffic crossing a network. Paths are unidirectional and time dependent, i.e., there can be a variety of paths from one node to another, and the path over which packets are transmitted may change. See also Section 2 of <xref target="RFC9473"/>.</dd>
           <dt>Termination Point:</dt>
           <dd>The topological attachment point on a node where a link terminates, consistent with the terminology of <xref target="RFC8345"/>.</dd>
           <dt>Entity:</dt>
@@ -1035,9 +1035,12 @@ The following potential security considerations warrant detailed investigation a
         <?rfc include="reference.RFC.6241.xml"?>
         <?rfc include="reference.RFC.7950.xml"?>
         <?rfc include="reference.RFC.8040.xml"?>
+        <?rfc include="reference.RFC.8309.xml"?>
         <?rfc include="reference.RFC.8345.xml"?>
         <?rfc include="reference.RFC.8346.xml"?>
         <?rfc include="reference.RFC.8944.xml"?>
+        <?rfc include="reference.RFC.9473.xml"?>
+        <?rfc include="reference.RFC.9907.xml"?>
         <reference anchor="AIXM" target="https://aixm.aero/sites/default/files/imce/AIXM51/aixm_temporality_1.0.pdf">
           <front>
             <title>AIXM 5 Temporality Model</title>
