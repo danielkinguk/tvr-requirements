@@ -19,25 +19,26 @@ This document introduces requirements for the design and implementation of syste
 It also explains different aspects of a TVR system which need to be considered during its design.
        
     " name="description">
-<meta content="xml2rfc 3.33.0" name="generator">
+<meta content="xml2rfc 3.34.0" name="generator">
 <meta content="Time-variant" name="keyword">
 <meta content="Routing" name="keyword">
 <meta content="Mobility" name="keyword">
 <meta content="Requirements" name="keyword">
 <meta content="draft-ietf-tvr-requirements-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.33.0
-    Python 3.12.13
-    ConfigArgParse 1.7
+  xml2rfc 3.34.0
+    Python 3.14.5
+    ConfigArgParse 1.7.5
     google-i18n-address 3.1.1
     intervaltree 3.2.1
     Jinja2 3.1.6
-    lxml 6.0.2
-    platformdirs 4.9.6
+    lxml 6.1.1
+    natsort 8.4.0
+    platformdirs 4.10.0
     pycountry 24.6.1
     PyYAML 6.0.3
     requests 2.33.1
-    wcwidth 0.7.0
+    wcwidth 0.8.1
 -->
 <link href="draft-ietf-tvr-requirements.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -1056,11 +1057,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">TVR Requirements</td>
-<td class="right">May 2026</td>
+<td class="right">July 2026</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">King, et al.</td>
-<td class="center">Expires 2 December 2026</td>
+<td class="center">Expires 2 January 2027</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1073,12 +1074,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-tvr-requirements-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-05-31" class="published">31 May 2026</time>
+<time datetime="2026-07-01" class="published">1 July 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-12-02">2 December 2026</time></dd>
+<dd class="expires"><time datetime="2027-01-02">2 January 2027</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1116,7 +1117,7 @@ It also explains different aspects of a TVR system which need to be considered d
       </h2>
 <p id="section-note.1-1">This note is to be removed before publishing as an RFC.<a href="#section-note.1-1" class="pilcrow">¶</a></p>
 <p id="section-note.1-2">
-        Status information for this document may be found at <span><a href="https://datatracker.ietf.org/doc/draft-ietf-tvr-requirements/">https://datatracker.ietf.org/doc/draft-ietf-tvr-requirements/</a></span>.<a href="#section-note.1-2" class="pilcrow">¶</a></p>
+        Status information for this document can be found at <span><a href="https://datatracker.ietf.org/doc/draft-ietf-tvr-requirements/">https://datatracker.ietf.org/doc/draft-ietf-tvr-requirements/</a></span>.<a href="#section-note.1-2" class="pilcrow">¶</a></p>
 <p id="section-note.1-3">
         Discussion of this document takes place on the
         Time Variant Routing Working Group mailing list (<span><a href="mailto:tvr@ietf.org">mailto:tvr@ietf.org</a></span>),
@@ -1144,7 +1145,7 @@ It also explains different aspects of a TVR system which need to be considered d
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 2 December 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 2 January 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1279,7 +1280,7 @@ It also explains different aspects of a TVR system which need to be considered d
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
-            <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-time-variant-use-case-requi" class="internal xref">Time-Variant Use Case Requirements</a></p>
+            <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-tvr-use-case-needs" class="internal xref">TVR Use Case Needs</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1">
                 <p id="section-toc.1-1.3.2.1.1"><a href="#section-3.1" class="auto internal xref">3.1</a>.  <a href="#name-resource-preservation-use-c" class="internal xref">Resource Preservation Use Case</a></p>
@@ -1293,7 +1294,7 @@ It also explains different aspects of a TVR system which need to be considered d
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
-            <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-requirements-summary" class="internal xref">Requirements Summary</a></p>
+            <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-tvr-requirements-summary" class="internal xref">TVR Requirements Summary</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1">
                 <p id="section-toc.1-1.4.2.1.1"><a href="#section-4.1" class="auto internal xref">4.1</a>.  <a href="#name-support-the-identification-" class="internal xref">Support the Identification and Advertisement of Entity Property Changes</a></p>
@@ -1336,16 +1337,19 @@ It also explains different aspects of a TVR system which need to be considered d
                 <p id="section-toc.1-1.6.2.2.1"><a href="#section-6.2" class="auto internal xref">6.2</a>.  <a href="#name-traffic-analysis-and-path-p" class="internal xref">Traffic Analysis and Path Prediction</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.3">
-                <p id="section-toc.1-1.6.2.3.1"><a href="#section-6.3" class="auto internal xref">6.3</a>.  <a href="#name-activity-identification-and" class="internal xref">Activity Identification and Privacy</a></p>
+                <p id="section-toc.1-1.6.2.3.1"><a href="#section-6.3" class="auto internal xref">6.3</a>.  <a href="#name-schedule-disclosure" class="internal xref">Schedule Disclosure</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.4">
-                <p id="section-toc.1-1.6.2.4.1"><a href="#section-6.4" class="auto internal xref">6.4</a>.  <a href="#name-spoofing-and-manipulation-o" class="internal xref">Spoofing and Manipulation of Time Information</a></p>
+                <p id="section-toc.1-1.6.2.4.1"><a href="#section-6.4" class="auto internal xref">6.4</a>.  <a href="#name-activity-identification-and" class="internal xref">Activity Identification and Privacy</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.5">
-                <p id="section-toc.1-1.6.2.5.1"><a href="#section-6.5" class="auto internal xref">6.5</a>.  <a href="#name-replay-attacks-on-time-sens" class="internal xref">Replay Attacks on Time-Sensitive Data</a></p>
+                <p id="section-toc.1-1.6.2.5.1"><a href="#section-6.5" class="auto internal xref">6.5</a>.  <a href="#name-spoofing-and-manipulation-o" class="internal xref">Spoofing and Manipulation of Time Information</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.6">
-                <p id="section-toc.1-1.6.2.6.1"><a href="#section-6.6" class="auto internal xref">6.6</a>.  <a href="#name-compromised-time-sources" class="internal xref">Compromised Time Sources</a></p>
+                <p id="section-toc.1-1.6.2.6.1"><a href="#section-6.6" class="auto internal xref">6.6</a>.  <a href="#name-replay-attacks-on-time-sens" class="internal xref">Replay Attacks on Time-Sensitive Data</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.7">
+                <p id="section-toc.1-1.6.2.7.1"><a href="#section-6.7" class="auto internal xref">6.7</a>.  <a href="#name-compromised-time-sources" class="internal xref">Compromised Time Sources</a></p>
 </li>
             </ul>
 </li>
@@ -1382,7 +1386,7 @@ It also explains different aspects of a TVR system which need to be considered d
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
 <p id="section-1-1">
-This document is an informational specification meant to inform the design and implementation of systems that manage time-variant routing (TVR) information, and to characterize those systems using design aspects understandable to network operators.
+This document was written to inform the design and implementation of systems that manage time-variant routing (TVR) information, and to characterize those systems using design aspects understandable to network operators.
 The terms discussed in this document are intentionally general and are intended to be tailored for specifics of those individual TVR systems.<a href="#section-1-1" class="pilcrow">¶</a></p>
 <p id="section-1-2">
 The motivation for this work is explained in the TVR Use Cases document <span>[<a href="#RFC9657" class="cite xref">RFC9657</a>]</span>, which justifies why there is value in having some form of time-variance in a system.
@@ -1390,7 +1394,7 @@ This document discusses technical detail of aspects that designers and operators
 This document builds on the use cases described in <span>[<a href="#RFC9657" class="cite xref">RFC9657</a>]</span> by deriving design requirements and operational considerations for TVR systems, but it does not define a protocol solution and is not limited to a single use case.
 These requirements are intended to inform solution work, such as the YANG data model for scheduled attributes in <span>[<a href="#I-D.ietf-tvr-schedule-yang" class="cite xref">I-D.ietf-tvr-schedule-yang</a>]</span>, by identifying the time-variant information and operational behavior that such solutions need to represent.<a href="#section-1-2" class="pilcrow">¶</a></p>
 <p id="section-1-3">
-This document starts with an overview of TVR networks and aspects of their time variance in <a href="#overview" class="auto internal xref">Section 2</a> and elaborates on TVR use cases in <a href="#tvr-use-case-requirements" class="auto internal xref">Section 3</a>.
+This document starts with an overview of TVR networks and aspects of their time variance in <a href="#overview" class="auto internal xref">Section 2</a> and elaborates on TVR use cases in <a href="#tvr-use-cases" class="auto internal xref">Section 3</a>.
 Requirements on the design of TVR systems are then categorized and summarized in <a href="#requirements-summary" class="auto internal xref">Section 4</a> with operational considerations for those systems in <a href="#ops-considerations" class="auto internal xref">Section 5</a>, and security considerations in <a href="#security-considerations" class="auto internal xref">Section 6</a>.<a href="#section-1-3" class="pilcrow">¶</a></p>
 <div id="conventions-and-definitions">
 <section id="section-1.1">
@@ -1404,11 +1408,11 @@ Requirements on the design of TVR systems are then categorized and summarized in
 </dd>
           <dd class="break"></dd>
 <dt id="section-1.1-2.3">Data Model:</dt>
-          <dd style="margin-left: 1.5em" id="section-1.1-2.4">A concrete representation of a model, suitable for exchange between management entities. A YANG module (or a collection of cooperating YANG modules) is an example of a data model.<a href="#section-1.1-2.4" class="pilcrow">¶</a>
+          <dd style="margin-left: 1.5em" id="section-1.1-2.4">Describes how data is represented and accessed. YANG structures data models into modules for ease of use <span>[<a href="#RFC8309" class="cite xref">RFC8309</a>]</span>. See Section 2.5 of <span>[<a href="#RFC9907" class="cite xref">RFC9907</a>]</span>.<a href="#section-1.1-2.4" class="pilcrow">¶</a>
 </dd>
           <dd class="break"></dd>
 <dt id="section-1.1-2.5">Network Model:</dt>
-          <dd style="margin-left: 1.5em" id="section-1.1-2.6">A data model that represents network topology or network state, including entities such as nodes, termination points, and links.<a href="#section-1.1-2.6" class="pilcrow">¶</a>
+          <dd style="margin-left: 1.5em" id="section-1.1-2.6">Describes a network-level abstraction (or a subset of aspects of a network infrastructure), including devices and their subsystems, and relevant protocols operating at the link and network layers across multiple devices. This model corresponds to the network configuration model discussed in <span>[<a href="#RFC8309" class="cite xref">RFC8309</a>]</span>. See Section 3.5.1 of <span>[<a href="#RFC9907" class="cite xref">RFC9907</a>]</span>.<a href="#section-1.1-2.6" class="pilcrow">¶</a>
 </dd>
           <dd class="break"></dd>
 <dt id="section-1.1-2.7">TVR System:</dt>
@@ -1420,7 +1424,7 @@ Requirements on the design of TVR systems are then categorized and summarized in
 </dd>
           <dd class="break"></dd>
 <dt id="section-1.1-2.11">Path:</dt>
-          <dd style="margin-left: 1.5em" id="section-1.1-2.12">The ordered sequence of nodes, links, and termination points used by traffic crossing a network.<a href="#section-1.1-2.12" class="pilcrow">¶</a>
+          <dd style="margin-left: 1.5em" id="section-1.1-2.12">The ordered sequence of nodes, links, and termination points used by traffic crossing a network. Paths are unidirectional and time dependent, i.e., there can be a variety of paths from one node to another, and the path over which packets are transmitted may change. See also Section 2 of <span>[<a href="#RFC9473" class="cite xref">RFC9473</a>]</span>.<a href="#section-1.1-2.12" class="pilcrow">¶</a>
 </dd>
           <dd class="break"></dd>
 <dt id="section-1.1-2.13">Termination Point:</dt>
@@ -1432,7 +1436,7 @@ Requirements on the design of TVR systems are then categorized and summarized in
 </dd>
           <dd class="break"></dd>
 <dt id="section-1.1-2.17">Property:</dt>
-          <dd style="margin-left: 1.5em" id="section-1.1-2.18">A single attribute of an entity which is used to parameterize that entity. The notion of a property is not time-variant, the property always exists within an entity but its value may be time-variant.<a href="#section-1.1-2.18" class="pilcrow">¶</a>
+          <dd style="margin-left: 1.5em" id="section-1.1-2.18">A single attribute of an entity which is used to parameterize that entity. The notion of a property is not time-variant, the property always exists within an entity but its value can be time-variant.<a href="#section-1.1-2.18" class="pilcrow">¶</a>
 </dd>
           <dd class="break"></dd>
 <dt id="section-1.1-2.19">Property Value:</dt>
@@ -1444,7 +1448,7 @@ Requirements on the design of TVR systems are then categorized and summarized in
 </dd>
           <dd class="break"></dd>
 <dt id="section-1.1-2.23">Schedule Time:</dt>
-          <dd style="margin-left: 1.5em" id="section-1.1-2.24">An idealized timeline within a time-variant model over which entities and property values may change without a difference of state in the model itself. The notion of schedule time is intrinsic to the model.<a href="#section-1.1-2.24" class="pilcrow">¶</a>
+          <dd style="margin-left: 1.5em" id="section-1.1-2.24">An idealized timeline within a time-variant model over which entities and property values can change without a difference of state in the model itself. The notion of schedule time is intrinsic to the model.<a href="#section-1.1-2.24" class="pilcrow">¶</a>
 </dd>
           <dd class="break"></dd>
 <dt id="section-1.1-2.25">Wall-Clock Time:</dt>
@@ -1540,8 +1544,8 @@ The figure is intended to show the functional relationships involved in TVR mana
       </h2>
 <p id="section-2-1">
 Existing Internet routing techniques maintain end-to-end connected paths across a network. Routing mechanisms exist to recover
-connectivity and resume normal traffic forwarding as the topology changes. Occasionally, optimization of routes may also be
-requested, especially post-topology changes due to disruptive events. However, there are a growing number of use cases where
+connectivity and resume normal traffic forwarding as the topology changes. Occasionally, optimization of routes can also be
+requested, especially post-topology changes due to disruptive events. However, there are a number of use cases <span>[<a href="#RFC9657" class="cite xref">RFC9657</a>]</span> where
 changes to the routing topology are an expected part of network operations. In these scenarios, the pre-planned loss and
 restoration of an adjacency, or formation of an alternate adjacency, can be treated as a non-disruptive event.<a href="#section-2-1" class="pilcrow">¶</a></p>
 <p id="section-2-2">
@@ -1639,12 +1643,12 @@ Two extremes for locality of schedule generation are:<a href="#section-2.1.3-2" 
 In this situation, all schedule generation is centralized within a network Orchestrator and changes are sent to routing applications in wall-clock time via a management interface.
 Even though the generation of the schedule is centralized, both the schedule visibility (within the data model) and the locality of how the schedule is executed are unconstrained.<a href="#section-2.1.3-3.2.1" class="pilcrow">¶</a></p>
 <p id="section-2.1.3-3.2.2">
-For example, a schedule could be generated in a central orchestrator synchronized to all managed devices which then execute the schedule in a distributed manner.<a href="#section-2.1.3-3.2.2" class="pilcrow">¶</a></p>
+For example, a schedule could be generated in a central Orchestrator synchronized to all managed devices which then execute the schedule in a distributed manner.<a href="#section-2.1.3-3.2.2" class="pilcrow">¶</a></p>
 </dd>
             <dd class="break"></dd>
 <dt id="section-2.1.3-3.3">Distributed Generation:</dt>
             <dd style="margin-left: 1.5em" id="section-2.1.3-3.4">
-This situation corresponds with the intrinsic or intermediate schedule visibility. Where a schedule (with a potentially limited time horizon from what is known at the orchestrator) is part of the managed data which is distributed to managed devices to be handled either by the Agent or by the routing Application itself.<a href="#section-2.1.3-3.4" class="pilcrow">¶</a>
+This situation corresponds with the intrinsic or intermediate schedule visibility. Where a schedule (with a potentially limited time horizon from what is known at the Orchestrator) is part of the managed data which is distributed to managed devices to be handled either by the Agent or by the routing Application itself.<a href="#section-2.1.3-3.4" class="pilcrow">¶</a>
 </dd>
           <dd class="break"></dd>
 </dl>
@@ -1656,7 +1660,7 @@ This situation corresponds with the intrinsic or intermediate schedule visibilit
 <a href="#section-2.1.4" class="section-number selfRef">2.1.4. </a><a href="#name-execution-locality" class="section-name selfRef">Execution Locality</a>
           </h4>
 <p id="section-2.1.4-1">
-Depending on the visibility of schedules within a data model (see <a href="#schedule-visibility" class="auto internal xref">Section 2.1.2</a>) there are different options for where the schedule may be executed, and ultimately influence a time-varying configuration on a managed device.<a href="#section-2.1.4-1" class="pilcrow">¶</a></p>
+Depending on the visibility of schedules within a data model (see <a href="#schedule-visibility" class="auto internal xref">Section 2.1.2</a>) there are different options for where the schedule can be executed, and ultimately influence a time-varying configuration on a managed device.<a href="#section-2.1.4-1" class="pilcrow">¶</a></p>
 <p id="section-2.1.4-2">
 Two extremes for locality of schedule execution are:<a href="#section-2.1.4-2" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlParallel" id="section-2.1.4-3">
@@ -1680,10 +1684,10 @@ The ratio of increased size can be mitigated by only distributing a limited time
 </dl>
 <p id="section-2.1.4-4">
 When schedules are both generated and executed centrally, there is a consistency risk between different managed devices because if one device fails to be reconfigured in wall-clock time its configuration will no longer align with the other devices which are supposed to all operate on the same schedule.
-To recover from this kind of situation, either reattempt to configure the misaligned device may be made to bring it back into alignment with the other devices or the other devices' configurations need to be rolled back into consistency which will then cause all the devices to be off-schedule.<a href="#section-2.1.4-4" class="pilcrow">¶</a></p>
+To recover from this kind of situation, either reattempt to configure the misaligned device can be made to bring it back into alignment with the other devices or the other devices' configurations need to be rolled back into consistency which will then cause all the devices to be off-schedule.<a href="#section-2.1.4-4" class="pilcrow">¶</a></p>
 <p id="section-2.1.4-5">
 When schedules are executed on each device, there is a risk that clocks on different devices become de-synchronized beyond the time precision required of the schedule.
-Because real-time clocks are necessary for more than just schedule execution, and because accurate and precise time sources exist outside of network time (<em>e.g.</em>, GPS time) this risk can be made to have a low probability.<a href="#section-2.1.4-5" class="pilcrow">¶</a></p>
+Because real-time clocks are necessary for more than just schedule execution, and because accurate and precise time sources exist outside of network time (<em>e.g.</em>, UTC-traceable time sources) this risk can be made to have a low probability.<a href="#section-2.1.4-5" class="pilcrow">¶</a></p>
 <p id="section-2.1.4-6">
 With distributed execution there is also a risk that a Manager loses connectivity with the managed device and the device eventually runs out of time horizon in the schedule which is known to it.
 This risk can be mitigated by trading between the size and the horizon end-time of schedules distributed to managed devices. This trade can be different for different devices, where some well-connected devices operate closer to just-in-time with short horizons while other devices can be given a longer horizon to allow it to execute in the absence of near-continuous Manager connectivity.<a href="#section-2.1.4-6" class="pilcrow">¶</a></p>
@@ -1769,7 +1773,7 @@ It is perfectly valid for some entities to have time-variance and others to have
 <a href="#section-2.2.1" class="section-number selfRef">2.2.1. </a><a href="#name-scope-of-time-variability" class="section-name selfRef">Scope of Time-Variability</a>
           </h4>
 <p id="section-2.2.1-1">
-One aspect of any time-variant data model is the scope of what may be time-variable.
+One aspect of any time-variant data model is the scope of what can be time-variable.
 Two extremes of this aspect are:<a href="#section-2.2.1-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-2.2.1-2.1">A model that is entirely time-invariant, where time exists conceptually but has no impact on any of the model's entities.<a href="#section-2.2.1-2.1" class="pilcrow">¶</a>
@@ -1801,7 +1805,7 @@ Another possibility is to apply a schedule to groups of properties within an ent
 <p id="section-2.2.2-1">
 In an idealized model the schedules will apply indefinitely far in the past and the future, but in a realizable data model with both processing and storage limitations there will need to be a time horizon within which the model applies and outside of which the model has no meaning.
 In some cases this horizon will be intrinsic to the data model itself, with an explicit model parameter indicating the horizon.
-In other cases the data model may allow indefinitely-large schedules but the processing of the schedule timeline is bounded to limit resource needs.<a href="#section-2.2.2-1" class="pilcrow">¶</a></p>
+In other cases the data model can allow indefinitely-large schedules but the processing of the schedule timeline is bounded to limit resource needs.<a href="#section-2.2.2-1" class="pilcrow">¶</a></p>
 <p id="section-2.2.2-2">
 One possible rationale for separating <span><a href="#schedule-domain" class="internal xref">schedule domains</a> (<a href="#schedule-domain" class="auto internal xref">Section 2.1.1</a>)</span> is the duration of the time horizon needed for entities in each domain.<a href="#section-2.2.2-2" class="pilcrow">¶</a></p>
 </section>
@@ -1950,7 +1954,7 @@ Since TVR is focused on the routing aspect of scheduled systems, relating schedu
           </h4>
 <p id="section-2.3.1-1">
 When a schedule is applied to a node the granularity could at least be at the individual node.
-In cases where the properties of a node have time-variable values the model may define an interpolation method, either globally or per-property.<a href="#section-2.3.1-1" class="pilcrow">¶</a></p>
+In cases where the properties of a node have time-variable values the model can define an interpolation method, either globally or per-property.<a href="#section-2.3.1-1" class="pilcrow">¶</a></p>
 <p id="section-2.3.1-2">
 A node is just a named entity in Layer 3 <span>[<a href="#RFC8346" class="cite xref">RFC8346</a>]</span> and Layer 2 <span>[<a href="#RFC8944" class="cite xref">RFC8944</a>]</span> topologies.
 Schedules on a node could be used to indicate the validity of the entire node or changing properties of that entity.
@@ -1966,9 +1970,9 @@ This logic allows a schedule to represent, for example, the expected power-on st
           </h4>
 <p id="section-2.3.2-1">
 When a schedule is applied to a termination point the granularity can be at least the individual entity.
-In cases where the properties of a termination point have time-variable values the model may define an interpolation method, either globally or per-property.<a href="#section-2.3.2-1" class="pilcrow">¶</a></p>
+In cases where the properties of a termination point have time-variable values the model can define an interpolation method, either globally or per-property.<a href="#section-2.3.2-1" class="pilcrow">¶</a></p>
 <p id="section-2.3.2-2">
-A termination point is associated with an IP address in Layer 3 <span>[<a href="#RFC8346" class="cite xref">RFC8346</a>]</span> and a MAC address in Layer 2 <span>[<a href="#RFC8944" class="cite xref">RFC8944</a>]</span> topologies.
+A termination point is associated with an IP address in Layer 3 <span>[<a href="#RFC8346" class="cite xref">RFC8346</a>]</span> and a link-layer identifier, such as an EUI-48 or EUI-64 identifier, in Layer 2 <span>[<a href="#RFC8944" class="cite xref">RFC8944</a>]</span> topologies.
 Schedules on a termination point could be used to indicate the validity of the layer-2/3 interface represented by the entity or changing properties of that entity.
 When a schedule indicates that a termination point is not valid for a schedule time instant, a model can define whether that condition affects links anchored at that termination point.
 This logic allows a schedule to represent, for example, the expected power-on or administrative-enabled state of an attached network interface card (NIC) or virtual private network (VPN) endpoint.<a href="#section-2.3.2-2" class="pilcrow">¶</a></p>
@@ -1981,7 +1985,7 @@ This logic allows a schedule to represent, for example, the expected power-on or
           </h4>
 <p id="section-2.3.3-1">
 When a schedule is applied to a link the granularity can be at least the individual link.
-In cases where the properties of a link have time-variable values the model may define an interpolation method, either globally or per-property.<a href="#section-2.3.3-1" class="pilcrow">¶</a></p>
+In cases where the properties of a link have time-variable values the model can define an interpolation method, either globally or per-property.<a href="#section-2.3.3-1" class="pilcrow">¶</a></p>
 <p id="section-2.3.3-2">
 A link is associated with link metric properties in Layer 3 <span>[<a href="#RFC8346" class="cite xref">RFC8346</a>]</span> and Layer 2 <span>[<a href="#RFC8944" class="cite xref">RFC8944</a>]</span> topologies.
 Schedules on a link can be used to indicate the validity of the entire link or changing properties of that entity.
@@ -2020,9 +2024,9 @@ Likewise, the assigning of an address property at one layer does not imply the p
           <h4 id="name-centralized">
 <a href="#section-2.4.1" class="section-number selfRef">2.4.1. </a><a href="#name-centralized" class="section-name selfRef">Centralized</a>
           </h4>
-<p id="section-2.4.1-1">The network entities will receive the time variable information and traffic forwarding rules directly from a logically centralized source, an Orchestrator or network controller. The time-variable data may then be
+<p id="section-2.4.1-1">The network entities will receive the time variable information and traffic forwarding rules directly from a logically centralized source, an Orchestrator or network controller. The time-variable data can then be
             processed locally by the entity entered into the scheduled routing table and specific forwarding rules applied.<a href="#section-2.4.1-1" class="pilcrow">¶</a></p>
-<p id="section-2.4.1-2">Furthermore, a centralized approach could also be used to extend existing tunnel and path delivery mechanisms and protocols to distribute traffic forwarding rules along with time-variable information. However, in certain environments, a logically centralized source may lose connectivity with network entities (as described in <a href="#schedule-exec-locality" class="auto internal xref">Section 2.1.4</a>), preventing timely delivery of traffic forwarding rules. To mitigate this risk, the time horizon for time-variable information can be extended accordingly.<a href="#section-2.4.1-2" class="pilcrow">¶</a></p>
+<p id="section-2.4.1-2">Furthermore, a centralized approach could also be used to extend existing tunnel and path delivery mechanisms and protocols to distribute traffic forwarding rules along with time-variable information. However, in certain environments, a logically centralized source can lose connectivity with network entities (as described in <a href="#schedule-exec-locality" class="auto internal xref">Section 2.1.4</a>), preventing timely delivery of traffic forwarding rules. To mitigate this risk, the time horizon for time-variable information can be extended accordingly.<a href="#section-2.4.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="Distributed">
@@ -2030,10 +2034,10 @@ Likewise, the assigning of an address property at one layer does not imply the p
           <h4 id="name-distributed">
 <a href="#section-2.4.2" class="section-number selfRef">2.4.2. </a><a href="#name-distributed" class="section-name selfRef">Distributed</a>
           </h4>
-<p id="section-2.4.2-1">Network entities may participate in a routing scheme where time variable information is propagated through the network via capability and variability advertisements. This could be achieved using
-            extensions to existing routing schemes and techniques so that link, adjacency, cost, and schedule may be considered when making forwarding decisions for per-hop packets or calculating traffic
-            engineered end-to-end paths. Note that schedule distribution and entity computation latency may exist in some network environments.<a href="#section-2.4.2-1" class="pilcrow">¶</a></p>
-<p id="section-2.4.2-2">In some environments, scheduling information may be distributed through a management plane mechanism, such as NETCONF <span>[<a href="#RFC6241" class="cite xref">RFC6241</a>]</span> or gNMI (gRPC Network Management Interface) <span>[<a href="#gNMI" class="cite xref">gNMI</a>]</span>, instead of the routing scheme.<a href="#section-2.4.2-2" class="pilcrow">¶</a></p>
+<p id="section-2.4.2-1">Network entities can participate in a routing scheme where time variable information is propagated through the network via capability and variability advertisements. This could be achieved using
+            extensions to existing routing schemes and techniques so that link, adjacency, cost, and schedule can be considered when making forwarding decisions for per-hop packets or calculating traffic
+            engineered end-to-end paths. Note that schedule distribution and entity computation latency can exist in some network environments.<a href="#section-2.4.2-1" class="pilcrow">¶</a></p>
+<p id="section-2.4.2-2">In some environments, scheduling information can be distributed through a management plane mechanism, such as NETCONF <span>[<a href="#RFC6241" class="cite xref">RFC6241</a>]</span> or gNMI (gRPC Network Management Interface) <span>[<a href="#gNMI" class="cite xref">gNMI</a>]</span>, instead of the routing scheme.<a href="#section-2.4.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="Hybrid">
@@ -2051,7 +2055,7 @@ Likewise, the assigning of an address property at one layer does not imply the p
           <h4 id="name-constraints">
 <a href="#section-2.4.4" class="section-number selfRef">2.4.4. </a><a href="#name-constraints" class="section-name selfRef">Constraints</a>
           </h4>
-<p id="section-2.4.4-1">Time-variant network constraints may be based on dynamic factors that will influence how the network is managed and how network resources are scheduled. These constraints are influenced by real-time
+<p id="section-2.4.4-1">Time-variant network constraints can be based on dynamic factors that will influence how the network is managed and how network resources are scheduled. These constraints are influenced by real-time
        data and can vary significantly depending on multiple factors. By considering time-variant constraints, network operators can enhance the efficiency, reliability, and performance of telecom networks. The main
        factors influencing these constraints include:<a href="#section-2.4.4-1" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-2.4.4-2">
@@ -2085,10 +2089,10 @@ Likewise, the assigning of an address property at one layer does not imply the p
 <p id="section-2.5-1">Time-variant network relies on accurate and timely dissemination of time-variant routing and forwarding information. However, the presence of
             malicious or unintended divergent information introduces risks that can impact network stability and operational correctness. An adversary could
             manipulate scheduled routing updates to introduce black holes, persistent loops, or denial-of-service conditions by injecting false time-sensitive
-            state changes. Even in non-malicious scenarios, incorrect or misaligned scheduling or misconfiguration, or time de-synchronization, may lead to
+            state changes. Even in non-malicious scenarios, incorrect or misaligned scheduling or misconfiguration, or time de-synchronization, can lead to
             unintended forwarding behavior, potentially degrading performance or causing service disruptions.<a href="#section-2.5-1" class="pilcrow">¶</a></p>
 <p id="section-2.5-2">To mitigate these risks, TVR solution mechanisms can incorporate integrity validation and trust enforcement to ensure the correctness and
-            authenticity of time-sensitive routing updates. This may include cryptographic techniques to verify the source and integrity of schedule updates,
+            authenticity of time-sensitive routing updates. This can include cryptographic techniques to verify the source and integrity of schedule updates,
             consistency checks against expected network state, and mechanisms to detect and reject anomalous scheduling data. Additionally, fallback strategies
             can allow continued operation in cases where unexpected or inconsistent information is detected.<a href="#section-2.5-2" class="pilcrow">¶</a></p>
 <p id="section-2.5-3">Specific security considerations are discussed in <a href="#security-considerations" class="auto internal xref">Section 6</a> later in this document.<a href="#section-2.5-3" class="pilcrow">¶</a></p>
@@ -2096,31 +2100,31 @@ Likewise, the assigning of an address property at one layer does not imply the p
 </div>
 </section>
 </div>
-<div id="tvr-use-case-requirements">
+<div id="tvr-use-cases">
 <section id="section-3">
-      <h2 id="name-time-variant-use-case-requi">
-<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-time-variant-use-case-requi" class="section-name selfRef">Time-Variant Use Case Requirements</a>
+      <h2 id="name-tvr-use-case-needs">
+<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-tvr-use-case-needs" class="section-name selfRef">TVR Use Case Needs</a>
       </h2>
 <p id="section-3-1">
-Several TVR use cases have been identified and discussed in <span>[<a href="#RFC9657" class="cite xref">RFC9657</a>]</span>.
-This section provides further detail on specific requirements to meet use case needs.<a href="#section-3-1" class="pilcrow">¶</a></p>
+Several TVR use cases have been identified and discussed in an earlier TVR document <span>[<a href="#RFC9657" class="cite xref">RFC9657</a>]</span>.
+This section provides further detail on specific needs from those use cases.<a href="#section-3-1" class="pilcrow">¶</a></p>
 <div id="resource-preservation-use-case">
 <section id="section-3.1">
         <h3 id="name-resource-preservation-use-c">
 <a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-resource-preservation-use-c" class="section-name selfRef">Resource Preservation Use Case</a>
         </h3>
-<p id="section-3.1-1">This use case is about managed devices being reactive to sensed conditions, but also providing feedback to an Orchestrator to allow coarse schedules of expected resource availability. Its requirements include:<a href="#section-3.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.1-1">This use case is about managed devices being reactive to sensed conditions, but also providing feedback to an Orchestrator to allow coarse schedules of expected resource availability. Its needs include:<a href="#section-3.1-1" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlParallel" id="section-3.1-2">
           <dt id="section-3.1-2.1">Temporality tailored to system dynamics:</dt>
-          <dd style="margin-left: 1.5em" id="section-3.1-2.2">Because managed devices are either powered-off or severely degraded in performance when preserving resources, the schedules governing expected topology must be of sufficient precision and synchronization to capture the dynamics of the managed devices.<a href="#section-3.1-2.2" class="pilcrow">¶</a>
+          <dd style="margin-left: 1.5em" id="section-3.1-2.2">Because managed devices are either powered-off or severely degraded in performance when preserving resources, the schedules governing expected topology need to be of sufficient precision and synchronization to capture the dynamics of the managed devices.<a href="#section-3.1-2.2" class="pilcrow">¶</a>
 </dd>
           <dd class="break"></dd>
 <dt id="section-3.1-2.3">Parameterization of periodicity:</dt>
-          <dd style="margin-left: 1.5em" id="section-3.1-2.4">Resource availability based on diurnal activity on Earth fits well into a periodicity based strictly on time-of-day. But when resources are available based on other natural phenomena (<em>e.g.</em>, orbital periods) the schedules must have a periodicity which is parameterized in such a way that allows matching the resource dynamics (<em>e.g.</em>, repeating subsequent intervals of durations of seconds available and seconds unavailable).<a href="#section-3.1-2.4" class="pilcrow">¶</a>
+          <dd style="margin-left: 1.5em" id="section-3.1-2.4">Resource availability based on diurnal activity on Earth fits well into a periodicity based strictly on time-of-day. But when resources are available based on other natural phenomena (<em>e.g.</em>, orbital periods) the schedules need to have a periodicity which is parameterized in such a way that allows matching the resource dynamics (<em>e.g.</em>, repeating subsequent intervals of durations of seconds available and seconds unavailable).<a href="#section-3.1-2.4" class="pilcrow">¶</a>
 </dd>
           <dd class="break"></dd>
 <dt id="section-3.1-2.5">Time horizon tailored to uncertainty:</dt>
-          <dd style="margin-left: 1.5em" id="section-3.1-2.6">Even when periodicity is well understood, characterized, and parameterized in a data model, there must be allowance for uncertainty of expected resource availability. This operates both in the sense of having a large enough time horizon to enable a device to "ride out" times of low resources without needing schedule updates, as well as the horizon being limited to avoid large schedules which far exceed the point where actual system state will diverge from the model state.<a href="#section-3.1-2.6" class="pilcrow">¶</a>
+          <dd style="margin-left: 1.5em" id="section-3.1-2.6">Even when periodicity is well understood, characterized, and parameterized in a data model, there needs to be allowance for uncertainty of expected resource availability. This operates both in the sense of having a large enough time horizon to enable a device to "ride out" times of low resources without needing schedule updates, as well as the horizon being limited to avoid large schedules which far exceed the point where actual system state will diverge from the model state.<a href="#section-3.1-2.6" class="pilcrow">¶</a>
 </dd>
         <dd class="break"></dd>
 </dl>
@@ -2130,22 +2134,22 @@ This section provides further detail on specific requirements to meet use case n
         <h3 id="name-operating-efficiency-use-ca">
 <a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-operating-efficiency-use-ca" class="section-name selfRef">Operating Efficiency Use Case</a>
         </h3>
-<p id="section-3.2-1">This use case is about scheduling resources proactively to improve efficiencies. Its requirements include:<a href="#section-3.2-1" class="pilcrow">¶</a></p>
+<p id="section-3.2-1">This use case is about scheduling resources proactively to improve efficiencies. Its needs include:<a href="#section-3.2-1" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlParallel" id="section-3.2-2">
           <dt id="section-3.2-2.1">Distribution of Predicted Topology-change:</dt>
-          <dd style="margin-left: 1.5em" id="section-3.2-2.2">The predicted topology-change information may include the valid time,
+          <dd style="margin-left: 1.5em" id="section-3.2-2.2">The predicted topology-change information might include the valid time,
                 invalid time, link costs at different times, and change periods.<a href="#section-3.2-2.2" class="pilcrow">¶</a>
 </dd>
           <dd class="break"></dd>
 <dt id="section-3.2-2.3">Topology Changes:</dt>
-          <dd style="margin-left: 1.5em" id="section-3.2-2.4">Predicted topology-change information can need revision as forecasts are refined or as unexpected events occur. The managing entity should be capable of providing a partial or full topology update as often as needed.<a href="#section-3.2-2.4" class="pilcrow">¶</a>
+          <dd style="margin-left: 1.5em" id="section-3.2-2.4">Predicted topology-change information can need revision as forecasts are refined or as unexpected events occur. The managing entity needs to be capable of providing a partial or full topology update as often as needed.<a href="#section-3.2-2.4" class="pilcrow">¶</a>
 </dd>
           <dd class="break"></dd>
 <dt id="section-3.2-2.5">Minimum Route Recalculation Interval and Threshold:</dt>
-          <dd style="margin-left: 1.5em" id="section-3.2-2.6">Although some cases may assume that the cost persists for a sufficient
-                amount of time, considering that each route contains multiple links, the change frequency of the path may be much higher than
+          <dd style="margin-left: 1.5em" id="section-3.2-2.6">Although some cases might assume that the cost persists for a sufficient
+                amount of time, considering that each route contains multiple links, the frequency of changes to the path might be much higher than
                 the cost. In this case, the minimum recalculation interval or cost change threshold is needed to determine when a route
-                recalculation is required. Of course, scheduled topology connection changes must be considered when path calculation is required.<a href="#section-3.2-2.6" class="pilcrow">¶</a>
+                recalculation is required. Of course, scheduled topology connection changes need to be considered when path calculation is required.<a href="#section-3.2-2.6" class="pilcrow">¶</a>
 </dd>
         <dd class="break"></dd>
 </dl>
@@ -2154,12 +2158,12 @@ This section provides further detail on specific requirements to meet use case n
         <h3 id="name-dynamic-reachability-use-ca">
 <a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-dynamic-reachability-use-ca" class="section-name selfRef">Dynamic Reachability Use Case</a>
         </h3>
-<p id="section-3.3-1">This use case is about geometric and kinematic constraints of mobile devices influencing their ability to establish or maintain links to neighbors. Its requirements include:<a href="#section-3.3-1" class="pilcrow">¶</a></p>
+<p id="section-3.3-1">This use case is about geometric and kinematic constraints of mobile devices influencing their ability to establish or maintain links to neighbors. Its needs include:<a href="#section-3.3-1" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlParallel" id="section-3.3-2">
           <dt id="section-3.3-2.1">Pairwise consideration of synchronization and margins:</dt>
           <dd style="margin-left: 1.5em" id="section-3.3-2.2">
-When scheduling links, the execution clock synchronization of its two endpoints as well as any margin needed on each of those endpoints must be considered when generating schedules for those links.
-Additionally, schedules on long-distance (<em>i.e.</em>, interplanetary scale) links must consider the effects of light-speed delays for distribution and execution.<a href="#section-3.3-2.2" class="pilcrow">¶</a>
+When scheduling links, the execution clock synchronization of its two endpoints as well as any margin needed on each of those endpoints need to be considered when generating schedules for those links.
+Additionally, schedules on long-distance (<em>i.e.</em>, interplanetary scale) links need to be planned for the effects of light-speed delays on distribution and execution.<a href="#section-3.3-2.2" class="pilcrow">¶</a>
 </dd>
           <dd class="break"></dd>
 <dt id="section-3.3-2.3">Schedule independence from external conditions:</dt>
@@ -2176,12 +2180,13 @@ Schedule-based TVR and condition-based reactive mechanisms can coexist within th
 </div>
 <div id="requirements-summary">
 <section id="section-4">
-      <h2 id="name-requirements-summary">
-<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-requirements-summary" class="section-name selfRef">Requirements Summary</a>
+      <h2 id="name-tvr-requirements-summary">
+<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-tvr-requirements-summary" class="section-name selfRef">TVR Requirements Summary</a>
       </h2>
 <p id="section-4-1">
-The requirements in this section are derived from the use case needs discussed in <a href="#tvr-use-case-requirements" class="auto internal xref">Section 3</a> and from the design aspects introduced in <a href="#overview" class="auto internal xref">Section 2</a>.
-Not every architectural option or temporal property described in <a href="#overview" class="auto internal xref">Section 2</a> results in an independent requirement; rather, those aspects inform the requirements that TVR systems need to support when they are applicable to a deployment.<a href="#section-4-1" class="pilcrow">¶</a></p>
+The requirements in this section are derived from the use case needs discussed in <a href="#tvr-use-cases" class="auto internal xref">Section 3</a> and from the design aspects introduced in this document.<a href="#section-4-1" class="pilcrow">¶</a></p>
+<p id="section-4-2">
+Not every architectural option or property described in this document results in a hard requirement; rather, those aspects inform the requirements that TVR systems need to support when they are applicable to a deployment or use case.<a href="#section-4-2" class="pilcrow">¶</a></p>
 <section id="section-4.1">
         <h3 id="name-support-the-identification-">
 <a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-support-the-identification-" class="section-name selfRef">Support the Identification and Advertisement of Entity Property Changes</a>
@@ -2190,15 +2195,24 @@ Not every architectural option or temporal property described in <a href="#overv
         In practical situations, however, the properties of entities can be
         converted back and forth between Time-Variant and Non-Time-Variant
         nodes.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
-<p id="section-4.1-2">An entity must support the identification and advertisement of non-scheduled
-        property changes.<a href="#section-4.1-2" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-4.1-2">
+          <dt id="section-4.1-2.1"><code>REQ_NON_SCH_CHANGE_ENTITY:</code></dt>
+          <dd style="margin-left: 1.5em" id="section-4.1-2.2">An entity must support the identification and advertisement of non-scheduled property changes.<a href="#section-4.1-2.2" class="pilcrow">¶</a>
+</dd>
+        <dd class="break"></dd>
+</dl>
 <p id="section-4.1-3">Besides, if there are abnormal changes in the system, it is
         necessary to advertise them through the existing routing protocols in
         time to achieve the stability of Time-Variant Routing and avoid
         redundant advertisements. For example, an entity in the system is
         suddenly damaged due to external factors.
         Changes in entity state outside of a schedule are communicated to other entities in a network through existing routing protocol mechanism, where they exist.<a href="#section-4.1-3" class="pilcrow">¶</a></p>
-<p id="section-4.1-4">A Manager should provide a mechanism to advertise unscheduled changes that invalidate or supersede previously distributed scheduled state, so that other entities can react without waiting for the next scheduled update.<a href="#section-4.1-4" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-4.1-4">
+          <dt id="section-4.1-4.1"><code>REQ_NON_SCH_CHANGE_MANAGER:</code></dt>
+          <dd style="margin-left: 1.5em" id="section-4.1-4.2">A Manager should provide a mechanism to advertise unscheduled changes that invalidate or supersede previously distributed scheduled state, so that other entities can react without waiting for the next scheduled update.<a href="#section-4.1-4.2" class="pilcrow">¶</a>
+</dd>
+        <dd class="break"></dd>
+</dl>
 </section>
 <section id="section-4.2">
         <h3 id="name-support-proxy-advertisement">
@@ -2209,28 +2223,40 @@ Not every architectural option or temporal property described in <a href="#overv
         A proxy advertisement needs to preserve the identity of the represented entity and the properties being advertised, so receivers can distinguish between the proxy itself and the entity on whose behalf it is acting.<a href="#section-4.2-1" class="pilcrow">¶</a></p>
 <p id="section-4.2-2">Supporting proxy entities means that a TVR system can designate, authenticate, and authorize an entity to advertise information for another entity, and can process those advertisements as applying to the represented entity rather than to the proxy.
         Proxy nodes can help nodes without routing functions to advertise information, thus improving the efficiency of the network. Therefore,<a href="#section-4.2-2" class="pilcrow">¶</a></p>
-<p id="section-4.2-3">Systems must support proxy entities to help non-routing nodes implement
-        information advertisement.<a href="#section-4.2-3" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-4.2-3">
+          <dt id="section-4.2-3.1"><code>REQ_PROXY_ADV:</code></dt>
+          <dd style="margin-left: 1.5em" id="section-4.2-3.2">Systems should support proxy entities to help non-routing nodes implement information advertisement.<a href="#section-4.2-3.2" class="pilcrow">¶</a>
+</dd>
+        <dd class="break"></dd>
+</dl>
 </section>
 <section id="section-4.3">
         <h3 id="name-support-identification-and-">
 <a href="#section-4.3" class="section-number selfRef">4.3. </a><a href="#name-support-identification-and-" class="section-name selfRef">Support Identification and Classification of Node Properties</a>
         </h3>
-<p id="section-4.3-1">The entity properties of the network may change as described in <a href="#resource-preservation-use-case" class="auto internal xref">Section 3.1</a>.
+<p id="section-4.3-1">The entity properties of the network might change as described in <a href="#resource-preservation-use-case" class="auto internal xref">Section 3.1</a>.
         If the system cannot timely identify and classify in a processing
         manner after the entity properties change, it will lead to suboptimal
         routing decisions. Therefore,<a href="#section-4.3-1" class="pilcrow">¶</a></p>
-<p id="section-4.3-2">Systems must provide a discovery and resolving methodology for the
-        identification and classification of entity schedule changes.<a href="#section-4.3-2" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-4.3-2">
+          <dt id="section-4.3-2.1"><code>REQ_IDENT_CLASS_NODE_PROP:</code></dt>
+          <dd style="margin-left: 1.5em" id="section-4.3-2.2">Systems must provide a discovery and resolving methodology for the identification and classification of entity schedule changes.<a href="#section-4.3-2.2" class="pilcrow">¶</a>
+</dd>
+        <dd class="break"></dd>
+</dl>
 </section>
 <section id="section-4.4">
         <h3 id="name-support-system-schedule-and">
 <a href="#section-4.4" class="section-number selfRef">4.4. </a><a href="#name-support-system-schedule-and" class="section-name selfRef">Support System Schedule and Time Interval Changes</a>
         </h3>
-<p id="section-4.4-1">The system's schedule may change, requiring entity configuration updates rather than being fixed and unmodifiable.
-        Additionally, time-variant intervals in the system may also vary. Therefore,<a href="#section-4.4-1" class="pilcrow">¶</a></p>
-<p id="section-4.4-2">Systems must support system schedule changes.<a href="#section-4.4-2" class="pilcrow">¶</a></p>
-<p id="section-4.4-3">Systems must support time interval changes.<a href="#section-4.4-3" class="pilcrow">¶</a></p>
+<p id="section-4.4-1">The system's schedule state can change, requiring entity configuration updates rather than being fixed and unmodifiable.
+        Additionally, time-variant intervals in the system can also vary. Therefore,<a href="#section-4.4-1" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-4.4-2">
+          <dt id="section-4.4-2.1"><code>REQ_SCH_CHANGE:</code></dt>
+          <dd style="margin-left: 1.5em" id="section-4.4-2.2">Systems must support system schedule changes and time interval changes, the frequency of update depends on the detailed scenarios. A rollback mechanism is necessary in case of incorrect updates.<a href="#section-4.4-2.2" class="pilcrow">¶</a>
+</dd>
+        <dd class="break"></dd>
+</dl>
 </section>
 <section id="section-4.5">
         <h3 id="name-support-appropriate-time-ac">
@@ -2239,7 +2265,12 @@ Not every architectural option or temporal property described in <a href="#overv
 <p id="section-4.5-1">TVR schedule execution depends on the relationship between time accuracy, schedule precision, synchronization error, and network convergence behavior.
         If the tolerated time error is too large for a deployment, entities can apply scheduled state at different effective times and produce inconsistent forwarding behavior.
         If the required tolerance is unnecessarily small, the system can impose avoidable implementation and operational cost. Therefore,<a href="#section-4.5-1" class="pilcrow">¶</a></p>
-<p id="section-4.5-2">Systems must support configurable or otherwise specified time tolerance appropriate to the schedule precision, synchronization uncertainty, and convergence needs of the deployment.<a href="#section-4.5-2" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-4.5-2">
+          <dt id="section-4.5-2.1"><code>REQ_TIME_TOL:</code></dt>
+          <dd style="margin-left: 1.5em" id="section-4.5-2.2">Systems must support configurable or otherwise specified time tolerance appropriate to the schedule precision, synchronization uncertainty, and convergence needs of the deployment.<a href="#section-4.5-2.2" class="pilcrow">¶</a>
+</dd>
+        <dd class="break"></dd>
+</dl>
 </section>
 <section id="section-4.6">
         <h3 id="name-support-robust-security-for">
@@ -2247,29 +2278,44 @@ Not every architectural option or temporal property described in <a href="#overv
         </h3>
 <p id="section-4.6-1">The security properties listed here are not unique to TVR and are generally applicable to routing information systems.
         TVR adds specific sensitivity to the correctness, authorization, timing, and freshness of scheduled routing information, because an incorrect schedule can affect future forwarding behavior even before the affected time interval begins.<a href="#section-4.6-1" class="pilcrow">¶</a></p>
-<p id="section-4.6-2">Implementations must address security risks associated with time-variant information to ensure the reliability and integrity of
+<p id="section-4.6-2">Implementations need to address security risks associated with time-variant information to ensure the reliability and integrity of
            scheduled network operations. The following security-related requirements are to be considered:<a href="#section-4.6-2" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlParallel" id="section-4.6-3">
-          <dt id="section-4.6-3.1">Integrity Protection:</dt>
+          <dt id="section-4.6-3.1">
+<code>REQ_INTEGRITY</code>:</dt>
           <dd style="margin-left: 1.5em" id="section-4.6-3.2">Mechanisms must be in place to ensure that time-sensitive routing updates are protected from unauthorized modification.<a href="#section-4.6-3.2" class="pilcrow">¶</a>
 </dd>
           <dd class="break"></dd>
-<dt id="section-4.6-3.3">Authentication and Authorization:</dt>
-          <dd style="margin-left: 1.5em" id="section-4.6-3.4">Entities generating or modifying TVR schedules must be authenticated,
-             and only authorized entities are permitted to inject, update, or override scheduled routing information.<a href="#section-4.6-3.4" class="pilcrow">¶</a>
+<dt id="section-4.6-3.3">
+<code>REQ_PROMPT_DELIVER</code>:</dt>
+          <dd style="margin-left: 1.5em" id="section-4.6-3.4">Mechanisms must ensure that time-sensitive routing updates are delivered within the time bounds needed for the affected schedule horizon, or that late updates are detected and handled safely.<a href="#section-4.6-3.4" class="pilcrow">¶</a>
 </dd>
           <dd class="break"></dd>
-<dt id="section-4.6-3.5">Resilience Against Malicious or Erroneous Inputs:</dt>
-          <dd style="margin-left: 1.5em" id="section-4.6-3.6">A TVR network must be resilient against the injection of incorrect or maliciously crafted scheduling information.<a href="#section-4.6-3.6" class="pilcrow">¶</a>
+<dt id="section-4.6-3.5">
+<code>REQ_AUTHN_AUTHZ</code>:</dt>
+          <dd style="margin-left: 1.5em" id="section-4.6-3.6">Entities generating or modifying TVR schedules must be authenticated,
+             and only authorized entities should be permitted to inject, update, or override scheduled routing information.<a href="#section-4.6-3.6" class="pilcrow">¶</a>
 </dd>
           <dd class="break"></dd>
-<dt id="section-4.6-3.7">Time Synchronization Robustness:</dt>
-          <dd style="margin-left: 1.5em" id="section-4.6-3.8">Since TVR relies on time-sensitive operations, it must ensure the trustworthiness of external time sources.
-             Protection against time-based attacks, such as replay attacks or clock manipulation, is also considered.<a href="#section-4.6-3.8" class="pilcrow">¶</a>
+<dt id="section-4.6-3.7">
+<code>REQ_CONFIDENTIALITY</code>:</dt>
+          <dd style="margin-left: 1.5em" id="section-4.6-3.8">TVR implementations must protect confidentiality of schedule information when disclosure could reveal sensitive operational plans, business relationships, or other information about future network behavior.<a href="#section-4.6-3.8" class="pilcrow">¶</a>
 </dd>
           <dd class="break"></dd>
-<dt id="section-4.6-3.9">Rollback and Recovery:</dt>
-          <dd style="margin-left: 1.5em" id="section-4.6-3.10">In the event of conflicting, missing, or compromised time-variant routing data, TVR implementations include fallback mechanisms to maintain network stability.<a href="#section-4.6-3.10" class="pilcrow">¶</a>
+<dt id="section-4.6-3.9">
+<code>REQ_RESILIENCE</code>:</dt>
+          <dd style="margin-left: 1.5em" id="section-4.6-3.10">A TVR network must be resilient against the injection of incorrect or maliciously crafted scheduling information.<a href="#section-4.6-3.10" class="pilcrow">¶</a>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-4.6-3.11">
+<code>REQ_ROBUSTNESS</code>:</dt>
+          <dd style="margin-left: 1.5em" id="section-4.6-3.12">Since TVR relies on time-sensitive operations, it must ensure the trustworthiness of external time sources.
+             Protection against time-based attacks, such as replay attacks or clock manipulation, is also considered.<a href="#section-4.6-3.12" class="pilcrow">¶</a>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-4.6-3.13">
+<code>REQ_STABILITY</code>:</dt>
+          <dd style="margin-left: 1.5em" id="section-4.6-3.14">In the event of conflicting, missing, or compromised time-variant routing data, TVR implementations must include mechanisms for fallback (to contingency configuration), rollback (to previously working configuration), and/or recovery (by adapting configuration to new sensed conditions) to maintain network stability.<a href="#section-4.6-3.14" class="pilcrow">¶</a>
 </dd>
         <dd class="break"></dd>
 </dl>
@@ -2295,13 +2341,13 @@ This section discusses considerations for those areas in the spirit of <span>[<a
 As explained in <a href="#schedule-domain" class="auto internal xref">Section 2.1.1</a>, the purpose of a schedule domain is to organize managed devices based on their time-variant needs and capabilities.
 The choice of which devices to include in a domain is subjective, but can take into consideration the schedule-awareness capabilities of the devices and temporal sensitivities of their configurations.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
 <p id="section-5.1-2">
-For example, including in a single domain devices which can handle data models with intrinsic schedules and devices which cannot will increase the burden on the network orchestrator to validate the joint configurations of those devices.
+For example, including in a single domain devices which can handle data models with intrinsic schedules and devices which cannot will increase the burden on the network Orchestrator to validate the joint configurations of those devices.
 Segmenting into different schedule domains would allow for a more simple validation of the time-invariant device configurations and a more narrow but complex validation of the time-variant device configurations.<a href="#section-5.1-2" class="pilcrow">¶</a></p>
 <p id="section-5.1-3">
 Another important consideration for schedule domains is the required wall-clock time precision and accuracy of devices in each domain, as explained in <a href="#time-precision" class="auto internal xref">Section 2.2.3</a>.
 A single domain which includes devices needing only coarse time precision as well as those needing tight precision can add unnecessary burden to planning and validation of schedules for the coarse-precision devices.<a href="#section-5.1-3" class="pilcrow">¶</a></p>
 <p id="section-5.1-4">
-Similarly, the required time synchronization for devices in each domain, as explained in <a href="#time-sync" class="auto internal xref">Section 2.2.4</a>, affects the amount of and types of analysis that a network orchestrator needs to validate configurations of those devices.
+Similarly, the required time synchronization for devices in each domain, as explained in <a href="#time-sync" class="auto internal xref">Section 2.2.4</a>, affects the amount of and types of analysis that a network Orchestrator needs to validate configurations of those devices.
 A single domain which includes some devices needing only loose synchronization and some with very tight requirements adds burden to planning and validation of schedules.<a href="#section-5.1-4" class="pilcrow">¶</a></p>
 </section>
 <section id="section-5.2">
@@ -2310,19 +2356,19 @@ A single domain which includes some devices needing only loose synchronization a
         </h3>
 <p id="section-5.2-1">
 There is an expectation that the intentionally simplified view of <a href="#fig-mgmt-ents" class="auto internal xref">Figure 1</a> would actually contain a large number of separate but possibly inter-related data models being managed for even a modestly complex managed device.
-And that figure shows only a single managed device while a real network is expected to contain a large number of managed devices, possibly with a diverse set of management protocols serving different sets of devices, but under the control of a central orchestrator.
+And that figure shows only a single managed device while a real network is expected to contain a large number of managed devices, possibly with a diverse set of management protocols serving different sets of devices, but under the control of a central Orchestrator.
 Because of these expectations, the introduction of TVR into an existing management ecosystem is meant to be able to be deployed incrementally, possibly along different aspects in different increments.
 This supports both greenfield deployments, where TVR can be designed into the initial architecture, and brownfield deployments, where TVR capabilities coexist with and gradually augment non-TVR operation.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
 <p id="section-5.2-2">
 Within the aspect of <span><a href="#schedule-domain" class="internal xref">schedule domains</a> (<a href="#schedule-domain" class="auto internal xref">Section 2.1.1</a>)</span> it is possible to start with a single completely time-invariant domain, add TVR as a single time-variant domain covering a portion of devices most in need of scheduled behavior.
 From there the operator can either grow that time-variant domain to cover more devices or add other time-variant domains to suit the operator's needs over deployment increments.<a href="#section-5.2-2" class="pilcrow">¶</a></p>
 <p id="section-5.2-3">
-Within the aspect of <span><a href="#schedule-visibility" class="internal xref">schedule visibility</a> (<a href="#schedule-visibility" class="auto internal xref">Section 2.1.2</a>)</span> it is possible to deploy TVR first as extrinsic schedules known only to the network orchestrator and executed centrally there.
+Within the aspect of <span><a href="#schedule-visibility" class="internal xref">schedule visibility</a> (<a href="#schedule-visibility" class="auto internal xref">Section 2.1.2</a>)</span> it is possible to deploy TVR first as extrinsic schedules known only to the network Orchestrator and executed centrally there.
 From there the operator can transition a portion of those extrinsic schedules to intrinsic schedules, which requires support for (some form of) schedule execution on the managed devices.
 As needs change or device support is updated, the scope of intrinsic schedules can be grown or adjusted to suit over deployment increments.<a href="#section-5.2-3" class="pilcrow">¶</a></p>
 <p id="section-5.2-4">
 Within the aspect of <span><a href="#schedule-gen-locality" class="internal xref">generation locality</a> (<a href="#schedule-gen-locality" class="auto internal xref">Section 2.1.3</a>)</span> a time-variant domain can start out as a fully externally-controlled device and possibly expand to allow managed devices themselves to propose schedules based on locally-sensed conditions such as traffic periodicity or resource (<em>e.g.</em>, power) availability.
-Managed devices might propose schedules which can then be simulated and verified by an orchestrator and augmented as intrinsic schedules back to those devices.<a href="#section-5.2-4" class="pilcrow">¶</a></p>
+Managed devices might propose schedules which can then be simulated and verified by an Orchestrator and augmented as intrinsic schedules back to those devices.<a href="#section-5.2-4" class="pilcrow">¶</a></p>
 <p id="section-5.2-5">
 The complexity and scope of supported schedules can also be adjusted incrementally, starting with a time-variant domain that operates on very simple schedules with coarse-grained scope and short time horizons.
 From there, an operator can incrementally increase schedule complexity, make schedule scope more fine grained, or expand time horizons as device support is updated.
@@ -2348,7 +2394,7 @@ The following potential security considerations warrant detailed investigation a
               maintaining network stability. Malicious actors could exploit this dependency by disrupting or manipulating the time
               synchronization process. For example, an attacker could intentionally delay or corrupt time signals exchanged within
               the network, leading to routing errors and widespread denial-of-service (DoS) attacks. In this scenario, routers and
-              managed devices may fail to correctly determine the optimal paths, resulting in dropped packets, increased latency,
+              managed devices might fail to correctly determine the optimal paths, resulting in dropped packets, increased latency,
               or even complete service outages. Additionally, these attacks could be scaled to affect multiple devices simultaneously,
               further amplifying their impact. Given the critical nature of time in such networks, securing time synchronization
               mechanisms, such as Network Time Protocol (NTP) or Precision Time Protocol (PTP), is essential to mitigate these risks.<a href="#section-6.1-1" class="pilcrow">¶</a></p>
@@ -2357,7 +2403,7 @@ The following potential security considerations warrant detailed investigation a
         <h3 id="name-traffic-analysis-and-path-p">
 <a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-traffic-analysis-and-path-p" class="section-name selfRef">Traffic Analysis and Path Prediction</a>
         </h3>
-<p id="section-6.2-1">Time-variant networks may involve frequent updates and adjustments to routing tables
+<p id="section-6.2-1">Time-variant networks can involve frequent updates and adjustments to routing tables
               based on current and forecasted network conditions. If time information is not adequately protected, attackers could
               conduct traffic analysis to infer routing decisions, network load, or usage patterns. The schedule availability could enable
               attackers to launch highly targeted attacks, such as selectively overloading certain links or intercepting sensitive
@@ -2366,22 +2412,30 @@ The following potential security considerations warrant detailed investigation a
               vital to encrypt time-sensitive data and limit the exposure of time-related metadata to unauthorized entities.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
 </section>
 <section id="section-6.3">
-        <h3 id="name-activity-identification-and">
-<a href="#section-6.3" class="section-number selfRef">6.3. </a><a href="#name-activity-identification-and" class="section-name selfRef">Activity Identification and Privacy</a>
+        <h3 id="name-schedule-disclosure">
+<a href="#section-6.3" class="section-number selfRef">6.3. </a><a href="#name-schedule-disclosure" class="section-name selfRef">Schedule Disclosure</a>
         </h3>
-<p id="section-6.3-1">In certain scenarios, precise time information exchanged within the network
+<p id="section-6.3-1">Schedule information can reveal future network behavior before it occurs.
+              In some deployments, disclosure of planned topology changes, resource availability, or forwarding behavior could reveal sensitive operational plans, business relationships, or other confidential information.
+              TVR solutions need to protect schedule information from unauthorized disclosure when the schedule itself is sensitive.<a href="#section-6.3-1" class="pilcrow">¶</a></p>
+</section>
+<section id="section-6.4">
+        <h3 id="name-activity-identification-and">
+<a href="#section-6.4" class="section-number selfRef">6.4. </a><a href="#name-activity-identification-and" class="section-name selfRef">Activity Identification and Privacy</a>
+        </h3>
+<p id="section-6.4-1">In certain scenarios, precise time information exchanged within the network
               could be correlated with specific user or device behavior, inadvertently revealing private information. For instance,
               time scheduling decisions could be analyzed to determine when and where certain devices are active, allowing an attacker to
               infer user habits, locations, or preferences. This could pose significant privacy concerns, particularly in environments
               where sensitive personal or organizational data is transmitted. Furthermore, attackers could use this information to create
               detailed profiles of network users, which could be exploited for social engineering attacks, surveillance, or other
-              malicious activities.<a href="#section-6.3-1" class="pilcrow">¶</a></p>
+              malicious activities.<a href="#section-6.4-1" class="pilcrow">¶</a></p>
 </section>
-<section id="section-6.4">
+<section id="section-6.5">
         <h3 id="name-spoofing-and-manipulation-o">
-<a href="#section-6.4" class="section-number selfRef">6.4. </a><a href="#name-spoofing-and-manipulation-o" class="section-name selfRef">Spoofing and Manipulation of Time Information</a>
+<a href="#section-6.5" class="section-number selfRef">6.5. </a><a href="#name-spoofing-and-manipulation-o" class="section-name selfRef">Spoofing and Manipulation of Time Information</a>
         </h3>
-<p id="section-6.4-1">The accuracy and integrity of time information are crucial for making correct
+<p id="section-6.5-1">The accuracy and integrity of time information are crucial for making correct
               routing decisions. If an attacker were to inject false or manipulated time data into the network, it could cause routers and
               devices to make incorrect decisions, potentially leading to traffic misrouting, network partitions, or inefficient use of
               resources. Such spoofing attacks could divert traffic through malicious nodes, enabling man-in-the-middle attacks, data
@@ -2389,30 +2443,30 @@ The following potential security considerations warrant detailed investigation a
               by continuously altering the perceived time, thereby forcing the network into a constant state of flux and instability.
               Robust authentication mechanisms for time sources and integrity checks on time-related messages are essential to defend against
               these types of attacks. Moreover, implementing redundancy in time synchronization (e.g., multiple time sources) can provide
-              resilience against single points of failure.<a href="#section-6.4-1" class="pilcrow">¶</a></p>
+              resilience against single points of failure.<a href="#section-6.5-1" class="pilcrow">¶</a></p>
 </section>
-<section id="section-6.5">
+<section id="section-6.6">
         <h3 id="name-replay-attacks-on-time-sens">
-<a href="#section-6.5" class="section-number selfRef">6.5. </a><a href="#name-replay-attacks-on-time-sens" class="section-name selfRef">Replay Attacks on Time-Sensitive Data</a>
+<a href="#section-6.6" class="section-number selfRef">6.6. </a><a href="#name-replay-attacks-on-time-sens" class="section-name selfRef">Replay Attacks on Time-Sensitive Data</a>
         </h3>
-<p id="section-6.5-1">Time-variant network data and schedule updates may be susceptible to replay attacks,
+<p id="section-6.6-1">Time-variant network data and schedule updates can be susceptible to replay attacks,
               where a malicious actor intercepts and retransmits valid time-based data at a later time. This could cause network devices to
               act on outdated information, leading to inconsistent routing decisions, misaligned schedules, or security gaps.
               In particular, attackers could exploit replay attacks to force devices into outdated configurations or interfere with the
               synchronization of schedules across the network. To prevent this type of attack, it is important to use a messaging protocol for
-              time-variant schedules that mitigates such attacks while ensuring the validity and timeliness of received information.<a href="#section-6.5-1" class="pilcrow">¶</a></p>
+              time-variant schedules that mitigates such attacks while ensuring the validity and timeliness of received information.<a href="#section-6.6-1" class="pilcrow">¶</a></p>
 </section>
-<section id="section-6.6">
+<section id="section-6.7">
         <h3 id="name-compromised-time-sources">
-<a href="#section-6.6" class="section-number selfRef">6.6. </a><a href="#name-compromised-time-sources" class="section-name selfRef">Compromised Time Sources</a>
+<a href="#section-6.7" class="section-number selfRef">6.7. </a><a href="#name-compromised-time-sources" class="section-name selfRef">Compromised Time Sources</a>
         </h3>
-<p id="section-6.6-1">The reliance on external time sources for synchronization purposes presents a potential attack surface
-              for time-variant networks. If a trusted time source, such as a GPS signal or an NTP server, is compromised, the attacker could
+<p id="section-6.7-1">The reliance on external time sources for synchronization purposes presents a potential attack surface
+              for time-variant networks. If a trusted time source, such as a GNSS (Global Navigation Satellite System) signal, PTP or an NTP server, is compromised, the attacker could
               feed erroneous time information to the entire network, disrupting its operation. Such an attack could lead to cascading failures
               as devices attempt to synchronize with the compromised source, ultimately resulting in incorrect routing decisions or even the
               collapse of the network. To address this, network operators can implement multiple, redundant time sources and regularly
               verify the integrity of these sources. In addition, alerting mechanisms can be in place to detect significant deviations in
-              time data that could indicate an attack.<a href="#section-6.6-1" class="pilcrow">¶</a></p>
+              time data that could indicate an attack.<a href="#section-6.7-1" class="pilcrow">¶</a></p>
 </section>
 </section>
 </div>
@@ -2429,12 +2483,11 @@ The following potential security considerations warrant detailed investigation a
       <h2 id="name-acknowledgments">
 <a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
       </h2>
-<p id="section-8-1">This work has benefited from the participation of the TVR working group and the discussions on the mailing list.<a href="#section-8-1" class="pilcrow">¶</a></p>
-<p id="section-8-2">The authors would like to specifically thank Tony Li, Mark Blanchet, Alexander Petrescu, Ed Birrane,
-    Jie Dong, Abdussalam Baryun and Joel Halpern<a href="#section-8-2" class="pilcrow">¶</a></p>
-<p id="section-8-3">This work is partly supported by the UK Department for Science, Innovation and Technology
+<p id="section-8-1">The authors would like to specifically thank Tony Li, Mark Blanchet, Alexander Petrescu, Ed Birrane,
+    Jie Dong, Abdussalam Baryun and Joel Halpern<a href="#section-8-1" class="pilcrow">¶</a></p>
+<p id="section-8-2">This work is partly supported by the UK Department for Science, Innovation and Technology
     under the Future Open Networks Research Challenge project TUDOR (Towards Ubiquitous 3D Open Resilient
-    Network).<a href="#section-8-3" class="pilcrow">¶</a></p>
+    Network).<a href="#section-8-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="contributors">
@@ -2509,7 +2562,7 @@ The following potential security considerations warrant detailed investigation a
 <dd class="break"></dd>
 <dt id="I-D.ietf-tvr-schedule-yang">[I-D.ietf-tvr-schedule-yang]</dt>
         <dd>
-<span class="refAuthor">Qu, Y.</span>, <span class="refAuthor">Lindem, A.</span>, <span class="refAuthor">Kinzie, E.</span>, <span class="refAuthor">Fedyk, D.</span>, and <span class="refAuthor">M. Blanchet</span>, <span class="refTitle">"YANG Data Model for Scheduled Attributes"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-tvr-schedule-yang-08</span>, <time datetime="2026-02-09" class="refDate">9 February 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-tvr-schedule-yang-08">https://datatracker.ietf.org/doc/html/draft-ietf-tvr-schedule-yang-08</a>&gt;</span>. </dd>
+<span class="refAuthor">Qu, Y.</span>, <span class="refAuthor">Lindem, A.</span>, <span class="refAuthor">Kinzie, E.</span>, <span class="refAuthor">Fedyk, D.</span>, and <span class="refAuthor">M. Blanchet</span>, <span class="refTitle">"A YANG Data Model for Scheduled Attributes"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-tvr-schedule-yang-12</span>, <time datetime="2026-06-10" class="refDate">10 June 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-tvr-schedule-yang-12">https://datatracker.ietf.org/doc/html/draft-ietf-tvr-schedule-yang-12</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC3339">[RFC3339]</dt>
         <dd>
@@ -2531,6 +2584,10 @@ The following potential security considerations warrant detailed investigation a
         <dd>
 <span class="refAuthor">Bierman, A.</span>, <span class="refAuthor">Bjorklund, M.</span>, and <span class="refAuthor">K. Watsen</span>, <span class="refTitle">"RESTCONF Protocol"</span>, <span class="seriesInfo">RFC 8040</span>, <span class="seriesInfo">DOI 10.17487/RFC8040</span>, <time datetime="2017-01" class="refDate">January 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8040">https://www.rfc-editor.org/info/rfc8040</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="RFC8309">[RFC8309]</dt>
+        <dd>
+<span class="refAuthor">Wu, Q.</span>, <span class="refAuthor">Liu, W.</span>, and <span class="refAuthor">A. Farrel</span>, <span class="refTitle">"Service Models Explained"</span>, <span class="seriesInfo">RFC 8309</span>, <span class="seriesInfo">DOI 10.17487/RFC8309</span>, <time datetime="2018-01" class="refDate">January 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8309">https://www.rfc-editor.org/info/rfc8309</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC8345">[RFC8345]</dt>
         <dd>
 <span class="refAuthor">Clemm, A.</span>, <span class="refAuthor">Medved, J.</span>, <span class="refAuthor">Varga, R.</span>, <span class="refAuthor">Bahadur, N.</span>, <span class="refAuthor">Ananthakrishnan, H.</span>, and <span class="refAuthor">X. Liu</span>, <span class="refTitle">"A YANG Data Model for Network Topologies"</span>, <span class="seriesInfo">RFC 8345</span>, <span class="seriesInfo">DOI 10.17487/RFC8345</span>, <time datetime="2018-03" class="refDate">March 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8345">https://www.rfc-editor.org/info/rfc8345</a>&gt;</span>. </dd>
@@ -2542,6 +2599,14 @@ The following potential security considerations warrant detailed investigation a
 <dt id="RFC8944">[RFC8944]</dt>
         <dd>
 <span class="refAuthor">Dong, J.</span>, <span class="refAuthor">Wei, X.</span>, <span class="refAuthor">Wu, Q.</span>, <span class="refAuthor">Boucadair, M.</span>, and <span class="refAuthor">A. Liu</span>, <span class="refTitle">"A YANG Data Model for Layer 2 Network Topologies"</span>, <span class="seriesInfo">RFC 8944</span>, <span class="seriesInfo">DOI 10.17487/RFC8944</span>, <time datetime="2020-11" class="refDate">November 2020</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8944">https://www.rfc-editor.org/info/rfc8944</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9473">[RFC9473]</dt>
+        <dd>
+<span class="refAuthor">Enghardt, R.</span> and <span class="refAuthor">C. Krähenbühl</span>, <span class="refTitle">"A Vocabulary of Path Properties"</span>, <span class="seriesInfo">RFC 9473</span>, <span class="seriesInfo">DOI 10.17487/RFC9473</span>, <time datetime="2023-09" class="refDate">September 2023</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc9473">https://www.rfc-editor.org/info/rfc9473</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9907">[RFC9907]</dt>
+        <dd>
+<span class="refAuthor">Bierman, A.</span>, <span class="refAuthor">Boucadair, M., Ed.</span>, and <span class="refAuthor">Q. Wu</span>, <span class="refTitle">"Guidelines for Authors and Reviewers of Documents Containing YANG Data Models"</span>, <span class="seriesInfo">BCP 216</span>, <span class="seriesInfo">RFC 9907</span>, <span class="seriesInfo">DOI 10.17487/RFC9907</span>, <time datetime="2026-03" class="refDate">March 2026</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc9907">https://www.rfc-editor.org/info/rfc9907</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="X.731">[X.731]</dt>
       <dd>
