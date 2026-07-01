@@ -5,12 +5,12 @@
 Network Working Group                                            D. King
 Internet-Draft                                      Lancaster University
 Intended status: Informational                           L. M. Contreras
-Expires: 26 December 2026                                     Telefonica
+Expires: 2 January 2027                                       Telefonica
                                                                 B. Sipos
                                                                  JHU/APL
                                                                 L. Zhang
                                                                   Huawei
-                                                            24 June 2026
+                                                             1 July 2026
 
 
                 Time-Variant Routing (TVR) Requirements
@@ -61,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 26 December 2026.
+   This Internet-Draft will expire on 2 January 2027.
 
 Copyright Notice
 
@@ -179,14 +179,16 @@ Table of Contents
    Model:  The universe being modeled, which defines a parameter state
       space.
 
-   Data Model:  A concrete representation of a model, suitable for
-      exchange between management entities.  A YANG module (or a
-      collection of cooperating YANG modules) is an example of a data
-      model.
+   Data Model:  Describes how data is represented and accessed.  YANG
+      structures data models into modules for ease of use [RFC8309].
+      See Section 2.5 of [RFC9907].
 
-   Network Model:  A data model that represents network topology or
-      network state, including entities such as nodes, termination
-      points, and links.
+   Network Model:  Describes a network-level abstraction (or a subset of
+      aspects of a network infrastructure), including devices and their
+      subsystems, and relevant protocols operating at the link and
+      network layers across multiple devices.  This model corresponds to
+      the network configuration model discussed in [RFC8309].  See
+      Section 3.5.1 of [RFC9907].
 
    TVR System:  A set of functions, protocols, data models, and
       operational procedures that produce, distribute, execute, or use
@@ -196,7 +198,10 @@ Table of Contents
       destination.
 
    Path:  The ordered sequence of nodes, links, and termination points
-      used by traffic crossing a network.
+      used by traffic crossing a network.  Paths are unidirectional and
+      time dependent, i.e., there can be a variety of paths from one
+      node to another, and the path over which packets are transmitted
+      may change.  See also Section 2 of [RFC9473].
 
    Termination Point:  The topological attachment point on a node where
       a link terminates, consistent with the terminology of [RFC8345].
@@ -1564,6 +1569,10 @@ Informative References
               Protocol", RFC 8040, DOI 10.17487/RFC8040, January 2017,
               <https://www.rfc-editor.org/info/rfc8040>.
 
+   [RFC8309]  Wu, Q., Liu, W., and A. Farrel, "Service Models
+              Explained", RFC 8309, DOI 10.17487/RFC8309, January 2018,
+              <https://www.rfc-editor.org/info/rfc8309>.
+
    [RFC8345]  Clemm, A., Medved, J., Varga, R., Bahadur, N.,
               Ananthakrishnan, H., and X. Liu, "A YANG Data Model for
               Network Topologies", RFC 8345, DOI 10.17487/RFC8345, March
@@ -1578,6 +1587,15 @@ Informative References
               YANG Data Model for Layer 2 Network Topologies", RFC 8944,
               DOI 10.17487/RFC8944, November 2020,
               <https://www.rfc-editor.org/info/rfc8944>.
+
+   [RFC9473]  Enghardt, R. and C. Krähenbühl, "A Vocabulary of Path
+              Properties", RFC 9473, DOI 10.17487/RFC9473, September
+              2023, <https://www.rfc-editor.org/info/rfc9473>.
+
+   [RFC9907]  Bierman, A., Boucadair, M., Ed., and Q. Wu, "Guidelines
+              for Authors and Reviewers of Documents Containing YANG
+              Data Models", BCP 216, RFC 9907, DOI 10.17487/RFC9907,
+              March 2026, <https://www.rfc-editor.org/info/rfc9907>.
 
    [X.731]    ITU, "Information Technology - Open Systems
               Interconnection - System Management: State Management
