@@ -92,15 +92,15 @@ Requirements on the design of TVR systems are then categorized and summarized in
           <dt>Model:</dt>
           <dd>The universe being modeled, which defines a parameter state space.</dd>
           <dt>Data Model:</dt>
-          <dd>Describes how data is represented and accessed. YANG structures data models into modules for ease of use <xref target="RFC8309"/>. See Section 2.5 of <xref target="RFC9907"/>.</dd>
+          <dd>Describes how data is represented and accessed. When defined by YANG, data models are structured into modules for ease of use (see <xref section="2.5" target="RFC9907"/>).</dd>
           <dt>Network Model:</dt>
-          <dd>Describes a network-level abstraction (or a subset of aspects of a network infrastructure), including devices and their subsystems, and relevant protocols operating at the link and network layers across multiple devices. This model corresponds to the network configuration model discussed in <xref target="RFC8309"/>. See Section 3.5.1 of <xref target="RFC9907"/>.</dd>
+          <dd>Describes a network-level abstraction (or a subset of aspects of a network infrastructure), including devices and their subsystems, and relevant protocols operating at the link and network layers across multiple devices. This model corresponds to the "network configuration model" discussed in <xref section="4" target="RFC8309"/>. See also <xref section="3.5.1" target="RFC9907"/>.</dd>
           <dt>TVR System:</dt>
           <dd>A set of functions, protocols, data models, and operational procedures that produce, distribute, execute, or use scheduled time-variant routing information.</dd>
           <dt>Route:</dt>
           <dd>The forwarding information used to direct traffic toward a destination.</dd>
           <dt>Path:</dt>
-          <dd>The ordered sequence of nodes, links, and termination points used by traffic crossing a network. Paths are unidirectional and time dependent, i.e., there can be a variety of paths from one node to another, and the path over which packets are transmitted may change. See also Section 2 of <xref target="RFC9473"/>.</dd>
+          <dd>The ordered sequence of nodes, links, and termination points used by traffic crossing a network. Paths are unidirectional and time dependent (<em>i.e.</em>, there can be a variety of paths from one node to another, and the path over which packets are transmitted may change) but not necessarily scheduled (<em>e.g.</em>, paths can change as a reaction to locally sensed conditons, possibly through routing control protocols). See also <xref section="2" target="RFC9473"/>.</dd>
           <dt>Termination Point:</dt>
           <dd>The topological attachment point on a node where a link terminates, consistent with the terminology of <xref target="RFC8345"/>.</dd>
           <dt>Entity:</dt>
