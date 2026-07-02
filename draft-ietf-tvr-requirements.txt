@@ -5,12 +5,12 @@
 Network Working Group                                            D. King
 Internet-Draft                                      Lancaster University
 Intended status: Informational                           L. M. Contreras
-Expires: 2 January 2027                                       Telefonica
+Expires: 3 January 2027                                       Telefonica
                                                                 B. Sipos
                                                                  JHU/APL
                                                                 L. Zhang
                                                                   Huawei
-                                                             1 July 2026
+                                                             2 July 2026
 
 
                 Time-Variant Routing (TVR) Requirements
@@ -61,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 2 January 2027.
+   This Internet-Draft will expire on 3 January 2027.
 
 Copyright Notice
 
@@ -179,16 +179,16 @@ Table of Contents
    Model:  The universe being modeled, which defines a parameter state
       space.
 
-   Data Model:  Describes how data is represented and accessed.  YANG
-      structures data models into modules for ease of use [RFC8309].
-      See Section 2.5 of [RFC9907].
+   Data Model:  Describes how data is represented and accessed.  When
+      defined by YANG, data models are structured into modules for ease
+      of use (see Section 2.5 of [RFC9907]).
 
    Network Model:  Describes a network-level abstraction (or a subset of
       aspects of a network infrastructure), including devices and their
       subsystems, and relevant protocols operating at the link and
       network layers across multiple devices.  This model corresponds to
-      the network configuration model discussed in [RFC8309].  See
-      Section 3.5.1 of [RFC9907].
+      the "network configuration model" discussed in Section 4 of
+      [RFC8309].  See also Section 3.5.1 of [RFC9907].
 
    TVR System:  A set of functions, protocols, data models, and
       operational procedures that produce, distribute, execute, or use
@@ -199,9 +199,11 @@ Table of Contents
 
    Path:  The ordered sequence of nodes, links, and termination points
       used by traffic crossing a network.  Paths are unidirectional and
-      time dependent, i.e., there can be a variety of paths from one
+      time dependent (_i.e._, there can be a variety of paths from one
       node to another, and the path over which packets are transmitted
-      may change.  See also Section 2 of [RFC9473].
+      may change) but not necessarily scheduled (_e.g._, paths can
+      change as a reaction to locally sensed conditons, possibly through
+      routing control protocols).  See also Section 2 of [RFC9473].
 
    Termination Point:  The topological attachment point on a node where
       a link terminates, consistent with the terminology of [RFC8345].
@@ -1535,9 +1537,9 @@ Informative References
               Claise, B., Clarke, J., Farrel, A., Barguil, S.,
               Pignataro, C., and R. Chen, "Guidelines for Considering
               Operations and Management in IETF Specifications", Work in
-              Progress, Internet-Draft, draft-ietf-opsawg-rfc5706bis-04,
-              15 March 2026, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-opsawg-rfc5706bis-04>.
+              Progress, Internet-Draft, draft-ietf-opsawg-rfc5706bis-05,
+              26 June 2026, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-opsawg-rfc5706bis-05>.
 
    [I-D.ietf-tvr-schedule-yang]
               Qu, Y., Lindem, A., Kinzie, E., Fedyk, D., and M.
